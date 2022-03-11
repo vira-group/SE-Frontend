@@ -1,0 +1,25 @@
+.imgs {
+	position: relative;
+	right: 0px;
+	width: 300px;
+	height: 300px;
+}
+.btn {
+	color: #003049;
+}
+
+.icon {
+	color: #c1121f;
+}
+
+.err{
+    color: red;
+    font-family:Arial, Helvetica, sans-serif ;
+    font-size: 13px ;
+    right: 10px;
+    /* padding-left:  100px; */
+    /* margin-left:  10px; */
+}
+.derr{
+    color: green;
+}
