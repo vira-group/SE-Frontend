@@ -1,24 +1,19 @@
-import React from 'react';
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import './App.css';
-import { BrowserRouter, Redirect, Routes, Route } from 'react-router-dom';
+// import Hotelcard from './hotelcard';
+// import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
-// import Switch from '@material-ui/core/Switch';
-import Register2 from './components/sign_up';
-import Sign_up from './components/sign_up';
-
-class App extends React.Component {
-	render() {
-		return (
-			<BrowserRouter>
-				<div className="auth-inner ">
-					<Routes>
-						{/* <Route exact path="/login" component={Login} /> */}
-						<Route exact path="/" component={Sign_up} />
-					</Routes>
-					<div>helllo</div>
-				</div>
-			</BrowserRouter>
-		);
-	}
+import Sign_up from "./components/Sign_up";
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route exact path = '/' component = { Sign_up }/>
+        </Switch>
+      </BrowserRouter>
+    </div>
+  );
 }
+
 export default App;
