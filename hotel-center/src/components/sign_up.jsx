@@ -1,11 +1,11 @@
 import * as React from 'react';
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -90,7 +90,7 @@ class Sign_up extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.setState({ message: 'لطفا ایمیل رو تایید کنید.' });
+		this.setState({ message: '' });
 
 		// this.setState({ toast: true });
 
@@ -134,9 +134,9 @@ class Sign_up extends React.Component {
 					!value.match(
 						/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
 					)
-						? '*Please enter a valid email'
+						? '*Please enter a valid email.'
 						: '';
-				error.email.u1 = !value ? '*Email field must not be empty' : '';
+				error.email.u1 = !value ? '*Email field must not be empty!' : '';
 				break;
 
 			case 'password':
@@ -157,6 +157,7 @@ class Sign_up extends React.Component {
 						? '*Password should contain at least one special character ( @, #, %, &,  $,).'
 						: '';
 				error.password.p6 = value.length < 8 ? '*Password length should be at least 8 characters.' : '';
+
 				error.password.p1 = !value ? '*Password field must not be empty' : '';
 				error.password2.p1 = value !== this.state.fields['password2'] ? '*Confirm password doesnt match!' : '';
 
@@ -164,7 +165,7 @@ class Sign_up extends React.Component {
 
 			case 'password2':
 				error.password2.p1 = value !== this.state.fields['password'] ? '*Confirm password doesnt match!' : '';
-				error.password2.p2 = !value ? 'This field must not be empty' : '';
+				error.password2.p2 = !value ? '*This field must not be empty!' : '';
 				break;
 			default:
 				break;
@@ -220,10 +221,16 @@ class Sign_up extends React.Component {
 										onChange={this.formValChange}
 									/>
 									{this.state.error.email.u1.length > 0 && (
-										<span className="err">{this.state.error.email.u1}</span>
+										<span className="err">
+											{this.state.error.email.u1}
+											<br />
+										</span>
 									)}
 									{this.state.error.email.u2.length > 0 && (
-										<span className="err">{this.state.error.email.u2}</span>
+										<span className="err">
+											{this.state.error.email.u2}
+											<br />
+										</span>
 									)}
 								</Grid>
 								<Grid item xs={12}>
@@ -250,35 +257,55 @@ class Sign_up extends React.Component {
 										value={this.state['password']}
 										onChange={this.formValChange}
 									/>
-
 									{this.state.error.password.p1.length > 0 && (
-										<span className="err">{this.state.error.password.p1}{'\n'} </span>
+										<span className="err" sx={{ marginRight: '100px' }}>
+											{this.state.error.password.p1}
+											<br />
+										</span>
 									)}
+
 									{this.state.error.password.p2.length > 0 && (
-										<span className="err">{this.state.error.password.p2}{'\n'} </span>
+										<span className="err" sx={{ marginRight: '100px' }}>
+											{this.state.error.password.p2}
+											<br />
+										</span>
+									)}
+
+									{this.state.error.password.p6.length > 0 && (
+										<span className="err" sx={{ marginleft: '100px' }}>
+											{this.state.error.password.p6}
+											<br />
+										</span>
+									)}
+									{this.state.error.password.p3.length > 0 && (
+										<span className="err">
+											{this.state.error.password.p3}
+											<br />
+										</span>
 									)}
 
 									{this.state.error.password.p4.length > 0 && (
-										<span className="err">{this.state.error.password.p4}{'\n'} </span>
+										<span className="err">
+											{this.state.error.password.p4}
+											<br />
+										</span>
 									)}
-									{this.state.error.password.p3.length > 0 && (
-										<span className="err">{this.state.error.password.p3}</span>
-									)}
+
 									{this.state.error.password.p5.length > 0 && (
-										<span className="err">{this.state.error.password.p5}</span>
-									)}
-									{this.state.error.password.p6.length > 0 && (
-										<span className="err">{this.state.error.password.p6}</span>
+										<span className="err">
+											{this.state.error.password.p5}
+											<br />
+										</span>
 									)}
 								</Grid>
 								<Grid item xs={12}>
 									<TextField
 										required
 										fullWidth
-										name="Confirm password"
+										name="password2"
 										label="Confirm Password"
 										type="password"
-										id="password"
+										id="password2"
 										autoComplete="new-password"
 										className={
 											this.state.error.password2.p1.length > 0 ||
@@ -291,11 +318,18 @@ class Sign_up extends React.Component {
 										value={this.state['password2']}
 										onChange={this.formValChange}
 									/>
-									{this.state.error.password2.p1.length > 0 && (
-										<span className="err">{this.state.error.password2.p1} {'\n'} </span>
-									)}
 									{this.state.error.password2.p2.length > 0 && (
-										<span className="err">{this.state.error.password2.p2}</span>
+										<span className="err">
+											{this.state.error.password2.p2}
+											<br />
+										</span>
+									)}
+
+									{this.state.error.password2.p1.length > 0 && (
+										<span className="err">
+											{this.state.error.password2.p1}
+											<br />
+										</span>
 									)}
 								</Grid>
 							</Grid>
@@ -310,7 +344,12 @@ class Sign_up extends React.Component {
 							</Button>
 							<Grid container justifyContent="flex-end">
 								<Grid item>
-									<Link to="./login" variant="body2" sx={{ color: '#003049', marginRight: '80px' }}>
+									<Link
+										to="./login"
+										variant="body2"
+										className="lnk"
+										sx={{ color: '#003049', marginRight: '10px' }}
+									>
 										Already have an account? Sign in
 									</Link>
 								</Grid>
