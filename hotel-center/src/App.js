@@ -2,6 +2,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import './App.css';
 import Hotelcard from './hotelcard';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { render } from '@testing-library/react';
 
 function App() {
   return (
