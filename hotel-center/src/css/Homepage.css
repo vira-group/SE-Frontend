@@ -1,0 +1,43 @@
+.text-theme-white {
+  color: #f8f9fa;
+}
+
+/* Navbar */
+.nav-background {
+  background-color: #ba324f;
+}
+
+.logo {
+  display: contents;
+}
+
+.logo img {
+  width: 3rem;
+  margin-right: 0.5rem;
+}
+
+.nav-button {
+  border-radius: 25px;
+}
+
+.nav-hamburger-button,
+.nav-hamburger-button:focus,
+.nav-hamburger-button:active,
+.nav-hamburger-button:hover {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+@media only screen and (max-width: 575.99px) {
+  .nav-button,
+  .nav-button:active,
+  .nav-button:focus,
+  .nav-button:hover {
+    border-color: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    width: 100%;
+    text-align: left;
+    /* color: #f8f9fa; */
+  }
+}
