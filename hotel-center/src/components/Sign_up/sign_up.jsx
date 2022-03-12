@@ -220,23 +220,21 @@ class Sign_up extends React.Component {
 										value={this.state['email']}
 										onChange={this.formValChange}
 									/>
-
-
 								</Grid>
 								<div>
 									{this.state.error.email.u1.length > 0 && (
-											<p className="err">
-												{this.state.error.email.u1}
-												<br />
-											</p>
-										)}
-										{this.state.error.email.u2.length > 0 && (
-											<p className="err">
-												{this.state.error.email.u2}
-												<br />
-											</p>
-										)}
-									</div>
+										<p className="err">
+											{this.state.error.email.u1}
+											<br />
+										</p>
+									)}
+									{this.state.error.email.u2.length > 0 && (
+										<p className="err">
+											{this.state.error.email.u2}
+											<br />
+										</p>
+									)}
+								</div>
 								<Grid item xs={12}>
 									<TextField
 										required
@@ -263,9 +261,20 @@ class Sign_up extends React.Component {
 									/>
 								</Grid>
 								<div>
-								{this.state.error.password.p1.length > 0 && (
-										<p className="err" sx={{ marginRight: '100px' }}>
-											{this.state.error.password.p1}
+									{this.state.error.password.p5.length > 0 && (
+										<p className="err">{this.state.error.password.p5}</p>
+									)}
+
+									{this.state.error.password.p4.length > 0 && (
+										<p className="err">{this.state.error.password.p4}</p>
+									)}
+									{this.state.error.password.p3.length > 0 && (
+										<p className="err">{this.state.error.password.p3}</p>
+									)}
+
+									{this.state.error.password.p6.length > 0 && (
+										<p className="err" sx={{ marginleft: '100px' }}>
+											{this.state.error.password.p6}
 										</p>
 									)}
 
@@ -275,30 +284,13 @@ class Sign_up extends React.Component {
 										</p>
 									)}
 
-									{this.state.error.password.p6.length > 0 && (
-										<p className="err" sx={{ marginleft: '100px' }}>
-											{this.state.error.password.p6}
-										</p>
-									)}
-									{this.state.error.password.p3.length > 0 && (
-										<p className="err">
-											{this.state.error.password.p3}
-										</p>
-									)}
-
-									{this.state.error.password.p4.length > 0 && (
-										<p className="err">
-											{this.state.error.password.p4}
-										</p>
-									)}
-
-									{this.state.error.password.p5.length > 0 && (
-										<p className="err">
-											{this.state.error.password.p5}
+									{this.state.error.password.p1.length > 0 && (
+										<p className="err" sx={{ marginRight: '100px' }}>
+											{this.state.error.password.p1}
 										</p>
 									)}
 								</div>
-								<Grid item xs={12} style={{direction:"rtl"}}>
+								<Grid item xs={12}>
 									<TextField
 										required
 										fullWidth
@@ -320,16 +312,12 @@ class Sign_up extends React.Component {
 									/>
 								</Grid>
 								<div>
-								{this.state.error.password2.p2.length > 0 && (
-										<p className="err">
-											{this.state.error.password2.p2}
-										</p>
+									{this.state.error.password2.p1.length > 0 && (
+										<p className="err">{this.state.error.password2.p1}</p>
 									)}
 
-									{this.state.error.password2.p1.length > 0 && (
-										<p className="err">
-											{this.state.error.password2.p1}
-										</p>
+									{this.state.error.password2.p2.length > 0 && (
+										<p className="err">{this.state.error.password2.p2}</p>
 									)}
 								</div>
 							</Grid>
