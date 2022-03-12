@@ -86,7 +86,7 @@ export default function Hotelcard() {
                             </Grid>
                         </Grid>
                         <Grid item xs={3} md={2}>
-                            <Grid container style={{textAlign:'end'}}>
+                            <Grid container spacing={0.5} style={{textAlign:'end'}}>
                                 <Grid item xs={9} style={{textAlign:'end'}}>
                                     <Typography variant='h8' style={{fontWeight: "bold"}}>
                                     <Link underline="hover" onClick={()=> window.open('_blank')}
@@ -98,12 +98,19 @@ export default function Hotelcard() {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={3} style={{textAlign:'end'}}>
-                                    {/* <Button 
+                                    <Box 
                                     style={{
-                                        backgroundColor:'#000066',
+                                        backgroundColor:'#780000',
                                         color: '#ffffff',
+                                        textAlign:'center',
                                         fontWeight:"bold",
-                                    }}>9.0</Button> */}
+                                        borderRadius: 3,
+                                        width:30,
+                                        height:30,
+                                        marginTop:'4px',
+                                    }}>
+                                        <Typography style={{textAlign:'center'}}>9.0</Typography>
+                                    </Box>
                                 </Grid>
                             </Grid>
                             <Grid container>
@@ -112,7 +119,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
@@ -166,7 +173,7 @@ export default function Hotelcard() {
                             </Grid>
                         </Grid>
                         <Grid item xs={3} md={2}>
-                            <Grid container style={{textAlign:'end'}}>
+                            <Grid container spacing={0.5} style={{textAlign:'end'}}>
                                 <Grid item xs={9} style={{textAlign:'end'}}>
                                     <Typography variant='h8' style={{fontWeight: "bold"}}>
                                     <Link underline="hover" onClick={()=> window.open('_blank')}
@@ -178,12 +185,19 @@ export default function Hotelcard() {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={3} style={{textAlign:'end'}}>
-                                    {/* <Button 
-                                    style={{
-                                        backgroundColor:'#000066',
-                                        color: '#ffffff',
-                                        fontWeight:"bold",
-                                    }}>9.0</Button> */}
+                                    <Box 
+                                        style={{
+                                            backgroundColor:'#780000',
+                                            color: '#ffffff',
+                                            textAlign:'center',
+                                            fontWeight:"bold",
+                                            borderRadius: 3,
+                                            width:30,
+                                            height:30,
+                                            marginTop:'4px',
+                                        }}>
+                                            <Typography style={{textAlign:'center'}}>9.3</Typography>
+                                    </Box>
                                 </Grid>
                             </Grid>
                             <Grid container>
@@ -192,7 +206,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
@@ -247,7 +261,7 @@ export default function Hotelcard() {
                             </Grid>
                         </Grid>
                         <Grid item xs={3} md={2}>
-                            <Grid container style={{textAlign:'end'}}>
+                            <Grid container spacing={0.5} style={{textAlign:'end'}}>
                                 <Grid item xs={9} style={{textAlign:'end'}}>
                                     <Typography variant='h8' style={{fontWeight: "bold"}}>
                                     <Link underline="hover" onClick={()=> window.open('_blank')}
@@ -259,12 +273,19 @@ export default function Hotelcard() {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={3} style={{textAlign:'end'}}>
-                                    {/* <Button 
-                                    style={{
-                                        backgroundColor:'#000066',
-                                        color: '#ffffff',
-                                        fontWeight:"bold",
-                                    }}>9.0</Button> */}
+                                    <Box 
+                                        style={{
+                                            backgroundColor:'#780000',
+                                            color: '#ffffff',
+                                            textAlign:'center',
+                                            fontWeight:"bold",
+                                            borderRadius: 3,
+                                            width:30,
+                                            height:30,
+                                            marginTop:'4px',
+                                        }}>
+                                            <Typography style={{textAlign:'center'}}>7.9</Typography>
+                                    </Box>
                                 </Grid>
                             </Grid>
                             <Grid container>
@@ -273,7 +294,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
@@ -328,7 +349,7 @@ export default function Hotelcard() {
                             </Grid>
                         </Grid>
                         <Grid item xs={3} md={2}>
-                            <Grid container style={{textAlign:'end'}}>
+                            <Grid container spacing={0.5} style={{textAlign:'end'}}>
                                 <Grid item xs={9} style={{textAlign:'end'}}>
                                     <Typography variant='h8' style={{fontWeight: "bold"}}>
                                     <Link underline="hover" onClick={()=> window.open('_blank')}
@@ -340,12 +361,19 @@ export default function Hotelcard() {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={3} style={{textAlign:'end'}}>
-                                    {/* <Button 
-                                    style={{
-                                        backgroundColor:'#000066',
-                                        color: '#ffffff',
-                                        fontWeight:"bold",
-                                    }}>9.0</Button> */}
+                                    <Box 
+                                        style={{
+                                            backgroundColor:'#780000',
+                                            color: '#ffffff',
+                                            textAlign:'center',
+                                            fontWeight:"bold",
+                                            borderRadius: 3,
+                                            width:30,
+                                            height:30,
+                                            marginTop:'4px',
+                                        }}>
+                                            <Typography style={{textAlign:'center'}}>8.6</Typography>
+                                    </Box>
                                 </Grid>
                             </Grid>
                             <Grid container>
@@ -354,7 +382,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
@@ -409,7 +437,7 @@ export default function Hotelcard() {
                             </Grid>
                         </Grid>
                         <Grid item xs={3} md={2}>
-                            <Grid container style={{textAlign:'end'}}>
+                            <Grid container spacing={0.5} style={{textAlign:'end'}}>
                                 <Grid item xs={9} style={{textAlign:'end'}}>
                                     <Typography variant='h8' style={{fontWeight: "bold"}}>
                                     <Link underline="hover" onClick={()=> window.open('_blank')}
@@ -421,12 +449,19 @@ export default function Hotelcard() {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={3} style={{textAlign:'end'}}>
-                                    {/* <Button 
-                                    style={{
-                                        backgroundColor:'#000066',
-                                        color: '#ffffff',
-                                        fontWeight:"bold",
-                                    }}>9.0</Button> */}
+                                    <Box 
+                                        style={{
+                                            backgroundColor:'#780000',
+                                            color: '#ffffff',
+                                            textAlign:'center',
+                                            fontWeight:"bold",
+                                            borderRadius: 3,
+                                            width:30,
+                                            height:30,
+                                            marginTop:'4px',
+                                        }}>
+                                            <Typography style={{textAlign:'center'}}>9.2</Typography>
+                                    </Box>
                                 </Grid>
                             </Grid>
                             <Grid container>
@@ -435,7 +470,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
