@@ -77,7 +77,7 @@ export default function Hotelcard() {
                             <Grid container>
                                 <Grid item xs={12}>
                                      <Typography style={{textAlign:'left'}}>
-                                     In the heart of London’s fashionable Marylebone,
+                                     In the heart of London's fashionable Marylebone,
                                         this deluxe hotel has a stunning glass-roofed 8-story atrium with
                                         towering palm trees, an award-winning restaurant, luxurious bedrooms and
                                         an indoor...
@@ -112,7 +112,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#000066', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
@@ -192,7 +192,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#000066', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
@@ -273,7 +273,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#000066', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
@@ -354,7 +354,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#000066', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
@@ -435,7 +435,7 @@ export default function Hotelcard() {
                                     type="submit"
                                     variant="contained"
                                     sx={{ mt: 2, mb: 2 }}
-                                    style={{ backgroundColor: '#000066', color: '#FFFFFF', textTransform: 'unset' }}>
+                                    style={{ backgroundColor: '#4BA3C3', color: '#FFFFFF', textTransform: 'unset' }}>
                                         Show Prices
                                     </Button>
                                 </Grid>
