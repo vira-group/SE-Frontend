@@ -2,8 +2,8 @@ import * as React from 'react';
 import CardActions from '@mui/material/CardActions';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Avatar, CssBaseline, Link, Grid, Box, Button,
-  Typography, Container, Stack, CardActionArea } from '@mui/material';
+import { Avatar, Link, Grid, Box, Button,
+  Typography, Container} from '@mui/material';
 import Helmet from 'react-helmet';
 import image1 from './pics/london1.jpg';
 import image2 from './pics/london2.jpg';
@@ -12,8 +12,6 @@ import image4 from './pics/Amsterdom1.jpg';
 import image5 from './pics/Amsterdom2.jpg';
 import Rating from '@mui/material/Rating';
 import { useState, useEffect} from "react";
-import { textAlign } from '@mui/system';
-import { DataGrid } from '@mui/x-data-grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
