@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css';
-import pic from './s2.png';
+import pic from './s1.png';
 
 const theme = createTheme();
 
@@ -95,13 +95,13 @@ class login extends React.Component {
 							alignItems: 'center'
 						}}
 					>
-						<Avatar sx={{ m: 1, backgroundColor: '#003049' }} className="icon" />
+						<Avatar sx={{ m: 1, backgroundColor: '#003049' }} className="icon_Login" />
 
 						<Typography component="h1" variant="h5">
 							Sign up
 						</Typography>
 
-						<img className="imgs" src={pic} />
+						<img className="imgs_Login" src={pic} />
 
 						<Box component="form" noValidate onSubmit={this.onSubmit} sx={{ mt: 3 }}>
 							<Grid container spacing={2}>
@@ -133,7 +133,7 @@ class login extends React.Component {
 								</Grid>
 
 								<div>
-									<h5>{this.state.logerror}</h5>
+									<h5 className="err_Login">{this.state.logerror}</h5>
 								</div>
 							</Grid>
 							<Button
@@ -150,7 +150,7 @@ class login extends React.Component {
 									<Link
 										to="/sign-up"
 										variant="body2"
-										className="lnk"
+										className="lnk_Login"
 										sx={{ color: '#003049', marginRight: '10px' }}
 									>
 										sign up
