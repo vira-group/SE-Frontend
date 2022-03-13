@@ -16,6 +16,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css';
 import pic from './s1.png';
+import ico from './icon.png';
 
 const theme = createTheme();
 
@@ -95,16 +96,16 @@ class login extends React.Component {
 							alignItems: 'center'
 						}}
 					>
-						<Avatar sx={{ m: 1, backgroundColor: '#003049' }} className="icon_Login" />
+						<img sx={{ m: 1, backgroundColor: '#003049' }} className="icon_Login" src={ico} />
 
 						<Typography component="h1" variant="h5">
-							Sign up
+							Login
 						</Typography>
 
 						<img className="imgs_Login" src={pic} />
 
-						<Box component="form" noValidate onSubmit={this.onSubmit} sx={{ mt: 3 }}>
-							<Grid container spacing={2}>
+						<Box component="form" noValidate onSubmit={this.onSubmit} sx={{ mt: 1 }}>
+							<Grid container spacing={1}>
 								<Grid item xs={12}>
 									<TextField
 										required
@@ -141,9 +142,9 @@ class login extends React.Component {
 								fullWidth
 								variant="contained"
 								onClick={this.handleSubmit}
-								sx={{ mt: 3, mb: 2, backgroundColor: '#C1121F', height: 55 }}
+								sx={{ mt: 1, mb: 2, backgroundColor: '#C1121F', height: 55 }}
 							>
-								Sign Up
+								Login
 							</Button>
 							<Grid container justifyContent="flex-end">
 								<Grid item>
@@ -153,7 +154,7 @@ class login extends React.Component {
 										className="lnk_Login"
 										sx={{ color: '#003049', marginRight: '10px' }}
 									>
-										sign up
+										Don't have an account yet? Sign Up
 									</Link>
 								</Grid>
 							</Grid>

@@ -4,19 +4,24 @@
 	width: 300px;
 	height: 300px;
 }
+
+
 .btn_Login {
 	color: #003049;
 }
 
 .icon_Login {
-	color: #c1121f;
+	position: relative;
+	right: 0px;
+	width: 40px;
+	height: 40px;
 }
 
 .err_Login {
 	color: red;
 	font-family: Arial, Helvetica, sans-serif;
 	margin-left: 15px;
-	font-size: 13.5px;
+	font-size: 14.5px;
 	right: auto;
 }
 .lnk_Login {
