@@ -3,8 +3,18 @@
 }
 
 /* Navbar */
-.nav-background {
-  background-color: #ba324f;
+.nav-style {
+  background-color: rgba(248, 249, 250, 0.8);
+  position: fixed;
+}
+
+.nav-top {
+  transition: all 0.3s ease;
+}
+
+.nav-scrolled {
+  box-shadow: 0 1px 15px 0 rgba(205, 154, 45, 0.8);
+  transition: all 0.3s ease;
 }
 
 .logo {
