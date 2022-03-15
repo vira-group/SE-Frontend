@@ -45,6 +45,35 @@
   box-shadow: none !important;
 }
 
+.number-of-guests-form {
+  width: 300px;
+}
+
+.increase-button,
+.decrease-button {
+  background-color: #cd9a2d;
+  height: 40px;
+  width: 40px;
+  border: none;
+  padding: 0;
+}
+
+.increase-button:focus,
+.increase-button:active,
+.increase-button:hover,
+.decrease-button:focus,
+.decrease-button:active,
+.decrease-button:hover {
+  background-color: #be8f2a;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.increase-button:disabled,
+.decrease-button:disabled {
+  background-color: #d3b065;
+}
+
 /******************************************** Navbar **************************************/
 .nav-style {
   background-color: #f8f8f8;
@@ -94,5 +123,11 @@
     background-color: transparent !important;
     width: 100%;
     text-align: left;
+  }
+
+  .nav-button:active,
+  .nav-button:focus,
+  .nav-button:hover {
+    color: #cd9a2d;
   }
 }
