@@ -1,22 +1,21 @@
 import references from "../assets/References.json"
+import { makeURL } from "./common";
+import axios from "axios";
 
-export const AccountActivation = async (uid,token) => {
+export const AccountActivation = async (uid1,token1) => {
     let message = "";
     await axios
       .post(makeURL(references.url_AccountActivation), {
-        uid: uid,
-        token: token
+        uid: uid1,
+        token: token1
       })
       .then((response) => {
         console.log(response);
+        message = true
       })
       .catch((error) => {
-        console.log(error, error.response.data);
-        if (error.response.status == 401) {
-          message = error.response.data.message;
-        } else {
-          message = error.response.data;
-        }
+          console.log(error)
+        message=false
       });
     return message;
   };
