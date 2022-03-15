@@ -76,11 +76,14 @@ class Navbar extends Component {
             <div className="ms-auto pt-3 pt-sm-0">
               <button
                 type="button"
-                class="btn btn-outline-dark me-2 nav-button"
+                className="btn btn-outline-dark me-2 nav-button fw-bold"
               >
                 Login
               </button>
-              <button type="button" class="btn btn-outline-dark nav-button">
+              <button
+                type="button"
+                className="btn btn-outline-dark nav-button fw-bold"
+              >
                 Sign up
               </button>
             </div>
