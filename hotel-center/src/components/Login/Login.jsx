@@ -18,6 +18,8 @@ import './style.css';
 import pic from './s1.png';
 import ico from './icon.png';
 
+import { login_connection } from '../../Utils/connection';
+
 const theme = createTheme();
 
 class login extends React.Component {
@@ -51,7 +53,15 @@ class login extends React.Component {
 			fields['password'] = '';
 			this.setState({ fields: fields });
 			alert('Form submitted');
-		}
+			const is_logged_in = login_connection(this.state.fields['email'], this.state.fields['password']);
+			/*
+			if(is_logged_in === "Already logged in")
+			{
+				window.alert("Already logged in"); 
+			}
+			*/
+		
+	}
 	}
 
 	componentDidMount() {
@@ -65,6 +75,7 @@ class login extends React.Component {
 
 		formData.append('email', this.state.fields['email']);
 		formData.append('password', this.state.fields['password']);
+		/*
 		axios
 			.post('', formData)
 			.then((response) => {
@@ -81,6 +92,7 @@ class login extends React.Component {
 				let error = <h5>Invalid email or password!</h5>;
 				this.setState({ logerror: error });
 			});
+*/
 	};
 
 	render() {
@@ -141,7 +153,7 @@ class login extends React.Component {
 								type="submit"
 								fullWidth
 								variant="contained"
-								onClick={this.handleSubmit}
+								onClick={this.submituserlogin}
 								sx={{ mt: 1, mb: 2, backgroundColor: '#C1121F', height: 55 }}
 							>
 								Login

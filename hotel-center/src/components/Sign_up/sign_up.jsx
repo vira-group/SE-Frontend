@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css';
 import pic from './s2.png';
+import { Sign_up_connection } from '../../Utils/connection';
 
 const theme = createTheme();
 
@@ -85,41 +86,46 @@ class Sign_up extends React.Component {
 			fields['password2'] = '';
 			this.setState({ fields: fields });
 			alert('Form submitted');
+			const is_registered = Sign_up_connection(this.state.fields['email'], this.state.fields['password']);
+			
+			if (is_registered) {
+				window.location.replace('/login');
+			}
 		}
 	}
 
-	handleSubmit = (e) => {
-		e.preventDefault();
-		this.setState({ message: '' });
+	// handleSubmit = (e) => {
+	// 	e.preventDefault();
+	// 	this.setState({ message: '' });
 
-		// this.setState({ toast: true });
+	// 	// this.setState({ toast: true });
 
-		var formData = new FormData();
-		formData.append('email', this.state.fields['email']);
-		formData.append('password', this.state.fields['password']);
-		formData.append('password2', this.state.fields['password2']);
+	// 	var formData = new FormData();
+	// 	formData.append('email', this.state.fields['email']);
+	// 	formData.append('password', this.state.fields['password']);
+	// 	formData.append('password2', this.state.fields['password2']);
 
-		var config = {
-			method: 'post',
-			url: '',
-			// headers: {
-			//   'Authorization': 'Token '+ localStorage.getItem('token'),
+	// 	var config = {
+	// 		method: 'post',
+	// 		url: '',
+	// 		// headers: {
+	// 		//   'Authorization': 'Token '+ localStorage.getItem('token'),
 
-			// },
-			data: formData
-		};
+	// 		// },
+	// 		data: formData
+	// 	};
 
-		axios(config)
-			.then(function(response) {
-				console.log(JSON.stringify(response.data));
-				console.log('email:' + this.state.fields['email']);
-				console.log('password:' + this.state.fields['password']);
-				console.log('password2:' + this.state.fields['password2']);
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
-	};
+	// 	axios(config)
+	// 		.then(function(response) {
+	// 			console.log(JSON.stringify(response.data));
+	// 			console.log('email:' + this.state.fields['email']);
+	// 			console.log('password:' + this.state.fields['password']);
+	// 			console.log('password2:' + this.state.fields['password2']);
+	// 		})
+	// 		.catch(function(error) {
+	// 			console.log(error);
+	// 		});
+	// };
 
 	formValChange = (e) => {
 		let fields = this.state.fields;

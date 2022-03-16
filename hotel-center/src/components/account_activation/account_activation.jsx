@@ -1,8 +1,11 @@
+
 import React from "react";
 import { BarLoader,DoubleBubble, SlidingPebbles } 
 from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css'
 import { AccountActivation } from "../../Utils/connection";
+
+
 class account_activation extends React.Component {
   constructor(props) {
     super(props);
