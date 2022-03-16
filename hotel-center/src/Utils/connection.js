@@ -19,3 +19,5 @@ export const AccountActivation = async (uid1,token1) => {
       });
     return message;
   };
+
+  
