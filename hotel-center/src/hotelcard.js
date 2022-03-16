@@ -21,6 +21,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import ExpandCircleDownRoundedIcon from '@mui/icons-material/ExpandCircleDownRounded';
 import Backdrop from '@mui/material/Backdrop';
+// import './hotelcard.css';
 
 
 const facility = [
@@ -77,7 +78,7 @@ export default function Hotelcard() {
     const [r12, setRval12] = useState(false); 
     //Accordion part
     const [ccExpanded, setCcExpanded] = React.useState(true);
-    const [expExpanded, setExpExpanded] = React.useState(true);
+    const [rfacilityExpanded, setRfacilityExpanded] = React.useState(true);
     const [starsExpanded, setStarExpanded] = React.useState(true);
     const [facilityExpanded, setFacilityExpanded] = React.useState(true);
     const [technologies, setTechnologies] = useState([]);
@@ -97,11 +98,11 @@ export default function Hotelcard() {
     const theme = createTheme({
         breakpoints: {
             values: {
-              xs: 0,
-              sm: 745,
-              md: 746,
-              lg: 1000,
-              xl: 1500,
+                xs: 0,
+                sm: 600,
+                md: 900,
+                lg: 1200,
+                xl: 1536,
             },
           },
     });
@@ -117,7 +118,7 @@ export default function Hotelcard() {
                         <Grid item xs={12}>
                                 <Accordion expanded={starsExpanded} variant="outlined" onChange={() => setStarExpanded(!starsExpanded)} >
                                     <AccordionSummary
-                                        expandIcon={<ExpandCircleDownRoundedIcon style={{ color: '#780000' }} />}
+                                        expandIcon={<ExpandCircleDownRoundedIcon style={{ color: '#000000' }} />}
                                         aria-controls="panel1bh-content"
                                         id="panel1bh-header"
                                         style={{ backgroundColor: '#f5f5f5', color: 'black' }}
@@ -167,7 +168,7 @@ export default function Hotelcard() {
                         <Grid item xs={12}>
                                 <Accordion expanded={facilityExpanded} variant="outlined" onChange={() => setFacilityExpanded(!facilityExpanded)} >
                                     <AccordionSummary
-                                        expandIcon={<ExpandCircleDownRoundedIcon style={{ color: '#780000' }} />}
+                                        expandIcon={<ExpandCircleDownRoundedIcon style={{ color: '#000000' }} />}
                                         aria-controls="panel1bh-content"
                                         id="panel1bh-header"
                                         style={{ backgroundColor: '#f5f5f5', color: 'black' }}>
@@ -269,14 +270,14 @@ export default function Hotelcard() {
                         </Grid>
 
                         <Grid item xs={12}>
-                                <Accordion expanded={facilityExpanded} variant="outlined" onChange={() => setFacilityExpanded(!facilityExpanded)} >
+                                <Accordion expanded={rfacilityExpanded} variant="outlined" onChange={() => setRfacilityExpanded(!rfacilityExpanded)} >
                                     <AccordionSummary
-                                        expandIcon={<ExpandCircleDownRoundedIcon style={{ color: '#780000' }} />}
+                                        expandIcon={<ExpandCircleDownRoundedIcon style={{ color: '#000000' }} />}
                                         aria-controls="panel1bh-content"
                                         id="panel1bh-header"
                                         style={{ backgroundColor: '#f5f5f5', color: 'black' }}>
                                         <Typography sx={{ flexShrink: 0, fontWeight: 'bold' }}>
-                                            Facilities
+                                            Room Facilities
                                         </Typography>
                                     </AccordionSummary>
                                     <Divider />
@@ -363,7 +364,8 @@ export default function Hotelcard() {
                         </Grid>
 
                         <Grid item xs={12} style={{marginBottom:'2rem', marginTop:'1rem'}}>
-                                <Button fullWidth  style={{ backgroundColor: '#780000', color: 'white', letterSpacing: '3' }} variant="outlined">
+                                <Button fullWidth  style={{ backgroundColor: '#cd9a2d', color: 'white' }} type="submit"
+                                    variant="contained">
                                 Search
                                 </Button>
                                 <Backdrop
@@ -372,7 +374,7 @@ export default function Hotelcard() {
                                 >
                                     <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
 
-                                        <CircularProgress size="3rem" style={{ color: "#780000" }} />
+                                        <CircularProgress size="3rem" style={{ color: "#000000" }} />
                                     </Box>
                                 </Backdrop>
                                 
@@ -383,8 +385,8 @@ export default function Hotelcard() {
                             <CardContent style={{padding:"20px"}}>
                                 <Grid container spacing={2}>
                                     <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
-                                        <Grid container >
-                                            <Avatar sx={{ width: "100%", height: "150%" }} variant="rounded" src={image1}/>
+                                        <Grid container className='hotelcard-container'>
+                                            <Avatar className='hotel-img' sx={{ width: "100%", height: "150%" }} variant="rounded" src={image1}/>
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={9} md={6}>
@@ -436,7 +438,7 @@ export default function Hotelcard() {
                                             <Grid item xs={3} style={{textAlign:'end'}}>
                                                 <Box 
                                                 style={{
-                                                    backgroundColor:'#780000',
+                                                    backgroundColor:'#000000',
                                                     color: '#ffffff',
                                                     textAlign:'center',
                                                     fontWeight:"bold",
@@ -455,7 +457,7 @@ export default function Hotelcard() {
                                                 type="submit"
                                                 variant="contained"
                                                 sx={{ mt: 2, mb: 2 }}
-                                                style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
+                                                style={{ backgroundColor: '#cd9a2d', color: '#FFFFFF', textTransform: 'unset' }}>
                                                     Show Prices
                                                 </Button>
                                             </Grid>
@@ -472,8 +474,8 @@ export default function Hotelcard() {
                         <CardContent style={{padding:"20px"}}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
-                                    <Grid container >
-                                        <Avatar sx={{ width: "100%", height: "150%" }} variant="rounded" src={image2}/>
+                                    <Grid container className='hotelcard-container'>
+                                        <Avatar className='hotel-img' sx={{ width: "100%", height: "150%" }} variant="rounded" src={image2}/>
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={9} md={6}>
@@ -482,7 +484,7 @@ export default function Hotelcard() {
                                             <Typography variant='h5' style={{fontWeight: "bold", textAlign:"justify"}}>
                                                 <Link underline="hover" onClick={()=> window.open('_blank')}
                                                 style={{color:"black", cursor:'pointer'}}>
-                                                    The Montague On The Gardens</Link>
+                                                    The Montague Gardens</Link>
                                                 <Rating name="read-only" value={value2} readOnly />
                                             </Typography> 
                                         </Grid>     
@@ -523,7 +525,7 @@ export default function Hotelcard() {
                                         <Grid item xs={3} style={{textAlign:'end'}}>
                                             <Box 
                                                 style={{
-                                                    backgroundColor:'#780000',
+                                                    backgroundColor:'#000000',
                                                     color: '#ffffff',
                                                     textAlign:'center',
                                                     fontWeight:"bold",
@@ -542,7 +544,7 @@ export default function Hotelcard() {
                                             type="submit"
                                             variant="contained"
                                             sx={{ mt: 2, mb: 2 }}
-                                            style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
+                                            style={{ backgroundColor: '#cd9a2d', color: '#FFFFFF', textTransform: 'unset' }}>
                                                 Show Prices
                                             </Button>
                                         </Grid>
@@ -559,17 +561,17 @@ export default function Hotelcard() {
                         <CardContent style={{padding:"20px"}}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
-                                    <Grid container >
-                                        <Avatar sx={{ width: "100%", height: "150%" }} variant="rounded" src={image3}/>
+                                    <Grid container className='hotelcard-img'>
+                                        <Avatar className='hotel-img' sx={{ width: "100%", height: "150%" }} variant="rounded" src={image3}/>
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={9} md={6}>
                                     <Grid container style={{}}>
                                         <Grid item xs={12}>
-                                            <Typography variant='h6' style={{fontWeight: "bold", textAlign:"justify"}}>
+                                            <Typography variant='h5' style={{fontWeight: "bold", textAlign:"justify"}}>
                                                 <Link underline="hover" onClick={()=> window.open('_blank')}
                                                 style={{color:"black", cursor:'pointer'}}>
-                                                    Presidential Apartments Kensington</Link>
+                                                    Presidential Apartments</Link>
                                                 <Rating name="read-only" value={value3} readOnly />
                                             </Typography> 
                                         </Grid>     
@@ -611,7 +613,7 @@ export default function Hotelcard() {
                                         <Grid item xs={3} style={{textAlign:'end'}}>
                                             <Box 
                                                 style={{
-                                                    backgroundColor:'#780000',
+                                                    backgroundColor:'#000000',
                                                     color: '#ffffff',
                                                     textAlign:'center',
                                                     fontWeight:"bold",
@@ -630,7 +632,7 @@ export default function Hotelcard() {
                                             type="submit"
                                             variant="contained"
                                             sx={{ mt: 2, mb: 2 }}
-                                            style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
+                                            style={{ backgroundColor: '#cd9a2d', color: '#FFFFFF', textTransform: 'unset' }}>
                                                 Show Prices
                                             </Button>
                                         </Grid>
@@ -647,8 +649,8 @@ export default function Hotelcard() {
                         <CardContent style={{padding:"20px"}}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
-                                    <Grid container >
-                                        <Avatar sx={{ width: "100%", height: "150%" }} variant="rounded" src={image4}/>
+                                    <Grid container className='hotelcard-container'>
+                                        <Avatar className='hotel-img' sx={{ width: "100%", height: "150%" }} variant="rounded" src={image4}/>
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={9} md={6}>
@@ -699,7 +701,7 @@ export default function Hotelcard() {
                                         <Grid item xs={3} style={{textAlign:'end'}}>
                                             <Box 
                                                 style={{
-                                                    backgroundColor:'#780000',
+                                                    backgroundColor:'#000000',
                                                     color: '#ffffff',
                                                     textAlign:'center',
                                                     fontWeight:"bold",
@@ -718,7 +720,7 @@ export default function Hotelcard() {
                                             type="submit"
                                             variant="contained"
                                             sx={{ mt: 2, mb: 2 }}
-                                            style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
+                                            style={{ backgroundColor: '#cd9a2d', color: '#FFFFFF', textTransform: 'unset' }}>
                                                 Show Prices
                                             </Button>
                                         </Grid>
@@ -735,8 +737,8 @@ export default function Hotelcard() {
                         <CardContent style={{padding:"20px"}}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
-                                    <Grid container >
-                                        <Avatar sx={{ width: "100%", height: "150%" }} variant="rounded" src={image5}/>
+                                    <Grid container className='hotelcard-container'>
+                                        <Avatar className='hotel-img' sx={{ width: "100%", height: "150%" }} variant="rounded" src={image5}/>
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={9} md={6}>
@@ -787,7 +789,7 @@ export default function Hotelcard() {
                                         <Grid item xs={3} style={{textAlign:'end'}}>
                                             <Box 
                                                 style={{
-                                                    backgroundColor:'#780000',
+                                                    backgroundColor:'#000000',
                                                     color: '#ffffff',
                                                     textAlign:'center',
                                                     fontWeight:"bold",
@@ -806,7 +808,7 @@ export default function Hotelcard() {
                                             type="submit"
                                             variant="contained"
                                             sx={{ mt: 2, mb: 2 }}
-                                            style={{ backgroundColor: '#C1121F', color: '#FFFFFF', textTransform: 'unset' }}>
+                                            style={{ backgroundColor: '#cd9a2d', color: '#FFFFFF', textTransform: 'unset' }}>
                                                 Show Prices
                                             </Button>
                                         </Grid>
