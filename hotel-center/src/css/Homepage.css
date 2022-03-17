@@ -1,0 +1,133 @@
+.text-theme-white {
+  color: #f8f9fa;
+}
+
+/******************************************** Header **************************************/
+.header {
+  position: relative;
+  /* height: 85vh;
+  min-height: 768px; */
+}
+
+.header img {
+  position: absolute;
+  /* height: 100%; */
+  /* width: 100%; */
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  padding-top: 25vh;
+}
+
+.location-icon {
+  color: #cd9a2d;
+}
+
+.search-form-card {
+  box-shadow: 1px 1px 15px 0 rgba(205, 154, 45, 0.8);
+  background-color: #f8f9fa;
+}
+
+.search-button {
+  background-color: #cd9a2d;
+  height: 100%;
+  width: 56px;
+  border: none;
+}
+
+.search-button:focus,
+.search-button:active,
+.search-button:hover {
+  background-color: #be8f2a;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.number-of-guests-form {
+  width: 300px;
+}
+
+.increase-button,
+.decrease-button {
+  background-color: #cd9a2d;
+  height: 40px;
+  width: 40px;
+  border: none;
+  padding: 0;
+}
+
+.increase-button:focus,
+.increase-button:active,
+.increase-button:hover,
+.decrease-button:focus,
+.decrease-button:active,
+.decrease-button:hover {
+  background-color: #be8f2a;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.increase-button:disabled,
+.decrease-button:disabled {
+  background-color: #d3b065;
+}
+
+/******************************************** Navbar **************************************/
+.nav-style {
+  background-color: #f8f8f8;
+  /* position: fixed; */
+}
+
+.nav-top {
+  transition: all 0.3s ease;
+}
+
+.nav-scrolled {
+  box-shadow: 0 1px 15px 0 rgba(205, 154, 45, 0.8);
+  transition: all 0.3s ease;
+}
+
+.logo {
+  display: contents;
+}
+
+.logo img {
+  width: 3rem;
+  margin-right: 0.5rem;
+}
+
+.nav-button,
+.nav-button:active,
+.nav-button:focus,
+.nav-button:hover {
+  border-radius: 25px;
+  box-shadow: none !important;
+}
+
+.nav-hamburger-button,
+.nav-hamburger-button:focus,
+.nav-hamburger-button:active,
+.nav-hamburger-button:hover {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+@media only screen and (max-width: 575.99px) {
+  .nav-button,
+  .nav-button:active,
+  .nav-button:focus,
+  .nav-button:hover {
+    border-color: transparent !important;
+    background-color: transparent !important;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-button:active,
+  .nav-button:focus,
+  .nav-button:hover {
+    color: #cd9a2d;
+  }
+}
