@@ -1,7 +1,7 @@
 import references from '../assets/References.json';
 import { cookies, makeURL } from './common';
 import axios from 'axios';
-import { get_token, get_user, set_user_session, remove_user_session } from './common';
+import { get_token, get_user, set_user_session, remove_user_session, set_cookie } from './common';
 
 export const AccountActivation = async (uid1, token1) => {
 	let message = '';
@@ -41,9 +41,11 @@ export const Sign_up_connection = async (email, password) => {
 };
 
 export const login_connection = async (email, password) => {
+	console.log(password, email)
 	let message = '';
-	if (cookies.get('x-access-token') != undefined) {
+	if (cookies.get('Authorization') != undefined) {
 		message = 'Already logged in';
+		window.alert("Already logged in");
 	} else {
 		await axios
 			.post(makeURL(references.url_login), {
@@ -51,13 +53,14 @@ export const login_connection = async (email, password) => {
 				password: password
 			})
 			.then((response) => {
-				set_user_session(response.data.auth_token);
+				console.log(response.data.auth_token);
+				set_cookie(response.data.auth_token);
 				console.log(response);
 				message = true;
 			})
 			.catch((error) => {
 				if (error.response.status == 400) {
-					window.alert('Already logged in');
+					window.alert("wrong email or password");
 				}
 				console.log(error);
 				message = false;

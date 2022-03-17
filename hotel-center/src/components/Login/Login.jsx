@@ -26,7 +26,7 @@ class login extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			fields: {},
+			fields: {'email':"", "password":""},
 			errors: {},
 			logerror: '',
 			history: ''
@@ -47,11 +47,11 @@ class login extends React.Component {
 	submituserlogin(e) {
 		e.preventDefault();
 		if (true) {
-			let fields = {};
+			// let fields = {};
 
-			fields['email'] = '';
-			fields['password'] = '';
-			this.setState({ fields: fields });
+			// fields['email'] = '';
+			// fields['password'] = '';
+			// this.setState({ fields: fields });
 			alert('Form submitted');
 			const is_logged_in = login_connection(this.state.fields['email'], this.state.fields['password']);
 			/*
