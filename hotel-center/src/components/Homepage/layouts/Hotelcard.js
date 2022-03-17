@@ -114,7 +114,7 @@ export default function Hotelcard() {
         <Container component="main" maxWidth="lg">
             <ThemeProvider theme={theme}>
                 <Grid container spacing={2}>
-                    <Grid item xs={3} style={{marginTop:'3rem'}}>
+                    <Grid item xs={3} style={{marginTop:'2rem'}}>
                         <Grid item xs={12}>
                                 <Accordion expanded={starsExpanded} variant="outlined" onChange={() => setStarExpanded(!starsExpanded)} >
                                     <AccordionSummary
@@ -132,32 +132,32 @@ export default function Hotelcard() {
                                         <Grid container>
                                             <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={ht} control={<Checkbox onClick={() => setHt(!ht)} />} label="1 star" />
+                                                    <FormControlLabel checked={ht} control={<Checkbox onClick={() => setHt(!ht)} style={{color:'#000'}}/>} label="1 star" />
                                                 </FormGroup>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={ft} control={<Checkbox onClick={() => setFt(!ft)} />} label="2 stars" />
+                                                    <FormControlLabel checked={ft} control={<Checkbox onClick={() => setFt(!ft)} style={{color:'#000'}}/>} label="2 stars" />
                                                 </FormGroup>                      
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={proj} control={<Checkbox onClick={() => setProj(!proj)} />} label="3 stars" />
+                                                    <FormControlLabel checked={proj} control={<Checkbox onClick={() => setProj(!proj)} style={{color:'#000'}}/>} label="3 stars" />
                                                 </FormGroup>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={remote} control={<Checkbox onClick={() => setRemote(!remote)} />} label="4 stars" />
+                                                    <FormControlLabel checked={remote} control={<Checkbox onClick={() => setRemote(!remote)} style={{color:'#000'}}/>} label="4 stars" />
                                                 </FormGroup>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={star5} control={<Checkbox onClick={() => setStar5(!star5)} />} label="5 stars" />
+                                                    <FormControlLabel checked={star5} control={<Checkbox onClick={() => setStar5(!star5)} style={{color:'#000'}}/>} label="5 stars" />
                                                 </FormGroup>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={unrate} control={<Checkbox onClick={() => setUnrate(!unrate)} />} label="Unrated" />
+                                                    <FormControlLabel checked={unrate} control={<Checkbox onClick={() => setUnrate(!unrate)} style={{color:'#000'}}/>} label="Unrated" />
                                                 </FormGroup>
                                             </Grid>
                                         </Grid>
@@ -197,72 +197,72 @@ export default function Hotelcard() {
                                         /> */}
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v1} control={<Checkbox onClick={() => setVal1(!v1)} />} label="Parking" />
+                                                    <FormControlLabel checked={v1} control={<Checkbox onClick={() => setVal1(!v1)} style={{color:'#000'}}/>} label="Parking" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v2} control={<Checkbox onClick={() => setVal2(!v2)} />} label="Restaurant" />
+                                                    <FormControlLabel checked={v2} control={<Checkbox onClick={() => setVal2(!v2)} style={{color:'#000'}}/>} label="Restaurant" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v3} control={<Checkbox onClick={() => setVal3(!v3)} />} label="Pets allowed" />
+                                                    <FormControlLabel checked={v3} control={<Checkbox onClick={() => setVal3(!v3)} style={{color:'#000'}}/>} label="Pets allowed" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v4} control={<Checkbox onClick={() => setVal4(!v4)} />} label="Room service" />
+                                                    <FormControlLabel checked={v4} control={<Checkbox onClick={() => setVal4(!v4)} style={{color:'#000'}}/>} label="Room service" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v5} control={<Checkbox onClick={() => setVal5(!v5)} />} label="24-hour front desk" />
+                                                    <FormControlLabel checked={v5} control={<Checkbox onClick={() => setVal5(!v5)} style={{color:'#000'}}/>} label="24-hour front desk" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v6} control={<Checkbox onClick={() => setVal6(!v6)} />} label="Fitness centre" />
+                                                    <FormControlLabel checked={v6} control={<Checkbox onClick={() => setVal6(!v6)} style={{color:'#000'}}/>} label="Fitness centre" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v7} control={<Checkbox onClick={() => setVal7(!v7)} />} label="Non-smoking rooms" />
+                                                    <FormControlLabel checked={v7} control={<Checkbox onClick={() => setVal7(!v7)} style={{color:'#000'}}/>} label="Non-smoking rooms" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v8} control={<Checkbox onClick={() => setVal8(!v8)} />} label="Airport shuttle" />
+                                                    <FormControlLabel checked={v8} control={<Checkbox onClick={() => setVal8(!v8)} style={{color:'#000'}}/>} label="Airport shuttle" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v9} control={<Checkbox onClick={() => setVal9(!v9)} />} label={<Typography fontSize={15}>Facilities for disabled guests</Typography>} />
+                                                    <FormControlLabel checked={v9} control={<Checkbox onClick={() => setVal9(!v9)} style={{color:'#000'}}/>} label={<Typography fontSize={15}>Facilities for disabled guests</Typography>} />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v10} control={<Checkbox onClick={() => setVal10(!v10)} />} label="Family rooms" />
+                                                    <FormControlLabel checked={v10} control={<Checkbox onClick={() => setVal10(!v10)} style={{color:'#000'}}/>} label="Family rooms" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v11} control={<Checkbox onClick={() => setVal11(!v11)} />} label="Spa and wellness centre" />
+                                                    <FormControlLabel checked={v11} control={<Checkbox onClick={() => setVal11(!v11)} style={{color:'#000'}}/>} label="Spa and wellness centre" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v12} control={<Checkbox onClick={() => setVal12(!v12)} />} label="Free WiFi" />
+                                                    <FormControlLabel checked={v12} control={<Checkbox onClick={() => setVal12(!v12)} style={{color:'#000'}}/>} label="Free WiFi" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v13} control={<Checkbox onClick={() => setVal13(!v13)} />} label={<Typography fontSize={13.62}>Electric vehicle charging station</Typography>} />
+                                                    <FormControlLabel checked={v13} control={<Checkbox onClick={() => setVal13(!v13)} style={{color:'#000'}}/>} label={<Typography fontSize={13.62}>Electric vehicle charging station</Typography>} />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={v14} control={<Checkbox onClick={() => setVal14(!v14)} />} label="Swimming pool" />
+                                                    <FormControlLabel checked={v14} control={<Checkbox onClick={() => setVal14(!v14)} style={{color:'#000'}}/>} label="Swimming pool" />
                                                 </FormGroup>
                                         </Grid>
                                     </AccordionDetails>
@@ -301,62 +301,62 @@ export default function Hotelcard() {
                                         /> */}
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r1} control={<Checkbox onClick={() => setRval1(!r1)} />} label="Kitchen/kitchenette" />
+                                                    <FormControlLabel checked={r1} control={<Checkbox onClick={() => setRval1(!r1)} style={{color:'#000'}}/>} label="Kitchen/kitchenette" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r2} control={<Checkbox onClick={() => setRval2(!r2)} />} label="Private bathroom" />
+                                                    <FormControlLabel checked={r2} control={<Checkbox onClick={() => setRval2(!r2)} style={{color:'#000'}}/>} label="Private bathroom" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r3} control={<Checkbox onClick={() => setRval3(!r3)} />} label="Air conditioning" />
+                                                    <FormControlLabel checked={r3} control={<Checkbox onClick={() => setRval3(!r3)} style={{color:'#000'}}/>} label="Air conditioning" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r4} control={<Checkbox onClick={() => setRval4(!r4)} />} label="Desk" />
+                                                    <FormControlLabel checked={r4} control={<Checkbox onClick={() => setRval4(!r4)} style={{color:'#000'}}/>} label="Desk" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r5} control={<Checkbox onClick={() => setRval5(!r5)} />} label="Bath" />
+                                                    <FormControlLabel checked={r5} control={<Checkbox onClick={() => setRval5(!r5)} style={{color:'#000'}}/>} label="Bath" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r6} control={<Checkbox onClick={() => setRval6(!r6)} />} label="Balcony" />
+                                                    <FormControlLabel checked={r6} control={<Checkbox onClick={() => setRval6(!r6)} style={{color:'#000'}}/>} label="Balcony" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r7} control={<Checkbox onClick={() => setRval7(!r7)} />} label="Flat-screen TV" />
+                                                    <FormControlLabel checked={r7} control={<Checkbox onClick={() => setRval7(!r7)} style={{color:'#000'}}/>} label="Flat-screen TV" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r8} control={<Checkbox onClick={() => setRval8(!r8)} />} label="Washing machine" />
+                                                    <FormControlLabel checked={r8} control={<Checkbox onClick={() => setRval8(!r8)} style={{color:'#000'}}/>} label="Washing machine" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r9} control={<Checkbox onClick={() => setRval9(!r9)} />} label="View" />
+                                                    <FormControlLabel checked={r9} control={<Checkbox onClick={() => setRval9(!r9)} style={{color:'#000'}}/>} label="View" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r10} control={<Checkbox onClick={() => setRval10(!r10)} />} label="Electric kettle" />
+                                                    <FormControlLabel checked={r10} control={<Checkbox onClick={() => setRval10(!r10)} style={{color:'#000'}}/>} label="Electric kettle" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r11} control={<Checkbox onClick={() => setRval11(!r11)} />} label="Coffee/tea maker" />
+                                                    <FormControlLabel checked={r11} control={<Checkbox onClick={() => setRval11(!r11)} style={{color:'#000'}}/>} label="Coffee/tea maker" />
                                                 </FormGroup>
                                         </Grid>
                                         <Grid item xs={12}>
                                                 <FormGroup>
-                                                    <FormControlLabel checked={r12} control={<Checkbox onClick={() => setRval12(!r12)} />} label="Coffee machine" />
+                                                    <FormControlLabel checked={r12} control={<Checkbox onClick={() => setRval12(!r12)} style={{color:'#000'}}/>} label="Coffee machine" />
                                                 </FormGroup>
                                         </Grid>
                                     </AccordionDetails>
@@ -368,7 +368,7 @@ export default function Hotelcard() {
                                     variant="contained">
                                 Search
                                 </Button>
-                                <Backdrop
+                                {/* <Backdrop
                                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                                     open={filterStart || searchStart}
                                 >
@@ -376,12 +376,12 @@ export default function Hotelcard() {
 
                                         <CircularProgress size="3rem" style={{ color: "#000000" }} />
                                     </Box>
-                                </Backdrop>
+                                </Backdrop> */}
                                 
                             </Grid>
                     </Grid>
                     <Grid item xs={9}>
-                        <Card style={{marginTop:"3rem"}}>
+                        <Card style={{marginTop:"2rem"}}>
                             <CardContent style={{padding:"20px"}}>
                                 <Grid container spacing={2}>
                                     <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
@@ -470,7 +470,7 @@ export default function Hotelcard() {
                     </CardActions> */}
                         </Card>
                 
-                        <Card style={{marginTop:"3rem"}}>
+                        <Card style={{marginTop:"1.5rem"}}>
                         <CardContent style={{padding:"20px"}}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
@@ -557,7 +557,7 @@ export default function Hotelcard() {
                         </CardActions> */}
                         </Card>
 
-                        <Card style={{marginTop:"3rem"}}>
+                        <Card style={{marginTop:"1.5rem"}}>
                         <CardContent style={{padding:"20px"}}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
@@ -645,7 +645,7 @@ export default function Hotelcard() {
                         </CardActions> */}
                         </Card>
 
-                        <Card style={{marginTop:"3rem" , marginBottom:'2rem'}}>
+                        <Card style={{marginTop:"1.5rem" }}>
                         <CardContent style={{padding:"20px"}}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
@@ -733,7 +733,7 @@ export default function Hotelcard() {
                         </CardActions> */}
                         </Card>
 
-                        <Card style={{marginTop:"3rem" , marginBottom:'2rem'}}>
+                        <Card style={{marginTop:"1.5rem" , marginBottom:'2rem'}}>
                         <CardContent style={{padding:"20px"}}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12} md={4} style={{alignSelf:'center'}}>
