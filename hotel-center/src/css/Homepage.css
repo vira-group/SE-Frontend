@@ -5,14 +5,14 @@
 /******************************************** Header **************************************/
 .header {
   position: relative;
-  /* height: 85vh;
-  min-height: 768px; */
+  height: 95vh;
+  min-height: 768px;
 }
 
 .header img {
   position: absolute;
-  /* height: 100%; */
-  /* width: 100%; */
+  height: 100%;
+  width: 100%;
 }
 
 .search-form {

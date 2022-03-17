@@ -6,11 +6,7 @@ function Header(props) {
   return (
     <div className="header">
       <div>
-        <img
-          src={Background}
-          alt="Background image"
-          style={{ width: "100%" }}
-        />
+        <img src={Background} alt="Background image" />
       </div>
       <div className="search-form">
         <SearchForm />
