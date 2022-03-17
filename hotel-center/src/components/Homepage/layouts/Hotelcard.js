@@ -7,11 +7,11 @@ import { Avatar, Link, Grid, Box, Button,
   , AccordionDetails, Container, Divider, TextField, CircularProgress} from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import Helmet from 'react-helmet';
-import image1 from './pics/london1.jpg';
-import image2 from './pics/london2.jpg';
-import image3 from './pics/london3.jpg';
-import image4 from './pics/Amsterdom1.jpg';
-import image5 from './pics/Amsterdom2.jpg';
+import image1 from '../../../statics/img/pics/london1.jpg';
+import image2 from '../../../statics/img/pics/london2.jpg';
+import image3 from '../../../statics/img/pics/london3.jpg';
+import image4 from '../../../statics/img/pics/Amsterdom1.jpg';
+import image5 from '../../../statics/img/pics/Amsterdom2.jpg';
 import Rating from '@mui/material/Rating';
 import { useState, useEffect} from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';

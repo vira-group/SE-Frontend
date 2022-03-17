@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Avatar, Link, Grid, Box, Button,
     Typography, Container } from '@mui/material';
 import Helmet from 'react-helmet';
-import image1 from './pics/opened_dark.svg';
-import './verify.css';
+import image1 from './statics/img/pics/opened_dark.svg';
 import { textAlign } from '@mui/system';
 
 export default function Verify(){
