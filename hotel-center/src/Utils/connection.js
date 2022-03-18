@@ -69,3 +69,53 @@ export const login_connection = async (email, password) => {
 
 	return message;
 };
+
+export const me = async () => {
+	let message;
+	console.log(cookies.get('Authorization'));
+	await axios
+		.get(makeURL(references.url_me),{
+
+				headers:{
+					'Authorization': cookies.get('Authorization')
+				}
+
+		})
+		.then((response) => {
+			console.log(response);
+			message = true;
+		})
+		.catch((error) => {
+			console.log(error);
+			message = false;
+		});
+
+	console.log(")))))))))) "+ message)
+	return message;
+};
+
+
+export const logout = async () => {
+	let message = '';
+	console.log(cookies.get('Authorization'));
+	await axios
+		.post(makeURL(references.url_logout),{},{
+
+				headers:{
+					'Authorization': cookies.get('Authorization')
+				}
+
+		})
+		.then((response) => {
+			console.log(response);
+			cookies.remove('Authorization');
+			message = true;
+		})
+		.catch((error) => {
+			console.log(error);
+			message = false;
+		});
+
+
+	return message;
+};

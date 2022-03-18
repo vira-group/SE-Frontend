@@ -89,7 +89,7 @@ class Sign_up extends React.Component {
 			const is_registered = Sign_up_connection(this.state.fields['email'], this.state.fields['password']);
 			
 			if (is_registered) {
-				window.location.replace('/login');
+				window.location.replace('/verify-email');
 			}
 		}
 	}

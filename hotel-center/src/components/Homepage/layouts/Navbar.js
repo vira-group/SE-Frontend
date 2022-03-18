@@ -4,20 +4,36 @@ import UseAnimations from "react-useanimations";
 import menu3 from "react-useanimations/lib/menu3";
 import Signup from '../../Sign_up/sign_up';
 import Login from '../../Login/Login';
+import { me, logout } from "../../../Utils/connection";
+import { cookies } from "../../../Utils/common";
 
 class Navbar extends Component {
-  state = {
-    openMenu: false,
-    navbarMoved: false,
-  };
+
+  constructor() {
+		super();
+		this.state = {
+			openMenu: false,
+      navbarMoved: false,
+      is_loggedin: false,
+		};
+
+	}
 
   componentDidMount() {
     document.scrollingElement.scrollTop = 0;
     document.addEventListener("scroll", this.handleScroll);
+    const t1 = async ()=>{
+      await me()
+      .then((response) => {
+        this.setState({is_loggedin:response})
+      })
+    }
+    // console.log(this.state.is_loggedin, ".....");
   }
 
   componentWillUnmount() {
     document.removeEventListener("scroll", this.handleScroll);
+
   }
 
   handleOpenMenu = () => {
@@ -42,6 +58,10 @@ class Navbar extends Component {
       }
     }
   };
+  handleLogout = () =>{
+    logout();
+    window.location.reload();
+  }
 
   render() {
     return (
@@ -73,28 +93,49 @@ class Navbar extends Component {
               strokeColor="#cd9a2d"
             />
           </button>
+          <div>
+            {
+              cookies.get('Authorization') == undefined ? (
+                <div className="collapse navbar-collapse" id="navMenu">
+          <div className="ms-auto pt-3 pt-sm-0">
+            <a href='http://localhost:3000/login'>
+              <button
+                type="button"
+                className="btn btn-outline-dark me-2 nav-button fw-bold"
+                
+              >
+                Login
+              </button>
+            </a>
 
-          <div className="collapse navbar-collapse" id="navMenu">
-            <div className="ms-auto pt-3 pt-sm-0">
-              <a href='http://localhost:3000/login'>
-                <button
-                  type="button"
-                  className="btn btn-outline-dark me-2 nav-button fw-bold"
-                  
-                >
-                  Login
-                </button>
-              </a>
+            <a href='http://localhost:3000/sign-up'>
+              <button
+                type="button"
+                className="btn btn-outline-dark nav-button fw-bold"
+              >
+                Sign up
+              </button>
+            </a>
+          </div>
+        </div>
 
-              <a href='http://localhost:3000/sign-up'>
-                <button
-                  type="button"
-                  className="btn btn-outline-dark nav-button fw-bold"
-                >
-                  Sign up
-                </button>
-              </a>
-            </div>
+              ) : (
+
+<div className="collapse navbar-collapse" id="navMenu">
+          <div className="ms-auto pt-3 pt-sm-0">
+            <a href='http://localhost:3000'>
+              <button
+                type="button"
+                className="btn btn-outline-dark me-2 nav-button fw-bold"
+                onClick={this.handleLogout}
+              >
+                logout
+              </button>
+            </a>
+          </div>
+        </div>
+              )
+            }
           </div>
         </div>
       </nav>
@@ -103,3 +144,16 @@ class Navbar extends Component {
 }
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+
+
+
+

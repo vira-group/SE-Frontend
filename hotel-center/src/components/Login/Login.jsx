@@ -54,6 +54,9 @@ class login extends React.Component {
 			// this.setState({ fields: fields });
 			alert('Form submitted');
 			const is_logged_in = login_connection(this.state.fields['email'], this.state.fields['password']);
+			if(is_logged_in){
+				window.location.replace("/")
+			}
 			/*
 			if(is_logged_in === "Already logged in")
 			{
