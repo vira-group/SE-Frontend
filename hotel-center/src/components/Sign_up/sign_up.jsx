@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css';
-import pic from './s2.png';
+import pic from './s3.png';
 import { Sign_up_connection } from '../../Utils/connection';
 
 const theme = createTheme();
@@ -87,7 +87,7 @@ class Sign_up extends React.Component {
 			this.setState({ fields: fields });
 			alert('Form submitted');
 			const is_registered = Sign_up_connection(this.state.fields['email'], this.state.fields['password']);
-			
+
 			if (is_registered) {
 				window.location.replace('/verify-email');
 			}
@@ -197,7 +197,7 @@ class Sign_up extends React.Component {
 							alignItems: 'center'
 						}}
 					>
-						<Avatar sx={{ m: 1, backgroundColor: '#003049' }} className="icon" />
+						<Avatar sx={{ m: 0.5, backgroundColor: 'black', color: 'white' }} className="icon" />
 
 						<Typography component="h1" variant="h5">
 							Sign up
@@ -205,8 +205,8 @@ class Sign_up extends React.Component {
 
 						<img className="imgs" src={pic} />
 
-						<Box component="form" noValidate onSubmit={this.onSubmit} sx={{ mt: 3 }}>
-							<Grid container spacing={2}>
+						<Box component="form" noValidate onSubmit={this.onSubmit} sx={{ mt: 2 }}>
+							<Grid container spacing={1}>
 								<Grid item xs={12}>
 									<TextField
 										required
@@ -332,17 +332,26 @@ class Sign_up extends React.Component {
 								onClick={this.handleSubmit}
 								fullWidth
 								variant="contained"
-								sx={{ mt: 2, mb: 2, backgroundColor: '#C1121F' }}
+								style={{
+									mt: 2,
+									mb: 2,
+									backgroundColor: 'black',
+									color: 'white',
+									marginTop: '20px',
+									height: '43px',
+									marginBottom:'10px'
+								}}
 							>
 								Sign Up
 							</Button>
+
 							<Grid container justifyContent="flex-end">
 								<Grid item>
 									<Link
 										to="./login"
 										variant="body2"
 										className="lnk"
-										sx={{ color: '#003049', marginRight: '10px' }}
+										sx={{ color: 'black', marginRight: '10px', marginTop: '50px', mt: 2, mb: 3 }}
 									>
 										Already have an account? Sign in
 									</Link>

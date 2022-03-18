@@ -63,6 +63,9 @@ export const login_connection = async (email, password) => {
 					window.alert("wrong email or password");
 				}
 				console.log(error);
+				let err = <h5>Invalid email or password!</h5>;
+				this.setState({ logerror: err });
+			
 				message = false;
 			});
 	}

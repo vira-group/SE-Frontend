@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css';
-import pic from './s1.png';
+import pic from './s4.png';
 import ico from './icon.png';
 
 import { login_connection } from '../../Utils/connection';
@@ -26,7 +26,7 @@ class login extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			fields: {'email':"", "password":""},
+			fields: { email: '', password: '' },
 			errors: {},
 			logerror: '',
 			history: ''
@@ -54,8 +54,8 @@ class login extends React.Component {
 			// this.setState({ fields: fields });
 			alert('Form submitted');
 			const is_logged_in = login_connection(this.state.fields['email'], this.state.fields['password']);
-			if(is_logged_in){
-				window.location.replace("/")
+			if (is_logged_in) {
+				window.location.replace('/');
 			}
 			/*
 			if(is_logged_in === "Already logged in")
@@ -63,8 +63,7 @@ class login extends React.Component {
 				window.alert("Already logged in"); 
 			}
 			*/
-		
-	}
+		}
 	}
 
 	componentDidMount() {
@@ -157,17 +156,26 @@ class login extends React.Component {
 								fullWidth
 								variant="contained"
 								onClick={this.submituserlogin}
-								sx={{ mt: 1, mb: 2, backgroundColor: '#C1121F' }}
+								style={{
+									mt: 2,
+									mb: 2,
+									backgroundColor: 'black',
+									color: 'white',
+									marginTop: '20px',
+									height: '43px',
+									marginBottom: '10px'
+								}}
 							>
 								Login
 							</Button>
+
 							<Grid container justifyContent="flex-end">
 								<Grid item>
 									<Link
 										to="/sign-up"
 										variant="body2"
 										className="lnk_Login"
-										sx={{ color: '#003049', marginRight: '10px' }}
+										sx={{ color: '#cd9a2d', marginRight: '10px' }}
 									>
 										Don't have an account yet? Sign Up
 									</Link>
