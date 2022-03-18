@@ -191,7 +191,7 @@ class Sign_up extends React.Component {
 					<CssBaseline />
 					<Box
 						sx={{
-							marginTop: 8,
+							marginTop: 2,
 							display: 'flex',
 							flexDirection: 'column',
 							alignItems: 'center'
@@ -332,7 +332,7 @@ class Sign_up extends React.Component {
 								onClick={this.handleSubmit}
 								fullWidth
 								variant="contained"
-								sx={{ mt: 3, mb: 2, backgroundColor: '#C1121F', height: 55 }}
+								sx={{ mt: 2, mb: 2, backgroundColor: '#C1121F' }}
 							>
 								Sign Up
 							</Button>

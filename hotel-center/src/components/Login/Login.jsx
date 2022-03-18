@@ -154,7 +154,7 @@ class login extends React.Component {
 								fullWidth
 								variant="contained"
 								onClick={this.submituserlogin}
-								sx={{ mt: 1, mb: 2, backgroundColor: '#C1121F', height: 55 }}
+								sx={{ mt: 1, mb: 2, backgroundColor: '#C1121F' }}
 							>
 								Login
 							</Button>
