@@ -78,9 +78,9 @@ export default function Hotelcard() {
     const [r12, setRval12] = useState(false); 
     //Accordion part
     const [ccExpanded, setCcExpanded] = React.useState(true);
-    const [rfacilityExpanded, setRfacilityExpanded] = React.useState(true);
-    const [starsExpanded, setStarExpanded] = React.useState(true);
-    const [facilityExpanded, setFacilityExpanded] = React.useState(true);
+    const [rfacilityExpanded, setRfacilityExpanded] = React.useState(false);
+    const [starsExpanded, setStarExpanded] = React.useState(false);
+    const [facilityExpanded, setFacilityExpanded] = React.useState(false);
     const [technologies, setTechnologies] = useState([]);
 
     // for checking search and filter start
