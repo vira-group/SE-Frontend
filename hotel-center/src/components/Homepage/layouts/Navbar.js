@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback, Component } from "react";
 import Logo from "../../../statics/logo/logo2.png";
 import UseAnimations from "react-useanimations";
 import menu3 from "react-useanimations/lib/menu3";
+import Signup from '../../Sign_up/sign_up';
+import Login from '../../Login/Login';
 
 class Navbar extends Component {
   state = {
@@ -51,7 +53,7 @@ class Navbar extends Component {
         }
       >
         <div className="container">
-          <a href="#" className="navbar-brand logo">
+          <a href="/" className="navbar-brand logo">
             <img src={Logo} alt="Hotel Center" />
             <span className="fw-bold">Hotel Center</span>
           </a>
@@ -74,18 +76,24 @@ class Navbar extends Component {
 
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="ms-auto pt-3 pt-sm-0">
-              <button
-                type="button"
-                className="btn btn-outline-dark me-2 nav-button fw-bold"
-              >
-                Login
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-dark nav-button fw-bold"
-              >
-                Sign up
-              </button>
+              <a href='http://localhost:3000/login'>
+                <button
+                  type="button"
+                  className="btn btn-outline-dark me-2 nav-button fw-bold"
+                  
+                >
+                  Login
+                </button>
+              </a>
+
+              <a href='http://localhost:3000/sign-up'>
+                <button
+                  type="button"
+                  className="btn btn-outline-dark nav-button fw-bold"
+                >
+                  Sign up
+                </button>
+              </a>
             </div>
           </div>
         </div>
