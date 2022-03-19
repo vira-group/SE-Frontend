@@ -32,6 +32,7 @@ export const Sign_up_connection = async (email, password) => {
 		.then((response) => {
 			console.log(response);
 			message = true;
+			window.location.replace('/verify-email');
 		})
 		.catch((error) => {
 			console.log(error);
@@ -57,15 +58,13 @@ export const login_connection = async (email, password) => {
 				set_cookie(response.data.auth_token);
 				console.log(response);
 				message = true;
+				window.location.replace("/")
 			})
 			.catch((error) => {
 				if (error.response.status == 400) {
 					window.alert("wrong email or password");
 				}
 				console.log(error);
-				let err = <h5>Invalid email or password!</h5>;
-				this.setState({ logerror: err });
-			
 				message = false;
 			});
 	}
@@ -113,6 +112,10 @@ export const logout = async () => {
 			console.log(response);
 			cookies.remove('Authorization');
 			message = true;
+			
+		})
+		.then(()=>{
+			 window.location.reload()
 		})
 		.catch((error) => {
 			console.log(error);

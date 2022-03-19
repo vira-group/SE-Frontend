@@ -22,13 +22,7 @@ class Navbar extends Component {
   componentDidMount() {
     document.scrollingElement.scrollTop = 0;
     document.addEventListener("scroll", this.handleScroll);
-    const t1 = async ()=>{
-      await me()
-      .then((response) => {
-        this.setState({is_loggedin:response})
-      })
-    }
-    // console.log(this.state.is_loggedin, ".....");
+    me().then((response)=>{this.setState({is_loggedin : response})})
   }
 
   componentWillUnmount() {
@@ -60,7 +54,6 @@ class Navbar extends Component {
   };
   handleLogout = () =>{
     logout();
-    window.location.reload();
   }
 
   render() {
@@ -95,7 +88,7 @@ class Navbar extends Component {
           </button>
           <div>
             {
-              cookies.get('Authorization') == undefined ? (
+              !this.state.is_loggedin ? (
                 <div className="collapse navbar-collapse" id="navMenu">
           <div className="ms-auto pt-3 pt-sm-0">
             <a href='http://localhost:3000/login'>
@@ -123,15 +116,13 @@ class Navbar extends Component {
 
 <div className="collapse navbar-collapse" id="navMenu">
           <div className="ms-auto pt-3 pt-sm-0">
-            <a href='http://localhost:3000'>
-              <button
+            <button
                 type="button"
                 className="btn btn-outline-dark me-2 nav-button fw-bold"
-                onClick={this.handleLogout}
+                onClick={()=>{this.handleLogout()}}
               >
                 logout
-              </button>
-            </a>
+            </button>
           </div>
         </div>
               )

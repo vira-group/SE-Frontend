@@ -85,7 +85,7 @@ class Sign_up extends React.Component {
 			fields['password'] = '';
 			fields['password2'] = '';
 			this.setState({ fields: fields });
-			alert('Form submitted');
+			// alert('Form submitted');
 			const is_registered = Sign_up_connection(this.state.fields['email'], this.state.fields['password']);
 
 			if (is_registered) {
