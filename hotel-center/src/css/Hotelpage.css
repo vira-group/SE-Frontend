@@ -1,0 +1,30 @@
+.btn-secondary, .btn-secondary:active, .btn-secondary:focus{
+    color: black;
+    background-color: white;
+}
+
+.btn-secondary:hover{
+    background-color:#f5f5f5;
+    color: black;
+}
+
+.btn-outline-secondary, .btn-outline-secondary:active, .btn-outline-secondary:focus{
+    border-radius: 30px;
+    background-color:#f5f5f5;
+    color: black;
+}
+
+.btn-outline-secondary:hover{
+    background-color:#f5f5f5;
+    color: black;
+}
+
+.card{
+    border-radius: 20px;
+}
+
+
+.vl {
+    border-left: 1px solid rgb(179, 170, 170);
+    height: 100px;
+}
