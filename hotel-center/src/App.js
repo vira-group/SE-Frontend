@@ -9,7 +9,7 @@ import login from './components/Login/Login';
 import Sign_up from './components/Sign_up/sign_up';
 import "./css/Homepage.css";
 import './css/Verify.css';
-
+import hotelPage from "./components/HotelPage/hotelPage";
 function App() {
   return (
     <div className="App">
@@ -21,6 +21,9 @@ function App() {
           <Route exact path = '/sign-up' component = { Sign_up }/>
 					<Route exact path="/login" component={login} />
 					<Route exact path="/auth/activate/:handle/:handle1" component={account_activation}/>
+
+        	<Route exact path = '/hotelPage' component = { hotelPage }/>
+					
         </Switch>
       </BrowserRouter>
     </div>
