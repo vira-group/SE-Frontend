@@ -4,25 +4,16 @@ import SearchForm from "./SearchForm";
 
 function Header(props) {
   return (
-    <div>
-      <div  className="d-none d-lg-block">
-      <div className="header">
+    <div className="header">
       <div>
-        <img src={Background} alt="Background image" />
+        <img
+          src={Background}
+          alt="Background image"
+          style={{ width: "100%" }}
+        />
       </div>
       <div className="search-form">
         <SearchForm />
-      </div>
-    </div>
-      </div>
-
-      <div  className="d-lg-none">
-        <div>
-          <img class="img-fluid" src={Background} alt="Background image" style={{height:"auto"}}/>
-        </div>
-        {/* <div className="search-form">
-          <SearchForm />
-        </div> */}
       </div>
     </div>
   );

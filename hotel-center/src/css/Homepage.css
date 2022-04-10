@@ -114,7 +114,7 @@
   box-shadow: none !important;
 }
 
-@media only screen and (max-width: 575.99px) {
+@media only screen and (max-width: 575px) {
   .nav-button,
   .nav-button:active,
   .nav-button:focus,
