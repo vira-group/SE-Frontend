@@ -2,23 +2,35 @@
   color: #f8f9fa;
 }
 
+@font-face {
+  font-family: logo_font;
+  src: url(../statics/font/Donalia.ttf);
+}
 /******************************************** Header **************************************/
 .header {
   position: relative;
-  height: 95vh;
-  min-height: 768px;
+  max-height: 600px;
+  min-height: 600px;
 }
 
-.header img {
+.header .carousel {
   position: absolute;
-  height: 100%;
-  width: 100%;
+}
+
+.header .carousel-item img {
+  max-height: 600px;
+  min-height: 600px;
+  min-width: 100%;
+}
+
+.header .carousel-caption-style {
+  color: black;
 }
 
 .search-form {
   display: flex;
   justify-content: center;
-  padding-top: 25vh;
+  padding-top: 30vh;
 }
 
 .location-icon {
@@ -98,6 +110,16 @@
   margin-right: 0.5rem;
 }
 
+.logo-text-font {
+  font-family: logo_font;
+  font-size: larger;
+}
+
+.nav-menu-style {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .nav-button,
 .nav-button:active,
 .nav-button:focus,
@@ -106,6 +128,9 @@
   box-shadow: none !important;
 }
 
+.login-icon-style {
+  margin-right: 5px;
+}
 .nav-hamburger-button,
 .nav-hamburger-button:focus,
 .nav-hamburger-button:active,
@@ -114,20 +139,26 @@
   box-shadow: none !important;
 }
 
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 991px) {
   .nav-button,
   .nav-button:active,
   .nav-button:focus,
   .nav-button:hover {
-    border-color: transparent !important;
+    border: 1px solid transparent !important;
     background-color: transparent !important;
     width: 100%;
     text-align: left;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .nav-button:active,
   .nav-button:focus,
   .nav-button:hover {
     color: #cd9a2d;
+  }
+
+  #carousel {
+    display: none;
   }
 }

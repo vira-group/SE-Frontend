@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, Component } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  Component,
+  Fragment,
+} from "react";
 import Logo from "../../../statics/logo/logo2.png";
 import UseAnimations from "react-useanimations";
 import menu3 from "react-useanimations/lib/menu3";
@@ -6,6 +12,9 @@ import Signup from "../../Sign_up/sign_up";
 import Login from "../../Login/Login";
 import { me, logout } from "../../../Utils/connection";
 import { cookies } from "../../../Utils/common";
+import { fontFamily, fontStyle } from "@mui/system";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 class Navbar extends Component {
   constructor() {
@@ -61,14 +70,14 @@ class Navbar extends Component {
       <nav
         className={
           this.state.navbarMoved
-            ? "navbar navbar-expand-sm navbar-light sticky-top nav-scrolled w-100 nav-style"
-            : "navbar navbar-expand-sm navbar-light sticky-top nav-top w-100 nav-style"
+            ? "navbar navbar-expand-lg navbar-light sticky-top nav-scrolled w-100 nav-style"
+            : "navbar navbar-expand-lg navbar-light sticky-top nav-top w-100 nav-style"
         }
       >
-        <div className="container">
+        <div className="container-fluid">
           <a href="/" className="navbar-brand logo">
             <img src={Logo} alt="Hotel Center" />
-            <span className="fw-bold">Hotel Center</span>
+            <span className="fw-bold logo-text-font">Hotel Center</span>
           </a>
 
           <button
@@ -88,37 +97,101 @@ class Navbar extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="ms-auto pt-3 pt-sm-0">
-              {!this.state.is_loggedin ? (
-                <div>
-                  <a href="http://localhost:3000/login">
-                    <button
-                      type="button"
-                      className="btn btn-outline-dark me-2 nav-button fw-bold"
-                    >
-                      Login
-                    </button>
+              {/* <div className="col"> */}
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a
+                    class="nav-link nav-menu-style"
+                    aria-current="page"
+                    href="#"
+                  >
+                    Hotels
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-menu-style" href="#">
+                    Rooms
+                  </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle nav-menu-style"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Dropdown
                   </a>
 
-                  <a href="http://localhost:3000/sign-up">
-                    <button
-                      type="button"
-                      className="btn btn-outline-dark nav-button fw-bold"
-                    >
-                      Sign up
-                    </button>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        Action
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        Another action
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-menu-style" href="#">
+                    Domain
                   </a>
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  className="btn btn-outline-dark me-2 nav-button fw-bold"
-                  onClick={() => {
-                    this.handleLogout();
-                  }}
-                >
-                  logout
-                </button>
-              )}
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-menu-style" href="#">
+                    Pricing
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-menu-style" href="#">
+                    Favorites
+                  </a>
+                </li>
+                {!this.state.is_loggedin ? (
+                  <Fragment>
+                    <li>
+                      <a href="http://localhost:3000/login">
+                        <button
+                          type="button"
+                          className="btn btn-outline-dark me-2 nav-button nav-menu-style"
+                        >
+                          Login
+                        </button>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:3000/sign-up">
+                        <button
+                          type="button"
+                          className="btn btn-outline-dark nav-button nav-menu-style"
+                        >
+                          Sign up
+                        </button>
+                      </a>
+                    </li>
+                  </Fragment>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-outline-dark me-2 nav-button fw-bold"
+                    onClick={() => {
+                      this.handleLogout();
+                    }}
+                  >
+                    logout
+                  </button>
+                )}
+              </ul>
+              {/* </div> */}
+              {/* <div className="col"> */}
+
+              {/* </div> */}
             </div>
           </div>
         </div>
