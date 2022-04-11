@@ -3,6 +3,10 @@
     height: 100%;
 }
 
+.homepage-card .card{
+    border-radius: 10px !important;
+}
+
 .btn-primary, .btn-primary:active, .btn-primary:focus {
     background-color: #cd9a2d !important;
     border-color: #cd9a2d !important;
