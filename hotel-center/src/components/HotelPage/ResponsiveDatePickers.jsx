@@ -165,7 +165,7 @@ function SearchForm(props) {
 					</Popover>
 
 					<div className="row">
-						<button className="btn btn-primary">rooms</button>
+						<button className="btn btn-primary bttn">rooms</button>
 					</div>
 				</div>
 			</div>
