@@ -128,14 +128,11 @@ import ResponsiveDatePickers from './ResponsiveDatePickers';
 export default function Hotelpage() {
 	return (
 		<div>
-			<Helmet bodyAttributes={{ style: 'background-color : #f5f5f5' }} />
-			<Container maxWidth="lg">
-				<Grid container>
-					<Grid item xs={3}>
-					<ResponsiveDatePickers></ResponsiveDatePickers>
-					</Grid>
-
-					<Grid item xs={9}>
+			<Helmet bodyAttributes={{ style: 'background-color : #f5f5f5'  }} />
+		
+		
+				<Grid container spacing={3} >
+					<Grid item xs={8}>
 						<div className="row">
 							{/* <div className="">
 				<hr className="mb-0 mt-0 hr-text" />
@@ -476,8 +473,48 @@ export default function Hotelpage() {
 							</div>
 						</div>
 					</Grid>
+
+
+					<Grid item xs={3.8}>
+					<ResponsiveDatePickers></ResponsiveDatePickers>
+					</Grid>
+
+				
 				</Grid>
-			</Container>
+
+
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+		
 		</div>
 	);
 }
