@@ -97,25 +97,24 @@ class Navbar extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="ms-auto pt-3 pt-sm-0">
-              {/* <div className="col"> */}
-              <ul class="navbar-nav">
-                <li class="nav-item">
+              <ul className="navbar-nav">
+                <li className="nav-item">
                   <a
-                    class="nav-link nav-menu-style"
+                    className="nav-link nav-menu-style"
                     aria-current="page"
                     href="#"
                   >
                     Hotels
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-menu-style" href="#">
+                <li className="nav-item">
+                  <a className="nav-link nav-menu-style" href="#">
                     Rooms
                   </a>
                 </li>
-                <li class="nav-item dropdown">
+                <li className="nav-item dropdown">
                   <a
-                    class="nav-link dropdown-toggle nav-menu-style"
+                    className="nav-link dropdown-toggle nav-menu-style"
                     href="#"
                     id="navbarDropdown"
                     role="button"
@@ -125,31 +124,34 @@ class Navbar extends Component {
                     Dropdown
                   </a>
 
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <ul
+                    className="dropdown-menu mt-2"
+                    aria-labelledby="navbarDropdown"
+                  >
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Action
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a className="dropdown-item" href="#">
                         Another action
                       </a>
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-menu-style" href="#">
+                <li className="nav-item">
+                  <a className="nav-link nav-menu-style" href="#">
                     Domain
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-menu-style" href="#">
+                <li className="nav-item">
+                  <a className="nav-link nav-menu-style" href="#">
                     Pricing
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-menu-style" href="#">
+                <li className="nav-item">
+                  <a className="nav-link nav-menu-style" href="#">
                     Favorites
                   </a>
                 </li>
@@ -188,10 +190,6 @@ class Navbar extends Component {
                   </button>
                 )}
               </ul>
-              {/* </div> */}
-              {/* <div className="col"> */}
-
-              {/* </div> */}
             </div>
           </div>
         </div>

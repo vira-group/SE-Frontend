@@ -2,20 +2,26 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import Popover from "@mui/material/Popover";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DatePicker from "@mui/lab/DatePicker";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { GoldenTextField } from "../../../theme/GoldenTextField";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const Cities = [
   { id: "0", city: "Tehran", country: "Iran" },
   { id: "1", city: "Karaj", country: "Iran" },
   { id: "2", city: "Shiraz", country: "Iran" },
+  { id: "3", city: "Toronto", country: "Canada" },
+  { id: "4", city: "London", country: "England" },
+  { id: "5", city: "Paris", country: "France" },
+  { id: "6", city: "Alberta", country: "Canada" },
 ];
+
+const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
 
 function SearchForm(props) {
   const [checkinDate, setCheckinDate] = useState(null);
@@ -26,10 +32,9 @@ function SearchForm(props) {
   const [numberOfChildren, setNumberOfChildren] = React.useState(0);
 
   // useEffect(() => {
-  //   console.log(destination);
   //   console.log(checkinDate);
   //   console.log(checkoutDate);
-  // }, [destination, checkinDate, checkoutDate]);
+  // }, [checkinDate, checkoutDate]);
 
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
@@ -54,11 +59,11 @@ function SearchForm(props) {
 
   return (
     <div className="card search-form-card">
-      <div className="card-body d-flex">
+      <div className="card-body row">
         <Autocomplete
-          className="me-2"
+          className="col-12 col-lg-4 px-1"
           id="destination"
-          sx={{ width: 300 }}
+          // sx={{ width: 300 }}
           options={Cities}
           autoHighlight
           getOptionLabel={(option) => option.city}
@@ -97,6 +102,9 @@ function SearchForm(props) {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             disablePast
+            maxDate={
+              checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
+            }
             label="Check in"
             value={checkinDate}
             onChange={(newValue) => {
@@ -106,7 +114,8 @@ function SearchForm(props) {
               <GoldenTextField
                 {...params}
                 variant="outlined"
-                sx={{ width: 200 }}
+                className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
+                // sx={{ width: 200 }}
               />
             )}
           />
@@ -114,6 +123,9 @@ function SearchForm(props) {
         <LocalizationProvider dateAdapter={AdapterDateFns} className="ms-2">
           <DatePicker
             disablePast
+            minDate={
+              checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
+            }
             label="Check out"
             value={checkoutDate}
             onChange={(newValue) => {
@@ -123,14 +135,14 @@ function SearchForm(props) {
               <GoldenTextField
                 {...params}
                 variant="outlined"
-                className="ms-2"
-                sx={{ width: 200 }}
+                className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
+                // sx={{ width: 200 }}
               />
             )}
           />
         </LocalizationProvider>
         <GoldenTextField
-          className="ms-2"
+          className="col-12 col-lg-3 px-1 my-3 my-lg-0"
           aria-describedby={id}
           variant="outlined"
           onClick={handleClick}
@@ -140,8 +152,8 @@ function SearchForm(props) {
           }
           placeholder="0 adults - 0 children"
         />
-        <div>
-          <button type="button" className="btn btn-primary ms-2 search-button">
+        <div className="col-12 col-lg-1 px-1">
+          <button type="button" className="btn btn-primary search-button">
             <span>
               <SearchIcon />
             </span>

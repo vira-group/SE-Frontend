@@ -1,25 +1,26 @@
 .imgs {
-	position: relative;
-	right: 0px;
-	width: 300px;
-	height: 300px;
-}
-.btn {
-	color: #003049;
+  position: relative;
+  right: 0px;
+  width: 300px;
+  height: 300px;
 }
 
+/* .btn {
+  color: #003049;
+} */
+
 .icon {
-	/* color: #c1121f; */
-	color :#cd9a2d ;
+  /* color: #c1121f; */
+  color: #cd9a2d;
 }
 
 .err {
-	color: red;
-	font-family: Arial, Helvetica, sans-serif;
-  	margin-left: 15px;
-  	font-size: 11.5px;
-  	right:auto;
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 15px;
+  font-size: 11.5px;
+  right: auto;
 }
 .lnk {
-	margin-right: 70px;
+  margin-right: 70px;
 }
