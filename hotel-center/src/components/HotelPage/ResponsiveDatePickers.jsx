@@ -11,6 +11,8 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { GoldenTextField } from '../../theme/GoldenTextField';
 
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+
 import './hotelPage.css';
 import { margin, positions, spacing, textAlign } from '@mui/system';
 import { alignProperty } from '@mui/material/styles/cssUtils';
@@ -22,7 +24,11 @@ function SearchForm(props) {
 	const [ anchor, setAnchor ] = React.useState(null);
 	const [ numberOfAdults, setNumberOfAdults ] = React.useState(1);
 	const [ numberOfChildren, setNumberOfChildren ] = React.useState(0);
+	const icon = 
+	<div className="col">
+   <PersonRoundedIcon />
 
+ </div> ;
 	const handleClick = (event) => {
 		setAnchor(event.currentTarget);
 	};
@@ -96,8 +102,10 @@ function SearchForm(props) {
 							onClick={handleClick}
 							label="Number of guests"
 							value={numberOfAdults + ' adults' + ' - ' + numberOfChildren + ' children'}
-							placeholder="0 adults - 0 children"
+							placeholder=" 0 adults - 0 children"
 						/>
+
+
 					</div>
 
 					<Popover
@@ -165,7 +173,7 @@ function SearchForm(props) {
 					</Popover>
 
 					<div className="row">
-						<button className="btn btn-primary bttn">rooms</button>
+						<button className="btn btn-primary ">rooms</button>
 					</div>
 				</div>
 			</div>
