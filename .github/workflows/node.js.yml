@@ -31,9 +31,11 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: |
+        cd hotelcenter
         npm install
     - name: build
       run: |
+        cd hotelcenter
         npm run build
         npm test
 #     - run: npm ci
