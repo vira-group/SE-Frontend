@@ -28,10 +28,14 @@ import RestaurantMenuRoundedIcon from "@mui/icons-material/RestaurantMenuRounded
 import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import BedroomChildRoundedIcon from "@mui/icons-material/BedroomChildRounded";
+import CheckIcon from "@mui/icons-material/Check";
 import { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import "../../../css/Hotelpage.css";
 import { srLatn } from "date-fns/locale";
+import Image1 from "../../../statics/img/room1.jpg";
+import Image2 from "../../../statics/img/room2.jpg";
+import Image3 from "../../../statics/img/room3.jpg";
 
 export default function Hotelpage() {
   return (
@@ -104,7 +108,7 @@ export default function Hotelpage() {
             </div>
             <button
               type="button"
-              className="mb-3 btn btn-secondary"
+              className="mb-3 btn btn-secondary room-facilities"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >
@@ -201,32 +205,7 @@ export default function Hotelpage() {
               <hr className="mb-0 mt-0 hr-text"></hr>
             </div>
             <h3 className="mb-3 mt-3">Available rooms</h3>
-            <div>
-              <ul className="nav nav-pills">
-                <li className="nav-item">
-                  {/* <a className="nav-link active" aria-current="page" href="/hotelcard">Show all</a> */}
-                  <button
-                    type="button"
-                    href="/hotelcard"
-                    className="btn btn-outline-secondary"
-                    style={{ marginRight: "10px" }}
-                  >
-                    Show all
-                  </button>
-                </li>
-                <li className="nav-item">
-                  {/* <a className="nav-link" href="#">Breakfast included</a> */}
-                  <button
-                    type="button"
-                    href="#"
-                    className="btn btn-outline-secondary"
-                    style={{ marginLeft: "10px" }}
-                  >
-                    Breakfast included
-                  </button>
-                </li>
-              </ul>
-            </div>
+
             <div className="card hotelpage-card mt-3">
               <div className="card-body">
                 <div className="row align-items-center">
@@ -247,7 +226,7 @@ export default function Hotelpage() {
                         aria-labelledby="roomDetails"
                         aria-hidden="true"
                       >
-                        <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-dialog modal-xl modal-dialog-centered">
                           <div className="modal-content">
                             <div className="modal-header">
                               <h5 className="modal-title" id="roomDetails">
@@ -260,11 +239,585 @@ export default function Hotelpage() {
                                 aria-label="Close"
                               ></button>
                             </div>
-                            <div className="modal-body">Hello, this is a test</div>
+                            <div className="row modal-body">
+                              <div className="col-md-7">
+                                {/* <img src={Image} className="modal-images"></img> */}
+                                <div
+                                  id="thumbnail-preview-indicators"
+                                  class="carousel slide"
+                                  data-ride="carousel"
+                                >
+                                  <ol class="carousel-indicators">
+                                    <li
+                                      data-target="#thumbnail-preview-indicators"
+                                      data-slide-to="0"
+                                      class="active"
+                                    >
+                                      <div class="thumbnail">
+                                        <img
+                                          class="img-responsive w-100"
+                                          src={Image1}
+                                        ></img>
+                                      </div>
+                                    </li>
+                                    <li
+                                      data-target="#thumbnail-preview-indicators"
+                                      data-slide-to="1"
+                                    >
+                                      <div class="thumbnail">
+                                        <img
+                                          class="img-responsive w-100"
+                                          src={Image2}
+                                        ></img>
+                                      </div>
+                                    </li>
+                                    <li
+                                      data-target="#thumbnail-preview-indicators"
+                                      data-slide-to="2"
+                                    >
+                                      <div class="thumbnail">
+                                        <img
+                                          class="img-responsive w-100"
+                                          src={Image3}
+                                        ></img>
+                                      </div>
+                                    </li>
+                                  </ol>
+                                  <div class="carousel-inner">
+                                    <div class="item slides active">
+                                      <div class="slide-1"></div>
+                                      
+                                    </div>
+                                    <div class="item slides">
+                                      <div class="slide-2"></div>
+                                      
+                                    </div>
+                                    <div class="item slides">
+                                      <div class="slide-3"></div>
+                                      
+                                    </div>
+                                  </div>
+                                  <a
+                                    class="left carousel-control"
+                                    href="#thumbnail-preview-indicators"
+                                    role="button"
+                                    data-slide="prev"
+                                  >
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                  </a>
+                                  <a
+                                    class="right carousel-control"
+                                    href="#thumbnail-preview-indicators"
+                                    role="button"
+                                    data-slide="next"
+                                  >
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="col-md-5">
+                                <div className="row">Single classic room</div>
+                                <div className="row">
+                                  <h6 className="mt-3">Room facilities</h6>
+                                  <div className="col">
+                                    <div className="row">
+                                      <span className="ms-2">
+                                        <small>
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="18"
+                                            height="18"
+                                            fill="currentColor"
+                                            className="bi bi-check2 me-2"
+                                            viewBox="0 0 18 18"
+                                          >
+                                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                          </svg>
+                                          Upper floors accessible by elevator
+                                        </small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Linen</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Wardrobe or closet</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Hand sanitiser</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Tea/Coffee maker</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Minibar</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Air conditioner</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Safety deposit box</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Soundproofing</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>
+                                          Interconnected room(s) available
+                                        </small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Heating</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Carpeted</small>
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="col">
+                                    <div className="row">
+                                      <span className="ms-2">
+                                        <small>
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="18"
+                                            height="18"
+                                            fill="currentColor"
+                                            className="bi bi-check2 me-2"
+                                            viewBox="0 0 18 18"
+                                          >
+                                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                          </svg>
+                                          Laptop safe
+                                        </small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Carbon monoxide detector</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Electric kettle</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Desk</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>TV</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Telephone</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Satellite channels</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Radio</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Air purifiers</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Socket near the bed</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>
+                                          Wake up service/Alarm clock
+                                        </small>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <h6 className="mt-3">
+                                    In your private bathroom
+                                  </h6>
+                                  <div className="col">
+                                    <div className="row">
+                                      <span className="ms-2">
+                                        <small>
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="18"
+                                            height="18"
+                                            fill="currentColor"
+                                            className="bi bi-check2 me-2"
+                                            viewBox="0 0 18 18"
+                                          >
+                                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                          </svg>
+                                          Free toiletries
+                                        </small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Bathrobe</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Bath or shower</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Toilet</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Towels</small>
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="col">
+                                    <div className="row">
+                                      <span className="ms-2">
+                                        <small>
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="18"
+                                            height="18"
+                                            fill="currentColor"
+                                            className="bi bi-check2 me-2"
+                                            viewBox="0 0 18 18"
+                                          >
+                                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                          </svg>
+                                          Slippers
+                                        </small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Hairdryer</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Towels/sheets (extra fee)</small>
+                                      </span>
+
+                                      <span className="ms-2">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="18"
+                                          height="18"
+                                          fill="currentColor"
+                                          className="bi bi-check2 me-2"
+                                          viewBox="0 0 18 18"
+                                        >
+                                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <small>Toilet papers</small>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <h6 className="mt-3">Smoking</h6>
+                                  <div className="col">
+                                    <span>
+                                      <small>No smoking</small>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <h6 className="mt-3">Parking</h6>
+                                  <div className="col">
+                                    <span>
+                                      <small>No parking available.</small>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-
                     </div>
                     <div className="row">
                       <div className="col">
@@ -331,7 +884,7 @@ export default function Hotelpage() {
                       </div>
                     </div>
                     {/* <div className="row"> */}
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary hotel-room">
                       Reserve the room
                     </button>
                     {/* </div> */}

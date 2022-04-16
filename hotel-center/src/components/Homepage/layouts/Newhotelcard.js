@@ -27,57 +27,31 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import "../../../css/Hotelcard.css";
 import Slider from "@mui/material/Slider";
 
-const stars = [
-  {
-    value: 1,
-    label: "1 star",
-  },
-  {
-    value: 2,
-    label: "2 stars",
-  },
-  {
-    value: 3,
-    label: "3 stars",
-  },
-  {
-    value: 4,
-    label: "4 stars",
-  },
-  {
-    value: 5,
-    label: "5 stars",
-  },
-];
-
-function valuetext(value) {
-  if (value === 1) {
-    return `${value}star`;
-  } else return `${value}stars`;
-}
-
-function valueLabelFormat(value) {
-  return stars.findIndex((star) => star.value === value) + 1;
-}
-
 export default function Newhotelcard() {
   const [value2, setValue2] = useState(4);
+  const [value, setValue] = React.useState(1);
   return (
     <div style={{ display: "flex", height: "100%" }}>
       <Helmet bodyAttributes={{ style: "background-color : #f5f5f5" }}></Helmet>
       <Container maxWidth="lg">
         <div className="row">
           <div className="col-lg-3 mt-5">
-            <Slider
-              aria-label="Restricted values"
-              defaultValue={2}
-              valueLabelFormat={valueLabelFormat}
-              getAriaValueText={valuetext}
-              step={1}
-              valueLabelDisplay="auto"
-              stars={stars}
-            />
-            <div className="accordion-item mt-5">
+            <div className="card">
+              <div className="card-body">
+                <h6 className="card-title">Star Ranking</h6>
+                <div className="rating-start" style={{ textAlign: "center" }}>
+                  <Rating
+                    name="simple-controlled"
+                    size="large"
+                    value={value}
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="accordion-item mt-2">
               <h2 className="accordion-header" id="headingTwo">
                 <button
                   className="accordion-button collapsed"
@@ -131,16 +105,16 @@ export default function Newhotelcard() {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md">
-                    <img src={image1} className="card-img-top"></img>
+                    <img src={image1} className="card-img-top hotel-card-img"></img>
                   </div>
                   <div className="col-md-6">
-                    <div className="row" className="star">
+                    <div className="row star">
                       <h5 className="card-title">
-                        The Landmark London
+                        <a className="link hotel-links" href="/hotelpage2">The Landmark London</a>
                         <Rating name="read-only" value={value2} readOnly />
                       </h5>
                     </div>
-                    <a href="#">Westminster Borough, London</a>
+                    <a href="">Westminster Borough, London</a>
                     <p className="mb-1">Metro access</p>
                     <p className="card-text">
                       In the heart of London's fashionable Marylebone, this
@@ -161,7 +135,7 @@ export default function Newhotelcard() {
                         </h5>
                       </div>
                     </div>
-                    <a href="#" className="btn btn-primary hoverable">
+                    <a href="#" className="btn btn-primary hotel-card-btn hoverable">
                       show prices
                     </a>
                   </div>
