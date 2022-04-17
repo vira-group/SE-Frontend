@@ -105,12 +105,17 @@ export default function Newhotelcard() {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md">
-                    <img src={image1} className="card-img-top hotel-card-img"></img>
+                    <img
+                      src={image1}
+                      className="card-img-top hotel-card-img"
+                    ></img>
                   </div>
                   <div className="col-md-6">
                     <div className="row star">
                       <h5 className="card-title">
-                        <a className="link hotel-links" href="/hotelpage2">The Landmark London</a>
+                        <a className="link hotel-links" href="/hotelpage2">
+                          The Landmark London
+                        </a>
                         <Rating name="read-only" value={value2} readOnly />
                       </h5>
                     </div>
@@ -123,21 +128,34 @@ export default function Newhotelcard() {
                       luxurious bedrooms and an indoor...
                     </p>
                   </div>
-                  <div className="col-md-2">
+                  <div className="col-md-2 d-none d-md-block">
                     <div className="row">
-                      <div className="col-md-8">
-                        <p className="mb-1 rate">Superb</p>
+                      <div className="pr-0 col-md-8">
+                        <p className="mb-1 rate ">Superb</p>
                         <p className="mb-1 views">2,362 reviews</p>
                       </div>
-                      <div className="me-10 col-md-2 score">
-                        <h5>
-                          <span className="badge bg-dark">9.0</span>
-                        </h5>
+                      <div className="col-md-4 score">
+                        <span className="mt-10"><small>9.0</small></span>
                       </div>
                     </div>
-                    <a href="#" className="btn btn-primary hotel-card-btn hoverable">
+                    <a
+                      href="#"
+                      className="btn btn-primary hotel-card-btn hoverable"
+                    >
                       show prices
                     </a>
+                  </div>
+                  <div className="d-md-none row">
+                    <div className="col-2 col-sm-4"></div>
+                    <div className="col-8 col-sm-4 gy-2">
+                      <a
+                        href="#"
+                        className="btn btn-primary hotel-card-btn hoverable w-100 text-align-center"
+                      >
+                        show prices
+                      </a>
+                    </div>
+                    <div className="col-2 col-sm-4"></div>
                   </div>
                 </div>
               </div>
