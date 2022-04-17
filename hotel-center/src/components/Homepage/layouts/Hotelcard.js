@@ -110,7 +110,7 @@ export default function Hotelcard() {
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
-      <div style={{ display: 'flex', height: '100%' }}>
+      <div className='mb-5' style={{ display: 'flex', height: '100%' }}>
         <Helmet bodyAttributes={{ style: 'background-color : #f5f5f5' }}></Helmet>
         <Container component="main" maxWidth="lg">
             <ThemeProvider theme={theme}>

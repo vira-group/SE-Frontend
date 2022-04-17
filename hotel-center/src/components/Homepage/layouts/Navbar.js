@@ -1,20 +1,15 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  Component,
-  Fragment,
-} from "react";
+import React, { Component, Fragment } from "react";
 import Logo from "../../../statics/logo/logo2.png";
 import UseAnimations from "react-useanimations";
 import menu3 from "react-useanimations/lib/menu3";
-import Signup from "../../Sign_up/sign_up";
-import Login from "../../Login/Login";
 import { me, logout } from "../../../Utils/connection";
-import { cookies } from "../../../Utils/common";
-import { fontFamily, fontStyle } from "@mui/system";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import Avatar from "@mui/material/Avatar";
+import PersonIcon from "@mui/icons-material/Person";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Logout from "@mui/icons-material/Logout";
 
 class Navbar extends Component {
   constructor() {
@@ -23,12 +18,23 @@ class Navbar extends Component {
       openMenu: false,
       navbarMoved: false,
       is_loggedin: false,
+      anchorEl: null,
+      open: Boolean(null),
+      navbarExpand: true,
     };
   }
 
   componentDidMount() {
     document.scrollingElement.scrollTop = 0;
     document.addEventListener("scroll", this.handleScroll);
+    window.innerWidth < 992
+      ? this.setState({
+          navbarExpand: false,
+        })
+      : this.setState({
+          navbarExpand: true,
+        });
+
     me().then((response) => {
       this.setState({ is_loggedin: response });
     });
@@ -65,6 +71,20 @@ class Navbar extends Component {
     logout();
   };
 
+  handleClick = (event) => {
+    this.setState({
+      anchorEl: event.currentTarget,
+      open: Boolean(event.currentTarget),
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      anchorEl: null,
+      open: Boolean(null),
+    });
+  };
+
   render() {
     return (
       <nav
@@ -98,21 +118,7 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="ms-auto pt-3 pt-sm-0">
               <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a
-                    className="nav-link nav-menu-style"
-                    aria-current="page"
-                    href="#"
-                  >
-                    Hotels
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Rooms
-                  </a>
-                </li>
-                <li className="nav-item dropdown">
+                {/* <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle nav-menu-style"
                     href="#"
@@ -139,6 +145,20 @@ class Navbar extends Component {
                       </a>
                     </li>
                   </ul>
+                </li> */}
+                <li className="nav-item">
+                  <a
+                    className="nav-link nav-menu-style"
+                    aria-current="page"
+                    href="#"
+                  >
+                    Hotels
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link nav-menu-style" href="#">
+                    Rooms
+                  </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link nav-menu-style" href="#">
@@ -157,7 +177,9 @@ class Navbar extends Component {
                 </li>
                 {!this.state.is_loggedin ? (
                   <Fragment>
-                    <li>
+                    {/*  {this.state.navbarExpand ? <Fragment /> : <hr />} */}
+                    <hr />
+                    <li className="nav-item">
                       <a href="http://localhost:3000/login">
                         <button
                           type="button"
@@ -167,7 +189,7 @@ class Navbar extends Component {
                         </button>
                       </a>
                     </li>
-                    <li>
+                    <li className="nav-item">
                       <a href="http://localhost:3000/sign-up">
                         <button
                           type="button"
@@ -179,19 +201,104 @@ class Navbar extends Component {
                     </li>
                   </Fragment>
                 ) : (
-                  <button
-                    type="button"
-                    className="btn btn-outline-dark me-2 nav-button fw-bold"
-                    onClick={() => {
-                      this.handleLogout();
-                    }}
-                  >
-                    logout
-                  </button>
+                  <Fragment>
+                    {this.state.navbarExpand ? (
+                      <li className="nav-item">
+                        <IconButton
+                          onClick={this.handleClick}
+                          size="small"
+                          aria-controls={
+                            this.state.open ? "account-menu" : undefined
+                          }
+                          aria-haspopup="true"
+                          aria-expanded={this.state.open ? "true" : undefined}
+                        >
+                          <Avatar sx={{ width: 32, height: 32 }}>
+                            <PersonIcon />
+                          </Avatar>
+                        </IconButton>
+                      </li>
+                    ) : (
+                      <Fragment>
+                        <hr />
+                        <li className="nav-item">
+                          <button
+                            type="button"
+                            className="btn btn-outline-dark nav-button nav-menu-style"
+                          >
+                            Profile
+                          </button>
+                        </li>
+                        <li className="nav-item">
+                          <button
+                            type="button"
+                            className="btn btn-outline-dark nav-button nav-menu-style"
+                            onClick={() => {
+                              this.handleLogout();
+                            }}
+                          >
+                            Logout
+                          </button>
+                        </li>
+                      </Fragment>
+                    )}
+                  </Fragment>
                 )}
               </ul>
             </div>
           </div>
+          <Menu
+            anchorEl={this.state.anchorEl}
+            id="account-menu"
+            open={this.state.open}
+            onClose={this.handleClose}
+            onClick={this.handleClose}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                overflow: "visible",
+                filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                mt: 1,
+                "& .MuiAvatar-root": {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1,
+                },
+                // "&:before": {
+                //   content: '""',
+                //   display: "block",
+                //   position: "absolute",
+                //   top: 0,
+                //   right: 14,
+                //   width: 10,
+                //   height: 10,
+                //   bgcolor: "background.paper",
+                //   transform: "translateY(-50%) rotate(45deg)",
+                //   zIndex: 0,
+                // },
+              },
+            }}
+            transformOrigin={{ horizontal: "left", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          >
+            <MenuItem style={{ width: "150px" }}>
+              <ListItemIcon>
+                <PersonIcon fontSize="small" />
+              </ListItemIcon>
+              Profile
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                this.handleLogout();
+              }}
+            >
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </Menu>
         </div>
       </nav>
     );
