@@ -4,6 +4,20 @@
   color: black;
   background-color: white;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+.span-col-2{grid-column: span 2 / auto;}
+
+.span-row-40{grid-row: span 40 / auto;}
+
+.span-row-20{grid-row: span 20 /   auto;}
+
+
+
 .style
 {
   width: 190px ;

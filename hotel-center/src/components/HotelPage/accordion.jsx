@@ -7,8 +7,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function SimpleAccordion() {
 	return (
-		<div sx={{ borderRadius : 40  }}>
-			<Accordion >
+		<div >
+			<Accordion style={{borderRadius:"20px"}}>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
 					<Typography>
 						{' '}

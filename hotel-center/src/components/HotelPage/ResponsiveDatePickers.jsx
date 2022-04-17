@@ -11,7 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { GoldenTextField } from '../../theme/GoldenTextField';
 
-import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 import './hotelPage.css';
 import { margin, positions, spacing, textAlign } from '@mui/system';
@@ -24,11 +24,11 @@ function SearchForm(props) {
 	const [ anchor, setAnchor ] = React.useState(null);
 	const [ numberOfAdults, setNumberOfAdults ] = React.useState(1);
 	const [ numberOfChildren, setNumberOfChildren ] = React.useState(0);
-	const icon = 
-	<div className="col">
-   <PersonRoundedIcon />
-
- </div> ;
+	const icon = (
+		<div className="col">
+			<PersonRoundedIcon />
+		</div>
+	);
 	const handleClick = (event) => {
 		setAnchor(event.currentTarget);
 	};
@@ -51,51 +51,42 @@ function SearchForm(props) {
 	const id = open ? 'popover' : undefined;
 
 	return (
-		<div className="card  card1 mt-3">
+		<div className="card  card1">
 			<div className="card-body">
 				<div className="col col-md-12 align-items-center">
-					<div className="row align-items-center">
-						<div className="col">
-							<LocalizationProvider dateAdapter={AdapterDateFns}>
-								<DatePicker
-									disablePast
-									label="Check in"
-									value={checkinDate}
-									onChange={(newValue) => {
-										setCheckinDate(newValue);
-									}}
-									renderInput={(params) => (
-										<GoldenTextField {...params} variant="outlined" className="md-6" />
-									)}
-								/>
-							</LocalizationProvider>
+					<div className="row">
+						<div className="col-12 col-md-6 ">
+							{/* <LocalizationProvider dateAdapter={AdapterDateFns} > */}
+							<DatePicker
+								disablePast
+								label="Check in"
+								value={checkinDate}
+								onChange={(newValue) => {
+									setCheckinDate(newValue);
+								}}
+								renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
+							/>
+							{/* </LocalizationProvider> */}
 						</div>
 
-
-						<div className="col">
-
-							<LocalizationProvider dateAdapter={AdapterDateFns}
-              >
-								<DatePicker
-									disablePast
-									label="Check out"
-									value={checkoutDate}
-									onChange={(newValue) => {
-										setCheckoutDate(newValue);
-									}}
-									renderInput={(params) => (
-										<GoldenTextField {...params} variant="outlined" className="md-6" />
-									)}
-								/>
-							</LocalizationProvider>
+						<div className="col-12 col-md-6">
+							{/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
+							<DatePicker
+								disablePast
+								label="Check out"
+								value={checkoutDate}
+								onChange={(newValue) => {
+									setCheckoutDate(newValue);
+								}}
+								renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
+							/>
+							{/* </LocalizationProvider> */}
 						</div>
 					</div>
 
-					<div className="row align-items-center">
+					<div className="row col-12">
 						<GoldenTextField
-							// className="ms-3"
-              className="mx-auto"
-              // className="md-6"
+							className="mx-auto"
 							sx={{ margin: 3 }}
 							aria-describedby={id}
 							variant="outlined"
@@ -104,8 +95,6 @@ function SearchForm(props) {
 							value={numberOfAdults + ' adults' + ' - ' + numberOfChildren + ' children'}
 							placeholder=" 0 adults - 0 children"
 						/>
-
-
 					</div>
 
 					<Popover
@@ -173,7 +162,7 @@ function SearchForm(props) {
 					</Popover>
 
 					<div className="row">
-						<button className="btn btn-primary ">rooms</button>
+						<button className="btn btn-dark">rooms</button>
 					</div>
 				</div>
 			</div>

@@ -1,92 +1,11 @@
-// import * as React from 'react';
-// import { styled } from '@mui/material/styles';
-
-// import Paper from '@mui/material/Paper';
-// import Grid from '@mui/material/Grid';
-// import pic1 from './../../statics/img/pic (1).jpg';
-// import pic2 from './../../statics/img/pic (2).jpg';
-// import pic3 from './../../statics/img/pic (3).jpg';
-// import pic4 from './../../statics/img/pic (4).jpg';
-// import pic5 from './../../statics/img/pic (5).jpg';
-// import pic6 from './../../statics/img/pic (6).jpg';
-// import pic7 from './../../statics/img/pic (7).jpg';
-// import pic8 from './../../statics/img/pic (8).jpg';
-// import { height } from '@mui/system';
-
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import Typography from '@mui/material/Typography';
-// import { Button, CardActionArea, CardActions } from '@mui/material';
-
-// import './hotelPage.css';
-
-// import Box from '@mui/material/Box';
-// import Card from '@mui/material/Card';
-
-// const Item = styled(Paper)(({ theme }) => ({
-// 	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-// 	...theme.typography.body2,
-// 	padding: theme.spacing(1),
-// 	textAlign: 'center',
-// 	color: theme.palette.text.secondary
-// }));
-
-// export default function FullWidthGrid() {
-// 	return (
-// 		<div>
-// 			<Box sx={{ flexGrow: 1, padding: '100px' }}>
-// 				<Grid container spacing={1}>
-// 					<Grid item lg={6}>
-// 						<item>
-// 							<img src={pic1} width={698} height={410} alt="this is car image" />
-// 						</item>
-// 					</Grid>
-
-// 					<Grid item lg={3} sx={{ margin: '1px' }}>
-// 						<item>
-// 							<img src={pic2} width={300} height={200} alt="this is car image" />
-// 						</item>
-// 					</Grid>
-// 					<Grid item lg={3} sx={{ margin: '1px' }}>
-// 						<item color="blue">
-// 							<img src={pic3} width={300} height={200} alt="this is car image" />
-// 						</item>
-// 					</Grid>
-
-// 					<Grid item lg={6} />
-
-// 					<Grid item lg={3} sx={{ margin: '1px' }}>
-// 						<img src={pic4} alt="this is car image" width={300} height={200} />
-// 					</Grid>
-// 					<Grid item xs={3} sx={{ margin: '1px' }}>
-// 						<img src={pic5} alt="this is car image" width={300} height={200} />
-// 					</Grid>
-// 				</Grid>
-// 			</Box>
-// 			<Box
-// 				sx={{
-// 					padding: 10,
-// 					height: 400,
-// 					width: 2500,
-// 					paddingLeft: 100
-// 				}}
-// 			>
-// 				<Card>
-// 					Word of the Day
-// 					<CardActions />
-// 				</Card>
-// 			</Box>
-// 			<Card sx={{ maxWidth: 345 }}>
-
-// 				<CardActions>
-// 					<Button size="small" color="primary">
-// 						Share
-// 					</Button>
-// 				</CardActions>
-// 			</Card>
-// 		</div>
-// 	);
-// }
+import pic1 from './../../statics/img/pic (1).jpg';
+import pic2 from './../../statics/img/pic (2).jpg';
+import pic3 from './../../statics/img/pic (3).jpg';
+import pic4 from './../../statics/img/pic (4).jpg';
+import pic5 from './../../statics/img/pic (5).jpg';
+import pic6 from './../../statics/img/pic (6).jpg';
+import pic7 from './../../statics/img/pic (7).jpg';
+import pic8 from './../../statics/img/pic (8).jpg';
 
 import * as React from 'react';
 import {
@@ -127,57 +46,126 @@ import ResponsiveDatePickers from './ResponsiveDatePickers';
 
 import SimpleAccordion from './accordion';
 
-
 export default function Hotelpage() {
 	return (
-		<div>
-			<Helmet bodyAttributes={{ style: 'background-color : #f5f5f5' }} />
+		<div className="div">
+			<div className="div">
+				<div className="div">
+					<div className="container d-none d-md-block">
+						<div className="row">
+							<div className="col-6">
+								<div className="row">
+									<div className="col-12 gy-3">
+										<img src={pic1} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+									</div>
+								</div>
+							</div>
+							<div className="col-6">
+								<div className="row">
+									<div className="col-6 gy-3">
+										<img src={pic5} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+									</div>
+									<div className="col-6 gy-3">
+										<img src={pic2} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+									</div>
 
-			<Grid container spacing={3}>
-				<Grid item xs={8}>
-					<div className="row md-8">
-					<SimpleAccordion></SimpleAccordion>
-					
-					
-					</div>
-					<div className="row">
-						<div className="">
-				<hr className="mb-0 mt-0 hr-text" />
-			</div>
-
-						<div className="accordion accordion-flush">
-							<h2 className="accordion-header hotelpage-accordion-header" id="headingThree">
-					
-							</h2>
-
-							<div
-								id="collapseThree"
-								className="accordion-collapse collapse"
-								aria-labelledby="headingThree"
-								data-bs-parent="#accordionExample"
-							>
-								<div className="accordion-body">
-									You can modify any of this with custom CSS or overriding our default variables.
+									<div className="col-6 gy-3">
+										<img src={pic3} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+									</div>
+									<div className="col-6 gy-3">
+										<img src={pic4} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+									</div>
 								</div>
 							</div>
 						</div>
-
-						<div className="">
-							<hr className="mb-0 mt-0 hr-text" />
-						</div>
-
-
-
-
 					</div>
-				</Grid>
+				</div>
 
-				<Grid item xs={3.8}>
-					<ResponsiveDatePickers />
-				</Grid>
-			</Grid>
+				<div id="carouselExampleIndicators" class="carousel slide d-md-none" data-bs-ride="carousel">
+					<div class="carousel-indicators">
+						<button
+							type="button"
+							data-bs-target="#carouselExampleIndicators"
+							data-bs-slide-to="0"
+							class="active"
+							aria-current="true"
+							aria-label="Slide 1"
+						/>
+						<button
+							type="button"
+							data-bs-target="#carouselExampleIndicators"
+							data-bs-slide-to="1"
+							aria-label="Slide 2"
+						/>
+						<button
+							type="button"
+							data-bs-target="#carouselExampleIndicators"
+							data-bs-slide-to="2"
+							aria-label="Slide 3"
+						/>
+					</div>
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src={pic2} class="d-block w-100" alt="..." />
+						</div>
+						<div class="carousel-item">
+							<img src={pic6} class="d-block w-100" alt="..." />
+						</div>
+						<div class="carousel-item">
+							<img src={pic3} class="d-block w-100" alt="..." />
+						</div>
+					</div>
+					<button
+						class="carousel-control-prev"
+						type="button"
+						data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="prev"
+					>
+						<span class="carousel-control-prev-icon" aria-hidden="true" />
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button
+						class="carousel-control-next"
+						type="button"
+						data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="next"
+					>
+						<span class="carousel-control-next-icon" aria-hidden="true" />
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
 
-			<br />
+			<div className="container">
+				<Helmet bodyAttributes={{ style: 'background-color : #f5f5f5' }} />
+
+				<br />
+
+				<div className="row">
+					<div className="col-12 col-md-4 gy-2">
+						<ResponsiveDatePickers />
+					</div>
+					<div className="col-12 d-md-none"><br></br></div>
+					
+					<div className="col-12 col-md-8">
+						<SimpleAccordion />
+					</div>
+				</div>
+
+				{/* <Grid container spacing={3}>
+					<Grid item xs={8}>
+						<div className="row md-8">
+							<SimpleAccordion />
+						</div>
+					</Grid>
+
+					<Grid item xs={3.8}>
+						<ResponsiveDatePickers />
+					</Grid>
+				</Grid> */}
+
+				<br />
+			</div>
 		</div>
 	);
 }
