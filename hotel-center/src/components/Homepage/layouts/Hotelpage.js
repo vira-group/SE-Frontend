@@ -16,6 +16,8 @@ import {
   CircularProgress,
 } from "@mui/material";
 import Helmet from "react-helmet";
+import PropTypes from "prop-types";
+import Rating from "@mui/material/Rating";
 import LocalTaxiRoundedIcon from "@mui/icons-material/LocalTaxiRounded";
 import ChairRoundedIcon from "@mui/icons-material/ChairRounded";
 import ShowerRoundedIcon from "@mui/icons-material/ShowerRounded";
@@ -28,6 +30,7 @@ import RestaurantMenuRoundedIcon from "@mui/icons-material/RestaurantMenuRounded
 import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import BedroomChildRoundedIcon from "@mui/icons-material/BedroomChildRounded";
+import AlarmIcon from "@mui/icons-material/Alarm";
 import CheckIcon from "@mui/icons-material/Check";
 import { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
@@ -36,14 +39,31 @@ import { srLatn } from "date-fns/locale";
 import Image1 from "../../../statics/img/room1.jpg";
 import Image2 from "../../../statics/img/room2.jpg";
 import Image3 from "../../../statics/img/room3.jpg";
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import StarIcon from "@mui/icons-material/Star";
+
+const labels = {
+  0.5: "Useless",
+  1: "Useless+",
+  1.5: "Poor",
+  2: "Poor+",
+  2.5: "Ok",
+  3: "Ok+",
+  3.5: "Good",
+  4: "Good+",
+  4.5: "Excellent",
+  5: "Excellent+",
+};
+
 
 export default function Hotelpage() {
+  const value = 3.5;
+
   return (
     <div>
       <Helmet bodyAttributes={{ style: "background-color : #f5f5f5" }}></Helmet>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid item xs={3}></Grid>
           <Grid item xs={9}>
             <div className="row">
               <h3 className="mb-3">Facilities of the room</h3>
@@ -206,7 +226,7 @@ export default function Hotelpage() {
             </div>
             <h3 className="mb-3 mt-3">Available rooms</h3>
 
-            <div className="card hotelpage-card mt-3">
+            <div className="card hotelpage-card mt-3 mb-3">
               <div className="card-body">
                 <div className="row align-items-center">
                   <div className="col-md-8 border-end">
@@ -229,9 +249,6 @@ export default function Hotelpage() {
                         <div className="modal-dialog modal-xl modal-dialog-centered">
                           <div className="modal-content">
                             <div className="modal-header">
-                              <h5 className="modal-title" id="roomDetails">
-                                Modal title
-                              </h5>
                               <button
                                 type="button"
                                 className="btn-close"
@@ -286,15 +303,12 @@ export default function Hotelpage() {
                                   <div class="carousel-inner">
                                     <div class="item slides active">
                                       <div class="slide-1"></div>
-                                      
                                     </div>
                                     <div class="item slides">
                                       <div class="slide-2"></div>
-                                      
                                     </div>
                                     <div class="item slides">
                                       <div class="slide-3"></div>
-                                      
                                     </div>
                                   </div>
                                   <a
@@ -864,9 +878,9 @@ export default function Hotelpage() {
                         aria-labelledby="headingThree"
                         data-bs-parent="#accordionExample"
                       >
-                        <div className="accordion-body">
-                          You can modify any of this with custom CSS or
-                          overriding our default variables.
+                        <div className="accordion-body cancelation-rules">
+                          <RemoveCircleOutlineIcon fontSize="small"/>
+                          <span className="ms-1">It is not possible to cancel the reservation.</span>
                         </div>
                       </div>
                     </div>
@@ -892,7 +906,203 @@ export default function Hotelpage() {
                 </div>
               </div>
             </div>
+
+            <div className="">
+              <hr className="mb-0 mt-0 hr-text"></hr>
+            </div>
+
+            <div className="row">
+              <h3 className="mb-3 mt-3">Hotel rules</h3>
+              <div
+                className="mb-3 me-2 card rule-card"
+                style={{ width: "15rem" }}
+              >
+                <div className="card-body">
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    <AlarmIcon fontSize="large" />
+                  </h6>
+                  <h5 className="card-title">Check in time</h5>
+                  <p className="card-text">02:00 (P.M)</p>
+                </div>
+              </div>
+              <div className="mb-3 card rule-card" style={{ width: "15rem" }}>
+                <div className="card-body">
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    <AlarmIcon fontSize="large" />
+                  </h6>
+                  <h5 className="card-title">Check out time</h5>
+                  <p className="card-text">12:00 (Noon)</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="">
+              <hr className="mb-0 mt-0 hr-text"></hr>
+            </div>
+
+            <div className="row mt-3 mb-3">
+              <div className="col d-inline-flex">
+                <h5>Feedback and comments</h5>
+                <Box
+                  sx={{
+                    width: 200,
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "10px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  <Rating
+                    name="text-feedback"
+                    value={value}
+                    readOnly
+                    precision={0.5}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                  />
+                  <Box sx={{ ml: 2 }}>{labels[value]}</Box>
+                </Box>
+              </div>
+
+              <div className="row">
+                <div className="col-md-6 d-grid">
+                  <div className="mb-4 card comments-1">
+                    <div className="card-body">
+                      <h5 className="card-title">Alex</h5>
+                      <div className="row">
+                        <div className="col">
+                          <h6 className="card-subtitle mb-2 text-muted">
+                            January 2022 <span className="border-start"></span>
+                            <span className="ms-1">
+                              4
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="ms-1 mb-1 bi bi-star-fill"
+                                viewBox="0 0 16 16"
+                              >
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                              </svg>
+                            </span>
+                          </h6>
+                        </div>
+                      </div>
+                      <p className="card-text">Amazing experience!</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-6 d-grid">
+                  <div className="mb-4 card d-flex-inline comments-2 ">
+                    <div className="card-body">
+                      <h5 className="card-title">Diana</h5>
+                      <div className="row">
+                        <div className="col">
+                          <h6 className="card-subtitle mb-2 text-muted">
+                            April 2019 <span className="border-start"></span>
+                            <span className="ms-1">
+                              2
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="ms-1 mb-1 bi bi-star-fill"
+                                viewBox="0 0 16 16"
+                              >
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                              </svg>
+                            </span>
+                          </h6>
+                        </div>
+                      </div>
+                      <p className="card-text">
+                        event for young people on Friday with loud noise, music
+                        and not expected for the venue well into the early
+                        hours.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-6 d-grid">
+                  <div className="mb-4 card d-flex-inline comments-3">
+                    <div className="card-body">
+                      <h5 className="card-title">Chris</h5>
+                      <div className="row">
+                        <div className="col">
+                          <h6 className="card-subtitle mb-2 text-muted">
+                            June 2021 <span className="border-start"></span>
+                            <span className="ms-1">
+                              4
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="ms-1 mb-1 bi bi-star-fill"
+                                viewBox="0 0 16 16"
+                              >
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                              </svg>
+                            </span>
+                          </h6>
+                        </div>
+                      </div>
+                      <p className="card-text">
+                        Breakfast was exceptional. Nice setup. Good
+                        food.pleasant staff
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-6 d-grid">
+                  <div className="mb-4 card d-inline-grid comments-4">
+                    <div className="card-body">
+                      <h5 className="card-title">Lionel</h5>
+                      <div className="row">
+                        <div className="col">
+                          <h6 className="card-subtitle mb-2 text-muted">
+                            October 2021 <span className="border-start"></span>
+                            <span className="ms-1">
+                              3
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="ms-1 mb-1 bi bi-star-fill"
+                                viewBox="0 0 16 16"
+                              >
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                              </svg>
+                            </span>
+                          </h6>
+                        </div>
+                      </div>
+
+                      <p className="card-text">
+                        it was lovely to eat breakfast in such wonderful
+                        surroundings but the breakfast itself was not to a level
+                        I would have expected.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* <div col-3>
+                <p>something</p>
+                <p>something else</p>
+                <p>another thing</p>
+                <div class="bar-container">
+                  <div class="bar-3"></div>
+                </div>
+              </div> */}
+            </div>
           </Grid>
+          <Grid item xs={3}></Grid>
         </Grid>
       </Container>
     </div>

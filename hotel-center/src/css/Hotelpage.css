@@ -1,22 +1,33 @@
 .room-facilities.btn-secondary,
-.room-facilities.btn-secondary:active,
+.room-facilities.btn-secondary:active {
+  color: black;
+  background-color: white;
+}
+
 .room-facilities.btn-secondary:focus {
   color: black;
   background-color: white;
 }
 
 .room-facilities.btn-secondary:hover {
-  background-color: #f5f5f5;
+  background-color: white;
   color: black;
+  box-shadow: 0 0 0 0.25rem rgb(130 138 145 / 50%);
 }
 
 .hotel-room.btn-primary,
-.hotel-room.btn-primary:active,
-.hotel-room.btn-primary:focus {
+.hotel-room.btn-primary:active {
   background-color: #cd9a2d !important;
   border-color: #cd9a2d !important;
   outline: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hotel-room.btn-primary:focus {
+  background-color: #cd9a2d !important;
+  border-color: #cd9a2d !important;
+  box-shadow: none;
+  color: black;
 }
 
 .hotel-room.btn-primary:hover {
@@ -27,16 +38,31 @@
   border-radius: 20px !important;
 }
 
+.rule-card.card {
+  border-radius: 20px !important;
+}
+
 .accordion-button {
   border-color: transparent !important;
+  
+}
+
+.accordion-button:hover,
+.accordion-button:active {
+  color:#cd9a2d;
+}
+
+.hotelpage-accordion-header .accordion-button:not(.collapsed) {
+  color:#cd9a2d !important;
 }
 
 .hotelpage-accordion-header .accordion-button::after {
-  width: 0.8rem !important;
-  height: 0.8rem !important;
+  width: 0.0 !important;
+  height: 0.0 !important;
   background-size: 0.8rem !important;
   margin-left: 5px !important;
   margin-top: 5px;
+
 }
 
 .room-btn.btn {
@@ -47,7 +73,11 @@
   box-shadow: none !important;
 }
 
-.modal-images{
+.room-btn.btn:hover {
+  color: #cd9a2d;
+}
+
+.modal-images {
   width: 100%;
 }
 
@@ -102,7 +132,7 @@
   height: auto;
   max-height: 100px;
   overflow: hidden;
-  
+
   opacity: 0.8;
   display: block;
   padding: 0;
@@ -113,7 +143,10 @@
   transition: all 550ms ease-out;
 }
 #thumbnail-preview-indicators .carousel-indicators li:hover > .thumbnail,
-#thumbnail-preview-indicators .carousel-indicators li.active > .thumbnail:hover {
+#thumbnail-preview-indicators
+  .carousel-indicators
+  li.active
+  > .thumbnail:hover {
   position: relative;
   display: block;
   border: 1px solid white;
@@ -121,9 +154,21 @@
   transform: scale(1.5);
   z-index: 1;
 }
-#thumbnail-preview-indicators .carousel-indicators li.active > .thumbnail:hover {
+#thumbnail-preview-indicators
+  .carousel-indicators
+  li.active
+  > .thumbnail:hover {
   border: 1px solid whitesmoke;
 }
+
+.bi-star-fill.bi{
+  color:#FFB302;
+}
+
+.cancelation-rules.accordion-body{
+  color:lightcoral;
+}
+
 
 @media screen and (min-width: 480px) {
 }

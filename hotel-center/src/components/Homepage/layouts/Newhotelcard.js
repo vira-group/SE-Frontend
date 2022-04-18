@@ -111,13 +111,26 @@ export default function Newhotelcard() {
                     ></img>
                   </div>
                   <div className="col-md-6">
-                    <div className="row star">
+                    <div className="col star d-flex">
                       <h5 className="card-title">
                         <a className="link hotel-links" href="/hotelpage2">
-                          The Landmark London
-                        </a>
-                        <Rating name="read-only" value={value2} readOnly />
-                      </h5>
+                        The Landmark London 
+                        </a></h5>
+                        <Box
+                          sx={{
+                            width: 50,
+                            display: "flex",
+                            alignItems: "center",
+                            marginBottom: "10px",
+                            marginLeft: "2px",
+                          }}
+                        >
+                          <Rating
+                          name="read-only"
+                          value={value2}
+                          readOnly
+                        />
+                        </Box>
                     </div>
                     <a href="">Westminster Borough, London</a>
                     <p className="mb-1">Metro access</p>
@@ -130,12 +143,14 @@ export default function Newhotelcard() {
                   </div>
                   <div className="col-md-2 d-none d-md-block">
                     <div className="row">
-                      <div className="pr-0 col-md-8">
+                      <div className="col-md-8 border-end-white">
                         <p className="mb-1 rate ">Superb</p>
                         <p className="mb-1 views">2,362 reviews</p>
                       </div>
-                      <div className="col-md-4 score">
-                        <span className="mt-10"><small>9.0</small></span>
+                      <div className="col-md-4" style={{marginTop:'6px'}}>
+                        <span className="score ">
+                          9.0
+                        </span>
                       </div>
                     </div>
                     <a

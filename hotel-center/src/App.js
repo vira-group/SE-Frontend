@@ -10,6 +10,7 @@ import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
 import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
 import "./css/Homepage.css";
 import './css/Verify.css';
+import './css/Average_rating.css'
 
 function App() {
   return (
