@@ -17,7 +17,7 @@ import './hotelPage.css';
 import { margin, positions, spacing, textAlign } from '@mui/system';
 import { alignProperty } from '@mui/material/styles/cssUtils';
 
-function SearchForm(props) {
+function ResponsiveDatePickers(props) {
 	const [ checkinDate, setCheckinDate ] = useState(null);
 	const [ checkoutDate, setCheckoutDate ] = useState(null);
 
@@ -36,7 +36,6 @@ function SearchForm(props) {
 	const handleClose = () => {
 		setAnchor(null);
 	};
-
 	const handleChangeNumber = (actionType, guestType) => {
 		actionType === 'dec'
 			? guestType === 'adults'
@@ -56,31 +55,31 @@ function SearchForm(props) {
 				<div className="col col-md-12 align-items-center">
 					<div className="row">
 						<div className="col-12 col-md-6 ">
-							{/* <LocalizationProvider dateAdapter={AdapterDateFns} > */}
-							<DatePicker
-								disablePast
-								label="Check in"
-								value={checkinDate}
-								onChange={(newValue) => {
-									setCheckinDate(newValue);
-								}}
-								renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
-							/>
-							{/* </LocalizationProvider> */}
+							<LocalizationProvider dateAdapter={AdapterDateFns}>
+								<DatePicker
+									disablePast
+									label="Check in"
+									value={checkinDate}
+									onChange={(newValue) => {
+										setCheckinDate(newValue);
+									}}
+									renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
+								/>
+							</LocalizationProvider>
 						</div>
 
 						<div className="col-12 col-md-6">
-							{/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
-							<DatePicker
-								disablePast
-								label="Check out"
-								value={checkoutDate}
-								onChange={(newValue) => {
-									setCheckoutDate(newValue);
-								}}
-								renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
-							/>
-							{/* </LocalizationProvider> */}
+							<LocalizationProvider dateAdapter={AdapterDateFns}>
+								<DatePicker
+									disablePast
+									label="Check out"
+									value={checkoutDate}
+									onChange={(newValue) => {
+										setCheckoutDate(newValue);
+									}}
+									renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
+								/>
+							</LocalizationProvider>
 						</div>
 					</div>
 
@@ -160,7 +159,6 @@ function SearchForm(props) {
 							</div>
 						</div>
 					</Popover>
-
 					<div className="row">
 						<button className="btn btn-dark">rooms</button>
 					</div>
@@ -170,4 +168,4 @@ function SearchForm(props) {
 	);
 }
 
-export default SearchForm;
+export default ResponsiveDatePickers;

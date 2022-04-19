@@ -46,34 +46,75 @@ import ResponsiveDatePickers from './ResponsiveDatePickers';
 
 import SimpleAccordion from './accordion';
 
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
+
 export default function Hotelpage() {
 	return (
 		<div className="div">
 			<div className="div">
 				<div className="div">
 					<div className="container d-none d-md-block">
+						<br />
+						<br />
+						<br />
+						<br />
+						<div className="row-md-12">
+							<h2>Nobu Hotel London Portman Square</h2>
+						</div>
+						<div className="row-md-12">
+							{/* <div className="col"> */}
+							<FmdGoodIcon />
+							<h5>Tehtan</h5>
+							{/* </div> */}
+						</div>
+
 						<div className="row">
 							<div className="col-6">
 								<div className="row">
 									<div className="col-12 gy-3">
-										<img src={pic1} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+										<img
+											src={pic1}
+											className="img-fluid"
+											alt="..."
+											style={{ borderRadius: '20px' }}
+										/>
 									</div>
 								</div>
 							</div>
 							<div className="col-6">
 								<div className="row">
 									<div className="col-6 gy-3">
-										<img src={pic5} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+										<img
+											src={pic5}
+											className="img-fluid"
+											alt="..."
+											style={{ borderRadius: '20px' }}
+										/>
 									</div>
 									<div className="col-6 gy-3">
-										<img src={pic2} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+										<img
+											src={pic2}
+											className="img-fluid"
+											alt="..."
+											style={{ borderRadius: '20px' }}
+										/>
 									</div>
 
 									<div className="col-6 gy-3">
-										<img src={pic3} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+										<img
+											src={pic3}
+											className="img-fluid"
+											alt="..."
+											style={{ borderRadius: '20px' }}
+										/>
 									</div>
 									<div className="col-6 gy-3">
-										<img src={pic4} class="img-fluid" alt="..." style={{ borderRadius: '20px' }} />
+										<img
+											src={pic4}
+											className="img-fluid"
+											alt="..."
+											style={{ borderRadius: '20px' }}
+										/>
 									</div>
 								</div>
 							</div>
@@ -81,13 +122,13 @@ export default function Hotelpage() {
 					</div>
 				</div>
 
-				<div id="carouselExampleIndicators" class="carousel slide d-md-none" data-bs-ride="carousel">
-					<div class="carousel-indicators">
+				<div id="carouselExampleIndicators" className="carousel slide d-md-none" data-bs-ride="carousel">
+					<div className="carousel-indicators">
 						<button
 							type="button"
 							data-bs-target="#carouselExampleIndicators"
 							data-bs-slide-to="0"
-							class="active"
+							className="active"
 							aria-current="true"
 							aria-label="Slide 1"
 						/>
@@ -104,34 +145,34 @@ export default function Hotelpage() {
 							aria-label="Slide 3"
 						/>
 					</div>
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img src={pic2} class="d-block w-100" alt="..." />
+					<div className="carousel-inner">
+						<div className="carousel-item active">
+							<img src={pic2} className="d-block w-100" alt="..." />
 						</div>
-						<div class="carousel-item">
-							<img src={pic6} class="d-block w-100" alt="..." />
+						<div className="carousel-item">
+							<img src={pic6} className="d-block w-100" alt="..." />
 						</div>
-						<div class="carousel-item">
-							<img src={pic3} class="d-block w-100" alt="..." />
+						<div className="carousel-item">
+							<img src={pic3} className="d-block w-100" alt="..." />
 						</div>
 					</div>
 					<button
-						class="carousel-control-prev"
+						className="carousel-control-prev"
 						type="button"
 						data-bs-target="#carouselExampleIndicators"
 						data-bs-slide="prev"
 					>
-						<span class="carousel-control-prev-icon" aria-hidden="true" />
-						<span class="visually-hidden">Previous</span>
+						<span className="carousel-control-prev-icon" aria-hidden="true" />
+						<span className="visually-hidden">Previous</span>
 					</button>
 					<button
-						class="carousel-control-next"
+						className="carousel-control-next"
 						type="button"
 						data-bs-target="#carouselExampleIndicators"
 						data-bs-slide="next"
 					>
-						<span class="carousel-control-next-icon" aria-hidden="true" />
-						<span class="visually-hidden">Next</span>
+						<span className="carousel-control-next-icon" aria-hidden="true" />
+						<span className="visually-hidden">Next</span>
 					</button>
 				</div>
 			</div>
@@ -145,8 +186,10 @@ export default function Hotelpage() {
 					<div className="col-12 col-md-4 gy-2">
 						<ResponsiveDatePickers />
 					</div>
-					<div className="col-12 d-md-none"><br></br></div>
-					
+					<div className="col-12 d-md-none">
+						<br />
+					</div>
+
 					<div className="col-12 col-md-8">
 						<SimpleAccordion />
 					</div>
