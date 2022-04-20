@@ -61,11 +61,13 @@ export default function Hotelpage() {
 						<div className="row-md-12">
 							<h2>Nobu Hotel London Portman Square</h2>
 						</div>
-						<div className="row-md-12">
-							{/* <div className="col"> */}
-							<FmdGoodIcon />
-							<h5>Tehtan</h5>
-							{/* </div> */}
+						<div className="row">
+							<div className="col-md-1 m-100">
+								<FmdGoodIcon />
+							</div>
+							<div className="col-md-1">
+								<h5>Tehran</h5>
+							</div>
 						</div>
 
 						<div className="row">
@@ -183,10 +185,16 @@ export default function Hotelpage() {
 				<br />
 
 				<div className="row">
-					<div className="col-12 col-md-4 gy-2">
-						<ResponsiveDatePickers />
+					{/* <div className="div" style={{ display: 'flex', top: '0' }}> */}
+					<div className="col-12 col-md-4 "  style={{  marginBottom : 2 }}  >
+						<div style={{ position: 'sticky', top: '11vh' }}>
+							<ResponsiveDatePickers />
+						</div>
 					</div>
+					{/* </div> */}
+
 					<div className="col-12 d-md-none">
+				
 						<br />
 					</div>
 
@@ -207,6 +215,46 @@ export default function Hotelpage() {
 					</Grid>
 				</Grid> */}
 
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
 				<br />
 			</div>
 		</div>
