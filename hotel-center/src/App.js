@@ -22,7 +22,7 @@ function App() {
 					<Route exact path="/login" component={login} />
 					<Route exact path="/auth/activate/:handle/:handle1" component={account_activation}/>
 
-        	<Route exact path = '/hotelPage' component = { hotelPage }/>
+        	<Route exact path = '/hotelPage/:handle' component = { hotelPage }/>
 					
         </Switch>
       </BrowserRouter>

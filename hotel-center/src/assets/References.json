@@ -4,5 +4,6 @@
     "url_Sign_up":"/auth/users/",
     "url_login":"/auth/token/login/",
     "url_me" : "/auth/users/me/",
-    "url_logout" : "/auth/token/logout/"
+    "url_logout" : "/auth/token/logout/",
+    "url_onehotel" : "/hotel/hotels"
 }

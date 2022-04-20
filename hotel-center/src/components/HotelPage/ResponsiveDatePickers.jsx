@@ -64,7 +64,7 @@ function ResponsiveDatePickers(props) {
 				<div className="col col-md-12 align-items-center">
 					<div className="d-flex justify-content-center">
 						<div className="row">
-							<div className="col-12 col-md-6   ">
+							<div className="col-6">
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DatePicker
 										disablePast
@@ -86,11 +86,11 @@ function ResponsiveDatePickers(props) {
 								</LocalizationProvider>
 							</div>
 
-							<div className="col-12">
+							{/* <div className="col-12">
 								<br />
-							</div>
+							</div> */}
 
-							<div className="col-12 col-md-6">
+							<div className="col-6">
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DatePicker
 										disablePast

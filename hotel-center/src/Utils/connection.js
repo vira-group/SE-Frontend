@@ -125,3 +125,26 @@ export const logout = async () => {
 
 	return message;
 };
+
+export const one_hotel_connection = async (id) => {
+	let message = '';
+	await axios
+	.get(makeURL(references.url_onehotel+"/"+id+"/"),{},{
+
+		headers:{
+			'Authorization': cookies.get('Authorization')
+		}
+
+})
+.then((response) => {
+	console.log(response);
+	message=response.data;
+	
+})
+.catch((error) => {
+	console.log(error);
+	message = false;
+});
+
+return message;
+};

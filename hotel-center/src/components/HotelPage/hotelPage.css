@@ -37,7 +37,13 @@
   display: flex;
 
 }
+.icon 
+{
+  align-items: center ;
+  display: flex ;
+  color:rgb(255, 165, 0)
 
+}
 
 
 .btn-secondary:hover {
