@@ -1,8 +1,5 @@
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import Hotelcard from "./components/Homepage/layouts/Hotelcard";
 import Verify from "./verify";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { render } from "@testing-library/react";
 import Homepage from "./components/Homepage/Homepage";
 import account_activation from "../src/components/account_activation/account_activation";
 import login from "./components/Login/Login";

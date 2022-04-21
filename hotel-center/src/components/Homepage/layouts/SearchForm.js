@@ -10,6 +10,18 @@ import { GoldenTextField } from "../../../theme/GoldenTextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const datePickerTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#cd9a2b",
+      dark: "#cd9a2b",
+      light: "#d7ae55",
+      contrastText: "#fff",
+    },
+  },
+});
 
 const Cities = [
   { id: "0", city: "Tehran", country: "Iran" },
@@ -99,48 +111,49 @@ function SearchForm(props) {
           //   this.handleInputChange(event, newInputValue);
           // }}
         />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            disablePast
-            maxDate={
-              checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
-            }
-            label="Check in"
-            value={checkinDate}
-            onChange={(newValue) => {
-              setCheckinDate(newValue);
-            }}
-            renderInput={(params) => (
-              <GoldenTextField
-                {...params}
-                variant="outlined"
-                className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
-                // sx={{ width: 200 }}
-              />
-            )}
-          />
-        </LocalizationProvider>
-        <LocalizationProvider dateAdapter={AdapterDateFns} className="ms-2">
-          <DatePicker
-            disablePast
-            minDate={
-              checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
-            }
-            label="Check out"
-            value={checkoutDate}
-            onChange={(newValue) => {
-              setCheckoutDate(newValue);
-            }}
-            renderInput={(params) => (
-              <GoldenTextField
-                {...params}
-                variant="outlined"
-                className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
-                // sx={{ width: 200 }}
-              />
-            )}
-          />
-        </LocalizationProvider>
+        <ThemeProvider theme={datePickerTheme}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              disablePast
+              maxDate={
+                checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
+              }
+              label="Check in"
+              value={checkinDate}
+              onChange={(newValue) => {
+                setCheckinDate(newValue);
+              }}
+              renderInput={(params) => (
+                <GoldenTextField
+                  {...params}
+                  variant="outlined"
+                  className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
+                />
+              )}
+            />
+          </LocalizationProvider>
+
+          <LocalizationProvider dateAdapter={AdapterDateFns} className="ms-2">
+            <DatePicker
+              disablePast
+              minDate={
+                checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
+              }
+              label="Check out"
+              value={checkoutDate}
+              onChange={(newValue) => {
+                setCheckoutDate(newValue);
+              }}
+              renderInput={(params) => (
+                <GoldenTextField
+                  {...params}
+                  variant="outlined"
+                  className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
+                />
+              )}
+            />
+          </LocalizationProvider>
+        </ThemeProvider>
         <GoldenTextField
           className="col-12 col-lg-3 px-1 my-3 my-lg-0"
           aria-describedby={id}
