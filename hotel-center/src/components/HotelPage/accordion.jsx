@@ -4,59 +4,56 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
+import './hotelPage.css';
 
 class SimpleAccordion extends React.Component {
 	constructor(props) {
 		super(props);
+		// console.log(props.data);
 	}
-	state = {  }
-	render() { 
-		return (
-			<div >
-				<Accordion style={{borderRadius:"20px"}}>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-						<Typography>
-							{' '}
-							West town center. Private bright room 4x4 m, central heating, fully equipped kitchen, private
-							shower+toilet. Third floor, stairs. WiFi, tv set, DVD, hairdryer. Towels, bed linen provided.
-						</Typography>
-					</AccordionSummary>
+
+	state = {
+		description: '',
+		phone_numbers: 0
+	};
+
+	async componentDidMount() {
+		var splitted = window.location.toString().split('/');
+		await this.setState({ id: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.id);
+
+		one_hotel_connection(this.state.id).then((res) => {
+			this.setState({ description: res.description });
+			this.setState({ phone_numbers: res.phone_numbers });
+		});
+	}
+
+	render() {
 	
+		const first = this.state.description.slice(0,250);
+		const sec = this.state.description.slice(250,100000);
+		
+		return (
+			<div>
+				<Accordion style={{ borderRadius: '20px' }}>
+					<AccordionSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography>{first} ...</Typography>
+					</AccordionSummary>
+
 					<AccordionDetails>
-						<Typography>
-							Lively lovely neighborhood, quiet and safe at night. Street with characteristic Amsterdam houses
-							and big trees. Museums, park, market, shops, bars, restaurants in radius of 1,5 km. Public
-							transport from Airport nearby. All places of interest walk able, buses trams in proximity as are
-							bicycle and car rentals.
-						</Typography>
+						<Typography />{sec}
+						<a href=""> {this.state.phone_numbers}</a>
 					</AccordionDetails>
 				</Accordion>
-	
-				{/* <Accordion> */}
-	
-				{/* <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2a-content" id="panel2a-header">
-						<Typography>Show more</Typography>
-					</AccordionSummary>
-					
-			
-			
-			<AccordionDetails>
-						<Typography>
-							West town center. Private bright room 4x4 m, central heating, fully equipped kitchen, private
-							shower+toilet. Third floor, stairs. WiFi, tv set, DVD, hairdryer. Towels, bed linen provided.
-							Lively lovely neighborhood, quiet and safe at night. Street with characteristic Amsterdam houses
-							and big trees. Museums, park, market, shops, bars, restaurants in radius of 1,5 km. Public
-							transport from Airport nearby. All places of interest walk able, buses trams in proximity as are
-							bicycle and car rentals.{' '}
-						</Typography>
-					</AccordionDetails> */}
-				{/* </Accordion> */}
+				
 			</div>
 		);
 	}
 }
- 
+
 export default SimpleAccordion;
-
-

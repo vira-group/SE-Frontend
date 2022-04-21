@@ -10,6 +10,9 @@ import Sign_up from './components/Sign_up/sign_up';
 import "./css/Homepage.css";
 import './css/Verify.css';
 import hotelPage from "./components/HotelPage/hotelPage";
+import a from "./components/HotelPage/a";
+
+
 function App() {
   return (
     <div className="App">
@@ -23,6 +26,7 @@ function App() {
 					<Route exact path="/auth/activate/:handle/:handle1" component={account_activation}/>
 
         	<Route exact path = '/hotelPage/:handle' component = { hotelPage }/>
+        	<Route exact path = '/a' component = { a }/>
 					
         </Switch>
       </BrowserRouter>

@@ -1,28 +1,9 @@
-// import React, { useEffect, useState } from 'react';
-// import Box from '@mui/material/Box';
-// import Autocomplete from '@mui/material/Autocomplete';
-// import Popover from '@mui/material/Popover';
-// import AdapterDateFns from '@mui/lab/AdapterDateFns';
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import DatePicker from '@mui/lab/DatePicker';
-// import LocationOnIcon from '@mui/icons-material/LocationOn';
-// import SearchIcon from '@mui/icons-material/Search';
-// import AddIcon from '@mui/icons-material/Add';
-// import RemoveIcon from '@mui/icons-material/Remove';
 import { GoldenTextField } from '../../theme/GoldenTextField';
-
 import React, { useEffect, useState } from 'react';
-
 import './hotelPage.css';
-
-import Box from '@mui/material/Box';
-import Autocomplete from '@mui/material/Autocomplete';
 import Popover from '@mui/material/Popover';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-// import  GoldenTextField  from '../../theme/GoldenTextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -32,7 +13,6 @@ const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
 function ResponsiveDatePickers(props) {
 	const [ checkinDate, setCheckinDate ] = useState(null);
 	const [ checkoutDate, setCheckoutDate ] = useState(null);
-	const [ destination, setDestination ] = useState(null);
 	const [ anchor, setAnchor ] = React.useState(null);
 	const [ numberOfAdults, setNumberOfAdults ] = React.useState(1);
 	const [ numberOfChildren, setNumberOfChildren ] = React.useState(0);
@@ -74,22 +54,10 @@ function ResponsiveDatePickers(props) {
 										onChange={(newValue) => {
 											setCheckinDate(newValue);
 										}}
-										renderInput={(params) => (
-											<GoldenTextField
-												{...params}
-												variant="outlined"
-												// className="col-6 col-lg-2"
-												// sx={{ width: 200 }}
-											/>
-										)}
+										renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
 									/>
 								</LocalizationProvider>
 							</div>
-
-							{/* <div className="col-12">
-								<br />
-							</div> */}
-
 							<div className="col-6">
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DatePicker
@@ -100,14 +68,7 @@ function ResponsiveDatePickers(props) {
 										onChange={(newValue) => {
 											setCheckoutDate(newValue);
 										}}
-										renderInput={(params) => (
-											<GoldenTextField
-												{...params}
-												variant="outlined"
-												// className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
-												// sx={{ width: 200 }}
-											/>
-										)}
+										renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
 									/>
 								</LocalizationProvider>
 							</div>
@@ -118,7 +79,6 @@ function ResponsiveDatePickers(props) {
 					<div className="d-flex justify-content-center">
 						<div className="row col-12">
 							<GoldenTextField
-								// className="col-12 col-lg-3 px-1 my-3 my-lg-0"
 								aria-describedby={id}
 								variant="outlined"
 								onClick={handleClick}
@@ -197,9 +157,9 @@ function ResponsiveDatePickers(props) {
 
 					<div className="d-flex justify-content-center">
 						<div className="row w-100">
-							{/* <div className="col"> */}
-							<button className="btn btn-dark">rooms</button>
-							{/* </div> */}
+							<button className="btn btn-dark" style={{ height: '123%' }}>
+								check availability
+							</button>
 						</div>
 					</div>
 				</div>
