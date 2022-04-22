@@ -37,7 +37,8 @@ jobs:
       run: |
         cd hotel-center
         npm test
-        npm run build
+        npm start
+#       npm run build
         
 #     - run: npm ci
 #     - run: npm run build --if-present
