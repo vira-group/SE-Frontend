@@ -42,7 +42,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 import references from "../../../assets/References.json";
-import Roomcard from "../layouts/Roomcard";
+import Roomcard from "./Roomcard";
 
 
 const labels = {
@@ -71,7 +71,7 @@ const Icons = {
   Bar: <LocalBarIcon/>
 };
 
-export default function Hotelpage() {
+export default function Hotelpage2() {
   const value = 3.5;
   const { hotelid } = useParams();
   const [hotel, setHotel] = useState(null);

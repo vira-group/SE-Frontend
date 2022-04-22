@@ -15,6 +15,9 @@ import ResponsiveDatePickers from './ResponsiveDatePickers';
 import SimpleAccordion from './accordion';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
+import Hotelpage2 from '../Homepage/layouts/Hotelpage2';
+
+
 class Hotelpage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -226,47 +229,7 @@ class Hotelpage extends React.Component {
 						</div>
 					</div>
 
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
+					<Hotelpage2 />
 				</div>
 			</div>
 		);

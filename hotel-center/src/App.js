@@ -10,7 +10,7 @@ import './css/Homepage.css';
 import './css/Verify.css';
 import hotelPage from './components/HotelPage/hotelPage';
 import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
-import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
+// import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
 import "./css/Homepage.css";
 import "./css/Verify.css";
 import "./css/Average_rating.css";
@@ -31,7 +31,7 @@ function App() {
 
 
                   <Route exact path="/hotelcard" component={Hotelcard} />
-          <Route exact path="/hotelpage2" component={Hotelpage2} />
+          {/* <Route exact path="/hotelpage2" component={Hotelpage2} /> */}
 
 				</Switch>
 			</BrowserRouter>
