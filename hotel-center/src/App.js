@@ -1,5 +1,4 @@
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import Hotelcard from './components/Homepage/layouts/Hotelcard';
 import Verify from './verify';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { render } from '@testing-library/react';
@@ -10,6 +9,12 @@ import Sign_up from './components/Sign_up/sign_up';
 import './css/Homepage.css';
 import './css/Verify.css';
 import hotelPage from './components/HotelPage/hotelPage';
+import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
+import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
+import "./css/Homepage.css";
+import "./css/Verify.css";
+import "./css/Average_rating.css";
+
 
 function App() {
 	return (
@@ -23,10 +28,14 @@ function App() {
 					<Route exact path="/login" component={login} />
 					<Route exact path="/auth/activate/:handle/:handle1" component={account_activation} />
 					<Route exact path="/hotelPage/:handle" component={hotelPage} />
+
+
+                  <Route exact path="/hotelcard" component={Hotelcard} />
+          <Route exact path="/hotelpage2" component={Hotelpage2} />
+
 				</Switch>
 			</BrowserRouter>
 		</div>
 	);
-}
-
-export default App;
+  }
+  export default App ;

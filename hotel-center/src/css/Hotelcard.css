@@ -1,0 +1,41 @@
+.hotel-card-img.card-img-top {
+  width: 100%;
+  height: 100%;
+}
+
+.homepage-card .card {
+  border-radius: 10px !important;
+}
+
+.hotel-card-btn.btn-primary,
+.hotel-card-btn.btn-primary:active,
+.hotel-card-btn.btn-primary:focus {
+  background-color: #cd9a2d !important;
+  border-color: #cd9a2d !important;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.accordion-button,
+.accordion-button:active,
+.accordion-button:focus {
+  box-shadow: none !important;
+  background-color: white;
+}
+.hotel-card-btn.btn-primary:hover {
+  box-shadow: none;
+}
+.rate {
+  font-weight: bold;
+}
+.views {
+  font-size: 11px;
+}
+.score {
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 1px 1px 6px  black;
+}
+.hotel-links {
+  color: black !important;
+  text-decoration: none;
+}

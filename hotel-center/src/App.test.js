@@ -1,10 +1,9 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import * as React from "react";
+import { render, screen } from "@testing-library/react";
+import Newhotelcard from "../src/components/Homepage/layouts/Newhotelcard";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />); //render is from @testing-library/react
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument(); //expect assertion is from Jest
+it("should check whether the content renders correctly or not", async () => {
+  render(<Newhotelcard />);
+  const cardElement = screen.queryAllByRole("button");
+  expect(cardElement.length).toBe(1);
 });
-
