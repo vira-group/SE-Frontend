@@ -1,6 +1,9 @@
 import { GoldenTextField } from '../../theme/GoldenTextField';
 import React, { useEffect, useState } from 'react';
-import './hotelPage.css';
+
+import '../../css/hotelPage.css';
+
+
 import Popover from '@mui/material/Popover';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';

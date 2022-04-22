@@ -9,7 +9,8 @@ import pic8 from './../../statics/img/pic (8).jpg';
 import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
 import * as React from 'react';
 import Helmet from 'react-helmet';
-import './hotelPage.css';
+import '../../css/hotelPage.css';
+
 import ResponsiveDatePickers from './ResponsiveDatePickers';
 import SimpleAccordion from './accordion';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
@@ -19,10 +20,10 @@ class Hotelpage extends React.Component {
 		super(props);
 	}
 	state = {
-		image1 : null ,
-		image2 : null ,
-		image3 : null ,
-		image4 : null ,
+		image1: null,
+		image2: null,
+		image3: null,
+		image4: null,
 		id: 1,
 		name: 'Nobu',
 		header: null,
@@ -50,14 +51,11 @@ class Hotelpage extends React.Component {
 			this.setState({ start_date: res.start_date });
 		});
 
-
 		one_hotel_image(this.state.id).then((res) => {
-
 			this.setState({ image1: res[0].image });
 			this.setState({ image2: res[1].image });
 			this.setState({ image3: res[2].image });
 			this.setState({ image4: res[3].image });
-
 		});
 	}
 
@@ -75,7 +73,7 @@ class Hotelpage extends React.Component {
 								<h2>{this.state.name}</h2>
 							</div>
 							<div className="row ">
-								<div className="col-5 icon2  gx-3 col-sm-1 " style={{ display: 'flex'  	 }}>
+								<div className="col-5 icon2  gx-3 col-sm-1 " style={{ display: 'flex' }}>
 									<FmdGoodIcon />
 									{this.state.city},{this.state.state}
 								</div>
@@ -91,7 +89,7 @@ class Hotelpage extends React.Component {
 										viewBox="0 0 16 16"
 										style={{ marginRight: 5 }}
 									>
-									<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+										<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
 									</svg>{' '}
 									<span>{this.state.rate}</span>
 								</div>
@@ -144,7 +142,6 @@ class Hotelpage extends React.Component {
 											<img
 												// src={pic4}
 												src={this.state.image4}
-												
 												className="img-fluid"
 												alt="..."
 												style={{ borderRadius: '20px' }}
@@ -181,13 +178,13 @@ class Hotelpage extends React.Component {
 						</div>
 						<div className="carousel-inner">
 							<div className="carousel-item active">
-								<img src={pic2} className="d-block w-100" alt="..." />
+								<img src={this.state.image4} className="d-block w-100" alt="..." />
 							</div>
 							<div className="carousel-item">
-								<img src={pic6} className="d-block w-100" alt="..." />
+								<img src={this.state.image2} className="d-block w-100" alt="..." />
 							</div>
 							<div className="carousel-item">
-								<img src={pic3} className="d-block w-100" alt="..." />
+								<img src={this.state.image3} className="d-block w-100" alt="..." />
 							</div>
 						</div>
 						<button
@@ -226,7 +223,6 @@ class Hotelpage extends React.Component {
 
 						<div className="col-12 col-md-8">
 							<SimpleAccordion data={this.state} />
-						
 						</div>
 					</div>
 

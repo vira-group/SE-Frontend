@@ -5,7 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
-import './hotelPage.css';
+import '../../css/hotelPage.css';
 
 class SimpleAccordion extends React.Component {
 	constructor(props) {
@@ -30,10 +30,9 @@ class SimpleAccordion extends React.Component {
 	}
 
 	render() {
-	
-		const first = this.state.description.slice(0,250);
-		const sec = this.state.description.slice(250,100000);
-		
+		const first = this.state.description.slice(0, 250);
+		const sec = this.state.description.slice(250, 100000);
+
 		return (
 			<div>
 				<Accordion style={{ borderRadius: '20px' }}>
@@ -46,11 +45,11 @@ class SimpleAccordion extends React.Component {
 					</AccordionSummary>
 
 					<AccordionDetails>
-						<Typography />{sec}
+						<Typography />
+						{sec}
 						<a href=""> {this.state.phone_numbers}</a>
 					</AccordionDetails>
 				</Accordion>
-				
 			</div>
 		);
 	}
