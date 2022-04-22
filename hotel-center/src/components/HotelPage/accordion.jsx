@@ -5,7 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
-import '../../css/hotelPage.css';
+import '../../css/Hotelpage.css';
 
 class SimpleAccordion extends React.Component {
 	constructor(props) {
