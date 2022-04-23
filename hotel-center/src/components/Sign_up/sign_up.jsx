@@ -332,6 +332,7 @@ class Sign_up extends React.Component {
 								onClick={this.handleSubmit}
 								fullWidth
 								variant="contained"
+								name = "Sign Up"
 								style={{
 									mt: 2,
 									mb: 2,

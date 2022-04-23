@@ -35,7 +35,7 @@ class SimpleAccordion extends React.Component {
 
 		return (
 			<div>
-				<Accordion style={{ borderRadius: '5px' }}>
+				<Accordion  title='accordion' style={{ borderRadius: '5px' }}>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="panel1a-content"
@@ -45,7 +45,7 @@ class SimpleAccordion extends React.Component {
 					</AccordionSummary>
 
 					<AccordionDetails>
-						<Typography />
+						<Typography data-testid="test" />
 						{sec}
 						<a href=""> {this.state.phone_numbers}</a>
 					</AccordionDetails>

@@ -10,6 +10,7 @@ import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
 import * as React from 'react';
 import Helmet from 'react-helmet';
 // import '../../css/hotelPage.css';
+import '../../css/Hotelpage.css';
 
 import ResponsiveDatePickers from './ResponsiveDatePickers';
 import SimpleAccordion from './accordion';
@@ -70,7 +71,7 @@ class Hotelpage extends React.Component {
 						<div className="container d-none d-md-block">
 							<br />
 							<br />
-							<div className="row-md-12">
+							<div className="row-md-12"  title='HotelName'>
 								<h2>{this.state.name}</h2>
 							</div>
 							<div className="row ">

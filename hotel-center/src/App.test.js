@@ -1,69 +1,11 @@
-// hello.test.js, again
-
-// import React from "react";
-// import { render, unmountComponentAtNode } from "react-dom";
-// import { act } from "react-dom/test-utils";
-// import pretty from "pretty";
-
-// import Hello from "./hello";
-
-// let container = null;
-// beforeEach(() => {
-//   // setup a DOM element as a render target
-//   container = document.createElement("div");
-//   document.body.appendChild(container);
-// });
-
-// afterEach(() => {
-//   // cleanup on exiting
-//   unmountComponentAtNode(container);
-//   container.remove();
-//   container = null;
-// });
-
-// it("should render a greeting", () => {
-//   act(() => {
-//     render(<Hello />, container);
-//   });
-
-//   expect(
-// pretty(container.innerHTML)).
-// toMatchInlineSnapshot(`"<span>Hey, stranger</span>"`); /* ... gets filled automatically by jest ... */
-
-//   act(() => {
-//     render(<Hello name="Jenny" />, container);
-//   });
-
-//   expect(
-// pretty(container.innerHTML)).
-// toMatchInlineSnapshot(`"<h1>Hello, Jenny!</h1>"`); /* ... gets filled automatically by jest ... */
-
-//   act(() => {
-//     render(<Hello name="Margaret" />, container);
-//   });
-
-//   expect(
-// pretty(container.innerHTML)).
-// toMatchInlineSnapshot(`"<h1>Hello, Margaret!</h1>"`); /* ... gets filled automatically by jest ... */
-// });
-
-import * as React from "react";
-import * as ReactDom from "react-dom";
-import Hotelpage2 from "./components/Homepage/layouts/Hotelpage2";
+import Sign_up from "../src/components/Sign_up/sign_up"
 import Footer from "./components/Homepage/layouts/Footer";
 import Filter from "./components/Homepage/layouts/Filter";
-import { render, screen } from "@testing-library/react";
-// import { faParagraph } from "@fortawesome/free-solid-svg-icons";
-import { toBeChecked } from "@testing-library/jest-dom/dist/matchers";
-
-// test("renders the correct content", () => {
-//   //Render a React component to the DOM
-//   const root = document.createElement("div");
-//   ReactDom.render(<Footer />, root);
-
-//   //Use DOM APIs (querySelector) to make assertions
-//   expect(root.querySelector("p").textContent).toBe("Support");
-// });
+import ResponsiveDatePickers from "../src/components/HotelPage/ResponsiveDatePickers" ;
+import * as React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import SimpleAccordion from "../src/components/HotelPage/accordion";
 
 it("should render the correct content", async () => {
   render(<Footer />);
@@ -106,3 +48,108 @@ it("should render the correct content", async () => {
   const FilterElement = screen.getByTitle("stars");
   expect(FilterElement).toBeInTheDocument();
 });
+
+
+
+
+const mockFn = jest.fn();
+
+
+it('should render input element', () => {
+		render(
+			<BrowserRouter>
+				<Sign_up v={''} f={mockFn} />
+			</BrowserRouter>
+		);
+		const inputElement = screen.getByLabelText(/Email Address/i);
+		expect(inputElement).toBeInTheDocument();
+	});
+ 
+it('functionality of button when is cliked', () => {
+        render(
+			<BrowserRouter>
+				{' '}
+				<Sign_up v={''} f={mockFn} />
+			</BrowserRouter>
+		);
+		const inputElement = screen.getByLabelText(/Email Address/i);
+
+        fireEvent.change(inputElement, { target: { value: "fatima@gmail.com" } });
+	    const buttonElement = screen.getByRole("button", { name: /Sign Up/i});
+	    fireEvent.click(buttonElement)
+	    expect(inputElement.value).toBe("fatima@gmail.com")
+	});
+
+
+const MockList = () => {
+    return (
+        <BrowserRouter>
+            <ResponsiveDatePickers />
+        </BrowserRouter>
+    )
+}
+
+afterAll(() => {
+        console.log("RUNS ONCE AFTER ALL TESTS")
+    })
+
+    it('should fetch and render input element', async () => {
+        render(
+            <MockList />
+        );
+
+        
+        const followerDivElement = await screen.queryByText(/animals/i) ;
+        expect(followerDivElement).not.toBeInTheDocument();
+    });
+
+    it('should render same text ', () => {
+      render(<SimpleAccordion />);
+      const h1Element = screen.getByTitle(/accordion/i);
+      expect(h1Element).toBeInTheDocument();
+    });
+  
+const Mockq = () => {
+	return (
+		<BrowserRouter>
+			<ResponsiveDatePickers />
+		</BrowserRouter>
+	);
+};
+
+it('shodduld ', async () => {
+	render(<Mockq />);
+
+	const ollowerDivElement = await screen.findByRole('button');
+	expect(ollowerDivElement).toBeInTheDocument();
+});
+
+it('should fetch and render input element', async () => {
+	render(
+		<BrowserRouter>
+			<SimpleAccordion />
+		</BrowserRouter>
+	);
+
+	const followerDivElement = await screen.findByTestId('test');
+	expect(followerDivElement).toBeInTheDocument();
+});
+
+
+
+
+	it('should be able to type into input', () => {
+		render(
+			<BrowserRouter>
+				{' '}
+				<Sign_up v={''} f={mockFn} />
+			</BrowserRouter>
+		);
+		const inputElement = screen.getByLabelText(/Email Address/i);
+
+		fireEvent.click(inputElement);
+		fireEvent.change(inputElement, { target: { value: 'Fatima@gmail.com' } });
+		expect(inputElement.value).toBe('Fatima@gmail.com');
+    
+    
+    });
