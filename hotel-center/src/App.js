@@ -7,7 +7,8 @@ import account_activation from "../src/components/account_activation/account_act
 import login from "./components/Login/Login";
 import Sign_up from "./components/Sign_up/sign_up";
 import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
-import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
+// import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
+import hotelPage from './components/HotelPage/hotelPage';
 import "./css/Homepage.css";
 import "./css/Verify.css";
 import "./css/Average_rating.css";
@@ -18,7 +19,8 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/hotelcard" component={Hotelcard} />
-          <Route exact path="/hotelpage2" component={Hotelpage2} />
+          {/* <Route exact path="/hotelpage2" component={Hotelpage2} /> */}
+          <Route exact path="/hotelpage/:handle" component={hotelPage} />
           <Route exact path="/verify-email" component={Verify} />
           <Route exact path="/" component={Homepage} />
           <Route exact path="/sign-up" component={Sign_up} />

@@ -30,7 +30,7 @@ import AlarmIcon from "@mui/icons-material/Alarm";
 import CheckIcon from "@mui/icons-material/Check";
 import { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import "../../../css/Hotelpage.css";
+import "../../../css/Hotelpage2.css";
 import { srLatn } from "date-fns/locale";
 import Image1 from "../../../statics/img/room1.jpg";
 import Image2 from "../../../statics/img/room2.jpg";
@@ -42,7 +42,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 import references from "../../../assets/References.json";
-import Roomcard from "../layouts/Roomcard";
+import Roomcard from "./Roomcard";
+import ResponsiveDatePickers from "../../HotelPage/ResponsiveDatePickers";
 
 
 const labels = {
@@ -73,19 +74,18 @@ const Icons = {
 
 export default function Hotelpage() {
   const value = 3.5;
-  const { hotelid } = useParams();
+  // const { hotelid } = useParams();
   const [hotel, setHotel] = useState(null);
   const [facility, setFacility] = useState(null);
-  const [shortFacilities, setShortfacilities] = useState(null);
+  const [roomimg, setRoomimg] = useState(null);
   const [f1, setf1] = useState(null);
   const [f2, setf2] = useState(null);
   const [rooms, setRooms] = useState(null);
 
   useEffect(() => {
     // console.log(cookies.get("Authorization"));
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const hotelid = urlParams.get("id");
+    const queryString = window.location.toString();
+    const hotelid = queryString.slice(-1);
     axios
       .get(makeURL(references.url_one_hotel + hotelid + "/"), {
         headers: {
@@ -104,9 +104,8 @@ export default function Hotelpage() {
   }, []);
 
   useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const hotelid = urlParams.get("id");
+    const queryString = window.location.toString();
+    const hotelid = queryString.slice(-1);
     axios
       .get(makeURL(references.url_hotelrooms + hotelid + "/"), {
         headers: {
@@ -123,32 +122,31 @@ export default function Hotelpage() {
       });
   }, []);
 
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const hotelid = urlParams.get("id");
-    axios
-      .get(makeURL(references.url_hotelrooms + hotelid + "/" + "images/"), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((response) => {
-        console.log("images response:" , response.data);
-        // console.log("rooms response:" , response.data.option);
-        // setRooms(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const queryString = window.location.toString();
+  //   const hotelid = queryString.slice(-1);
+  //   axios
+  //     .get(makeURL(references.url_hotelrooms + hotelid + "/" + "images/"), {
+  //       headers: {
+  //         Authorization: cookies.get("Authorization"),
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log("images response:" , response.data);
+  //       // console.log("rooms response:" , response.data.option);
+  //       setRoomimg(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   return hotel ? (
     <div>
       <Helmet bodyAttributes={{ style: "background-color : #f5f5f5" }}></Helmet>
-      <Container maxWidth="lg">
-        <Grid container>
-          <Grid item xs={9}>
+      <div className="container">
+        <div className="row mt-5">
+          <div className="col-lg-8">
             <div className="row">
               <h3 className="mb-3">Facilities of the room</h3>
               <div className="col">
@@ -237,16 +235,16 @@ export default function Hotelpage() {
                 type={r.type}
                 roomfacilities={r.room_facilities}
                 />
-              ))
+              )) 
             ) : null}
             <div className="">
               <hr className="mb-0 mt-0 hr-text"></hr>
             </div>
 
-            <div className="row">
-              <h3 className="mb-3 mt-3">Hotel rules</h3>
+            <div className="row mt-3 mb-3">
+              <h3 className="mb-3 mt-3 ms-1">Hotel rules</h3>
               <div
-                className="mb-3 me-2 card rule-card"
+                className="mb-3 ms-3 me-2 card rule-card"
                 style={{ width: "15rem" }}
               >
                 <div className="card-body">
@@ -433,10 +431,12 @@ export default function Hotelpage() {
                 </div>
               </div> */}
             </div>
-          </Grid>
-          <Grid item xs={3}></Grid>
-        </Grid>
-      </Container>
+          </div>
+          <div className="col-lg-4">
+            <ResponsiveDatePickers/>
+          </div>
+        </div>
+      </div>
     </div>
   ) : (
     <Box

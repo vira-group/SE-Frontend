@@ -12,7 +12,9 @@ export default function Filter() {
       <div className="mt-5">
         <div className="card">
           <div className="card-body">
-            <h6 className="card-title">Star Ranking</h6>
+            <h7 className="card-title" title="stars">
+              Star Ranking
+            </h7>
             <div className="rating-start" style={{ textAlign: "center" }}>
               <Rating
                 name="simple-controlled"
@@ -274,6 +276,9 @@ export default function Filter() {
             </div>
           </div>
         </div>
+        <button className="btn btn-primary hotel-room w-100 mt-1">
+          Search
+        </button>
       </div>
     </div>
   );

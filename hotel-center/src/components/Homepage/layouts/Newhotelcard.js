@@ -29,7 +29,7 @@ export default function Newhotelcard(props) {
                 <h5 className="card-title">
                   <a
                     className="link hotel-links"
-                    href={"/hotelpage2?id=" + props.id}
+                    href={"/hotelpage/" + props.id}
                   >
                     {props.name}
                   </a>
