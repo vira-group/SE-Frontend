@@ -9,41 +9,41 @@ import { useHistory, useParams } from "react-router-dom";
 import Filter from "../Homepage/layouts/Filter";
 import { Grid, Button, Container } from "@mui/material";
 
-export default function Homepagecontent() {
+export default function Homepagecontent(props) {
   const { hotelid } = useParams();
-  const [hotel, setHotel] = useState(null);
+  // const [hotel, setHotel] = useState(props.hotels);
   const header = {
     header: {
       Authorization: cookies,
     },
   };
-  useEffect(() => {
-    // console.log(cookies.get("Authorization"));
-    axios
-      .get(makeURL(references.url_allhotels), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((response) => {
-        setHotel(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  // useEffect(() => {
+  //   // console.log(cookies.get("Authorization"));
+  //   axios
+  //     .get(makeURL(references.url_allhotels), {
+  //       headers: {
+  //         Authorization: cookies.get("Authorization"),
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setHotel(response.data);
+  //       // console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
 
-    // console.log(")))))))))) ");
-  }, []);
+  //   // console.log(")))))))))) ");
+  // }, []);
 
-  return hotel ? (
+  return props.hotels ? (
     <div className="container">
       <div className="row">
         <div className="col-lg-3">
           <Filter />
         </div>
         <div className="col-lg-9">
-          {hotel.map((h) => (
+          {props.hotels.map((h) => (
             <Newhotelcard
               address={h.address}
               description={h.description}

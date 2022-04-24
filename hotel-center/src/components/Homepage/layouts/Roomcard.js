@@ -70,81 +70,40 @@ export default function Roomcard(props) {
                     </div>
                     <div className="row modal-body">
                       <div className="col-md-7">
-                        {/* <img src={Image} className="modal-images"></img> */}
-                        <div
-                          id="thumbnail-preview-indicators"
-                          class="carousel slide"
-                          data-ride="carousel"
-                        >
-                          <ol class="carousel-indicators">
-                            {roomimg
-                              ? roomimg.map((rimg) => (
-                                  <li
-                                    data-target="#thumbnail-preview-indicators"
-                                    data-slide-to="0"
-                                    class="active"
-                                  >
-                                    <div class="thumbnail">
-                                      <img
-                                        class="img-responsive w-100"
-                                        src={rimg}
-                                      ></img>
-                                    </div>
-                                  </li>
-                                ))
-                              : null}
-
-                            {/* <li
-                              data-target="#thumbnail-preview-indicators"
-                              data-slide-to="1"
-                            >
-                              <div class="thumbnail">
+                        <div className="row">
+                          {roomimg ? (
+                            <div class="row">
+                              <div className="col mb-3">
                                 <img
-                                  class="img-responsive w-100"
-                                  src={Image2}
+                                  class="img-responsive w-100" style={{borderRadius: '5px'}}
+                                  src={
+                                    "http://127.0.0.1:8000" + roomimg[0].image
+                                  }
                                 ></img>
                               </div>
-                            </li>
-                            <li
-                              data-target="#thumbnail-preview-indicators"
-                              data-slide-to="2"
-                            >
-                              <div class="thumbnail">
-                                <img
-                                  class="img-responsive w-100"
-                                  src={Image3}
-                                ></img>
-                              </div>
-                            </li> */}
-                          </ol>
-                          <div class="carousel-inner">
-                            <div class="item slides active">
-                              <div class="slide-1"></div>
                             </div>
-                            <div class="item slides">
-                              <div class="slide-2"></div>
+                          ) : null}
+                          <div className="row">
+                        {roomimg ? (
+                            <div className="col-6 ">
+                              <img
+                                class="img-responsive w-100" style={{borderRadius: '5px'}}
+                                src={"http://127.0.0.1:8000" + roomimg[1].image}
+                              ></img>
                             </div>
-                            <div class="item slides">
-                              <div class="slide-3"></div>
+                          ) : null}
+                          {roomimg ? (
+                            <div className="col-6 ">
+                              <img
+                                class="img-responsive w-100" style={{borderRadius: '5px'}}
+                                src={"http://127.0.0.1:8000" + roomimg[2].image}
+                              ></img>
                             </div>
-                          </div>
-                          <a
-                            class="left carousel-control"
-                            href="#thumbnail-preview-indicators"
-                            role="button"
-                            data-slide="prev"
-                          >
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                          </a>
-                          <a
-                            class="right carousel-control"
-                            href="#thumbnail-preview-indicators"
-                            role="button"
-                            data-slide="next"
-                          >
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                          </a>
+                          ) : null}
                         </div>
+                        </div>
+
+                        
                       </div>
                       <div className="col-md-5">
                         <div className="row">Single classic room</div>

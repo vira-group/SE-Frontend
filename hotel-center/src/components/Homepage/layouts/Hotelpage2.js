@@ -36,7 +36,7 @@ import Image1 from "../../../statics/img/room1.jpg";
 import Image2 from "../../../statics/img/room2.jpg";
 import Image3 from "../../../statics/img/room3.jpg";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import LocalBarIcon from '@mui/icons-material/LocalBar';
+import LocalBarIcon from "@mui/icons-material/LocalBar";
 import StarIcon from "@mui/icons-material/Star";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -44,7 +44,6 @@ import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 import references from "../../../assets/References.json";
 import Roomcard from "./Roomcard";
 import ResponsiveDatePickers from "../../HotelPage/ResponsiveDatePickers";
-
 
 const labels = {
   0.5: "Useless",
@@ -69,7 +68,7 @@ const Icons = {
   Television: <TvRoundedIcon />,
   Gym: <FitnessCenterRoundedIcon />,
   Restaurant: <RestaurantMenuRoundedIcon />,
-  Bar: <LocalBarIcon/>
+  Bar: <LocalBarIcon />,
 };
 
 export default function Hotelpage() {
@@ -93,6 +92,7 @@ export default function Hotelpage() {
         },
       })
       .then((response) => {
+        console.log('this request is for hotel facilities:', response.data)
         setHotel(response.data);
         setFacility(response.data.facilities);
         setf1(response.data.facilities.slice(0, 4));
@@ -113,7 +113,7 @@ export default function Hotelpage() {
         },
       })
       .then((response) => {
-        console.log("rooms response:" , response.data);
+        console.log("rooms response:", response.data);
         // console.log("rooms response:" , response.data.option);
         setRooms(response.data);
       })
@@ -146,6 +146,9 @@ export default function Hotelpage() {
       <Helmet bodyAttributes={{ style: "background-color : #f5f5f5" }}></Helmet>
       <div className="container">
         <div className="row mt-5">
+          <div className="col-lg-4">
+            <ResponsiveDatePickers />
+          </div>
           <div className="col-lg-8">
             <div className="row">
               <h3 className="mb-3">Facilities of the room</h3>
@@ -226,17 +229,17 @@ export default function Hotelpage() {
               <hr className="mb-0 mt-0 hr-text"></hr>
             </div>
             <h3 className="mb-3 mt-3">Available rooms</h3>
-            {rooms ? (
-              rooms.map((r) => (
-                <Roomcard
-                option={r.option}
-                price={r.price}
-                sleeps={r.sleeps}
-                type={r.type}
-                roomfacilities={r.room_facilities}
-                />
-              )) 
-            ) : null}
+            {rooms
+              ? rooms.map((r) => (
+                  <Roomcard
+                    option={r.option}
+                    price={r.price}
+                    sleeps={r.sleeps}
+                    type={r.type}
+                    roomfacilities={r.room_facilities}
+                  />
+                ))
+              : null}
             <div className="">
               <hr className="mb-0 mt-0 hr-text"></hr>
             </div>
@@ -431,9 +434,6 @@ export default function Hotelpage() {
                 </div>
               </div> */}
             </div>
-          </div>
-          <div className="col-lg-4">
-            <ResponsiveDatePickers/>
           </div>
         </div>
       </div>

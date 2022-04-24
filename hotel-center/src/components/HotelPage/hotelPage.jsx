@@ -10,7 +10,7 @@ import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
 import * as React from 'react';
 import Helmet from 'react-helmet';
 // import '../../css/hotelPage.css';
-import '../../css/Hotelpage.css';
+import '../../css/hotelPage.css';
 
 import ResponsiveDatePickers from './ResponsiveDatePickers';
 import SimpleAccordion from './accordion';

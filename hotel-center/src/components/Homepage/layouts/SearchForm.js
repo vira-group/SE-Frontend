@@ -11,6 +11,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import references from "../../../assets/References.json";
+import axios from "axios";
+import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -39,9 +42,9 @@ function SearchForm(props) {
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
   const [destination, setDestination] = useState(null);
-  const [anchor, setAnchor] = React.useState(null);
-  const [numberOfAdults, setNumberOfAdults] = React.useState(1);
-  const [numberOfChildren, setNumberOfChildren] = React.useState(0);
+  const [anchor, setAnchor] = useState(null);
+  const [numberOfAdults, setNumberOfAdults] = useState(1);
+  const [numberOfChildren, setNumberOfChildren] = useState(0);
 
   // useEffect(() => {
   //   console.log(checkinDate);
@@ -54,6 +57,22 @@ function SearchForm(props) {
 
   const handleClose = () => {
     setAnchor(null);
+  };
+
+  const handleSearch = () => {
+    var url = makeURL(references.url_allhotels) + destination.city;
+    axios
+      .get(url, {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((response) => {
+        props.setHotels(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleChangeNumber = (actionType, guestType) => {
@@ -166,7 +185,11 @@ function SearchForm(props) {
           placeholder="0 adults - 0 children"
         />
         <div className="col-12 col-lg-1 px-1">
-          <button type="button" className="btn btn-primary search-button">
+          <button
+            type="button"
+            className="btn btn-primary search-button"
+            onClick={handleSearch}
+          >
             <span>
               <SearchIcon />
             </span>
