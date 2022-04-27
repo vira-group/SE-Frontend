@@ -8,15 +8,10 @@ class reservation extends Component {
     render() { 
         return ( <div>
                 <div className="containter">
-                    <
+                    
                 </div>
 
         </div> );
     }
 }
- <div>
-
-
- </div>
-e               <div className="containter">
-<</div>xport default reservation;
+export default reservation;
