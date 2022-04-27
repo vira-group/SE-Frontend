@@ -11,6 +11,7 @@ import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
 import hotelPage from './components/HotelPage/hotelPage';
 import Navbar from "./components/Homepage/layouts/Navbar";
 import Footer from "./components/Homepage/layouts/Footer";
+import Profile from "./components/Profile/Editprofile";
 import "./css/Homepage.css";
 import "./css/Verify.css";
 import "./css/Average_rating.css";
@@ -22,7 +23,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/hotelcard" component={Hotelcard} />
-          {/* <Route exact path="/hotelpage2" component={Hotelpage2} /> */}
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/hotelpage/:handle" component={hotelPage} />
           <Route exact path="/verify-email" component={Verify} />
           <Route exact path="/" component={Homepage} />

@@ -18,7 +18,9 @@ export default function Roomcard(props) {
   const [roomimg, setRoomimg] = useState(null);
   const [rf2, setrf2] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => {}, []);
+
+  const handleClick = () => {
     const queryString = window.location.toString();
     const hotelid = queryString.slice(-1);
     axios
@@ -35,7 +37,10 @@ export default function Roomcard(props) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+  const handleRuleclick = () => {
+    console.log("this is for booking rules");
+  };
 
   return (
     <div className="card hotelpage-card mt-3 mb-3">
@@ -66,44 +71,45 @@ export default function Roomcard(props) {
                         className="btn-close"
                         data-bs-dismiss="modal"
                         aria-label="Close"
+                        onClick={handleClick}
                       ></button>
                     </div>
                     <div className="row modal-body">
                       <div className="col-md-7">
                         <div className="row">
-                          {roomimg ? (
-                            <div class="row">
-                              <div className="col mb-3">
-                                <img
-                                  class="img-responsive w-100" style={{borderRadius: '5px'}}
-                                  src={
-                                    "http://127.0.0.1:8000" + roomimg[0].image
-                                  }
-                                ></img>
-                              </div>
-                            </div>
-                          ) : null}
                           <div className="row">
-                        {roomimg ? (
-                            <div className="col-6 ">
-                              <img
-                                class="img-responsive w-100" style={{borderRadius: '5px'}}
-                                src={"http://127.0.0.1:8000" + roomimg[1].image}
-                              ></img>
-                            </div>
-                          ) : null}
-                          {roomimg ? (
-                            <div className="col-6 ">
-                              <img
-                                class="img-responsive w-100" style={{borderRadius: '5px'}}
-                                src={"http://127.0.0.1:8000" + roomimg[2].image}
-                              ></img>
-                            </div>
-                          ) : null}
+                            {roomimg
+                              ? roomimg
+                                  .slice(0, roomimg.length / 2)
+                                  .map((rimg) => (
+                                    <div className="col-6 mb-4">
+                                      <img
+                                        class="img-responsive w-100"
+                                        style={{ borderRadius: "5px" }}
+                                        src={
+                                          "http://127.0.0.1:8000" + rimg.image
+                                        }
+                                      ></img>
+                                    </div>
+                                  ))
+                              : null}
+                            {roomimg
+                              ? roomimg
+                                  .slice(roomimg.length / 2)
+                                  .map((rimg) => (
+                                    <div className="col-6 ">
+                                      <img
+                                        class="img-responsive w-100"
+                                        style={{ borderRadius: "5px" }}
+                                        src={
+                                          "http://127.0.0.1:8000" + rimg.image
+                                        }
+                                      ></img>
+                                    </div>
+                                  ))
+                              : null}
+                          </div>
                         </div>
-                        </div>
-
-                        
                       </div>
                       <div className="col-md-5">
                         <div className="row">Single classic room</div>
@@ -360,6 +366,7 @@ export default function Roomcard(props) {
                   data-bs-target="#collapseThree"
                   aria-expanded="false"
                   aria-controls="collapseThree"
+                  onClick={handleRuleclick}
                 >
                   <small>Booking cancellation rules</small>
                 </button>
@@ -384,10 +391,10 @@ export default function Roomcard(props) {
 
           <div className="col-md-4 text-center">
             <div className="row">
-              <div className="col">
+              <div className="col-lg-8">
                 <p className="mb-3 rate">Price per night: </p>
               </div>
-              <div className="col">
+              <div className="col-lg-4">
                 <p className="mb-1 rate">${props.price} </p>
               </div>
             </div>
