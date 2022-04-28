@@ -150,7 +150,12 @@ class Hotelpage extends React.Component {
 							</div>
 						</div>
 					</div>
+  
 
+
+
+
+  
 					<div id="carouselExampleIndicators" className="carousel slide d-md-none" data-bs-ride="carousel">
 						<div className="carousel-indicators">
 							<button
@@ -212,12 +217,7 @@ class Hotelpage extends React.Component {
 					<br />
 
 					<div className="row">
-						{/* <div className="div" style={{ display: 'flex', top: '0' }}> */}
-						{/* <div className="col-12 col-md-4 " style={{ marginBottom: 10 }}>
-							<div style={{ position: 'sticky', top: '11vh' }}>
-								<ResponsiveDatePickers />
-							</div>
-						</div> */}
+					 
 
 						<div className="col">
 							<SimpleAccordion data={this.state} />

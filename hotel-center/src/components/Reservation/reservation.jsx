@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import '../../css/Hotelpage.css';
 class reservation extends Component {
 	constructor(props) {
 		super(props);
@@ -9,31 +10,42 @@ class reservation extends Component {
 		return (
 			<div>
 				<div className="containter">
-					{/* <div className="col-md-4">
-                    hello</div>
-                    <div className="col-md-8">
-                    <div className="row-md-2">dfsd</div>
-                    <div className="row-md-2">dfsd</div>
-                    <div className="row-md-2">dfsd</div>
-                    <div className="row-md-2">dfsd</div>
-                    goog</div> */}
-
-					<div className="row">
+					<div className="row justify-content-center ">
 						<div className="col-12 col-md-4">
-							<div className="row-12 row-md-4">
-								<div className="card">
-									<div className="card-body">
-										<div className="d-flex justify-content-center">
-											<div className="row">hello</div>
-										</div>
-									</div>
-								</div>
+							<div className="card">
+								<div className="card-body">
+									<h5 className="card-title">Card title</h5>
+									<p className="card-text">
+										Some quick example text to build on the card title and make up the bulk of the
+										card's content.
+									</p>
+								
+									<button className="btn btn-primary" type="button" 
+									// disabled
+									>
+										{/* <span
+											className="spinner-border spinner-border-sm"
+											role="status"
+											aria-hidden="true"
+										/> */}
+										Loading
+									</button>
+</div>
 							</div>
-							<div className="row-12 row-md-8">ww</div>
 						</div>
 						<div className="col-12 col-md-8">
-							<div className="row-12 row-md-8">efr</div>
-							<div className="row-12 row-md-4">rteyr</div>
+							<div className="card">
+								<div className="card-body">
+									<h5 className="card-title">Card title</h5>
+									<p className="card-text">
+										Some quick example text to build on the card title and make up the bulk of the
+										card's content.
+									</p>
+									
+
+
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
