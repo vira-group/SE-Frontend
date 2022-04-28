@@ -14,6 +14,7 @@ import Footer from "./components/Homepage/layouts/Footer";
 import "./css/Homepage.css";
 import "./css/Verify.css";
 import "./css/Average_rating.css";
+import reservation from "./components/Reservation/reservation";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/sign-up" component={Sign_up} />
           <Route exact path="/login" component={login} />
+          <Route exact path="/r" component={reservation} />
           <Route
             exact
             path="/auth/activate/:handle/:handle1"
