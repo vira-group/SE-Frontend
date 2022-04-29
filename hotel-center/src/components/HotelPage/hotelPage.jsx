@@ -71,6 +71,10 @@ class Hotelpage extends React.Component {
 							<div className="row-md-12"  title='HotelName'>
 								<h2>{this.state.name}</h2>
 							</div>
+
+
+
+
 							<div className="row ">
 								<div className="col-5 icon2  gx-3 col-sm-1 d-flex" >
 									<FmdGoodIcon />
@@ -92,6 +96,14 @@ class Hotelpage extends React.Component {
 									<span>{this.state.rate}</span>
 								</div>
 							</div>
+
+
+
+
+
+
+
+
 
 							<div className="row">
 								<div className="col-6">
