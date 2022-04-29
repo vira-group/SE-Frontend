@@ -17,9 +17,9 @@ class reservation extends Component {
 							<hr className="ms-3 me-1 hr-text" />
 						</div> */}
 						<div className="col-12 col-md-4">
-							<div className="card-containter " style={{ borderRadius: '50%' }}>
+							<div className="card-containter ">
 								<div className="card-body">
-									<div class="shadow p-3 mb-5 bg-body rounded">
+									<div class="shadow p-3 mb-5 bg-body rounded"  style={{ borderRadius: '50%' , backgroundColor: "red" }}>
 										<div className="row   m-3">
 											<div className="col" style={{ display: 'flex', alignItems: 'left' }}>
 												<div
@@ -166,7 +166,7 @@ class reservation extends Component {
 											type="tel"
 											id="phone"
 											name="phone"
-											placeholder="phone number"
+											placeholder="natioanal code"
 											class="form-control form-control-lg"
 											pattern="[0-9]{10}"
 										/>
@@ -179,6 +179,7 @@ class reservation extends Component {
 											class="form-check-input form-control-huge"
 											type="checkbox"
 											value=""
+
 											id="flexCheckDefault"
 										/>
 										<label class="form-check-label" for="flexCheckDefault">
@@ -199,7 +200,8 @@ class reservation extends Component {
 											Default checkbox
 										</label>
 									</div>
-									<div class="d-grid gap-7 col-5 mx-auto m-3">
+									
+									<div class="gap-7 mx-auto m-3  " style={{}}>
 										<button class="btn btn-primary" type="submit">
 											Button
 										</button>
