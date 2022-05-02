@@ -229,6 +229,8 @@ export default function Hotelpage() {
               <hr className="mb-0 mt-0 hr-text"></hr>
             </div>
             <h3 className="mb-3 mt-3">Available rooms</h3>
+       
+       
             {rooms
               ? rooms.map((r) => (
                   <Roomcard
@@ -240,6 +242,19 @@ export default function Hotelpage() {
                   />
                 ))
               : null}
+
+
+
+
+
+
+
+
+
+
+
+
+              
             <div className="">
               <hr className="mb-0 mt-0 hr-text"></hr>
             </div>
