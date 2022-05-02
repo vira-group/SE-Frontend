@@ -16,9 +16,14 @@ import "./css/Verify.css";
 import "./css/Average_rating.css";
 import reservation from "./components/Reservation/reservation";
 
+
+
+
 function App() {
   return (
     <div className="App">
+
+
       <Navbar/>
       <BrowserRouter>
         <Switch>
