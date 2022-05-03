@@ -14,8 +14,6 @@ import SimpleAccordion from './accordion';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import Hotelpage2 from '../Homepage/layouts/Hotelpage2';
 
-
-
 class Hotelpage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -68,15 +66,12 @@ class Hotelpage extends React.Component {
 						<div className="container d-none d-md-block">
 							<br />
 							<br />
-							<div className="row-md-12"  title='HotelName'>
-								<h2>{this.state.name}</h2>
+							<div className="row-md-12" title="HotelName">
+								<h2 style={{ fontFamily: 'ariaHidden', fontWeight: 'bold' }}>{this.state.name}</h2>
 							</div>
 
-
-
-
 							<div className="row ">
-								<div className="col-5 icon2  gx-3 col-sm-1 d-flex" >
+								<div className="col-5 icon2  gx-3 col-sm-1 d-flex">
 									<FmdGoodIcon />
 									{this.state.city},{this.state.state}
 								</div>
@@ -96,14 +91,6 @@ class Hotelpage extends React.Component {
 									<span>{this.state.rate}</span>
 								</div>
 							</div>
-
-
-
-
-
-
-
-
 
 							<div className="row">
 								<div className="col-6">
@@ -162,12 +149,7 @@ class Hotelpage extends React.Component {
 							</div>
 						</div>
 					</div>
-  
 
-
-
-
-  
 					<div id="carouselExampleIndicators" className="carousel slide d-md-none" data-bs-ride="carousel">
 						<div className="carousel-indicators">
 							<button
@@ -193,13 +175,28 @@ class Hotelpage extends React.Component {
 						</div>
 						<div className="carousel-inner">
 							<div className="carousel-item active">
-								<img src={this.state.image4} className="d-block w-100" alt="..." />
+								<img
+									src={this.state.image4}
+									style={{ borderRadius: '50px' }}
+									className="d-block w-100"
+									alt="..."
+								/>
 							</div>
 							<div className="carousel-item">
-								<img src={this.state.image2} className="d-block w-100" alt="..." />
+								<img
+									src={this.state.image2}
+									style={{ borderRadius: '50px' }}
+									className="d-block w-100"
+									alt="..."
+								/>
 							</div>
 							<div className="carousel-item">
-								<img src={this.state.image3} className="d-block w-100" alt="..." />
+								<img
+									src={this.state.image3}
+									style={{ borderRadius: '50px' }}
+									className="d-block w-100"
+									alt="..."
+								/>
 							</div>
 						</div>
 						<button
@@ -229,8 +226,6 @@ class Hotelpage extends React.Component {
 					<br />
 
 					<div className="row">
-					 
-
 						<div className="col">
 							<SimpleAccordion data={this.state} />
 						</div>
