@@ -12,10 +12,15 @@ import hotelPage from "./components/HotelPage/hotelPage";
 import Navbar from "./components/Homepage/layouts/Navbar";
 import Footer from "./components/Homepage/layouts/Footer";
 import Profile from "./components/Profile/Editprofile";
+import IncreaseCredit from "./components/Profile/IncreaseCredit";
+import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
 import "./css/Homepage.css";
 import "./css/Verify.css";
 import "./css/Average_rating.css";
+import "./css/Profile.css";
+import "./css/IncreaseCredit.css";
+import "./css/Favorites.css";
 
 function App() {
   return (
@@ -25,6 +30,12 @@ function App() {
         <Switch>
           <Route exact path="/hotelcard" component={Hotelcard} />
           <Route exact path="/profile" component={Profile} />
+          <Route
+            exact
+            path="/profile/IncreaseCredit"
+            component={IncreaseCredit}
+          />
+          <Route exact path="/profile/favorites" component={Favorites} />
           <Route exact path="/myhotels" component={Myhotels} />
           <Route exact path="/hotelpage/:handle" component={hotelPage} />
           <Route exact path="/verify-email" component={Verify} />
