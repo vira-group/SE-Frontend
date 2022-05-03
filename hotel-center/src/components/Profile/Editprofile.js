@@ -54,6 +54,7 @@ export default function Profile() {
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
   const [state, setState] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   let date = birthdate; // value from your state
   let formattedDate = moment(date).format("YYYY-MM-DD");
   const formik = useFormik({
@@ -86,16 +87,16 @@ export default function Profile() {
         // console.log('response of profile: ',res.data);
         setState(res.data);
         formik.setValues({
-          firstname: res.data.firstName || '',
-          lastname: res.data.lastName || '',
-          nationalcode: res.data.national_code || '',
-          email: res.data.email || '',
-          phone: res.data.phone_number || '',
-          aboutme: res.data.description || '',
+          firstname: res.data.firstName || "",
+          lastname: res.data.lastName || "",
+          nationalcode: res.data.national_code || "",
+          email: res.data.email || "",
+          phone: res.data.phone_number || "",
+          aboutme: res.data.description || "",
           telephone: "",
         });
-        setBirthdate(res.data.birthday || '');
-        setGenValue(res.data.gender || '')
+        setBirthdate(res.data.birthday || "");
+        setGenValue(res.data.gender || "");
       });
   }, []);
 
@@ -111,6 +112,9 @@ export default function Profile() {
     console.log("filled:", filled);
 
     if (filled) {
+      console.log(selectedImage);
+      let form_data = new FormData();
+      form_data.append("pic", selectedImage, selectedImage.name);
       axios
         .put(
           makeURL(references.url_edit_profile),
@@ -148,7 +152,8 @@ export default function Profile() {
       formik.values.email,
       formik.values.phone,
       formik.values.aboutme,
-      formik.values.telephone
+      formik.values.telephone,
+      selectedImage
     );
   };
 
@@ -170,19 +175,15 @@ export default function Profile() {
                 </div>
               </div>
               <div className="col-lg-8" style={{ marginTop: "52px" }}>
-                <p className="">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-pencil me-2"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                  </svg>
-                  Edit profile photo
-                </p>
+                <input
+                  type="file"
+                  name="myImage"
+                  accept="image/*"
+                  onChange={(event) => {
+                    console.log(event.target.files[0]);
+                    setSelectedImage(event.target.files[0]);
+                  }}
+                />
               </div>
             </div>
 

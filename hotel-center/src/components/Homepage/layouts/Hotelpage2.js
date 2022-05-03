@@ -237,6 +237,8 @@ export default function Hotelpage() {
                     sleeps={r.sleeps}
                     type={r.type}
                     roomfacilities={r.room_facilities}
+                    size={r.size}
+                    id={r.id}
                   />
                 ))
               : null}

@@ -8,7 +8,7 @@ import login from "./components/Login/Login";
 import Sign_up from "./components/Sign_up/sign_up";
 import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
 // import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
-import hotelPage from './components/HotelPage/hotelPage';
+import hotelPage from "./components/HotelPage/hotelPage";
 import Navbar from "./components/Homepage/layouts/Navbar";
 import Footer from "./components/Homepage/layouts/Footer";
 import Profile from "./components/Profile/Editprofile";
@@ -20,7 +20,7 @@ import "./css/Average_rating.css";
 function App() {
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
       <BrowserRouter>
         <Switch>
           <Route exact path="/hotelcard" component={Hotelcard} />
@@ -38,7 +38,7 @@ function App() {
           />
         </Switch>
       </BrowserRouter>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

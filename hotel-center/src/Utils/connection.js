@@ -11,11 +11,11 @@ export const AccountActivation = async (uid1, token1) => {
 			token: token1
 		})
 		.then((response) => {
-			console.log(response);
+			// console.log(response);
 			message = true;
 		})
 		.catch((error) => {
-			console.log(error);
+			// console.log(error);
 			message = false;
 		});
 	return message;
@@ -30,19 +30,19 @@ export const Sign_up_connection = async (email, password) => {
 			re_password: password
 		})
 		.then((response) => {
-			console.log(response);
+			// console.log(response);
 			message = true;
 			window.location.replace('/verify-email');
 		})
 		.catch((error) => {
-			console.log(error);
+			// console.log(error);
 			message = false;
 		});
 	return message;
 };
 
 export const login_connection = async (email, password) => {
-	console.log(password, email)
+	// console.log(password, email)
 	let message = '';
 	if (cookies.get('Authorization') != undefined) {
 		message = 'Already logged in';
@@ -54,9 +54,9 @@ export const login_connection = async (email, password) => {
 				password: password
 			})
 			.then((response) => {
-				console.log(response.data.auth_token);
+				// console.log(response.data.auth_token);
 				set_cookie(response.data.auth_token);
-				console.log(response);
+				// console.log(response);
 				message = true;
 				window.location.replace("/")
 			})
@@ -64,7 +64,7 @@ export const login_connection = async (email, password) => {
 				if (error.response.status == 400) {
 					window.alert("wrong email or password");
 				}
-				console.log(error);
+				// console.log(error);
 				message = false;
 			});
 	}
@@ -74,7 +74,7 @@ export const login_connection = async (email, password) => {
 
 export const me = async () => {
 	let message;
-	console.log(cookies.get('Authorization'));
+	// console.log(cookies.get('Authorization'));
 	await axios
 		.get(makeURL(references.url_me),{
 
@@ -84,22 +84,22 @@ export const me = async () => {
 
 		})
 		.then((response) => {
-			console.log(response);
+			// console.log(response);
 			message = true;
 		})
 		.catch((error) => {
-			console.log(error);
+			// console.log(error);
 			message = false;
 		});
 
-	console.log(")))))))))) "+ message)
+	// console.log(")))))))))) "+ message)
 	return message;
 };
 
 
 export const logout = async () => {
 	let message = '';
-	console.log(cookies.get('Authorization'));
+	// console.log(cookies.get('Authorization'));
 	await axios
 		.post(makeURL(references.url_logout),{},{
 
@@ -109,7 +109,7 @@ export const logout = async () => {
 
 		})
 		.then((response) => {
-			console.log(response);
+			// console.log(response);
 			cookies.remove('Authorization');
 			message = true;
 			
@@ -118,7 +118,7 @@ export const logout = async () => {
 			 window.location.reload()
 		})
 		.catch((error) => {
-			console.log(error);
+			// console.log(error);
 			message = false;
 		});
 
@@ -137,12 +137,12 @@ export const one_hotel_connection = async (id) => {
 
 })
 .then((response) => {
-	console.log(response);
+	// console.log(response);
 	message=response.data;
 	
 })
 .catch((error) => {
-	console.log(error);
+	// console.log(error);
 	message = false;
 });
 
@@ -162,12 +162,12 @@ export const one_hotel_image = async (id) => {
 
 })
 .then((response) => {
-	console.log(response);
+	// console.log(response);
 	message=response.data;
 	
 })
 .catch((error) => {
-	console.log(error);
+	// console.log(error);
 	message = false;
 });
 
