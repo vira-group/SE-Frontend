@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
+import Sidebar from "./Sidebar";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -159,11 +160,12 @@ export default function Profile() {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-3"></div>
-        <div className="col-9">
-          <h5 className="ms-4 mt-5">Account</h5>
-          <div className="container edit-profile-form mt-3">
+      <div className="row pt-5">
+        <div className="col-lg-3">
+          <Sidebar />
+        </div>
+        <div className="col-lg-9">
+          <div className="container edit-profile-form border">
             <div className="row">
               <div className="col-lg-3">
                 <div className="profile-img">
