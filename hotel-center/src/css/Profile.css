@@ -21,3 +21,26 @@ hr.dashed {
   height: 36px;
   /* border-style: ; */
 }
+
+/* .myhotels-card.card{
+  width: 18rem;
+} */
+
+.myhotel-btn{
+  text-align: center;
+}
+
+.edit-hotel.btn-primary {
+  background-color: #cd9a2d !important;
+  border-color: #cd9a2d !important;
+  box-shadow: none;
+  color: black;
+}
+
+.edit-hotel.btn-primary:hover{
+  box-shadow: none;
+}
+
+.edit-pro-btn{
+  text-align: end;
+}
