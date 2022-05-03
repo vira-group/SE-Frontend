@@ -1,16 +1,101 @@
 import React, { Component } from 'react';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { Formik, Field, Form } from 'formik';
 import '../../css/Hotelpage.css';
 import Carousel from './carousel';
 import '../../css/Reserve.css';
 
 import '../../css/Hotelpage.css';
+
+import { TextField, Grid } from '@mui/material';
+// import axios from 'axios';
+// import { cookies, makeURL, set_cookie } from "../../Utils/common";
+// import references from "../../assets/References.json";
+// import '../../css/Profile.css';
+// import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+const validationSchema = yup.object({
+	firstname: yup
+		.string()
+		.max(20, 'Must be 20 characters or less')
+		.min(2, 'Must be at least 2 characters')
+		.required('Required!'),
+	lastname: yup
+		.string()
+		.max(20, 'Must be 20 characters or less')
+		.min(2, 'Must be at least 2 characters')
+		.required('Required!'),
+	nationalcode: yup.string().required('Required!'),
+
+	phone: yup.number().required('Required!')
+});
+
+const formik = useFormik({
+	initialValues: {
+		firstname: '',
+		lastname: '',
+		nationalcode: '',
+
+		phone: ''
+	},
+	validationSchema: validationSchema
+});
+
 class reservation extends Component {
 	constructor(props) {
 		super(props);
 	}
 	state = {};
+
+	// genhandleChange = (event, newValue) => {
+	// 	setGenValue(newValue);
+	// };
+
+	handleClick = () => {
+		let filled =
+			!Boolean(formik.errors.firstname) &&
+			!Boolean(formik.errors.lastname) &&
+			!Boolean(formik.errors.nationalcode) &&
+			!Boolean(formik.errors.phone) &&
+			// genValue.length != 0;
+		console.log('filled:', filled);
+
+		// if (filled) {
+		// 	axios
+		// 		.post(
+		// 			makeURL(references.url_edit_profile),
+		// 			{
+		// 				firstName: formik.values.firstname,
+		// 				lastName: formik.values.lastname,
+
+		// 				phone_number: formik.values.phone,
+		// 				national_code: formik.values.nationalcode
+		// 			},
+		// 			{
+		// 				headers: {
+		// 					Authorization: cookies.get('Authorization')
+		// 				}
+		// 			}
+		// 		)
+		// 		.then((response) => {
+		// 			console.log('status code: ', response.status);
+		// 		})
+		// 		.catch((error) => {
+		// 			console.log('error: ', error);
+		// 		});
+		// }
+
+		// console.log(
+		// 	formik.values.firstname,
+		// 	formik.values.lastname,
+		// 	formik.values.nationalcode,
+		// 	genValue,
+		// 	formik.values.phone
+		// );
+	};
+
 	render() {
 		return (
 			<div>
@@ -299,39 +384,65 @@ class reservation extends Component {
 							<div className="row">
 								<form className="row g-3 needs-validation mx-3" noValidate>
 									<div class="col-md-4 ">
-										<input
-											type="text"
-											class="form-control form-control-lg"
-											placeholder="First name"
-											aria-label="First name"
+										<Field
+											required
+											placeholder="Eric"
+											id="firstname"
+											size="small"
+											label="First name"
+											InputLabelProps={{ shrink: true }}
+											value={formik.values.firstname}
+											onChange={formik.handleChange}
+											onBlur={formik.handleBlur}
+											error={formik.touched.firstname && Boolean(formik.errors.firstname)}
+											helperText={formik.touched.firstname && formik.errors.firstname}
 										/>
 									</div>
 									<div class="col-md-4 ">
-										<input
-											type="text"
-											class="form-control form-control-lg"
-											placeholder="Last name"
-											aria-label="Last name"
+										<TextField
+											required
+											placeholder="Hodson"
+											id="lastname"
+											size="small"
+											label="Last name"
+											InputLabelProps={{ shrink: true }}
+											value={formik.values.lastname}
+											onChange={formik.handleChange}
+											onBlur={formik.handleBlur}
+											error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+											helperText={formik.touched.lastname && formik.errors.lastname}
 										/>
 									</div>
 									<div class="col-md-4 ">
-										<input
-											type="tel"
+										<TextField
+											required
+											fullWidth
+											placeholder="09912141869"
 											id="phone"
-											name="phone"
-											placeholder="phone number"
-											class="form-control form-control-lg"
-											pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}"
+											size="small"
+											label="Phone number"
+											InputLabelProps={{ shrink: true }}
+											value={formik.values.phone}
+											onChange={formik.handleChange}
+											onBlur={formik.handleBlur}
+											error={formik.touched.phone && Boolean(formik.errors.phone)}
+											helperText={formik.touched.phone && formik.errors.phone}
 										/>
 									</div>
 									<div class="col-md-4 ">
-										<input
-											type="tel"
-											id="phone"
-											name="phone"
-											placeholder="natioanal code"
-											class="form-control form-control-lg"
-											pattern="[0-9]{10}"
+										<TextField
+											required
+											fullWidth
+											placeholder="0023839813"
+											id="nationalcode"
+											size="small"
+											label="National code"
+											InputLabelProps={{ shrink: true }}
+											value={formik.values.nationalcode}
+											onChange={formik.handleChange}
+											onBlur={formik.handleBlur}
+											error={formik.touched.nationalcode && Boolean(formik.errors.nationalcode)}
+											helperText={formik.touched.nationalcode && formik.errors.nationalcode}
 										/>
 									</div>
 									<div className="">
@@ -379,7 +490,7 @@ class reservation extends Component {
 										</label>
 										<br />
 										<lable class="form-check-label" for="flexCheckDefault">
-											I have read the site rules and the internal hotel rules and I approve it. 
+											I have read the site rules and the internal hotel rules and I approve it.
 										</lable>
 									</div>
 									<div class="gap-7 mx-auto m-3  " /> <br />
