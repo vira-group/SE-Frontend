@@ -121,7 +121,7 @@ export default function Profile() {
           makeURL(references.url_edit_profile),
           {
             email: formik.values.email,
-            avatar: null,
+            avatar: selectedImage,
             firstName: formik.values.firstname,
             lastName: formik.values.lastname,
             birthday: formattedDate,

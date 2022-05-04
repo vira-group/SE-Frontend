@@ -92,7 +92,7 @@ export default function Hotelpage() {
         },
       })
       .then((response) => {
-        console.log('this request is for hotel facilities:', response.data)
+        console.log("this request is for hotel facilities:", response.data);
         setHotel(response.data);
         setFacility(response.data.facilities);
         setf1(response.data.facilities.slice(0, 4));
@@ -114,32 +114,13 @@ export default function Hotelpage() {
       })
       .then((response) => {
         console.log("rooms response:", response.data);
-        // console.log("rooms response:" , response.data.option);
+        // console.log("rooms response:", response.data.option);
         setRooms(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
-  // useEffect(() => {
-  //   const queryString = window.location.toString();
-  //   const hotelid = queryString.slice(-1);
-  //   axios
-  //     .get(makeURL(references.url_hotelrooms + hotelid + "/" + "images/"), {
-  //       headers: {
-  //         Authorization: cookies.get("Authorization"),
-  //       },
-  //     })
-  //     .then((response) => {
-  //       console.log("images response:" , response.data);
-  //       // console.log("rooms response:" , response.data.option);
-  //       setRoomimg(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   return hotel ? (
     <div>
