@@ -113,23 +113,21 @@ export default function Profile() {
     console.log("filled:", filled);
 
     if (filled) {
-      console.log(selectedImage);
+      // console.log(selectedImage);
       let form_data = new FormData();
-      form_data.append("pic", selectedImage, selectedImage.name);
+      form_data.append('avatar', selectedImage, selectedImage.name);
+      form_data.append('email',formik.values.email);
+      form_data.append('firstName',formik.values.firstname);
+      form_data.append('lastName',formik.values.lastname);
+      form_data.append('birthday',formattedDate);
+      form_data.append('gender',genValue);
+      form_data.append('phone_number',formik.values.phone);
+      form_data.append('national_code',formik.values.nationalcode);
+      form_data.append('description',formik.values.aboutme);
       axios
         .put(
           makeURL(references.url_edit_profile),
-          {
-            email: formik.values.email,
-            avatar: selectedImage,
-            firstName: formik.values.firstname,
-            lastName: formik.values.lastname,
-            birthday: formattedDate,
-            gender: genValue,
-            phone_number: formik.values.phone,
-            national_code: formik.values.nationalcode,
-            description: formik.values.aboutme,
-          },
+          form_data,
           {
             headers: {
               Authorization: cookies.get("Authorization"),
