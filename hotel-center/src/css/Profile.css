@@ -23,12 +23,24 @@ hr.dashed {
   /* border-style: ; */
 }
 
-/* .myhotels-card.card{
-  width: 18rem;
-} */
+.myhotels.card-footer {
+  background-color: transparent !important;
+  border-top: none !important;
+  display: flex;
+  justify-content: space-between;
+}
 
-.myhotel-btn {
-  text-align: center;
+.view-hotel-button {
+  background-color: #cd9a2d;
+  border: none !important;
+}
+
+.view-hotel-button:focus,
+.view-hotel-button:active,
+.view-hotel-button:hover {
+  background-color: #be8f2a;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .edit-hotel.btn-primary {
@@ -41,9 +53,22 @@ hr.dashed {
 .edit-hotel.btn-primary:hover {
   box-shadow: none;
 }
-
-.edit-pro-btn {
+.edit-profile{
   text-align: end;
+}
+.edit-hotel.btn {
+  color: white;
+  background-color: #cd9a2d;
+  border: none !important;
+  
+}
+
+.edit-hotel.btn:focus,
+.edit-hotel.btn:active,
+.edit-hotel.btn:hover{
+  background-color: #be8f2a;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /***********************Sidebar*************************/

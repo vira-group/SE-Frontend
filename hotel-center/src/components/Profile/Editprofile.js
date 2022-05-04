@@ -18,6 +18,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
 import Sidebar from "./Sidebar";
+import image1 from "../../statics/img/Landmark/h1.jpg"
 
 const datePickerTheme = createTheme({
   palette: {
@@ -96,6 +97,7 @@ export default function Profile() {
           aboutme: res.data.description || "",
           telephone: "",
         });
+        setSelectedImage(res.data.avatar || "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp")
         setBirthdate(res.data.birthday || "");
         setGenValue(res.data.gender || "");
       });
@@ -168,7 +170,7 @@ export default function Profile() {
               <div className="col-lg-3">
                 <div className="profile-img">
                   <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    src={"http://127.0.0.1:8000" + selectedImage}
                     className="rounded-circle"
                     alt="Avatar"
                   />
@@ -500,9 +502,9 @@ export default function Profile() {
             <div className="row mt-2 d-fit-content">
               <div className="col-4"></div>
               <div className="col-4"></div>
-              <div className="col-4 edit-pro-btn">
+              <div className="col-4 edit-profile">
                 <button
-                  className="btn btn-primary edit-hotel"
+                  className="btn edit-hotel"
                   onClick={handleClick}
                 >
                   Edit profile

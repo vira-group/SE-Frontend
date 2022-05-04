@@ -8,19 +8,21 @@ import { useHistory, useParams } from "react-router-dom";
 import "../../css/Profile.css";
 
 export default function Myhotelscard(props) {
+  const [isFavorite, setIsFavorite] = useState(props.isFavorite);
+
   return (
-    <div className="card mb-3 me-4 myhotels-card">
-      <img
-        src={props.image}
-        className="card-img-top myhotel-img mt-3"
-        alt="..."
-      ></img>
-      <div className="card-body">
-        <h5 className="card-title">{props.name}</h5>
-        <p className="card-text">{props.description.slice(0, 150) + " ..."}</p>
-        <a href="#" className="btn btn-primary">
-          Go somewhere
-        </a>
+    <div class="col">
+      <div class="card h-100">
+        <img src={props.img} class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{props.title}</h5>
+          <p class="card-text">{props.description}</p>
+        </div>
+        <div className="card-footer myhotels">
+          <button type="button" className="btn btn-primary view-hotel-button">
+            View details
+          </button>
+        </div>
       </div>
     </div>
   );

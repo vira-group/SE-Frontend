@@ -18,7 +18,7 @@ export default function Sidebar() {
           <p className="mb-0">Edit Profile</p>
         </Link>
         <hr className="mb-2" />
-        <Link to="#" class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2">
+        <Link to="/myhotels" class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2">
           <BedIcon className="icon-style" />
           <p className="mb-0">My Hotels</p>
         </Link>

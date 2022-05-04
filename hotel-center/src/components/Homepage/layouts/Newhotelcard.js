@@ -63,7 +63,7 @@ export default function Newhotelcard(props) {
                 </div>
               </div>
               <a href="#" className="btn btn-primary hotel-card-btn hoverable">
-                show prices
+                Show prices
               </a>
             </div>
             <div className="d-md-none row">
@@ -73,7 +73,7 @@ export default function Newhotelcard(props) {
                   href="#"
                   className="btn btn-primary hotel-card-btn hoverable w-100 text-align-center"
                 >
-                  show prices
+                  Show prices
                 </a>
               </div>
               <div className="col-2 col-sm-4"></div>
