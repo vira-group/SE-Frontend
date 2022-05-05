@@ -173,3 +173,38 @@ export const one_hotel_image = async (id) => {
 
 return message;
 };
+
+
+export const one_room_reserve = async ( start_day,end_day ,firstname ,lastname,roomspace,price_per_day ,
+national_code,phone_number) => {
+	let message = '';
+	console.log(cookies.get('Authorization'));
+	await axios
+		.post(makeURL(references.url_reserveroom ),{
+				start_day : start_day ,
+				end_day : end_day ,
+				firstname : firstname ,
+				lastname : lastname ,
+				roomspace : roomspace ,
+				price_per_day :price_per_day ,
+				national_code :national_code ,
+				phone_number :phone_number
+		},{
+				headers:{
+					'Authorization': cookies.get('Authorization')
+				}
+
+		}).then((response) => {
+			console.log(response);
+			message=response.data;
+			
+		})
+		.catch((error) => {
+			console.log(error);
+			message = false;
+		});
+		
+		return message;
+};
+
+

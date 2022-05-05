@@ -1,3 +1,14 @@
+// {
+//     "start_day": "2022-05-11",
+//     "end_day": "2022-05-11",
+//     "firstname" : "fn",
+//     "lastname" : "ln",
+//     "roomspace": 1,
+//     "price_per_day": 18,
+//     "national_code" : "0000",
+//     "phone_number" : "2222222"
+// }
+
 import React, { Component } from 'react';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,85 +26,170 @@ import { TextField, Grid } from '@mui/material';
 // import '../../css/Profile.css';
 // import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { one_room_reserve } from '../../Utils/connection';
 
-const validationSchema = yup.object({
-	firstname: yup
-		.string()
-		.max(20, 'Must be 20 characters or less')
-		.min(2, 'Must be at least 2 characters')
-		.required('Required!'),
-	lastname: yup
-		.string()
-		.max(20, 'Must be 20 characters or less')
-		.min(2, 'Must be at least 2 characters')
-		.required('Required!'),
-	nationalcode: yup.string().required('Required!'),
+const formvalid2 = ({ error, ...rest }) => {
+	let isValid = false;
 
-	phone: yup.number().required('Required!')
-});
+	Object.values(error).forEach((val) => {
+		if (val.length > 0) {
+			isValid = false;
+		} else {
+			isValid = true;
+		}
+	});
 
-const formik = useFormik({
-	initialValues: {
-		firstname: '',
-		lastname: '',
-		nationalcode: '',
+	Object.values(rest).forEach((val) => {
+		if (val === null) {
+			isValid = false;
+		} else {
+			isValid = true;
+		}
+	});
 
-		phone: ''
-	},
-	validationSchema: validationSchema
-});
+	return isValid;
+};
 
 class reservation extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			start_day: '2022-05-16',
+			end_day: '2022-05-17',
+			roomspace: 1,
+			price_per_day: 1,
+
+			emailtxt: '',
+			message: '',
+			fields: {},
+
+			error: {
+				firstname: {
+					u1: '',
+					u2: ''
+				},
+				lastname: {
+					u1: '',
+					u2: ''
+				},
+				phone: {
+					p1: '',
+					p2: '',
+					p3: ''
+				},
+				nationalcode: {
+					p1: '',
+					p2: ''
+				}
+			}
+		};
+
+		this.formValChange = this.formValChange.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
-	state = {};
 
-	// genhandleChange = (event, newValue) => {
-	// 	setGenValue(newValue);
-	// };
+	onSubmit(e) {
+		e.preventDefault();
 
-	handleClick = () => {
-		let filled =
-			!Boolean(formik.errors.firstname) &&
-			!Boolean(formik.errors.lastname) &&
-			!Boolean(formik.errors.nationalcode) &&
-			!Boolean(formik.errors.phone) &&
-			// genValue.length != 0;
-		console.log('filled:', filled);
+		if (formvalid2(this.state)) {
+			let fields = {};
 
-		// if (filled) {
-		// 	axios
-		// 		.post(
-		// 			makeURL(references.url_edit_profile),
-		// 			{
-		// 				firstName: formik.values.firstname,
-		// 				lastName: formik.values.lastname,
+			fields['firstname'] = '';
+			fields['lastname'] = '';
+			fields['phone'] = '';
+			fields['nationalcode'] = '';
+			this.setState({ fields: fields });
+			console.log(
+				'dataaaaaaaaa ',
+				this.state.start_day,
+				this.state.end_day,
+				this.state.fields['firstname'],
+				this.state.fields['lastname'],
+				this.state.roomspace,
+				this.state.price_per_day,
+				this.state.fields['nationalcode'],
+				this.state.fields['phone']
+			);
+			const is_sent = one_room_reserve(
+				this.state.start_day,
+				this.state.end_day,
+				this.state.fields['firstname'],
+				this.state.fields['lastname'],
+				this.state.roomspace,
+				this.state.price_per_day,
+				this.state.fields['nationalcode'],
+				this.state.fields['phone']
+			);
 
-		// 				phone_number: formik.values.phone,
-		// 				national_code: formik.values.nationalcode
-		// 			},
-		// 			{
-		// 				headers: {
-		// 					Authorization: cookies.get('Authorization')
-		// 				}
-		// 			}
-		// 		)
-		// 		.then((response) => {
-		// 			console.log('status code: ', response.status);
-		// 		})
-		// 		.catch((error) => {
-		// 			console.log('error: ', error);
-		// 		});
-		// }
+			if (is_sent) {
+				// window.location.replace('/');
 
-		// console.log(
-		// 	formik.values.firstname,
-		// 	formik.values.lastname,
-		// 	formik.values.nationalcode,
-		// 	genValue,
-		// 	formik.values.phone
-		// );
+				console.log('everything write');
+			}
+		}
+	}
+
+	async componentDidMount() {
+		var splitted = window.location.toString().split('/');
+		await this.setState({ roomspace: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.roomspace);
+		// window.alert(this.state.roomspace);
+	}
+
+	formValChange = (e) => {
+		let fields = this.state.fields;
+		fields[e.target.name] = e.target.value;
+		const { name, value } = e.target;
+		let error = { ...this.state.error };
+
+		switch (name) {
+			case 'firstname':
+				error.firstname.u1 =
+					(typeof value !== 'undefined' && value.length < 3) || value.length > 15
+						? '*Please enter a valid  name'
+						: '';
+
+				error.firstname.u2 = !value ? '*First name must not be empty!' : '';
+				break;
+
+			case 'lastname':
+				error.lastname.u1 =
+					(typeof value !== 'undefined' && value.length < 3) || value.length > 15
+						? '*Please enter a valid last name'
+						: '';
+
+				error.lastname.u2 = !value ? '*Last name must not be empty!' : '';
+				break;
+
+			case 'phone':
+				error.phone.p1 =
+					typeof value !== 'undefined' && !value.match(/^.*(?=.*\d).*$/) ? '*Invalid phone number. ' : '';
+
+				error.phone.p2 = value.length < 11 ? '*Too short for a phone number' : '';
+
+				error.phone.p3 = !value ? '*Password field must not be empty' : '';
+
+				break;
+
+			case 'phone':
+				error.nationalcode.p1 =
+					typeof value !== 'undefined' && (!value.match(/^.*(?=.*\d).*$/) || value.length < 10)
+						? '*Invalid national code. '
+						: '';
+
+				error.nationalcode.p2 = !value ? '*This field must not be empty' : '';
+
+				break;
+
+			default:
+				break;
+		}
+
+		this.setState({
+			fields,
+			error,
+			[name]: value
+		});
 	};
 
 	render() {
@@ -382,68 +478,154 @@ class reservation extends Component {
 								<p>It is enough to enter the information of one of the passengers as a supervisor.</p>
 							</div>
 							<div className="row">
-								<form className="row g-3 needs-validation mx-3" noValidate>
+								<form noValidate onSubmit={this.onSubmit} className="row g-3 needs-validation mx-3">
 									<div class="col-md-4 ">
-										<Field
+										<TextField
 											required
-											placeholder="Eric"
+											fullWidth
 											id="firstname"
-											size="small"
-											label="First name"
-											InputLabelProps={{ shrink: true }}
-											value={formik.values.firstname}
-											onChange={formik.handleChange}
-											onBlur={formik.handleBlur}
-											error={formik.touched.firstname && Boolean(formik.errors.firstname)}
-											helperText={formik.touched.firstname && formik.errors.firstname}
+											label="firstname"
+											name="firstname"
+											autoComplete="text"
+											className={
+												this.state.error.firstname.u1.length > 0 ||
+												this.state.error.firstname.u2.length > 0 ? (
+													'is-invalid form-control'
+												) : (
+													'form-control'
+												)
+											}
+											value={this.state['firstname']}
+											onChange={this.formValChange}
 										/>
+
+										<div>
+											{this.state.error.firstname.u1.length > 0 && (
+												<p className="err">
+													{this.state.error.firstname.u1}
+													<br />
+												</p>
+											)}
+											{this.state.error.firstname.u2.length > 0 && (
+												<p className="err">
+													{this.state.error.firstname.u2}
+													<br />
+												</p>
+											)}
+										</div>
 									</div>
 									<div class="col-md-4 ">
 										<TextField
 											required
-											placeholder="Hodson"
+											fullWidth
 											id="lastname"
-											size="small"
-											label="Last name"
-											InputLabelProps={{ shrink: true }}
-											value={formik.values.lastname}
-											onChange={formik.handleChange}
-											onBlur={formik.handleBlur}
-											error={formik.touched.lastname && Boolean(formik.errors.lastname)}
-											helperText={formik.touched.lastname && formik.errors.lastname}
+											label="lastname"
+											name="lastname"
+											autoComplete="text"
+											className={
+												this.state.error.lastname.u1.length > 0 ||
+												this.state.error.lastname.u2.length > 0 ? (
+													'is-invalid form-control'
+												) : (
+													'form-control'
+												)
+											}
+											value={this.state['lastname']}
+											onChange={this.formValChange}
 										/>
+
+										<div>
+											{this.state.error.lastname.u1.length > 0 && (
+												<p className="err">
+													{this.state.error.lastname.u1}
+													<br />
+												</p>
+											)}
+											{this.state.error.lastname.u2.length > 0 && (
+												<p className="err">
+													{this.state.error.lastname.u2}
+													<br />
+												</p>
+											)}
+										</div>
 									</div>
 									<div class="col-md-4 ">
 										<TextField
 											required
 											fullWidth
-											placeholder="09912141869"
 											id="phone"
-											size="small"
-											label="Phone number"
-											InputLabelProps={{ shrink: true }}
-											value={formik.values.phone}
-											onChange={formik.handleChange}
-											onBlur={formik.handleBlur}
-											error={formik.touched.phone && Boolean(formik.errors.phone)}
-											helperText={formik.touched.phone && formik.errors.phone}
+											label="phone"
+											name="phone"
+											autoComplete="text"
+											className={
+												this.state.error.phone.p1.length > 0 ||
+												this.state.error.phone.p3.length > 0 ||
+												this.state.error.phone.p2.length > 0 ? (
+													'is-invalid form-control'
+												) : (
+													'form-control'
+												)
+											}
+											value={this.state['phone']}
+											onChange={this.formValChange}
 										/>
+
+										<div>
+											{this.state.error.phone.p1.length > 0 && (
+												<p className="err">
+													{this.state.error.phone.p2}
+													<br />
+												</p>
+											)}
+
+											{this.state.error.phone.p3.length > 0 && (
+												<p className="err">
+													{this.state.error.phone.p3}
+													<br />
+												</p>
+											)}
+											{this.state.error.phone.p2.length > 0 && (
+												<p className="err">
+													{this.state.error.phone.p2}
+													<br />
+												</p>
+											)}
+										</div>
 									</div>
 									<div class="col-md-4 ">
 										<TextField
 											required
 											fullWidth
-											placeholder="0023839813"
 											id="nationalcode"
-											size="small"
-											label="National code"
-											InputLabelProps={{ shrink: true }}
-											value={formik.values.nationalcode}
-											onChange={formik.handleChange}
-											onBlur={formik.handleBlur}
-											error={formik.touched.nationalcode && Boolean(formik.errors.nationalcode)}
-											helperText={formik.touched.nationalcode && formik.errors.nationalcode}
+											label="nationalcode"
+											name="nationalcode"
+											autoComplete="text"
+											className={
+												this.state.error.nationalcode.p1.length > 0 ||
+												this.state.error.nationalcode.p2.length > 0 ? (
+													'is-invalid form-control'
+												) : (
+													'form-control'
+												)
+											}
+											value={this.state['nationalcode']}
+											onChange={this.formValChange}
 										/>
+
+										<div>
+											{this.state.error.nationalcode.p1.length > 0 && (
+												<p className="err">
+													{this.state.error.nationalcode.p1}
+													<br />
+												</p>
+											)}
+											{this.state.error.nationalcode.p2.length > 0 && (
+												<p className="err">
+													{this.state.error.nationalcode.p2}
+													<br />
+												</p>
+											)}
+										</div>
 									</div>
 									<div className="">
 										<hr className="hr-text" />
@@ -497,6 +679,7 @@ class reservation extends Component {
 									<div class="d-grid   col-5 ms-4" style={{ display: 'flex', alignItems: 'left' }}>
 										<button
 											type="button"
+											onClick={this.handleSubmit}
 											class="btn btn-dark btn-lg"
 											data-bs-toggle="modal"
 											data-bs-target="#exampleModal"
@@ -541,6 +724,7 @@ class reservation extends Component {
 														Close
 													</button>
 													<button
+														onClick={this.handleSubmit}
 														type="submit"
 														class="btn btn-dark"
 														style={{ backgroundColor: '#cd9a2d' }}

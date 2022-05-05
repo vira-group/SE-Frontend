@@ -34,7 +34,7 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/sign-up" component={Sign_up} />
           <Route exact path="/login" component={login} />
-          <Route exact path="/r" component={reservation} />
+          <Route exact path="/reserve/:id" component={reservation} />
           <Route
             exact
             path="/auth/activate/:handle/:handle1"

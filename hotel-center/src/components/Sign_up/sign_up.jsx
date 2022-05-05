@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -94,38 +95,6 @@ class Sign_up extends React.Component {
 		}
 	}
 
-	// handleSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	this.setState({ message: '' });
-
-	// 	// this.setState({ toast: true });
-
-	// 	var formData = new FormData();
-	// 	formData.append('email', this.state.fields['email']);
-	// 	formData.append('password', this.state.fields['password']);
-	// 	formData.append('password2', this.state.fields['password2']);
-
-	// 	var config = {
-	// 		method: 'post',
-	// 		url: '',
-	// 		// headers: {
-	// 		//   'Authorization': 'Token '+ localStorage.getItem('token'),
-
-	// 		// },
-	// 		data: formData
-	// 	};
-
-	// 	axios(config)
-	// 		.then(function(response) {
-	// 			console.log(JSON.stringify(response.data));
-	// 			console.log('email:' + this.state.fields['email']);
-	// 			console.log('password:' + this.state.fields['password']);
-	// 			console.log('password2:' + this.state.fields['password2']);
-	// 		})
-	// 		.catch(function(error) {
-	// 			console.log(error);
-	// 		});
-	// };
 
 	formValChange = (e) => {
 		let fields = this.state.fields;
