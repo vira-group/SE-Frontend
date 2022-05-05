@@ -3,7 +3,7 @@
 //     "end_day": "2022-05-11",
 //     "firstname" : "fn",
 //     "lastname" : "ln",
-//     "roomspace": 1,
+//     "room": 1,
 //     "price_per_day": 18,
 //     "national_code" : "0000",
 //     "phone_number" : "2222222"
@@ -56,7 +56,7 @@ class reservation extends Component {
 		this.state = {
 			start_day: '2022-05-16',
 			end_day: '2022-05-17',
-			roomspace: 1,
+			room: 1,
 			price_per_day: 1,
 
 			emailtxt: '',
@@ -105,7 +105,7 @@ class reservation extends Component {
 				this.state.end_day,
 				this.state.fields['firstname'],
 				this.state.fields['lastname'],
-				this.state.roomspace,
+				this.state.room,
 				this.state.price_per_day,
 				this.state.fields['nationalcode'],
 				this.state.fields['phone']
@@ -115,7 +115,7 @@ class reservation extends Component {
 				this.state.end_day,
 				this.state.fields['firstname'],
 				this.state.fields['lastname'],
-				this.state.roomspace,
+				this.state.room,
 				this.state.price_per_day,
 				this.state.fields['nationalcode'],
 				this.state.fields['phone']
@@ -131,9 +131,9 @@ class reservation extends Component {
 
 	async componentDidMount() {
 		var splitted = window.location.toString().split('/');
-		await this.setState({ roomspace: decodeURIComponent(splitted.pop()) });
-		decodeURIComponent(this.state.roomspace);
-		// window.alert(this.state.roomspace);
+		await this.setState({ room: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.room);
+		// window.alert(this.state.room);
 	}
 
 	formValChange = (e) => {

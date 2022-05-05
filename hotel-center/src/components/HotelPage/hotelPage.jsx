@@ -19,10 +19,10 @@ class Hotelpage extends React.Component {
 		super(props);
 	}
 	state = {
-		image1: null,
-		image2: null,
-		image3: null,
-		image4: null,
+		image1: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU",
+		image2: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU",
+		image3: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU",
+		image4: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU",
 		id: 1,
 		name: 'Nobu',
 		header: null,
@@ -52,6 +52,12 @@ class Hotelpage extends React.Component {
 
 		one_hotel_image(this.state.id).then((res) => {
 			this.setState({ image1: res[0].image });
+			console.log(  "1sssssssssssssssssssss    " ,res)
+			console.log(  "2sssssssssssssssssssss    " ,res[0])
+			console.log(  "3sssssssssssssssssssss    " ,res[1])
+			console.log(  "4sssssssssssssssssssss    " ,res[2])
+			console.log(  "5sssssssssssssssssssss    " ,res[3])
+
 			this.setState({ image2: res[1].image });
 			this.setState({ image3: res[2].image });
 			this.setState({ image4: res[3].image });

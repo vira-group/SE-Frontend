@@ -175,7 +175,7 @@ return message;
 };
 
 
-export const one_room_reserve = async ( start_day,end_day ,firstname ,lastname,roomspace,price_per_day ,
+export const one_room_reserve = async ( start_day,end_day ,firstname ,lastname,room,price_per_day ,
 national_code,phone_number) => {
 	let message = '';
 	console.log(cookies.get('Authorization'));
@@ -185,7 +185,7 @@ national_code,phone_number) => {
 				end_day : end_day ,
 				firstname : firstname ,
 				lastname : lastname ,
-				roomspace : roomspace ,
+				room : room ,
 				price_per_day :price_per_day ,
 				national_code :national_code ,
 				phone_number :phone_number
