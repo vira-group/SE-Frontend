@@ -10,7 +10,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
-import "../../../css/Navbar.css";
 
 class Navbar extends Component {
   constructor() {
@@ -84,6 +83,11 @@ class Navbar extends Component {
       anchorEl: null,
       open: Boolean(null),
     });
+  };
+
+  handleGotoProfile = () => {
+    console.log("profile profile profile profile");
+    window.location.href = "http://localhost:3000/profile";
   };
 
   render() {
@@ -226,6 +230,7 @@ class Navbar extends Component {
                           <button
                             type="button"
                             className="btn btn-outline-dark nav-button nav-menu-style"
+                            onClick={this.handleGotoProfile}
                           >
                             Profile
                           </button>
@@ -283,7 +288,12 @@ class Navbar extends Component {
             transformOrigin={{ horizontal: "left", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem style={{ width: "150px" }}>
+            <MenuItem
+              style={{ width: "150px" }}
+              onClick={() => {
+                this.handleGotoProfile();
+              }}
+            >
               <ListItemIcon>
                 <PersonIcon fontSize="small" />
               </ListItemIcon>

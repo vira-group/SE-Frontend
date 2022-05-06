@@ -15,6 +15,8 @@ import Profile from "./components/Profile/Editprofile";
 import IncreaseCredit from "./components/Profile/IncreaseCredit";
 import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
+import Createhotel from "./components/Createhotel/Createhotel";
+import "./css/Navbar.css";
 import "./css/Homepage.css";
 import "./css/Verify.css";
 import "./css/Average_rating.css";
@@ -30,6 +32,7 @@ function App() {
         <Switch>
           <Route exact path="/hotelcard" component={Hotelcard} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/createhotel" component={Createhotel} />
           <Route
             exact
             path="/profile/IncreaseCredit"

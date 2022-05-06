@@ -68,13 +68,18 @@ export default function Roomcard(props) {
                     <small>Adult</small>
                   </span>
                 </div>
-              ) : (
-                <div className="col">
+              ) : (props.sleeps === 2 ?
+                (<div className="col">
                   <PeopleAltIcon />
                   <span className="ms-2 card-text">
                     <small>Double</small>
                   </span>
-                </div>
+                </div>) : (props.sleeps >= 3 ? 
+                (<div className="col">
+                <span className="ms-2 card-text">
+                  <small>{props.sleeps} Sleeps</small>
+                </span>
+              </div>) : null)
               )}
 
               {props.option === "Breakfast" ? (
