@@ -10,7 +10,6 @@
   "url_onehotelImage": "/hotel",
   "url_allhotels": "/hotel/hotels/?search=",
   "url_one_hotel": "/hotel/hotels/",
-  "url_hotelrooms": "/hotel/room/" ,
   "url_hotelrooms": "/hotel/room/",
   "url_reserveroom" : "/hotel/reserve/"
 

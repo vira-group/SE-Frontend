@@ -20,12 +20,17 @@ function ResponsiveDatePickers(props) {
 	const [ numberOfAdults, setNumberOfAdults ] = React.useState(1);
 	const [ numberOfChildren, setNumberOfChildren ] = React.useState(0);
 
-	const handleClick = (event) => {
+	const handleClick = (event) => { 
 		setAnchor(event.currentTarget);
 	};
 
 	const handleClose = () => {
 		setAnchor(null);
+	};
+
+	const buttonClick =() => 
+	{
+		// window.location.href = "/hotelpage/" + {props.id} +  "/" +  {checkinDate} +  "/"  + {checkoutDate} +  "/"  + {numberOfAdults} ;	
 	};
 
 	const handleChangeNumber = (actionType, guestType) => {
@@ -161,7 +166,7 @@ function ResponsiveDatePickers(props) {
 
 					<div className="d-flex justify-content-center">
 						<div className="row w-100">
-							<button className="btn btn-dark">
+							<button  onClick={buttonClick} className="btn btn-dark">
 								check availability
 							</button>
 						</div>
