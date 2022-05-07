@@ -13,16 +13,16 @@ import ResponsiveDatePickers from './ResponsiveDatePickers';
 import SimpleAccordion from './accordion';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import Hotelpage2 from '../Homepage/layouts/Hotelpage2';
-
+import reservation from '../Reservation/reservation';
 class Hotelpage extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	state = {
-		image1: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU",
-		image2: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU",
-		image3: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU",
-		image4: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU",
+		image1: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU',
+		image2: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU',
+		image3: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU',
+		image4: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU',
 		id: 1,
 		name: 'Nobu',
 		header: null,
@@ -32,8 +32,18 @@ class Hotelpage extends React.Component {
 		rate: '5.0',
 		phone_numbers: '09123433300',
 		start_date: '2022-04-20',
-		alldate: []
+		alldate: [],
+		button1: '1',
+		
+		check_in : "" ,
+		check_out : "" ,
+		num_of_pssenger : "" 
+
 	};
+
+	// onch() {
+	// 	this.setState({ button1: 'clicked' });
+	// }
 	async componentDidMount() {
 		var splitted = window.location.toString().split('/');
 		await this.setState({ id: decodeURIComponent(splitted.pop()) });
@@ -51,13 +61,13 @@ class Hotelpage extends React.Component {
 		});
 
 		one_hotel_image(this.state.id).then((res) => {
-			this.setState({ image1: res[0].image });
-			console.log(  "1sssssssssssssssssssss    " ,res)
-			console.log(  "2sssssssssssssssssssss    " ,res[0])
-			console.log(  "3sssssssssssssssssssss    " ,res[1])
-			console.log(  "4sssssssssssssssssssss    " ,res[2])
-			console.log(  "5sssssssssssssssssssss    " ,res[3])
+			console.log('1sssssssssssssssssssss    ', res);
+			console.log('2sssssssssssssssssssss    ', res[0]);
+			console.log('3sssssssssssssssssssss    ', res[1]);
+			console.log('4sssssssssssssssssssss    ', res[2]);
+			console.log('5sssssssssssssssssssss    ', res[3]);
 
+			this.setState({ image1: res[0].image });
 			this.setState({ image2: res[1].image });
 			this.setState({ image3: res[2].image });
 			this.setState({ image4: res[3].image });
@@ -159,6 +169,8 @@ class Hotelpage extends React.Component {
 					<div id="carouselExampleIndicators" className="carousel slide d-md-none" data-bs-ride="carousel">
 						<div className="carousel-indicators">
 							<button
+								// onChange={onch}
+								data-testid="button1"
 								type="button"
 								data-bs-target="#carouselExampleIndicators"
 								data-bs-slide-to="0"
@@ -237,8 +249,12 @@ class Hotelpage extends React.Component {
 						</div>
 					</div>
 
-					<Hotelpage2 />
+					<Hotelpage2  checkin = {this.state.check_in} checkout ={this.state.check_out}
+					 locstion= {this.state.state} name= {this.state.name} num_pass = {this.state.num_of_pssenger}  />
 				</div>
+				{/* <reservation   > </reservation> */}
+				{/* <reservation data={this.state}> </reservation> */}
+				{/* <reservation  > </reservation> */}
 			</div>
 		);
 	}

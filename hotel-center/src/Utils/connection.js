@@ -42,11 +42,11 @@ export const Sign_up_connection = async (email, password) => {
 };
 
 export const login_connection = async (email, password) => {
-	console.log(password, email)
+	console.log(password, email);
 	let message = '';
 	if (cookies.get('Authorization') != undefined) {
 		message = 'Already logged in';
-		window.alert("Already logged in");
+		window.alert('Already logged in');
 	} else {
 		await axios
 			.post(makeURL(references.url_login), {
@@ -58,11 +58,11 @@ export const login_connection = async (email, password) => {
 				set_cookie(response.data.auth_token);
 				console.log(response);
 				message = true;
-				window.location.replace("/")
+				window.location.replace('/');
 			})
 			.catch((error) => {
 				if (error.response.status == 400) {
-					window.alert("wrong email or password");
+					window.alert('wrong email or password');
 				}
 				console.log(error);
 				message = false;
@@ -76,12 +76,10 @@ export const me = async () => {
 	let message;
 	console.log(cookies.get('Authorization'));
 	await axios
-		.get(makeURL(references.url_me),{
-
-				headers:{
-					'Authorization': cookies.get('Authorization')
-				}
-
+		.get(makeURL(references.url_me), {
+			headers: {
+				Authorization: cookies.get('Authorization')
+			}
 		})
 		.then((response) => {
 			console.log(response);
@@ -92,36 +90,35 @@ export const me = async () => {
 			message = false;
 		});
 
-	console.log(")))))))))) "+ message)
+	console.log(')))))))))) ' + message);
 	return message;
 };
-
 
 export const logout = async () => {
 	let message = '';
 	console.log(cookies.get('Authorization'));
 	await axios
-		.post(makeURL(references.url_logout),{},{
-
-				headers:{
-					'Authorization': cookies.get('Authorization')
+		.post(
+			makeURL(references.url_logout),
+			{},
+			{
+				headers: {
+					Authorization: cookies.get('Authorization')
 				}
-
-		})
+			}
+		)
 		.then((response) => {
 			console.log(response);
 			cookies.remove('Authorization');
 			message = true;
-			
 		})
-		.then(()=>{
-			 window.location.reload()
+		.then(() => {
+			window.location.reload();
 		})
 		.catch((error) => {
 			console.log(error);
 			message = false;
 		});
-
 
 	return message;
 };
@@ -129,82 +126,125 @@ export const logout = async () => {
 export const one_hotel_connection = async (id) => {
 	let message = '';
 	await axios
-	.get(makeURL(references.url_onehotel+"/"+id+"/"),{},{
-
-		headers:{
-			'Authorization': cookies.get('Authorization')
-		}
-
-})
-.then((response) => {
-	console.log(response);
-	message=response.data;
-	
-})
-.catch((error) => {
-	console.log(error);
-	message = false;
-});
-
-return message;
-};
-
-
-
-export const one_hotel_image = async (id) => {
-	let message = '';
-	await axios
-	.get(makeURL(references.url_onehotelImage+"/"+id+"/" + "images/"),{},{
-
-		headers:{
-			'Authorization': cookies.get('Authorization')
-		}
-
-})
-.then((response) => {
-	console.log(response);
-	message=response.data;
-	
-})
-.catch((error) => {
-	console.log(error);
-	message = false;
-});
-
-return message;
-};
-
-
-export const one_room_reserve = async ( start_day,end_day ,firstname ,lastname,room,price_per_day ,
-national_code,phone_number) => {
-	let message = '';
-	console.log(cookies.get('Authorization'));
-	await axios
-		.post(makeURL(references.url_reserveroom ),{
-				start_day : start_day ,
-				end_day : end_day ,
-				firstname : firstname ,
-				lastname : lastname ,
-				room : room ,
-				price_per_day :price_per_day ,
-				national_code :national_code ,
-				phone_number :phone_number
-		},{
-				headers:{
-					'Authorization': cookies.get('Authorization')
+		.get(
+			makeURL(references.url_onehotel + '/' + id + '/'),
+			{},
+			{
+				headers: {
+					Authorization: cookies.get('Authorization')
 				}
-
-		}).then((response) => {
+			}
+		)
+		.then((response) => {
 			console.log(response);
-			message=response.data;
-			
+			message = response.data;
 		})
 		.catch((error) => {
 			console.log(error);
 			message = false;
 		});
-		
-		return message;
+
+	return message;
+};
+
+export const one_hotel_image = async (id) => {
+	let message = '';
+	await axios
+		.get(
+			makeURL(references.url_onehotelImage + '/' + id + '/' + 'images/'),
+			{},
+			{
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			}
+		)
+		.then((response) => {
+			console.log(response);
+			message = response.data;
+		})
+		.catch((error) => {
+			console.log(error);
+			message = false;
+		});
+
+	return message;
 };
 
 
+export const room_image = async (
+
+	axios
+	.get(makeURL(references.url_hotelrooms + this.state.room + '/' + 'images/'), {
+		headers: {
+			Authorization: cookies.get('Authorization')
+		}
+	})
+	.then((response) => {
+		console.log('images response:', response.data);
+		// console.log("rooms response:" , response.data.option);
+
+	})
+	.catch((error) => {
+		console.log(error);
+	})
+
+);
+
+
+
+
+export const one_room_reserve = async (
+	start_day,
+	end_day,
+	firstname,
+	lastname,
+	room,
+	price_per_day,
+	national_code,
+	phone_number
+) => {
+	let message = '';
+	console.log(cookies.get('Authorization'));
+	await axios
+		.post(
+			makeURL(references.url_reserveroom),
+			{
+				start_day: start_day,
+				end_day: end_day,
+				firstname: firstname,
+				lastname: lastname,
+				room: room,
+				price_per_day: price_per_day,
+				national_code: national_code,
+				phone_number: phone_number
+			},
+			{
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			}
+		)
+		.then((response) => {
+			console.log(response);
+			console.log('everything right');
+			message = response.data;
+		})
+		.catch((error) => {
+			if (error.response.status == 400) {
+				window.alert('Please enter valid data.');
+			}
+		
+			if (error.response.status == 403) {
+				window.alert('Your wallet balance is not enough.');
+			}
+			if (error.response.status == 406) {
+				window.alert('This room is reserved before.');
+			}
+			console.log(error);
+			message = false;
+		});
+		
+
+	return message;
+};

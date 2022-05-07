@@ -19,7 +19,7 @@ import '../../css/Reserve.css';
 
 import '../../css/Hotelpage.css';
 
-import { TextField, Grid } from '@mui/material';
+import { TextField, Grid, fabClasses } from '@mui/material';
 // import axios from 'axios';
 // import { cookies, makeURL, set_cookie } from "../../Utils/common";
 // import references from "../../assets/References.json";
@@ -27,6 +27,7 @@ import { TextField, Grid } from '@mui/material';
 // import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { one_room_reserve } from '../../Utils/connection';
+import { display } from '@mui/system';
 
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
@@ -50,19 +51,23 @@ const formvalid2 = ({ error, ...rest }) => {
 	return isValid;
 };
 
-class reservation extends Component {
+class reservation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			start_day: '2022-05-16',
-			end_day: '2022-05-17',
-			room: 1,
-			price_per_day: 1,
+			start_day: '2022-05-18',
+			end_day: '2022-05-19',
+			price_per_day: '1',
+			images: [],
+			name: '',
+			city: '',
+			num_passenger: '10',
 
+			room: 1,
 			emailtxt: '',
 			message: '',
 			fields: {},
-
+			get_price: 1,
 			error: {
 				firstname: {
 					u1: '',
@@ -88,12 +93,19 @@ class reservation extends Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
+	calculatePrice() {
+		// return (this.state.end_day - this.state.start_day + 1) * this.state.price_per_day;
+
+		return 'sdfdfjfsio';
+	}
+
+	async componentDidMount() {
+	}
 	onSubmit(e) {
 		e.preventDefault();
 
 		if (formvalid2(this.state)) {
 			let fields = {};
-
 			fields['firstname'] = '';
 			fields['lastname'] = '';
 			fields['phone'] = '';
@@ -120,20 +132,38 @@ class reservation extends Component {
 				this.state.fields['nationalcode'],
 				this.state.fields['phone']
 			);
-
-			if (is_sent) {
-				// window.location.replace('/');
-
-				console.log('everything write');
-			}
 		}
 	}
+	//<Route exact path="/reserve/:start_day/:end_day/:price_per_day/
+
+	// :images/:name/:city/:num_passenger/:id/" />
 
 	async componentDidMount() {
 		var splitted = window.location.toString().split('/');
 		await this.setState({ room: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.room);
-		// window.alert(this.state.room);
+
+		await this.setState({ city: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.city);
+
+		await this.setState({ num_passenger: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.num_passenger);
+
+		await this.setState({ name: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.name);
+
+		await this.setState({ images: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.images);
+
+		await this.setState({ price_per_day: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.price_per_day);
+
+		await this.setState({ end_day: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.end_day);
+
+		await this.setState({ start_day: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.start_day);
+		// window.alert(this.state.start_day);
 	}
 
 	formValChange = (e) => {
@@ -171,7 +201,7 @@ class reservation extends Component {
 
 				break;
 
-			case 'phone':
+			case 'nationalcode':
 				error.nationalcode.p1 =
 					typeof value !== 'undefined' && (!value.match(/^.*(?=.*\d).*$/) || value.length < 10)
 						? '*Invalid national code. '
@@ -193,8 +223,12 @@ class reservation extends Component {
 	};
 
 	render() {
+		this.state.get_price = this.calculatePrice();
+
 		return (
 			<div>
+				<div>********************* city {this.state.city}</div>
+
 				<div className="containter m-5">
 					<div className="row justify-content-center">
 						<div
@@ -269,6 +303,7 @@ class reservation extends Component {
 								<span className="visually-hidden">Next</span>
 							</button>
 						</div>
+
 						<div className="col-12 col-lg-4">
 							<div className="card-containter ">
 								<div className="card-body">
@@ -292,13 +327,22 @@ class reservation extends Component {
 														<path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z" />
 													</svg>
 
-													<div
-														className="col-sm-6 m-2 "
-														style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}
-													>
-														Check in :
+													<div className="col-sm-6 m-2 ">
+														<span style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}>
+															{' '}
+															Check in :
+														</span>
+														<br />
+														<span
+															style={{
+																justifyContent: 'end',
+																alignItems: 'right',
+																color: 'grey'
+															}}
+														>
+															{this.state.start_day}
+														</span>
 													</div>
-													<div style={{ justifyContent: 'end', color: 'grey' }}> dddfdf</div>
 												</div>
 												<div
 													className="col-sm-6"
@@ -316,13 +360,23 @@ class reservation extends Component {
 														<path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zm5.402 9.746c.625 0 1.184-.484 1.184-1.18 0-.832-.527-1.23-1.16-1.23-.586 0-1.168.387-1.168 1.21 0 .817.543 1.2 1.144 1.2z" />
 														<path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z" />
 													</svg>
-													<div
-														className="col-sm-6 m-2 "
-														style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}
-													>
-														Check out :
+
+													<div className="col-sm-6 m-2 ">
+														<span style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}>
+															{' '}
+															Check in :
+														</span>
+														<br />
+														<span
+															style={{
+																justifyContent: 'end',
+																alignItems: 'right',
+																color: 'grey'
+															}}
+														>
+															{this.state.end_day}
+														</span>
 													</div>
-													<div style={{ justifyContent: 'end', color: 'grey' }}> dddfdf</div>
 												</div>
 											</div>
 											{/* <div className="col-md-6 m-2 ">dskd</div> */}
@@ -352,7 +406,10 @@ class reservation extends Component {
 											>
 												<span className="ms-2"> Number of passengers : </span>
 											</div>
-											<div style={{ justifyContent: 'end', color: 'grey' }}> dddfdf</div>
+											<div style={{ justifyContent: 'end', color: 'grey' }}>
+												{' '}
+												{this.state.num_passenger}
+											</div>
 										</div>
 
 										<div className="">
@@ -386,7 +443,10 @@ class reservation extends Component {
 											>
 												<span className="ms-2">Payment details : </span>
 											</div>
-											<div style={{ justifyContent: 'end', color: 'grey' }}> dddfdf</div>
+											<div style={{ justifyContent: 'end', color: 'grey' }}>
+												{' '}
+												{this.state.get_price}
+											</div>
 										</div>
 										{/* <div className="">
 											<hr className="m-3 hr-text" />
@@ -400,13 +460,14 @@ class reservation extends Component {
 								<br />
 								<br />
 								<div className="row-md-12" title="HotelName">
-									<h2 style={{ fontFamily: 'ariaHidden', fontWeight: 'bold' }}> fdsssssgf</h2>
+									<h2 style={{ fontFamily: 'ariaHidden', fontWeight: 'bold' }}>{this.state.name}</h2>
 								</div>
 
 								<div className="row ">
 									<div className="col-5 icon2  gx-3 col-sm-1 d-flex">
 										<FmdGoodIcon />
-										Fgsfdssdsdddddddddd
+
+										{this.state.city}
 									</div>
 									<br />
 								</div>
@@ -480,17 +541,19 @@ class reservation extends Component {
 							<div className="row">
 								<form noValidate onSubmit={this.onSubmit} className="row g-3 needs-validation mx-3">
 									<div class="col-md-4 ">
-										<TextField
+										<input
 											required
 											fullWidth
 											id="firstname"
 											label="firstname"
 											name="firstname"
+											placeholder="Firstname*"
 											autoComplete="text"
+											aria-describedby="inputGroup-sizing-sm"
 											className={
 												this.state.error.firstname.u1.length > 0 ||
 												this.state.error.firstname.u2.length > 0 ? (
-													'is-invalid form-control'
+													'is-invalid form-control lg'
 												) : (
 													'form-control'
 												)
@@ -499,7 +562,7 @@ class reservation extends Component {
 											onChange={this.formValChange}
 										/>
 
-										<div>
+										<div className="mt-3 ">
 											{this.state.error.firstname.u1.length > 0 && (
 												<p className="err">
 													{this.state.error.firstname.u1}
@@ -515,13 +578,14 @@ class reservation extends Component {
 										</div>
 									</div>
 									<div class="col-md-4 ">
-										<TextField
+										<input
 											required
 											fullWidth
 											id="lastname"
 											label="lastname"
 											name="lastname"
 											autoComplete="text"
+											placeholder="Lastname*"
 											className={
 												this.state.error.lastname.u1.length > 0 ||
 												this.state.error.lastname.u2.length > 0 ? (
@@ -533,8 +597,7 @@ class reservation extends Component {
 											value={this.state['lastname']}
 											onChange={this.formValChange}
 										/>
-
-										<div>
+										<div className="mt-3 ">
 											{this.state.error.lastname.u1.length > 0 && (
 												<p className="err">
 													{this.state.error.lastname.u1}
@@ -550,13 +613,14 @@ class reservation extends Component {
 										</div>
 									</div>
 									<div class="col-md-4 ">
-										<TextField
+										<input
 											required
 											fullWidth
 											id="phone"
 											label="phone"
 											name="phone"
 											autoComplete="text"
+											placeholder="0999-999-9999*"
 											className={
 												this.state.error.phone.p1.length > 0 ||
 												this.state.error.phone.p3.length > 0 ||
@@ -570,7 +634,7 @@ class reservation extends Component {
 											onChange={this.formValChange}
 										/>
 
-										<div>
+										<div className="mt-3 ">
 											{this.state.error.phone.p1.length > 0 && (
 												<p className="err">
 													{this.state.error.phone.p2}
@@ -593,12 +657,13 @@ class reservation extends Component {
 										</div>
 									</div>
 									<div class="col-md-4 ">
-										<TextField
+										<input
 											required
 											fullWidth
 											id="nationalcode"
 											label="nationalcode"
 											name="nationalcode"
+											placeholder="National code*"
 											autoComplete="text"
 											className={
 												this.state.error.nationalcode.p1.length > 0 ||
@@ -612,7 +677,7 @@ class reservation extends Component {
 											onChange={this.formValChange}
 										/>
 
-										<div>
+										<div className="mt-3 ">
 											{this.state.error.nationalcode.p1.length > 0 && (
 												<p className="err">
 													{this.state.error.nationalcode.p1}
@@ -684,7 +749,7 @@ class reservation extends Component {
 											data-bs-toggle="modal"
 											data-bs-target="#exampleModal"
 										>
-											Button
+											Reserve
 										</button>
 									</div>
 									<div
