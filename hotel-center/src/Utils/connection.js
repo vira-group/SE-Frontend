@@ -172,27 +172,29 @@ export const one_hotel_image = async (id) => {
 };
 
 
-export const room_image = async (
-
+export const room_image = async (id)=>{
+	let mes = '';
 	axios
-	.get(makeURL(references.url_hotelrooms + this.state.room + '/' + 'images/'), {
+	.get(makeURL(references.url_hotelrooms + id + '/' + 'images/'), {
 		headers: {
 			Authorization: cookies.get('Authorization')
 		}
 	})
 	.then((response) => {
-		console.log('images response:', response.data);
-		// console.log("rooms response:" , response.data.option);
-
+		console.log('room reserve img:', response.data);
+		mes = response.data;
+		console.log( "new messss" ,mes) ;
+		return mes ;
 	})
 	.catch((error) => {
 		console.log(error);
+		mes = false ;
 	})
+	console.log("ffff");
+	console.log(mes);
+	return  mes;
 
-);
-
-
-
+};
 
 export const one_room_reserve = async (
 	start_day,
@@ -243,7 +245,7 @@ export const one_room_reserve = async (
 			}
 			console.log(error);
 			message = false;
-		});
+   		});
 		
 
 	return message;
