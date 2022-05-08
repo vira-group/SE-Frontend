@@ -64,13 +64,11 @@ export default function Roomcard(props) {
 		console.log('button clicked', s);
 
 		window.location.href =
-			'http://localhost:3000/reserve/start_day/end_day/' +
+			'http://localhost:3000/reserve/' +
 			props.price +
 			'/' +
-			roomimg +
-			'/' +
 			props.name +
-			'/num_passenger/' +
+			'/' +
 			props.city +
 			'/' +
 			props.id ;

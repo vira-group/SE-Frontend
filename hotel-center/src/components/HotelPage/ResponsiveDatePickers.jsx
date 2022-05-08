@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 // import '../../css/hotelPage.css';
 
-
 import Popover from '@mui/material/Popover';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -19,26 +18,17 @@ function ResponsiveDatePickers(props) {
 	const [ anchor, setAnchor ] = React.useState(null);
 	const [ numberOfAdults, setNumberOfAdults ] = React.useState(1);
 	const [ numberOfChildren, setNumberOfChildren ] = React.useState(0);
+	// console.log('eeeeeee', checkinDate);
 
-	const handleClick = (event) => { 
+	const handleClick = (event) => {
 		setAnchor(event.currentTarget);
 	};
 
 	const handleClose = () => {
 		setAnchor(null);
 	};
-
-	const buttonClick =() => 
-	{
-		// window.location.href = "/hotelpage/" + {props.id} +  "/" +  {checkinDate} +  "/"  + {checkoutDate} +  "/"  + {numberOfAdults} ;	
-	};
-
-
-	useEffect(() => {
-		localStorage.setItem('i1', JSON.stringify(checkinDate));  
-		localStorage.setItem('i2', JSON.stringify(checkoutDate));  
-		localStorage.setItem('i3', JSON.stringify(numberOfChildren+numberOfAdults));  
-	}, []);
+	
+	
 
 	const handleChangeNumber = (actionType, guestType) => {
 		actionType === 'dec'
@@ -48,10 +38,15 @@ function ResponsiveDatePickers(props) {
 			: guestType === 'adults'
 				? setNumberOfAdults(numberOfAdults + 1)
 				: setNumberOfChildren(numberOfChildren + 1);
-	};
+
+				localStorage.setItem('i3', JSON.stringify(numberOfAdults+numberOfChildren+1));
+
+			};
 
 	const open = Boolean(anchor);
 	const id = open ? 'popover' : undefined;
+
+	// console.log("eeeeeee" ,checkinDate);
 
 	return (
 		<div className="card  card1 ">
@@ -66,9 +61,11 @@ function ResponsiveDatePickers(props) {
 										maxDate={checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null}
 										label="Check in"
 										value={checkinDate}
-										style={{borderRadius: '5px'}}
+										style={{ borderRadius: '5px' }}
 										onChange={(newValue) => {
 											setCheckinDate(newValue);
+											localStorage.setItem('i1', JSON.stringify(checkinDate));
+
 										}}
 										renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
 									/>
@@ -81,8 +78,11 @@ function ResponsiveDatePickers(props) {
 										minDate={checkinDate ? new Date(checkinDate.getTime() + oneDay) : null}
 										label="Check out"
 										value={checkoutDate}
+										
 										onChange={(newValue) => {
 											setCheckoutDate(newValue);
+											localStorage.setItem('i2', JSON.stringify(checkoutDate));
+	
 										}}
 										renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
 									/>
@@ -173,7 +173,8 @@ function ResponsiveDatePickers(props) {
 
 					<div className="d-flex justify-content-center">
 						<div className="row w-100">
-							<button  onClick={buttonClick} className="btn btn-dark">
+							<button className="btn btn-dark">
+								{' '}
 								check availability
 							</button>
 						</div>

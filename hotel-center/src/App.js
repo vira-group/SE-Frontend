@@ -33,7 +33,7 @@ function App() {
 
 					<Route
 						exact
-						path="/reserve/:start_day/:end_day/:price_per_day/:images/:name/:num_passenger/:city/:id"
+						path="/reserve/:price_per_day/:name/:city/:id"
 						component={reservation}
 					/>
 
