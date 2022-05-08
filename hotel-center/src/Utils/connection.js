@@ -237,10 +237,10 @@ export const one_room_reserve = async (
 				window.alert('Please enter valid data.');
 			}
 		
-			if (error.response.status == 403) {
+			if (error.response.status == 406) {
 				window.alert('Your wallet balance is not enough.');
 			}
-			if (error.response.status == 406) {
+			if (error.response.status == 403) {
 				window.alert('This room is reserved before.');
 			}
 			console.log(error);

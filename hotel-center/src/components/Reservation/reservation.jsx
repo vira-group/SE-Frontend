@@ -37,7 +37,7 @@ class reservation extends React.Component {
 		super(props);
 		this.state = {
 			start_day: '2022-05-18',
-			end_day: '2022-05-19',
+			end_day: '2022-05-23',
 			price_per_day: '1',
 			images: [],
 			name: '',
@@ -93,8 +93,9 @@ class reservation extends React.Component {
 			this.setState({ fields: fields });
 			console.log(
 				'dataaaaaaaaa ',
-				this.state.start_day,
-				this.state.end_day,
+				JSON.parse(localStorage.getItem('i1')).split('T')[0] ,
+				JSON.parse(localStorage.getItem('i2')).split('T')[0] ,
+				
 				this.state.fields['firstname'],
 				this.state.fields['lastname'],
 				this.state.room,
@@ -103,8 +104,8 @@ class reservation extends React.Component {
 				this.state.fields['phone']
 			);
 			const is_sent = one_room_reserve(
-				this.state.start_day,
-				this.state.end_day,
+				JSON.parse(localStorage.getItem('i1')).split('T')[0] ,
+				JSON.parse(localStorage.getItem('i2')).split('T')[0],
 				this.state.fields['firstname'],
 				this.state.fields['lastname'],
 				this.state.room,
