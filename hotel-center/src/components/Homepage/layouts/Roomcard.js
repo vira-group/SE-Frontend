@@ -23,6 +23,8 @@ export default function Roomcard(props) {
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
 		const roomid = props.id;
+
+
 		//<Route exact path="/reserve/:start_day/:end_day/:price_per_day/:images/:name/:city/:num_passenger/:id/" component={reservation} />
 
 		axios
@@ -35,6 +37,7 @@ export default function Roomcard(props) {
 				console.log('images response:', response.data);
 				// console.log("rooms response:" , response.data.option);
 				setRoomimg(response.data);
+				localStorage.setItem('items', JSON.stringify(response.data));
 			})
 			.catch((error) => {
 				console.log(error);

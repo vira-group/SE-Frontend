@@ -33,6 +33,13 @@ function ResponsiveDatePickers(props) {
 		// window.location.href = "/hotelpage/" + {props.id} +  "/" +  {checkinDate} +  "/"  + {checkoutDate} +  "/"  + {numberOfAdults} ;	
 	};
 
+
+	useEffect(() => {
+		localStorage.setItem('i1', JSON.stringify(checkinDate));  
+		localStorage.setItem('i2', JSON.stringify(checkoutDate));  
+		localStorage.setItem('i3', JSON.stringify(numberOfChildren+numberOfAdults));  
+	}, []);
+
 	const handleChangeNumber = (actionType, guestType) => {
 		actionType === 'dec'
 			? guestType === 'adults'

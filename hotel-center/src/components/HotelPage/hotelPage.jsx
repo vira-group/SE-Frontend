@@ -13,16 +13,18 @@ import ResponsiveDatePickers from './ResponsiveDatePickers';
 import SimpleAccordion from './accordion';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import Hotelpage2 from '../Homepage/layouts/Hotelpage2';
-import reservation from '../Reservation/reservation';
+
+
+
 class Hotelpage extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	state = {
-		image1: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU',
-		image2: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU',
-		image3: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU',
-		image4: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQz1mnVYQayrgtr59QJCa55zIbiflMT_HOQ&usqp=CAU',
+		image1: null,
+		image2: null,
+		image3: null,
+		image4: null,
 		id: 1,
 		name: 'Nobu',
 		header: null,
@@ -32,18 +34,8 @@ class Hotelpage extends React.Component {
 		rate: '5.0',
 		phone_numbers: '09123433300',
 		start_date: '2022-04-20',
-		alldate: [],
-		button1: '1',
-		
-		check_in : "" ,
-		check_out : "" ,
-		num_of_pssenger : "" 
-
+		alldate: []
 	};
-
-	// onch() {
-	// 	this.setState({ button1: 'clicked' });
-	// }
 	async componentDidMount() {
 		var splitted = window.location.toString().split('/');
 		await this.setState({ id: decodeURIComponent(splitted.pop()) });
@@ -61,12 +53,6 @@ class Hotelpage extends React.Component {
 		});
 
 		one_hotel_image(this.state.id).then((res) => {
-			console.log('1sssssssssssssssssssss    ', res);
-			console.log('2sssssssssssssssssssss    ', res[0]);
-			console.log('3sssssssssssssssssssss    ', res[1]);
-			console.log('4sssssssssssssssssssss    ', res[2]);
-			console.log('5sssssssssssssssssssss    ', res[3]);
-
 			this.setState({ image1: res[0].image });
 			this.setState({ image2: res[1].image });
 			this.setState({ image3: res[2].image });
@@ -82,12 +68,11 @@ class Hotelpage extends React.Component {
 						<div className="container d-none d-md-block">
 							<br />
 							<br />
-							<div className="row-md-12" title="HotelName">
-								<h2 style={{ fontFamily: 'ariaHidden', fontWeight: 'bold' }}>{this.state.name}</h2>
+							<div className="row-md-12"  title='HotelName'>
+								<h2>{this.state.name}</h2>
 							</div>
-
 							<div className="row ">
-								<div className="col-5 icon2  gx-3 col-sm-1 d-flex">
+								<div className="col-5 icon2  gx-3 col-sm-1 d-flex" >
 									<FmdGoodIcon />
 									{this.state.city},{this.state.state}
 								</div>
@@ -169,8 +154,6 @@ class Hotelpage extends React.Component {
 					<div id="carouselExampleIndicators" className="carousel slide d-md-none" data-bs-ride="carousel">
 						<div className="carousel-indicators">
 							<button
-								// onChange={onch}
-								data-testid="button1"
 								type="button"
 								data-bs-target="#carouselExampleIndicators"
 								data-bs-slide-to="0"
@@ -193,28 +176,13 @@ class Hotelpage extends React.Component {
 						</div>
 						<div className="carousel-inner">
 							<div className="carousel-item active">
-								<img
-									src={this.state.image4}
-									style={{ borderRadius: '50px' }}
-									className="d-block w-100"
-									alt="..."
-								/>
+								<img src={this.state.image4} className="d-block w-100" alt="..." />
 							</div>
 							<div className="carousel-item">
-								<img
-									src={this.state.image2}
-									style={{ borderRadius: '50px' }}
-									className="d-block w-100"
-									alt="..."
-								/>
+								<img src={this.state.image2} className="d-block w-100" alt="..." />
 							</div>
 							<div className="carousel-item">
-								<img
-									src={this.state.image3}
-									style={{ borderRadius: '50px' }}
-									className="d-block w-100"
-									alt="..."
-								/>
+								<img src={this.state.image3} className="d-block w-100" alt="..." />
 							</div>
 						</div>
 						<button
@@ -244,17 +212,20 @@ class Hotelpage extends React.Component {
 					<br />
 
 					<div className="row">
+						{/* <div className="div" style={{ display: 'flex', top: '0' }}> */}
+						{/* <div className="col-12 col-md-4 " style={{ marginBottom: 10 }}>
+							<div style={{ position: 'sticky', top: '11vh' }}>
+								<ResponsiveDatePickers />
+							</div>
+						</div> */}
+
 						<div className="col">
 							<SimpleAccordion data={this.state} />
 						</div>
 					</div>
 
-					<Hotelpage2  checkin = {this.state.check_in} checkout ={this.state.check_out}
-					 locstion= {this.state.state} name= {this.state.name} num_pass = {this.state.num_of_pssenger}  />
+					<Hotelpage2 />
 				</div>
-				{/* <reservation   > </reservation> */}
-				{/* <reservation data={this.state}> </reservation> */}
-				{/* <reservation  > </reservation> */}
 			</div>
 		);
 	}
