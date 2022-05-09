@@ -37,7 +37,21 @@ jobs:
       run: |
         cd hotel-center
         npm test
+    - name: Copy Files
+      run: |
+        sudo cp -r ./ /home/ubuntu/vira/frontend/
+        ls /home/ubuntu/vira/frontend/ -l
 
+    - name: Set server
+      run: |
+        cd /home/ubuntu/vira/
+        sudo systemctl start docker
+        sudo service docker start
+        sudo docker-compose ps
+
+        sudo docker-compose down
+        sudo docker-compose build
+        sudo docker-compose up -d
     
 #       npm start
         
