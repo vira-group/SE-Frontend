@@ -213,13 +213,15 @@ export default function Hotelpage() {
             {rooms
               ? rooms.map((r) => (
                   <Roomcard
+                    name={r.hotel_info.name}
+                    city={r.hotel_info.city}
+                    id={r.id}
                     option={r.option}
                     price={r.price}
                     sleeps={r.sleeps}
                     type={r.type}
                     roomfacilities={r.room_facilities}
                     size={r.size}
-                    id={r.id}
                   />
                 ))
               : null}

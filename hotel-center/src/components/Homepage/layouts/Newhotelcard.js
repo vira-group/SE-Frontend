@@ -13,14 +13,14 @@ export default function Newhotelcard(props) {
   const [value2, setValue2] = useState(null);
 
   return (
-    <div className="d-flex">
+    <div className="">
       <Helmet bodyAttributes={{ style: "background-color : #f5f5f5" }}></Helmet>
       <div className="card homepage-card mt-5">
         <div className="card-body">
           <div className="row">
             <div className="col-md">
               <img
-                src={props.image}
+                src={"http://127.0.0.1:8000" + props.image}
                 className="card-img-top hotel-card-img"
               ></img>
             </div>

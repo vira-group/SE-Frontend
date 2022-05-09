@@ -34,6 +34,7 @@ export default function Roomcard(props) {
         console.log("images response:", response.data);
         console.log("roomid: ", roomid);
         setRoomimg(response.data);
+        localStorage.setItem('items', JSON.stringify(response.data));
       })
       .catch((error) => {
         console.log(error);
@@ -43,6 +44,33 @@ export default function Roomcard(props) {
     // console.log("this is for booking rules");
     console.log("this is for images in cards:", roomimg[0].image);
   };
+
+  const handleReserveClick = () => {
+		let s =
+			'http://localhost:3000/reserve/:start_day/:end_day/:' +
+			props.price +
+			'/' +
+			roomimg +
+			'/' +
+			props.name +
+			'/:num_passenger/' +
+			props.city +
+			'/' +
+			props.id +
+			'/';
+
+		console.log('button clicked', s);
+
+		window.location.href =
+			'http://localhost:3000/reserve/' +
+			props.price +
+			'/' +
+			props.name +
+			'/' +
+			props.city +
+			'/' +
+			props.id ;
+	};
 
   return (
     <div className="card hotelpage-card mt-3 mb-3">
@@ -139,7 +167,7 @@ export default function Roomcard(props) {
               </div>
             </div>
             {/* <div className="row"> */}
-            <button className="btn btn-primary hotel-room">
+            <button className="btn btn-primary hotel-room" onClick={handleReserveClick}>
               Reserve the room
             </button>
             {/* </div> */}
@@ -179,7 +207,7 @@ export default function Roomcard(props) {
                     : null}
                   {roomimg
                     ? roomimg.slice(roomimg.length / 2).map((rimg) => (
-                        <div className="col-12 col-lg-6">
+                        <div className="col-12 col-lg-6 mb-4">
                           <img
                             class="img-responsive w-100"
                             style={{ borderRadius: "5px" }}

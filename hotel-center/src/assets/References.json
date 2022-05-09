@@ -11,6 +11,7 @@
   "url_allhotels": "/hotel/hotels/?search=",
   "url_one_hotel": "/hotel/hotels/",
   "url_hotelrooms": "/hotel/room/",
-
-  "url_edit_profile": "/accounts/users/me/"
+  "url_reserveroom" : "/hotel/reserve/",
+  "url_edit_profile": "/accounts/users/me/",
+  "url_hotel_search": "/hotel/1/search/"
 }

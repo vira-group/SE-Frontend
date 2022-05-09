@@ -51,7 +51,7 @@ const validationSchema = yup.object({
   birthdate: yup.date().required("Required!"),
 });
 
-export default function Profile() {
+function Profile(props) {
   const CHARACTER_LIMIT = 250;
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
@@ -129,7 +129,10 @@ export default function Profile() {
       axios
         .put(
           makeURL(references.url_edit_profile),
-          form_data,
+          
+            form_data
+          
+          ,
           {
             headers: {
               Authorization: cookies.get("Authorization"),
@@ -138,6 +141,7 @@ export default function Profile() {
         )
         .then((response) => {
           console.log("status code: ", response.status);
+          document.location.reload(true);
         })
         .catch((error) => {
           console.log("error: ", error);
@@ -517,3 +521,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default Profile;

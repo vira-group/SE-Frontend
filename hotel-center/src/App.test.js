@@ -1,11 +1,47 @@
-import Sign_up from "../src/components/Sign_up/sign_up"
+import Sign_up from "../src/components/Sign_up/sign_up";
 import Footer from "./components/Homepage/layouts/Footer";
 import Filter from "./components/Homepage/layouts/Filter";
-import ResponsiveDatePickers from "../src/components/HotelPage/ResponsiveDatePickers" ;
-import * as React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import Profile from "./components/Profile/Editprofile";
+import SearchForm from "./components/Homepage/layouts/SearchForm";
+import ResponsiveDatePickers from "../src/components/HotelPage/ResponsiveDatePickers";
+import * as React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import SimpleAccordion from "../src/components/HotelPage/accordion";
+
+/***************************************** search bar tests *********************************************** */
+
+it("should render the correct content", async () => {
+  render(<SearchForm />);
+  const FooterElement = screen.getByPlaceholderText(/0 adults - 0 children/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<SearchForm />);
+  const FooterElement = screen.getByLabelText(/Number of guests/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<SearchForm />);
+  const FooterElement = screen.getByLabelText(/Check out/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<SearchForm />);
+  const FooterElement = screen.getByLabelText(/Check in/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<SearchForm />);
+  const FooterElement = screen.getByLabelText(/Destination/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+/*******************************************footer tests ******************************************** */
 
 it("should render the correct content", async () => {
   render(<Footer />);
@@ -49,107 +85,169 @@ it("should render the correct content", async () => {
   expect(FilterElement).toBeInTheDocument();
 });
 
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Help center/i);
+  expect(FooterElement).toBeInTheDocument();
+});
 
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Safety information/i);
+  expect(FooterElement).toBeInTheDocument();
+});
 
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/How to register a hotel/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Booking tutorial/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Hotel reservation guidance/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Payment methods/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Cancellation options/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/About Us/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Rules/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Magazine/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+it("should render the correct content", async () => {
+  render(<Footer />);
+  const FooterElement = screen.getByText(/Contact us/i);
+  expect(FooterElement).toBeInTheDocument();
+});
+
+/********************************************* edit profile tests *************************************** */
+it("should render the correct content", async () => {
+  render(<Profile />);
+  const EditElement = screen.getByText(/Full name/i);
+  expect(EditElement).toBeInTheDocument();
+});
+
+/******************************************************************************************************* */
 
 const mockFn = jest.fn();
 
+it("should render input element", () => {
+  render(
+    <BrowserRouter>
+      <Sign_up v={""} f={mockFn} />
+    </BrowserRouter>
+  );
+  const inputElement = screen.getByLabelText(/Email Address/i);
+  expect(inputElement).toBeInTheDocument();
+});
 
-it('should render input element', () => {
-		render(
-			<BrowserRouter>
-				<Sign_up v={''} f={mockFn} />
-			</BrowserRouter>
-		);
-		const inputElement = screen.getByLabelText(/Email Address/i);
-		expect(inputElement).toBeInTheDocument();
-	});
- 
-it('functionality of button when is cliked', () => {
-        render(
-			<BrowserRouter>
-				{' '}
-				<Sign_up v={''} f={mockFn} />
-			</BrowserRouter>
-		);
-		const inputElement = screen.getByLabelText(/Email Address/i);
+it("functionality of button when is cliked", () => {
+  render(
+    <BrowserRouter>
+      {" "}
+      <Sign_up v={""} f={mockFn} />
+    </BrowserRouter>
+  );
+  const inputElement = screen.getByLabelText(/Email Address/i);
 
-        fireEvent.change(inputElement, { target: { value: "fatima@gmail.com" } });
-	    const buttonElement = screen.getByRole("button", { name: /Sign Up/i});
-	    fireEvent.click(buttonElement)
-	    expect(inputElement.value).toBe("fatima@gmail.com")
-	});
-
+  fireEvent.change(inputElement, { target: { value: "fatima@gmail.com" } });
+  const buttonElement = screen.getByRole("button", { name: /Sign Up/i });
+  fireEvent.click(buttonElement);
+  expect(inputElement.value).toBe("fatima@gmail.com");
+});
 
 const MockList = () => {
-    return (
-        <BrowserRouter>
-            <ResponsiveDatePickers />
-        </BrowserRouter>
-    )
-}
-
-afterAll(() => {
-        console.log("RUNS ONCE AFTER ALL TESTS")
-    })
-
-    it('should fetch and render input element', async () => {
-        render(
-            <MockList />
-        );
-
-        
-        const followerDivElement = await screen.queryByText(/animals/i) ;
-        expect(followerDivElement).not.toBeInTheDocument();
-    });
-
-    it('should render same text ', () => {
-      render(<SimpleAccordion />);
-      const h1Element = screen.getByTitle(/accordion/i);
-      expect(h1Element).toBeInTheDocument();
-    });
-  
-const Mockq = () => {
-	return (
-		<BrowserRouter>
-			<ResponsiveDatePickers />
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <ResponsiveDatePickers />
+    </BrowserRouter>
+  );
 };
 
-it('shodduld ', async () => {
-	render(<Mockq />);
-
-	const ollowerDivElement = await screen.findByRole('button');
-	expect(ollowerDivElement).toBeInTheDocument();
+afterAll(() => {
+  console.log("RUNS ONCE AFTER ALL TESTS");
 });
 
-it('should fetch and render input element', async () => {
-	render(
-		<BrowserRouter>
-			<SimpleAccordion />
-		</BrowserRouter>
-	);
+it("should fetch and render input element", async () => {
+  render(<MockList />);
 
-	const followerDivElement = await screen.findByTestId('test');
-	expect(followerDivElement).toBeInTheDocument();
+  const followerDivElement = await screen.queryByText(/animals/i);
+  expect(followerDivElement).not.toBeInTheDocument();
 });
 
+it("should render same text ", () => {
+  render(<SimpleAccordion />);
+  const h1Element = screen.getByTitle(/accordion/i);
+  expect(h1Element).toBeInTheDocument();
+});
 
+const Mockq = () => {
+  return (
+    <BrowserRouter>
+      <ResponsiveDatePickers />
+    </BrowserRouter>
+  );
+};
 
+it("shodduld ", async () => {
+  render(<Mockq />);
 
-	it('should be able to type into input', () => {
-		render(
-			<BrowserRouter>
-				{' '}
-				<Sign_up v={''} f={mockFn} />
-			</BrowserRouter>
-		);
-		const inputElement = screen.getByLabelText(/Email Address/i);
+  const ollowerDivElement = await screen.findByRole("button");
+  expect(ollowerDivElement).toBeInTheDocument();
+});
 
-		fireEvent.click(inputElement);
-		fireEvent.change(inputElement, { target: { value: 'Fatima@gmail.com' } });
-		expect(inputElement.value).toBe('Fatima@gmail.com');
-    
-    
-    });
+it("should fetch and render input element", async () => {
+  render(
+    <BrowserRouter>
+      <SimpleAccordion />
+    </BrowserRouter>
+  );
+
+  const followerDivElement = await screen.findByTestId("test");
+  expect(followerDivElement).toBeInTheDocument();
+});
+
+it("should be able to type into input", () => {
+  render(
+    <BrowserRouter>
+      {" "}
+      <Sign_up v={""} f={mockFn} />
+    </BrowserRouter>
+  );
+  const inputElement = screen.getByLabelText(/Email Address/i);
+
+  fireEvent.click(inputElement);
+  fireEvent.change(inputElement, { target: { value: "Fatima@gmail.com" } });
+  expect(inputElement.value).toBe("Fatima@gmail.com");
+});
