@@ -379,7 +379,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 										<div className="row   m-3">
 											<div className="col" style={{ display: 'flex', alignItems: 'left' }}>
 												<div
-													className="col-sm-6"
+													className="col-md-6"
 													style={{ display: 'flex', alignItems: 'center' }}
 												>
 													<svg
@@ -395,10 +395,10 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 														<path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z" />
 													</svg>
 
-													<div className="col-sm-6 m-2 ">
-														<span style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}>
+													<div className="col-md-6 m-2 ">
+														<span style={{  }}>
 															{' '}
-															Check in :
+															Check in:
 														</span>
 														<br />
 														<span
@@ -408,12 +408,14 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 																color: 'grey'
 															}}
 														>
+															<small>
 															{JSON.parse(localStorage.getItem('i1')).split('T')[0]}
+															</small>
 														</span>
 													</div>
 												</div>
 												<div
-													className="col-sm-6"
+													className="col-md-6"
 													style={{ display: 'flex', alignItems: 'center' }}
 												>
 													<svg
@@ -421,7 +423,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 														width="16"
 														height="16"
 														fill="currentColor"
-														class="bi bi-calendar-date-fill"
+														class="bi bi-calendar-date-fill "
 														viewBox="0 0 16 16"
 														color="#cd9a2d"
 													>
@@ -429,10 +431,11 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 														<path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z" />
 													</svg>
 
-													<div className="col-sm-6 m-2 ">
-														<span style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}>
-															{' '}
-															Check out :
+													<div className="col-md-6 m-2 ">
+														<span style={{ }}>
+															
+															{/* {' '} */}
+															Check out:
 														</span>
 														<br />
 														<span
@@ -442,7 +445,9 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 																color: 'grey'
 															}}
 														>
+															<small>
 															{JSON.parse(localStorage.getItem('i2')).split('T')[0]}
+															</small>
 														</span>
 													</div>
 												</div>
@@ -470,7 +475,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 
 											<div
 												className="col col-sm-8 "
-												style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}
+												style={{ fontWeight: 'bold' }}
 											>
 												<span className="ms-2"> Number of passengers : </span>
 											</div>
@@ -506,7 +511,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 												className="col col-sm-8 "
 												style={{
 													fontWeight: 'bold',
-													fontFamily: 'ariaHidden'
+												
 												}}
 											>
 												<span className="ms-2">Payment details : </span>
@@ -534,7 +539,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 								<br />
 								<br />
 								<div className="row-md-12" title="HotelName">
-									<h2 style={{ fontFamily: 'ariaHidden', fontWeight: 'bold' }}>{this.state.name}</h2>
+									<h2 style={{  fontWeight: 'bold' }}>{this.state.name}</h2>
 								</div>
 
 								<div className="row ">
@@ -629,7 +634,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 								<hr className="m-3 hr-text" />
 							</div>{' '}
 							<div className="row mx-3">
-								<h4 style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}>
+								<h4 style={{ fontWeight: 'bold' }}>
 									Supervisor information :
 								</h4>
 							</div>
@@ -803,7 +808,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 										<label
 											class="form-check-label"
 											for="flexCheckDefault"
-											style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}
+											style={{ fontWeight: 'bold'}}
 										>
 											Late arrival :
 										</label>
@@ -829,7 +834,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 										<label
 											class="form-check-label"
 											for="flexCheckDefault"
-											style={{ fontWeight: 'bold', fontFamily: 'ariaHidden' }}
+											style={{ fontWeight: 'bold' }}
 										>
 											Default checkbox
 										</label>

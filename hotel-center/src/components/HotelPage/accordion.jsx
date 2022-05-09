@@ -34,20 +34,23 @@ class SimpleAccordion extends React.Component {
 		const sec = this.state.description.slice(250, 100000);
 
 		return (
-			<div>
-				<Accordion  title='accordion' style={{ borderRadius: '5px' }}>
+			<div  title='accordion1' data-testid= "accordion1" >
+				<Accordion data-testid="accordion"  title='accordion' style={{ borderRadius: '5px' }}>
 					<AccordionSummary
-						expandIcon={<ExpandMoreIcon />}
+
+title='AccordionSummery'
+						expandIcon={<ExpandMoreIcon   data-testid="expand" title='expandMoreIcon' />}
 						aria-controls="panel1a-content"
 						id="panel1a-header"
 					>
-						<Typography>{first} ...</Typography>
+
+						<Typography   data-testid="typo"  title='Typography' >{first} ...</Typography>
 					</AccordionSummary>
 
-					<AccordionDetails>
+					<AccordionDetails title='AccordionDetails'>
 						<Typography data-testid="test" />
 						{sec}
-						<a href=""> {this.state.phone_numbers}</a>
+						<a  title='href'  data-testid="a"   href=""> {this.state.phone_numbers}</a>
 					</AccordionDetails>
 				</Accordion>
 			</div>
