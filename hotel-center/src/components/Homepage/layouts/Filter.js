@@ -7,6 +7,18 @@ import "../../../css/Hotelcard.css";
 
 export default function Filter() {
   const [value, setValue] = React.useState(1);
+  const [state, setState] = useState(null);
+
+  const handleFilterclick = () => {
+    console.log('this is before setstate');
+    setState(document.getElementById().value);
+    console.log('facility:', state)
+  }
+
+  const handleSearchclick = () => {
+      console.log('star value:',value);
+      console.log('facilities:', state)
+  }
   return (
     <div>
       <div className="mt-5">
@@ -21,6 +33,7 @@ export default function Filter() {
                 value={value}
                 onChange={(event, newValue) => {
                   setValue(newValue);
+                  // console.log('star value:',newValue);
                 }}
               />
             </div>
@@ -53,10 +66,10 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Parking"
                   id="f1"
                 ></input>
-                <label className="form-check-label" for="f1">
+                <label className="form-check-label" for="f1" aria-checked={handleFilterclick}>
                   Parking
                 </label>
               </div>
@@ -64,7 +77,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Restraunt"
                   id="f2"
                 ></input>
                 <label className="form-check-label" for="f2">
@@ -75,7 +88,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Room service"
                   id="f3"
                 ></input>
                 <label className="form-check-label" for="f3">
@@ -86,7 +99,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Gym"
                   id="f4"
                 ></input>
                 <label className="form-check-label" for="f4">
@@ -97,7 +110,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="WiFi"
                   id="f5"
                 ></input>
                 <label className="form-check-label" for="f5">
@@ -108,7 +121,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Swimming pool"
                   id="f6"
                 ></input>
                 <label className="form-check-label" for="f6">
@@ -119,7 +132,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Family rooms"
                   id="f7"
                 ></input>
                 <label className="form-check-label" for="f7">
@@ -130,7 +143,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Taxi service"
                   id="f8"
                 ></input>
                 <label className="form-check-label" for="f8">
@@ -141,7 +154,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Non-smoking rooms"
                   id="f9"
                 ></input>
                 <label className="form-check-label" for="f9">
@@ -178,7 +191,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Air conditioning"
                   id="r1"
                 ></input>
                 <label className="form-check-label" for="r1">
@@ -189,7 +202,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Wardrobe or closet"
                   id="r2"
                 ></input>
                 <label className="form-check-label" for="r2">
@@ -200,7 +213,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Ironing facilities"
                   id="r3"
                 ></input>
                 <label className="form-check-label" for="r3">
@@ -211,7 +224,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Heating"
                   id="r4"
                 ></input>
                 <label className="form-check-label" for="r4">
@@ -222,7 +235,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Coffee machine"
                   id="r5"
                 ></input>
                 <label className="form-check-label" for="r5">
@@ -233,7 +246,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Desk"
                   id="r6"
                 ></input>
                 <label className="form-check-label" for="r6">
@@ -244,7 +257,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Cable channels"
                   id="r7"
                 ></input>
                 <label className="form-check-label" for="r7">
@@ -255,7 +268,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Minibar"
                   id="r8"
                 ></input>
                 <label className="form-check-label" for="r8">
@@ -266,7 +279,7 @@ export default function Filter() {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Safety deposit box"
                   id="r9"
                 ></input>
                 <label className="form-check-label" for="r9">
@@ -276,7 +289,7 @@ export default function Filter() {
             </div>
           </div>
         </div>
-        <button className="btn btn-primary hotel-room w-100 mt-1">
+        <button className="btn btn-primary hotel-room w-100 mt-1" onClick={handleSearchclick}>
           Search
         </button>
       </div>
