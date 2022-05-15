@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { cookies, makeURL, set_cookie } from "../../Utils/common";
@@ -18,7 +18,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
 import Sidebar from "./Sidebar";
-import image1 from "../../statics/img/Landmark/h1.jpg"
+import image1 from "../../statics/img/avatar.jpg";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -30,6 +30,29 @@ const datePickerTheme = createTheme({
     },
   },
 });
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  preview: {
+    marginTop: 50,
+    display: "flex",
+    flexDirection: "column",
+  },
+  image: { maxWidth: "100%", maxHeight: 320 },
+  delete: {
+    cursor: "pointer",
+    padding: 15,
+    background: "red",
+    color: "white",
+    border: "none",
+  },
+};
 
 const validationSchema = yup.object({
   firstname: yup
@@ -56,7 +79,8 @@ function Profile(props) {
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
   const [state, setState] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState();
+  // const [imageUrl, setImageUrl] = useState(null);
   let date = birthdate; // value from your state
   let formattedDate = moment(date).format("YYYY-MM-DD");
   const formik = useFormik({
@@ -78,6 +102,16 @@ function Profile(props) {
     setGenValue(newValue);
   };
 
+  const imageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(e.target.files[0]);
+    }
+  };
+
+  const removeSelectedImage = () => {
+    setSelectedImage();
+  };
+
   useEffect(() => {
     axios
       .get(makeURL(references.url_edit_profile), {
@@ -97,7 +131,9 @@ function Profile(props) {
           aboutme: res.data.description || "",
           telephone: "",
         });
-        setSelectedImage(res.data.avatar || "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp")
+        setSelectedImage(
+          res.data.avatar || "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+        );
         setBirthdate(res.data.birthday || "");
         setGenValue(res.data.gender || "");
       });
@@ -117,22 +153,21 @@ function Profile(props) {
     if (filled) {
       // console.log(selectedImage);
       let form_data = new FormData();
-      form_data.append('avatar', selectedImage, selectedImage.name);
-      form_data.append('email',formik.values.email);
-      form_data.append('firstName',formik.values.firstname);
-      form_data.append('lastName',formik.values.lastname);
-      form_data.append('birthday',formattedDate);
-      form_data.append('gender',genValue);
-      form_data.append('phone_number',formik.values.phone);
-      form_data.append('national_code',formik.values.nationalcode);
-      form_data.append('description',formik.values.aboutme);
+      form_data.append("avatar", selectedImage, selectedImage.name);
+      form_data.append("email", formik.values.email);
+      form_data.append("firstName", formik.values.firstname);
+      form_data.append("lastName", formik.values.lastname);
+      form_data.append("birthday", formattedDate);
+      form_data.append("gender", genValue);
+      form_data.append("phone_number", formik.values.phone);
+      form_data.append("national_code", formik.values.nationalcode);
+      form_data.append("description", formik.values.aboutme);
       axios
         .put(
           makeURL(references.url_edit_profile),
-          
-            form_data
-          
-          ,
+
+          form_data,
+
           {
             headers: {
               Authorization: cookies.get("Authorization"),
@@ -173,23 +208,39 @@ function Profile(props) {
             <div className="row">
               <div className="col-lg-3">
                 <div className="profile-img">
-                  <img
-                    src={"http://127.0.0.1:8000" + selectedImage}
-                    className="rounded-circle"
-                    alt="Avatar"
-                  />
+                  {selectedImage ? (
+                    <img
+                      src={"http://127.0.0.1:8000" + selectedImage}
+                      className="rounded-circle"
+                      alt="Avatar"
+                    />
+                  ) : (
+                    <img src={image1} className="rounded-circle" alt="Avatar" />
+                  )}
                 </div>
               </div>
               <div className="col-lg-8" style={{ marginTop: "52px" }}>
-                <input
-                  type="file"
-                  name="myImage"
+                {/* <input
                   accept="image/*"
-                  onChange={(event) => {
-                    console.log(event.target.files[0]);
-                    setSelectedImage(event.target.files[0]);
-                  }}
-                />
+                  type="file"
+                  id="select-image"
+                  style={{ display: "none" }}
+                  onChange={(e) => setSelectedImage(e.target.files[0])}
+                /> */}
+                <input accept="image/*" type="file" onChange={imageChange} />
+
+                {/* {selectedImage && (
+          <div style={styles.preview}>
+            <img
+              src={URL.createObjectURL(selectedImage)}
+              style={styles.image}
+              alt="Thumb"
+            />
+            <button onClick={removeSelectedImage} style={styles.delete}>
+              Remove This Image
+            </button>
+          </div>
+        )} */}
               </div>
             </div>
 
@@ -507,10 +558,7 @@ function Profile(props) {
               <div className="col-4"></div>
               <div className="col-4"></div>
               <div className="col-4 edit-profile">
-                <button
-                  className="btn edit-hotel"
-                  onClick={handleClick}
-                >
+                <button className="btn edit-hotel" onClick={handleClick}>
                   Edit profile
                 </button>
               </div>
