@@ -254,6 +254,7 @@ export const one_room_reserve = async (
   return message;
 };
 
+
 export const hotel_search = async (
   hotel_id,
   size,
@@ -267,7 +268,7 @@ export const hotel_search = async (
         Authorization: cookies.get("Authorization"),
       },
       params: {
-        size: 1,
+        size: size,
         check_in: formattedCheckInDate,
         check_out: formattedCheckOutDate,
       },
@@ -275,12 +276,12 @@ export const hotel_search = async (
     .then((response) => {
       console.log("after_search", response.data);
 			console.log(formattedCheckInDate, formattedCheckOutDate)
+      mes = response.data  ;
     })
     .catch((error) => {
       console.log(error);
       mes = false;
     });
-  console.log("ffff");
-  console.log(mes);
+    
   return mes;
 };

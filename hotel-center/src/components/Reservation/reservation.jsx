@@ -6,6 +6,8 @@ import references from '../../assets/References.json';
 import { cookies, makeURL } from '../../Utils/common';
 import axios from 'axios';
 // import { get_token, get_user, set_user_session, remove_user_session, set_cookie } from './common';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
@@ -41,6 +43,8 @@ class reservation extends React.Component {
 			city: '',
 			num_passenger: '10',
 
+			ischeck1: false,
+			ischeck2: false,
 			room: 1,
 			emailtxt: '',
 			message: '',
@@ -71,6 +75,8 @@ class reservation extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
+
+
 	calculatePrice() {
 		let s = this.state.start_day.split('-');
 		let e = this.state.end_day.split('-');
@@ -78,6 +84,15 @@ class reservation extends React.Component {
 		return payment;
 	}
 
+	handlecheck1() {
+		this.setState({ ischeck1: true });
+		console.log('check1');
+	}
+
+	handlecheck2() {
+		this.setState({ ischeck2: true });
+		console.log('check2');
+	}
 	onSubmit(e) {
 		e.preventDefault();
 
@@ -90,9 +105,8 @@ class reservation extends React.Component {
 			this.setState({ fields: fields });
 			console.log(
 				'dataaaaaaaaa ',
-				JSON.parse(localStorage.getItem('i1')).split('T')[0] ,
-				JSON.parse(localStorage.getItem('i2')).split('T')[0] ,
-				
+				JSON.parse(localStorage.getItem('i1')).split('T')[0],
+				JSON.parse(localStorage.getItem('i2')).split('T')[0],
 				this.state.fields['firstname'],
 				this.state.fields['lastname'],
 				this.state.room,
@@ -101,7 +115,7 @@ class reservation extends React.Component {
 				this.state.fields['phone']
 			);
 			const is_sent = one_room_reserve(
-				JSON.parse(localStorage.getItem('i1')).split('T')[0] ,
+				JSON.parse(localStorage.getItem('i1')).split('T')[0],
 				JSON.parse(localStorage.getItem('i2')).split('T')[0],
 				this.state.fields['firstname'],
 				this.state.fields['lastname'],
@@ -138,9 +152,9 @@ class reservation extends React.Component {
 		// this.setState({ start_day:  });
 		// this.setState({ end_day: JSON.parse(localStorage.getItem('i2')) });
 		// this.setState({ num_of_passenger: JSON.parse(localStorage.getItem('i3')) });
-		console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i3'))) ;
-console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i1'))) ;
-console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).split('T')[0]) ;
+		console.log('ppppppppppppppppppppppp', JSON.parse(localStorage.getItem('i3')));
+		console.log('ppppppppppppppppppppppp', JSON.parse(localStorage.getItem('i1')));
+		console.log('ppppppppppppppppppppppp', JSON.parse(localStorage.getItem('i2')).split('T')[0]);
 
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
 		console.log('qqqqqqqqqqqqqqqqqq', JSON.parse(localStorage.getItem('items'))[0].image);
@@ -181,7 +195,9 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 		switch (name) {
 			case 'firstname':
 				error.firstname.u1 =
-					(typeof value !== 'undefined' && value.length < 3) || value.length > 15
+					(typeof value !== 'undefined' && value.length < 3) ||
+					value.length > 15 ||
+					!value.match(/^[A-Z a-z]+$/)
 						? '*Please enter a valid  name'
 						: '';
 
@@ -190,7 +206,9 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 
 			case 'lastname':
 				error.lastname.u1 =
-					(typeof value !== 'undefined' && value.length < 3) || value.length > 15
+					(typeof value !== 'undefined' && value.length < 3) ||
+					value.length > 15 ||
+					!value.match(/^[A-Z a-z]+$/)
 						? '*Please enter a valid last name'
 						: '';
 
@@ -199,7 +217,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 
 			case 'phone':
 				error.phone.p1 =
-					typeof value !== 'undefined' && !value.match(/^.*(?=.*\d).*$/) ? '*Invalid phone number. ' : '';
+					typeof value !== 'undefined' && !value.match(/^[0-9]+$/) ? '*Invalid phone number. ' : '';
 
 				error.phone.p2 = value.length < 11 ? '*Too short for a phone number' : '';
 
@@ -209,7 +227,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 
 			case 'nationalcode':
 				error.nationalcode.p1 =
-					typeof value !== 'undefined' && (!value.match(/^.*(?=.*\d).*$/) || value.length < 10)
+					typeof value !== 'undefined' && (!value.match(/^[0-9]+$/) || value.length < 10)
 						? '*Invalid national code. '
 						: '';
 
@@ -229,6 +247,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 	};
 
 	render() {
+		console.log(this.state.ischeck1);
 		this.state.get_price = this.calculatePrice();
 
 		// console.log( this.state.get_price) ;
@@ -396,10 +415,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 													</svg>
 
 													<div className="col-md-6 m-2 ">
-														<span style={{  }}>
-															{' '}
-															Check in:
-														</span>
+														<span style={{}}> Check in:</span>
 														<br />
 														<span
 															style={{
@@ -409,7 +425,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 															}}
 														>
 															<small>
-															{JSON.parse(localStorage.getItem('i1')).split('T')[0]}
+																{JSON.parse(localStorage.getItem('i1')).split('T')[0]}
 															</small>
 														</span>
 													</div>
@@ -432,8 +448,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 													</svg>
 
 													<div className="col-md-6 m-2 ">
-														<span style={{ }}>
-															
+														<span style={{}}>
 															{/* {' '} */}
 															Check out:
 														</span>
@@ -446,7 +461,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 															}}
 														>
 															<small>
-															{JSON.parse(localStorage.getItem('i2')).split('T')[0]}
+																{JSON.parse(localStorage.getItem('i2')).split('T')[0]}
 															</small>
 														</span>
 													</div>
@@ -473,10 +488,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 												<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
 											</svg>
 
-											<div
-												className="col col-sm-8 "
-												style={{ fontWeight: 'bold' }}
-											>
+											<div className="col col-sm-8 " style={{ fontWeight: 'bold' }}>
 												<span className="ms-2"> Number of passengers : </span>
 											</div>
 											<div style={{ justifyContent: 'end', color: 'grey' }}>
@@ -510,20 +522,17 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 											<div
 												className="col col-sm-8 "
 												style={{
-													fontWeight: 'bold',
-												
+													fontWeight: 'bold'
 												}}
 											>
 												<span className="ms-2">Payment details : </span>
 											</div>
 											<div style={{ justifyContent: 'end', color: 'grey' }}>
 												{' '}
-
-														{
-													   ( parseInt((JSON.parse(localStorage.getItem('i1')).split('T')[0])[2]) -
-													    parseInt((JSON.parse(localStorage.getItem('i1')).split('T')[0])[2]) + 
-														1) * parseInt(this.state.price_per_day)}$
-										
+												{(parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) -
+													parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) +
+													1) *
+													parseInt(this.state.price_per_day)}$
 												{/* {this.state.get_price}$ */}
 											</div>
 										</div>
@@ -539,7 +548,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 								<br />
 								<br />
 								<div className="row-md-12" title="HotelName">
-									<h2 style={{  fontWeight: 'bold' }}>{this.state.name}</h2>
+									<h2 style={{ fontWeight: 'bold' }}>{this.state.name}</h2>
 								</div>
 
 								<div className="row ">
@@ -634,9 +643,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 								<hr className="m-3 hr-text" />
 							</div>{' '}
 							<div className="row mx-3">
-								<h4 style={{ fontWeight: 'bold' }}>
-									Supervisor information :
-								</h4>
+								<h4 style={{ fontWeight: 'bold' }}>Supervisor information :</h4>
 							</div>
 							<div className="row mx-3">
 								<p>It is enough to enter the information of one of the passengers as a supervisor.</p>
@@ -716,6 +723,12 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 										</div>
 									</div>
 									<div class="col-md-4 ">
+										<PhoneInput
+											placeholder="Enter phone number"
+											onChange={this.formValChange}
+											value={this.state['phone']}
+										/>
+
 										<input
 											required
 											fullWidth
@@ -740,7 +753,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 										<div className="mt-3 ">
 											{this.state.error.phone.p1.length > 0 && (
 												<p className="err">
-													{this.state.error.phone.p2}
+													{this.state.error.phone.p1}
 													<br />
 												</p>
 											)}
@@ -802,13 +815,15 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 										<input
 											class="form-check-input form-control-huge checkbox-black"
 											type="checkbox"
-											value=""
+											value={this.state.ischeck1}
 											id="flexCheckDefault"
+
+											// onClick={this.handlecheck1}
 										/>
 										<label
 											class="form-check-label"
 											for="flexCheckDefault"
-											style={{ fontWeight: 'bold'}}
+											style={{ fontWeight: 'bold' }}
 										>
 											Late arrival :
 										</label>
@@ -830,6 +845,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 											type="checkbox"
 											value=""
 											id="flexCheckDefault"
+											onClick={this.handlecheck2}
 										/>
 										<label
 											class="form-check-label"
@@ -851,6 +867,7 @@ console.log("ppppppppppppppppppppppp" ,JSON.parse(localStorage.getItem('i2')).sp
 											class="btn btn-dark btn-lg"
 											data-bs-toggle="modal"
 											data-bs-target="#exampleModal"
+											// disabled={!(this.state.ischeck1 && this.state.ischeck2)}
 										>
 											Reserve
 										</button>
