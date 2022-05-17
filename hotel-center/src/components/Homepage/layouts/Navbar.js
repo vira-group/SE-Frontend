@@ -181,7 +181,7 @@ class Navbar extends Component {
                     {/*  {this.state.navbarExpand ? <Fragment /> : <hr />} */}
                     <hr />
                     <li className="nav-item">
-                      <a href="http://localhost:3000/login">
+                      <a href="/login">
                         <button
                           type="button"
                           className="btn btn-outline-dark me-2 nav-button nav-menu-style"
@@ -191,7 +191,7 @@ class Navbar extends Component {
                       </a>
                     </li>
                     <li className="nav-item">
-                      <a href="http://localhost:3000/sign-up">
+                      <a href="/sign-up">
                         <button
                           type="button"
                           className="btn btn-outline-dark nav-button nav-menu-style"
