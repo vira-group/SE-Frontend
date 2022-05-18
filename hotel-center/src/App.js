@@ -16,7 +16,8 @@ import IncreaseCredit from "./components/Profile/IncreaseCredit";
 import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
 import Createhotel from "./components/Createhotel/Createhotel";
-import reservation from './components/Reservation/reservation';
+
+import Reservation from "./components/Reservation/Reservation";
 import "./css/Navbar.css";
 import "./css/Homepage.css";
 import "./css/Verify.css";
@@ -57,7 +58,7 @@ function App() {
           <Route
 						exact
 						path="/reserve/:price_per_day/:name/:city/:id"
-						component={reservation}
+						component={Reservation}
 					/>
         </Switch>
       </BrowserRouter>
