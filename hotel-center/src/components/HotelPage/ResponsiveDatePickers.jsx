@@ -45,7 +45,6 @@ function ResponsiveDatePickers(props) {
 				console.log('after_search', response.data);
 				localStorage.setItem('rooms', JSON.stringify(response.data));
 				window.location.reload();
-				
 			})
 			.catch((error) => {
 				console.log(error);
