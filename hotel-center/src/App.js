@@ -15,8 +15,10 @@ import Profile from "./components/Profile/Editprofile";
 import IncreaseCredit from "./components/Profile/IncreaseCredit";
 import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
-// import Createhotel from "./components/Createhotel/Createhotel";
+
 import CreateHotel from "./components/CreateHotel/CreateHotel";
+// import CreateHotel from "./components/a/Createhotel";
+
 import Reservation from "./components/Reservation/Reservation";
 import "./css/Navbar.css";
 import "./css/Homepage.css";
