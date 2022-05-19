@@ -1,6 +1,6 @@
 import Stepper from './Stepper';
 import React, { Component } from 'react';
-
+import Country from "./Countries";
 
 import HotelInfo from './HotelInfo';
 export default class CreateHotel extends Component {
@@ -49,8 +49,6 @@ export default class CreateHotel extends Component {
 									/>
 								</div>
 <HotelInfo></HotelInfo>
-								<hr class="dashed" />
-
 							</div>
 						</div>
 					</div>

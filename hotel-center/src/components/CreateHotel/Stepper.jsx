@@ -96,7 +96,7 @@ export default class Stepper extends Component {
 				
 
 
-<div className="step-wrapper" key={index}>
+<div className="step-wrapper  mt-5" key={index}>
 				
 
 <div className="row">
