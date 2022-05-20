@@ -42,7 +42,7 @@ const validationSchema = yup.object({
     .max(20, "Must be 20 characters or less")
     .min(2, "Must be at least 2 characters")
     .required("Required!"),
-  nationalcode: yup.string().required("Required!"),
+  nationalcode: yup.string().max(10, "Must be less than 10 digits").required("Required!"),
   email: yup.string().email("Invalid email address").required("Required"),
   phone: yup.number().required("Required!"),
   aboutme: yup.string().max(250, "Can't be more than 250 characters."),

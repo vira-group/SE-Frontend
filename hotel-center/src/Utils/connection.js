@@ -235,6 +235,7 @@ export const one_room_reserve = async (
       console.log(response);
       console.log("everything right");
       message = response.data;
+      window.alert("everything right");
     })
     .catch((error) => {
       if (error.response.status == 400) {
@@ -274,7 +275,7 @@ export const hotel_search = async (
     })
     .then((response) => {
       console.log("after_search", response.data);
-			console.log(formattedCheckInDate, formattedCheckOutDate)
+      console.log(formattedCheckInDate, formattedCheckOutDate);
     })
     .catch((error) => {
       console.log(error);

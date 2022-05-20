@@ -84,7 +84,7 @@ export default function Myhotels() {
               free Wi-Fi."
             />
             <MyhotelsCard
-              img={image2}
+              img={image3}
               title="Eden hotel Amsterdam"
               description="Situated in the heart of the city centre, Eden Hotel
               Amsterdam offers warm-coloured rooms and free WiFi. The
