@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import references from "../../../assets/References.json";
 import axios from "axios";
 import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import moment from "moment";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -51,6 +52,12 @@ function SearchForm(props) {
   //   console.log(checkoutDate);
   // }, [checkinDate, checkoutDate]);
 
+  let checkin = checkinDate; // value from your state
+  let checkout = checkoutDate; // value from your state
+  let formattedcheckinDate = moment(checkin).format("YYYY-MM-DD");
+  let formattedcheckoutDate = moment(checkout).format("YYYY-MM-DD");
+  let numberOfPeople = numberOfAdults + numberOfChildren;
+
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };
@@ -60,7 +67,8 @@ function SearchForm(props) {
   };
 
   const handleSearch = () => {
-    var url = makeURL(references.url_allhotels) + destination.city;
+    var url = makeURL(references.url_allhotels) + destination.city + "&check_in=" + formattedcheckinDate 
+    + "&check_out=" + formattedcheckoutDate + "&size=" + numberOfPeople;
     axios
       .get(url, {
         headers: {
@@ -69,6 +77,9 @@ function SearchForm(props) {
       })
       .then((response) => {
         props.setHotels(response.data);
+        console.log('checkin date: ', formattedcheckinDate);
+        console.log('checkout date: ', formattedcheckoutDate);
+        console.log('number of people: ', numberOfPeople)
       })
       .catch((error) => {
         console.log(error);
