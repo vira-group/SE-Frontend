@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-function Footer() {
+function Footer(props) {
+  const [isAdminPanelPage, setIsAdminPanelPage] = useState(false);
+
+  useEffect(() => {
+    setIsAdminPanelPage(window.location.pathname.includes("adminpanel"));
+  }, []);
+
   return (
-    <div className="footer-bg-color mt-5">
+    <div className={isAdminPanelPage ? "d-none" : "footer-bg-color mt-5"}>
       <div className="container py-5">
         <div className="row text-white">
           <div className="col-md-4 mb-4 mb-md-0">

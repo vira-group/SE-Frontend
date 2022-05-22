@@ -16,6 +16,8 @@ import IncreaseCredit from "./components/Profile/IncreaseCredit";
 import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
 import reservation from './components/Reservation/reservation';
+import AdminPanel from "./components/AdminPanel/layout/AdminPanel";
+import "./components/AdminPanel/style/adminpanel.scss";
 import "./css/Navbar.css";
 import "./css/Homepage.css";
 import "./css/Verify.css";
@@ -29,7 +31,7 @@ import "./css/Hotelpage2.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App h-100">
       <Navbar />
       <BrowserRouter>
         <Switch>
@@ -53,10 +55,11 @@ function App() {
             component={account_activation}
           />
           <Route
-						exact
-						path="/reserve/:price_per_day/:name/:city/:id"
-						component={reservation}
-					/>
+            exact
+            path="/reserve/:price_per_day/:name/:city/:id"
+            component={reservation}
+          />
+          <Route exact path="/adminpanel" component={AdminPanel} />
         </Switch>
       </BrowserRouter>
       <Footer />

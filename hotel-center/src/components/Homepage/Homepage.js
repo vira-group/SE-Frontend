@@ -27,10 +27,8 @@ export default function Homepage() {
 
   return (
     <div>
-      {/* <Navbar /> */}
       <Header setHotels={setHotels} />
       <Homepagecontent hotels={hotels} />
-      {/* <Footer /> */}
     </div>
   );
 }

@@ -21,6 +21,7 @@ class Navbar extends Component {
       anchorEl: null,
       open: Boolean(null),
       navbarExpand: true,
+      isAdminPanelPage: false,
     };
   }
 
@@ -34,6 +35,10 @@ class Navbar extends Component {
       : this.setState({
           navbarExpand: true,
         });
+
+    this.setState({
+      isAdminPanelPage: window.location.pathname.includes("adminpanel"),
+    });
 
     me().then((response) => {
       this.setState({ is_loggedin: response });
@@ -94,7 +99,9 @@ class Navbar extends Component {
     return (
       <nav
         className={
-          this.state.navbarMoved
+          this.state.isAdminPanelPage
+            ? "d-none"
+            : this.state.navbarMoved
             ? "navbar navbar-expand-lg navbar-light sticky-top nav-scrolled w-100 nav-style"
             : "navbar navbar-expand-lg navbar-light sticky-top nav-top w-100 nav-style"
         }
