@@ -16,6 +16,8 @@ import IncreaseCredit from "./components/Profile/IncreaseCredit";
 import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
 import reservation from './components/Reservation/reservation';
+import Edithotel from "./components/Adminpanel/Edithotel";
+import Createroom from "./components/Adminpanel/Createroom";
 import "./css/Navbar.css";
 import "./css/Homepage.css";
 import "./css/Verify.css";
@@ -26,6 +28,7 @@ import "./css/Favorites.css";
 import "./css/Reserve.css";
 import "./css/Hotelpage.css";
 import "./css/Hotelpage2.css";
+import "./css/Edithotel.css";
 
 function App() {
   return (
@@ -35,6 +38,8 @@ function App() {
         <Switch>
           <Route exact path="/hotelcard" component={Hotelcard} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/edithotel" component={Edithotel} />
+          <Route exact path="/createroom" component={Createroom} />
           <Route
             exact
             path="/profile/IncreaseCredit"
