@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Image_upload from "./Image_upload"
 
-import 
+
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
 
@@ -125,7 +125,23 @@ class HotelInfo extends React.Component {
 				<br />
 				<form noValidate onSubmit={this.onSubmit} className="row g-3 needs-validation mx-3">
 					<div className="row">
-						<div className="col-md-8">
+
+						<div className=" col-md-12 col-lg-4">
+							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
+								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
+									Description :
+								</div>
+								<div className="row m-2">
+									Font Awesome 6 includes five icons styles: solid, regular, light, duotone, and the
+									new THIN style — not to mention all of our brand icons. And coming later in 2022 is
+									the entirely new SHARP family of styles.
+								</div>
+							</div>
+						</div>
+
+						<br></br>
+
+						<div className="col-md-12 col-lg-8">
 							<div className="row">
 								<div className="col-md-4">
 									<label className="ms-2 mt-1 form-label">Name :</label>
@@ -265,18 +281,6 @@ class HotelInfo extends React.Component {
 											</p>
 										)}
 									</div>
-								</div>
-							</div>
-						</div>
-						<div className="col-md-4">
-							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
-								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
-									Description :
-								</div>
-								<div className="row m-2">
-									Font Awesome 6 includes five icons styles: solid, regular, light, duotone, and the
-									new THIN style — not to mention all of our brand icons. And coming later in 2022 is
-									the entirely new SHARP family of styles.
 								</div>
 							</div>
 						</div>
