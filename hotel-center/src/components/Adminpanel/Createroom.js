@@ -18,6 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import PreviewMultipleImages from "./PreviewMultipleImages";
 
 const textfieldTheme = createTheme({
   palette: {
@@ -447,6 +448,12 @@ function Createroom(props) {
               </div>
             </div>
           </div>
+          <hr class="dashed"></hr>
+
+          <div className="mb-3 col-12">
+            <PreviewMultipleImages />
+          </div>
+
           <div className="row mt-2 d-fit-content">
             <div className="col-4"></div>
             <div className="col-4"></div>

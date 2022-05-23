@@ -180,7 +180,7 @@ function Profile(props) {
                   />
                 </div>
               </div>
-              <div className="col-lg-8" style={{ marginTop: "52px" }}>
+              <div className="col-lg-8">
                 <input
                   type="file"
                   name="myImage"
