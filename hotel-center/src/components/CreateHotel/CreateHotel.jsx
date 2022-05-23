@@ -1,6 +1,6 @@
 import Stepper from './Stepper';
 import React, { Component } from 'react';
-import Country from "./Countries";
+// import Country from "./Countries";
 
 import HotelInfo from './HotelInfo';
 export default class CreateHotel extends Component {
@@ -11,13 +11,7 @@ export default class CreateHotel extends Component {
 			currentStep: 1
 		
 			};
-
-	
-
 	}
-
-
-
 
 	handleClick(clickType) {
 		const { currentStep } = this.state;
