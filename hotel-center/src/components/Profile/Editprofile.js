@@ -51,6 +51,7 @@ const validationSchema = yup.object({
   birthdate: yup.date().required("Required!"),
 });
 
+
 function Profile(props) {
   const CHARACTER_LIMIT = 250;
   const [genValue, setGenValue] = useState("Male");

@@ -5,6 +5,12 @@ import RoomServiceIcon from '@mui/icons-material/RoomService';
 
 import PaidIcon from '@mui/icons-material/Paid';
 import RoomIcon from '@material-ui/icons/Room';
+
+
+
+
+
+
 class CreateHotel extends Component {
 	constructor(props) {
 		super(props);
