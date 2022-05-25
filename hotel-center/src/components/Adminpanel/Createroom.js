@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { cookies, makeURL, set_cookie } from "../../Utils/common";
@@ -68,8 +68,7 @@ const facilitieslist = [
 const validationSchema = yup.object({
   number: yup
     .string()
-    .max(5, "Must be 5 digits or less")
-    .min(1, "Must be at least 1 digit")
+    .matches(/^[0-9,]+$/, "Please enter your information correctly.")
     .required("Required!"),
   type: yup
     .string()
@@ -148,14 +147,54 @@ function Createroom(props) {
       <Container maxWidth="lg">
         <div className="container mt-4 p-4 edit-hotel-form border">
           <div className="row">
-            <div className="mb-3 col-6">
+            <div className="mb-3 col-md-6">
+              <div className="row">
+                <div className="col-lg-3 col-md-4 mt-lg-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Type of room
+                  </label>
+                </div>
+                <div className="col-lg-8 mt-lg-3">
+                  <ThemeProvider theme={textfieldTheme}>
+                    <FormControl fullWidth required>
+                      <InputLabel
+                        id="demo-simple-select-label"
+                        style={{ textAlign: "center" }}
+                      >
+                        Type
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        placeholder={t1}
+                        size="small"
+                        value="Single Classic Room"
+                        label="Type"
+                        onChange={handletypeChange}
+                      >
+                        <MenuItem value={t1}>Single Classic Room</MenuItem>
+                        <MenuItem value={t2}>Double King Room</MenuItem>
+                        <MenuItem value={t3}>Family Room</MenuItem>
+                        <MenuItem value={t4}>Junior Suit</MenuItem>
+                        <MenuItem value={t5}>Luxury Suite</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </ThemeProvider>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-3 col-md-6">
               <div className="row mt-3">
                 <div className="col-lg-3 col-md-4">
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
                   >
-                    Room number
+                    Rooms number
                   </label>
                 </div>
                 <div className="col-lg-8">
@@ -163,7 +202,7 @@ function Createroom(props) {
                     <TextField
                       required
                       fullWidth
-                      placeholder="101"
+                      placeholder="101,102,103"
                       id="number"
                       size="small"
                       label="Room number"
@@ -180,48 +219,13 @@ function Createroom(props) {
                 </div>
               </div>
             </div>
-
-            <div className="mb-3 col-6">
-              <div className="row">
-                <div className="col-lg-3 col-md-4 mt-3">
-                  <label
-                    for="exampleFormControlInput2"
-                    className="ms-2 mt-1 form-label"
-                  >
-                    Type of room
-                  </label>
-                </div>
-                <div className="col-lg-8">
-                  <ThemeProvider theme={textfieldTheme}>
-                    <FormControl fullWidth required>
-                      <InputLabel id="demo-simple-select-label">
-                        Type
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={type}
-                        label="Type"
-                        onChange={handletypeChange}
-                      >
-                        <MenuItem value={t1}>Single classic Room</MenuItem>
-                        <MenuItem value={t2}>Double King Room</MenuItem>
-                        <MenuItem value={t3}>Family Room</MenuItem>
-                        <MenuItem value={t4}>Junior Suit</MenuItem>
-                        <MenuItem value={t5}>Luxury Suite</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </ThemeProvider>
-                </div>
-              </div>
-            </div>
           </div>
 
           <hr class="dashed"></hr>
 
           <div className="mb-3 col-12">
             <div className="row">
-              <div className="col-lg-3 col-md-4">
+              <div className="col-lg-2 col-md-3">
                 <label
                   for="exampleFormControlInput2"
                   className="ms-2 mt-1 form-label"
@@ -229,7 +233,7 @@ function Createroom(props) {
                   Breakfast
                 </label>
               </div>
-              <div className="col-lg-8">
+              <div className="col-lg-9">
                 <RadioGroup
                   row
                   aria-label="level"
@@ -382,7 +386,7 @@ function Createroom(props) {
                       for="exampleFormControlInput2"
                       className="ms-2 mt-1 form-label"
                     >
-                      Room Sleeps
+                      Room sleeps
                     </label>
                   </div>
                   <div className="col-lg-8">
@@ -445,6 +449,30 @@ function Createroom(props) {
                     </ThemeProvider>
                   )}
                 />
+
+                <br />
+
+                <Typography sx={{ mb: 3 }}>
+                  Not listed above? please add it below.
+                </Typography>
+                <ThemeProvider theme={textfieldTheme}>
+                  <TextField
+                    fullWidth
+                    placeholder=""
+                    id="morefacilities"
+                    size="small"
+                    label="Extra facilities"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.morefacilities}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.morefacilities &&
+                      Boolean(formik.errors.morefacilities)
+                    }
+                    helperText="please seperate each facility with a comma. i.e Pool, Bar"
+                  />
+                </ThemeProvider>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { cookies, makeURL, set_cookie } from "../../Utils/common";
@@ -17,8 +17,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
 import { makeStyles } from "@mui/styles";
+import PreviewMultipleImages from "./PreviewMultipleImages";
 
-const datePickerTheme = createTheme({
+const textfieldTheme = createTheme({
   palette: {
     primary: {
       main: "#cd9a2b",
@@ -56,6 +57,7 @@ const validationSchema = yup.object({
   email: yup.string().email("Invalid email address").required("Required"),
   phone: yup.number().required("Required!"),
   description: yup.string().max(500, "Can't be more than 500 characters."),
+  morefacilities: yup.string().matches(/^[0-9a-zA-Z,]+$/, "Please enter your information correctly."),
 });
 
 function Edithotel(props) {
@@ -67,6 +69,7 @@ function Edithotel(props) {
   const [checkout, setCheckout] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  let newfacilities = ""
 
   const styles = makeStyles(() => ({
     root: {
@@ -85,6 +88,7 @@ function Edithotel(props) {
       email: "",
       phone: "",
       description: "",
+      morefacilities: "",
     },
     validationSchema: validationSchema,
   });
@@ -118,20 +122,22 @@ function Edithotel(props) {
                 </label>
               </div>
               <div className="col-lg-9">
-                <TextField
-                  required
-                  fullWidth
-                  placeholder="Something hotel"
-                  id="name"
-                  size="small"
-                  label="Name"
-                  InputLabelProps={{ shrink: true }}
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.name && Boolean(formik.errors.name)}
-                  helperText={formik.touched.name && formik.errors.name}
-                />
+                <ThemeProvider theme={textfieldTheme}>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="Something hotel"
+                    id="name"
+                    size="small"
+                    label="Name"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
+                  />
+                </ThemeProvider>
               </div>
             </div>
           </div>
@@ -145,7 +151,7 @@ function Edithotel(props) {
                   for="exampleFormControlInput2"
                   className="ms-2 mt-1 form-label"
                 >
-                  Picture
+                  Header picture
                 </label>
               </div>
               <div className="col-lg-9">
@@ -187,22 +193,24 @@ function Edithotel(props) {
                 </label>
               </div>
               <div className="col-lg-9">
-                <TextField
-                  required
-                  fullWidth
-                  placeholder="London, 22B Baker street"
-                  id="address"
-                  size="small"
-                  label="Address"
-                  InputLabelProps={{ shrink: true }}
-                  value={formik.values.address}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.address && Boolean(formik.errors.address)
-                  }
-                  helperText={formik.touched.address && formik.errors.address}
-                />
+                <ThemeProvider theme={textfieldTheme}>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="London, 22B Baker street"
+                    id="address"
+                    size="small"
+                    label="Address"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.address}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.address && Boolean(formik.errors.address)
+                    }
+                    helperText={formik.touched.address && formik.errors.address}
+                  />
+                </ThemeProvider>
               </div>
             </div>
           </div>
@@ -284,7 +292,7 @@ function Edithotel(props) {
                 <div className="row">
                   <div className="col-lg-6">
                     <div className="col-lg-12 checkin-inp">
-                      <ThemeProvider theme={datePickerTheme}>
+                      <ThemeProvider theme={textfieldTheme}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                           <DatePicker
                             label="Checkin date"
@@ -308,7 +316,7 @@ function Edithotel(props) {
                   </div>
                   <div className="col-lg-6">
                     <div className="col-lg-12 mt-2 mt-lg-0 checkout-inp">
-                      <ThemeProvider theme={datePickerTheme}>
+                      <ThemeProvider theme={textfieldTheme}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                           <DatePicker
                             label="Checkout date"
@@ -348,20 +356,22 @@ function Edithotel(props) {
                 </label>
               </div>
               <div className="col-lg-9">
-                <TextField
-                  required
-                  fullWidth
-                  placeholder="09912141869"
-                  id="phone"
-                  size="small"
-                  label="Phone number"
-                  InputLabelProps={{ shrink: true }}
-                  value={formik.values.phone}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.phone && Boolean(formik.errors.phone)}
-                  helperText={formik.touched.phone && formik.errors.phone}
-                />
+                <ThemeProvider theme={textfieldTheme}>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="09912141869"
+                    id="phone"
+                    size="small"
+                    label="Phone number"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.phone && Boolean(formik.errors.phone)}
+                    helperText={formik.touched.phone && formik.errors.phone}
+                  />
+                </ThemeProvider>
               </div>
             </div>
           </div>
@@ -379,20 +389,22 @@ function Edithotel(props) {
                 </label>
               </div>
               <div className="col-lg-9">
-                <TextField
-                  required
-                  fullWidth
-                  placeholder="yf7901@gamil.com"
-                  id="email"
-                  size="small"
-                  label="Email"
-                  InputLabelProps={{ shrink: true }}
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
-                />
+                <ThemeProvider theme={textfieldTheme}>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="yf7901@gamil.com"
+                    id="email"
+                    size="small"
+                    label="Email"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                  />
+                </ThemeProvider>
               </div>
             </div>
           </div>
@@ -410,24 +422,26 @@ function Edithotel(props) {
                 </label>
               </div>
               <div className="col-lg-9">
-                <TextField
-                  fullWidth
-                  id="description"
-                  placeholder=""
-                  multiline
-                  autoComplete="description"
-                  label="Description"
-                  InputLabelProps={{ shrink: true }}
-                  inputProps={{ maxLength: CHARACTER_LIMIT }}
-                  value={formik.values.description}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.description &&
-                    Boolean(formik.errors.description)
-                  }
-                  helperText={`${formik.values.description.length}/${CHARACTER_LIMIT}`}
-                />
+                <ThemeProvider theme={textfieldTheme}>
+                  <TextField
+                    fullWidth
+                    id="description"
+                    placeholder=""
+                    multiline
+                    autoComplete="description"
+                    label="Description"
+                    InputLabelProps={{ shrink: true }}
+                    inputProps={{ maxLength: CHARACTER_LIMIT }}
+                    value={formik.values.description}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.description &&
+                      Boolean(formik.errors.description)
+                    }
+                    helperText={`${formik.values.description.length}/${CHARACTER_LIMIT}`}
+                  />
+                </ThemeProvider>
               </div>
             </div>
           </div>
@@ -436,7 +450,7 @@ function Edithotel(props) {
 
           <div className="mb-3 col-12">
             <div className="row">
-              <div className="col-lg-2 col-md-3">
+              <div className="col-lg-2 col-md-3 ">
                 <label
                   for="exampleFormControlTextarea1"
                   className="ms-2 form-label"
@@ -455,17 +469,26 @@ function Edithotel(props) {
                   getOptionLabel={(option) => option}
                   filterSelectedOptions
                   renderInput={(params) => (
-                    <TextField
-                      fullWidth
-                      required
-                      {...params}
-                      label="Facilities"
-                    />
+                    <ThemeProvider theme={textfieldTheme}>
+                      <TextField
+                        fullWidth
+                        required
+                        {...params}
+                        label="Facilities"
+                      />
+                    </ThemeProvider>
                   )}
                 />
               </div>
             </div>
           </div>
+
+          <hr class="dashed"></hr>
+
+          <div className="mb-3 col-12">
+            <PreviewMultipleImages />
+          </div>
+
           <div className="row mt-2 d-fit-content">
             <div className="col-4"></div>
             <div className="col-4"></div>
