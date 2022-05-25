@@ -16,8 +16,14 @@ import IncreaseCredit from "./components/Profile/IncreaseCredit";
 import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
 import reservation from './components/Reservation/reservation';
-import Edithotel from "./components/Adminpanel/Edithotel";
-import Createroom from "./components/Adminpanel/Createroom";
+import Edithotel from "./components/AdminPanel/Pages/Edithotel";
+import Createroom from "./components/AdminPanel/Pages/Createroom";
+import Statistics from "./components/AdminPanel/Pages/Statistics";
+import RoomsStatus from "./components/AdminPanel/Pages/RoomsStatus";
+import "./components/AdminPanel/style/adminpanel.scss";
+import "./components/AdminPanel/style/widget.scss";
+import "./components/AdminPanel/style/chart.scss";
+import "./components/AdminPanel/style/roomStatus.scss";
 import "./css/Navbar.css";
 import "./css/Homepage.css";
 import "./css/Verify.css";
@@ -29,17 +35,16 @@ import "./css/Reserve.css";
 import "./css/Hotelpage.css";
 import "./css/Hotelpage2.css";
 import "./css/Edithotel.css";
+import "./css/Edithotel.css"
 
 function App() {
   return (
-    <div className="App">
+    <div className="App h-100">
       <Navbar />
       <BrowserRouter>
         <Switch>
           <Route exact path="/hotelcard" component={Hotelcard} />
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/edithotel" component={Edithotel} />
-          <Route exact path="/createroom" component={Createroom} />
           <Route
             exact
             path="/profile/IncreaseCredit"
@@ -58,10 +63,30 @@ function App() {
             component={account_activation}
           />
           <Route
-						exact
-						path="/reserve/:price_per_day/:name/:city/:id"
-						component={reservation}
-					/>
+            exact
+            path="/reserve/:price_per_day/:name/:city/:id"
+            component={reservation}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/statistics"
+            component={Statistics}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/createrooom"
+            component={Createroom}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/edithotel"
+            component={Edithotel}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/roomsstatus"
+            component={RoomsStatus}
+          />
         </Switch>
       </BrowserRouter>
       <Footer />

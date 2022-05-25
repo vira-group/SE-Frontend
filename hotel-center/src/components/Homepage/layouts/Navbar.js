@@ -21,6 +21,7 @@ class Navbar extends Component {
       anchorEl: null,
       open: Boolean(null),
       navbarExpand: true,
+      isAdminPanelPage: false,
     };
   }
 
@@ -34,6 +35,10 @@ class Navbar extends Component {
       : this.setState({
           navbarExpand: true,
         });
+
+    this.setState({
+      isAdminPanelPage: window.location.pathname.includes("adminpanel"),
+    });
 
     me().then((response) => {
       this.setState({ is_loggedin: response });
@@ -94,7 +99,9 @@ class Navbar extends Component {
     return (
       <nav
         className={
-          this.state.navbarMoved
+          this.state.isAdminPanelPage
+            ? "d-none"
+            : this.state.navbarMoved
             ? "navbar navbar-expand-lg navbar-light sticky-top nav-scrolled w-100 nav-style"
             : "navbar navbar-expand-lg navbar-light sticky-top nav-top w-100 nav-style"
         }
@@ -123,35 +130,7 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="ms-auto pt-3 pt-sm-0">
               <ul className="navbar-nav">
-                {/* <li className="nav-item dropdown">
-                  <a
-                    className="nav-link dropdown-toggle nav-menu-style"
-                    href="#"
-                    id="navbarDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Dropdown
-                  </a>
-
-                  <ul
-                    className="dropdown-menu mt-2"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                  </ul>
-                </li> */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a
                     className="nav-link nav-menu-style"
                     aria-current="page"
@@ -179,7 +158,7 @@ class Navbar extends Component {
                   <a className="nav-link nav-menu-style" href="#">
                     Favorites
                   </a>
-                </li>
+                </li> */}
                 {!this.state.is_loggedin ? (
                   <Fragment>
                     {/*  {this.state.navbarExpand ? <Fragment /> : <hr />} */}
