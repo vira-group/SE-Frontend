@@ -88,33 +88,44 @@ export default class Stepper extends Component {
 		const { direction, stepColor } = this.props;
 		const { steps } = this.state;
 		const stepsJSX = steps.map((step, index) => {
+
+
 			return (
-				<div className="step-wrapper  mt-5" key={index}>
-					<div className="row" />
 
-					<div className="row">
-						<div className="col-md-1" />
-						<div className="col-md-1">
-							<div
-								className={`step-number ${step.selected
-									? 'step-number-selected'
-									: 'step-number-disabled'}`}
-								style={{ background: `${step.selected ? stepColor : 'none'}` }}
-							>
-								{step.completed ? <span>&#10003;</span> : index + 1}
-							</div>
-						</div>
-						<div className="col-md-2">
-							{/* <div className={`step-description ${step.highlighted && 'step-description-active'}`}>
-								{step.description}
-							</div> */}
 
-							{index !== steps.length - 1 && (
-								<div className={`divider-line divider-line-${steps.length}`} />
-							)} 
-						</div>
-						<div className="col-md-1" />
+				
+
+
+<div className="step-wrapper  mt-5" key={index}>
+				
+
+<div className="row">
+	
+</div>
+
+
+
+
+
+					<div
+						className={`step-number ${step.selected ? 'step-number-selected' : 'step-number-disabled'}`}
+						style={{ background: `${step.selected ? stepColor : 'none'}` }}
+					>
+
+
+						{step.completed ? <span>&#10003;</span> : index + 1}
 					</div>
+					
+					
+					
+					<div className={`step-description ${step.highlighted && 'step-description-active'}`}>
+						{step.description}
+					</div>
+					
+					
+					{index !== steps.length - 1 && <div className={`divider-line divider-line-${steps.length}`} />}
+				
+				
 				</div>
 			);
 		});
