@@ -11,12 +11,12 @@ import {
 } from "react-pro-sidebar";
 import { logout } from "../../../Utils/connection";
 import Logo from "../../../statics/logo/logo2.png";
-import DiamondIcon from "@mui/icons-material/Diamond";
-// import SpeedIcon from "@mui/icons-material/Speed";
+import BubbleChartIcon from "@mui/icons-material/BubbleChart";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import LogoutIcon from "@mui/icons-material/Logout";
+import EditIcon from "@mui/icons-material/Edit";
 import KingBedIcon from "@mui/icons-material/KingBed";
-import ApartmentIcon from "@mui/icons-material/Apartment";
+import DomainAddIcon from "@mui/icons-material/DomainAdd";
 
 export default function Sidebar(props) {
   const handleLogout = () => {
@@ -38,28 +38,26 @@ export default function Sidebar(props) {
       </SidebarHeader>
       <SidebarContent>
         <Menu iconShape="circle">
-          <MenuItem icon={<ApartmentIcon />}>
-            <Link to="/profile/IncreaseCredit">
-              <p className="mb-0">Hotels</p>
+          <MenuItem icon={<BubbleChartIcon />}>
+            <Link to={`/adminpanel/${props.id}/statistics`}>
+              <p className="mb-0">Statistics</p>
             </Link>
           </MenuItem>
           <MenuItem icon={<KingBedIcon />}>
-            <Link to="#">
-              <p className="mb-0">Rooms</p>
+            <Link to={`/adminpanel/${props.id}/roomsstatus`}>
+              <p className="mb-0">Rooms status</p>
             </Link>
           </MenuItem>
-          <SubMenu title="Components" icon={<DiamondIcon />}>
-            <MenuItem>
-              <Link to="#">
-                <p className="mb-0">Component 1</p>
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="#">
-                <p className="mb-0">Component 2</p>
-              </Link>
-            </MenuItem>
-          </SubMenu>
+          <MenuItem icon={<DomainAddIcon />}>
+            <Link to={`/adminpanel/${props.id}/createrooom`}>
+              <p className="mb-0">Create room</p>
+            </Link>
+          </MenuItem>
+          <MenuItem icon={<EditIcon />}>
+            <Link to={`/adminpanel/${props.id}/edithotel`}>
+              <p className="mb-0">Edit hotel</p>
+            </Link>
+          </MenuItem>
           <MenuItem
             icon={<LogoutIcon />}
             onClick={() => {
@@ -70,7 +68,6 @@ export default function Sidebar(props) {
           </MenuItem>
         </Menu>
       </SidebarContent>
-
       <SidebarFooter
         style={{
           textAlign: "center",

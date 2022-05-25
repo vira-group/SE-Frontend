@@ -119,7 +119,7 @@ export const logout = async () => {
       message = true;
     })
     .then(() => {
-      window.location.reload();
+      window.location.href = "http://localhost:3000/";
     })
     .catch((error) => {
       // console.log(error);

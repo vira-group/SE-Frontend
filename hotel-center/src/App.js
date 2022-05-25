@@ -15,9 +15,13 @@ import Profile from "./components/Profile/Editprofile";
 import IncreaseCredit from "./components/Profile/IncreaseCredit";
 import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
-import reservation from './components/Reservation/reservation';
-import AdminPanel from "./components/AdminPanel/layout/AdminPanel";
+import reservation from "./components/Reservation/reservation";
+import Statistics from "./components/AdminPanel/Pages/Statistics";
+import RoomsStatus from "./components/AdminPanel/Pages/RoomsStatus";
 import "./components/AdminPanel/style/adminpanel.scss";
+import "./components/AdminPanel/style/widget.scss";
+import "./components/AdminPanel/style/chart.scss";
+import "./components/AdminPanel/style/roomStatus.scss";
 import "./css/Navbar.css";
 import "./css/Homepage.css";
 import "./css/Verify.css";
@@ -59,7 +63,26 @@ function App() {
             path="/reserve/:price_per_day/:name/:city/:id"
             component={reservation}
           />
-          <Route exact path="/adminpanel" component={AdminPanel} />
+          <Route
+            exact
+            path="/adminpanel/:id/statistics"
+            component={Statistics}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/createrooom"
+            component={Statistics}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/edithotel"
+            component={Statistics}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/roomsstatus"
+            component={RoomsStatus}
+          />
         </Switch>
       </BrowserRouter>
       <Footer />

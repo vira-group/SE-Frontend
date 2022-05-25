@@ -1,6 +1,6 @@
 $sidebar-bg-color: #f8f8f8 !default;
 $sidebar-color: #212529 !default;
-$sidebar-width: 270px !default;
+$sidebar-width: 250px !default;
 $sidebar-collapsed-width: 80px !default;
 $highlight-color: #cd9a2d !default;
 $submenu-bg-color: #f8f8f8 !default;
@@ -29,6 +29,15 @@ body {
   height: 100%;
   display: flex;
   position: relative;
+
+  .admin-content {
+    margin-left: $sidebar-width;
+  }
+
+  .pro-sidebar {
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    position: fixed;
+  }
 
   .pro-sidebar-header {
     padding: 24px;
@@ -64,6 +73,7 @@ body {
       }
     }
   }
+
   .adminpanel-header-mobile {
     display: flex;
     align-items: center;
@@ -71,6 +81,18 @@ body {
     padding: 15px;
     a {
       color: #212529;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .adminpanel-header-mobile {
+      padding: 0px;
+    }
+  }
+
+  @media screen and (max-width: 767.98px) {
+    .admin-content {
+      margin-left: 0;
     }
   }
 }
