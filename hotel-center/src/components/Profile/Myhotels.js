@@ -15,7 +15,7 @@ import image5 from "../../statics/img/pics/Amsterdom2.jpg";
 import MyhotelsCard from "./Myhotelscard";
 import Sidebar from "./Sidebar";
 
-export default function Myhotels() {
+export default function Myhotels(props) {
   const [hotel, setHotel] = useState(null);
 
   const header = {
@@ -25,23 +25,40 @@ export default function Myhotels() {
   };
 
   useEffect(() => {
-    // console.log(cookies.get("Authorization"));
     axios
-      .get(makeURL(references.url_allhotels), {
+      .get(makeURL(references.url_myhotels), {
         headers: {
           Authorization: cookies.get("Authorization"),
         },
       })
       .then((response) => {
-        setHotel(response.data);
-        console.log(response.data);
+        console.log("my hotels response: ", response.data.owners);
+        setHotel(response.data.owners)
+
       })
       .catch((error) => {
-        console.log(error);
+        console.log("error: ", error);
       });
-
-    // console.log(")))))))))) ");
   }, []);
+
+  // useEffect(() => {
+  //   // console.log(cookies.get("Authorization"));
+  //   axios
+  //     .get(makeURL(references.url_allhotels), {
+  //       headers: {
+  //         Authorization: cookies.get("Authorization"),
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setHotel(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+
+  //   // console.log(")))))))))) ");
+  // }, []);
 
   return (
     <div className="container">
@@ -51,24 +68,16 @@ export default function Myhotels() {
         </div>
         <div className="col-lg-9">
           <div class="row row-cols-1 row-cols-md-3 g-4">
-            {/* {listClasses.map((item) => {
-              <SingleFavoriteCard
-                img={item.img}
-                title={item.title}
-                description={item.description}
-                isFavorite={item.isFavorite}
-                id={item.id}
-              />;
-            })} */}
-            <MyhotelsCard
-              img={image1}
-              title="The landmark london"
-              description="In the heart of London's fashionable Marylebone, this deluxe
-              hotel has a stunning glass-roofed 8-story atrium with
-              towering palm trees, an award-winning restaurant, luxurious
-              bedrooms and an indoor..."
+            {hotel ? hotel.map((h) => (
+              <MyhotelsCard
+              img={references.base_url +  h.header}
+              title={h.name}
+              description= {h.description.slice(0, 250) + " ..."}
+              id = {h.id}
             />
-            <MyhotelsCard
+            )) : null}
+            
+            {/* <MyhotelsCard
               img={image2}
               title="The Montague Gardens"
               description="Overlooking private, secluded gardens, this 4-star luxury
@@ -89,28 +98,10 @@ export default function Myhotels() {
               description="Situated in the heart of the city centre, Eden Hotel
               Amsterdam offers warm-coloured rooms and free WiFi. The
               famous Rembrandt Square is right around the corner."
-            />
+            /> */}
           </div>
         </div>
       </div>
     </div>
   );
-  // hotel ? (
-  //   <div className="container">
-  //     <div className="row">
-  //       <div className="col-lg-3"></div>
-  //       <div className="col-lg-9">
-  //         <div className="row mt-5">
-  //           {hotel.map((h) => (
-  //             <Myhotelscard
-  //               description={h.description}
-  //               image={h.header}
-  //               name={h.name}
-  //             />
-  //           ))}
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // ) : null;
 }

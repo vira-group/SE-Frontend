@@ -50,7 +50,7 @@ const facilitieslist = [
 const validationSchema = yup.object({
   name: yup
     .string()
-    .max(15, "Must be 15 characters or less")
+    .max(30, "Must be 15 characters or less")
     .min(2, "Must be at least 2 characters")
     .required("Required!"),
   address: yup
@@ -60,16 +60,23 @@ const validationSchema = yup.object({
     .required("Required!"),
   email: yup.string().email("Invalid email address").required("Required"),
   phone: yup.number().required("Required!"),
-  description: yup.string().max(500, "Can't be more than 500 characters."),
-  morefacilities: yup
+  description: yup.string().max(1000, "Can't be more than 500 characters."),
+  country: yup
     .string()
-    .matches(/^[0-9a-zA-Z,]+$/, "Please enter your information correctly."),
+    .max(20, "Must be 20 characters or less")
+    .min(2, "Must be at least 2 characters")
+    .required("Required!"),
+  city: yup
+    .string()
+    .max(20, "Must be 20 characters or less")
+    .min(2, "Must be at least 2 characters")
+    .required("Required!"),
 });
 
 function Edithotel(props) {
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
-  const CHARACTER_LIMIT = 500;
+  const CHARACTER_LIMIT = 1000;
   const [type, setType] = useState(null);
   const [value, setValue] = useState(null);
   const [facilities, setFacilities] = useState([]);
@@ -77,7 +84,11 @@ function Edithotel(props) {
   const [checkout, setCheckout] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  let newfacilities = "";
+
+  let tempcheckin = checkin; // value from your state
+  let tempcheckout = checkout; // value from your state
+  let formattedcheckinDate = moment(tempcheckin).format("YYYY-MM-DD");
+  let formattedcheckoutDate = moment(tempcheckout).format("YYYY-MM-DD");
 
   const styles = makeStyles(() => ({
     root: {
@@ -100,7 +111,8 @@ function Edithotel(props) {
       email: "",
       phone: "",
       description: "",
-      morefacilities: "",
+      country: "",
+      city: ""
     },
     validationSchema: validationSchema,
   });
@@ -119,8 +131,104 @@ function Edithotel(props) {
     }
   }, [selectedImage]);
 
+  let hotelid = window.location.pathname.split("/")[2];
+
+  useEffect(() => {
+    let facilityarray = [];
+    console.log(hotelid);
+    axios
+      .get(makeURL(references.url_one_hotel + hotelid + "/"), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((res) => {
+        setValue(res.data);
+        console.log(res.data);
+        formik.setValues({
+          name: res.data.name || "",
+          address: res.data.address || "",
+          description: res.data.description || "",
+          phone: res.data.phone_numbers || "",
+          country: res.data.country || "",
+          city: res.data.city || "",
+        });
+        for (var i = 0; i < res.data.facilities.length; i++) {
+          facilityarray.push(res.data.facilities[i].name);
+        }
+        setFacilities(facilityarray || "");
+        setCheckin(res.data.start_date);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const handleClick = () => {
-    console.log("facilities: ", facilities);
+    let filled =
+      !Boolean(formik.errors.name) &&
+      !Boolean(formik.errors.address) &&
+      !Boolean(formik.errors.description) &&
+      !Boolean(formik.errors.phone) &&
+      !Boolean(formik.errors.country) &&
+      !Boolean(formik.errors.city) &&
+      type != null &&
+      facilities.length != 0 &&
+      formattedcheckinDate != "Invalid date" &&
+      formattedcheckoutDate != "Invalid date";
+    console.log("filled: ", filled);
+    console.log(
+      "informations validation: ",
+      !Boolean(formik.errors.name),
+      "\n",
+      !Boolean(formik.errors.address),
+      "\n",
+      !Boolean(formik.errors.description),
+      "\n",
+      !Boolean(formik.errors.phone),
+      "\n",
+      type,
+      "\n",
+      facilities.length,
+      "\n",
+      formattedcheckinDate,
+      "\n",
+      formattedcheckoutDate,
+      "\n",
+      !Boolean(formik.errors.name) &&
+        !Boolean(formik.errors.address) &&
+        !Boolean(formik.errors.description) &&
+        !Boolean(formik.errors.phone) &&
+        type != null &&
+        facilities.length != 0 &&
+        formattedcheckinDate != "Invalid date" &&
+        formattedcheckoutDate != "Invalid date"
+    );
+
+    if (filled) {
+      let form_data = new FormData();
+      form_data.append("name", formik.values.name);
+      form_data.append("address", formik.values.address);
+      form_data.append("description", formik.values.description);
+      form_data.append("facilities", facilities);
+      form_data.append("phone_number", formik.values.phone);
+      form_data.append("country", formik.values.country);
+      form_data.append("city", formik.values.city);
+
+
+      axios
+        .put(makeURL(references.url_one_hotel + hotelid + "/"), form_data, {
+          headers: {
+            Authorization: cookies.get("Authorization"),
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -320,6 +428,73 @@ function Edithotel(props) {
 
             <div className="mb-3 col-12">
               <div className="row">
+                <div className="col-lg-6">
+                  <div className="col-lg-2 col-md-3">
+                    <label
+                      for="exampleFormControlInput2"
+                      className="ms-2 mt-1 form-label"
+                    >
+                      Country
+                    </label>
+                  </div>
+                  <div className="col-lg-9">
+                    <ThemeProvider theme={textfieldTheme}>
+                      <TextField
+                        required
+                        fullWidth
+                        placeholder="USA"
+                        id="country"
+                        size="small"
+                        label="County"
+                        InputLabelProps={{ shrink: true }}
+                        value={formik.values.country}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={
+                          formik.touched.country && Boolean(formik.errors.country)
+                        }
+                        helperText={formik.touched.country && formik.errors.country}
+                      />
+                    </ThemeProvider>
+                  </div>
+                </div>
+                <div className="col-lg-6">
+                  <div className="col-lg-2 col-md-3">
+                    <label
+                      for="exampleFormControlInput2"
+                      className="ms-2 mt-1 form-label"
+                    >
+                      City
+                    </label>
+                  </div>
+                  <div className="col-lg-9">
+                    <ThemeProvider theme={textfieldTheme}>
+                      <TextField
+                        required
+                        fullWidth
+                        placeholder="New York"
+                        id="city"
+                        size="small"
+                        label="City"
+                        InputLabelProps={{ shrink: true }}
+                        value={formik.values.city}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={
+                          formik.touched.city && Boolean(formik.errors.city)
+                        }
+                        helperText={formik.touched.city && formik.errors.city}
+                      />
+                    </ThemeProvider>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="dashed"></hr>
+
+            <div className="mb-3 col-12">
+              <div className="row">
                 <div className="col-lg-2 col-md-3">
                   <label
                     for="exampleFormControlInput2"
@@ -506,6 +681,7 @@ function Edithotel(props) {
                   <Autocomplete
                     multiple
                     id="facilities"
+                    value={facilities}
                     options={facilitieslist}
                     onChange={(event, value) => {
                       setFacilities(value);

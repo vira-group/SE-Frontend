@@ -91,6 +91,9 @@ const validationSchema = yup.object({
     .min(1, "Can't be 0.")
     .max(999999, "Not possible.")
     .required("Required!"),
+  morefacilities: yup
+    .string()
+    .matches(/^[0-9a-zA-Z,]+$/, "Please enter your information correctly."),
 });
 
 function Createroom(props) {
@@ -129,6 +132,7 @@ function Createroom(props) {
       view: "",
       sleeps: "",
       price: "",
+      morefacilities: "",
     },
     validationSchema: validationSchema,
   });

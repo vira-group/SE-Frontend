@@ -18,7 +18,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
 import Sidebar from "./Sidebar";
-import image1 from "../../statics/img/Landmark/h1.jpg"
+import image1 from "../../statics/img/pics/avatar.jpg";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -97,7 +97,7 @@ function Profile(props) {
           aboutme: res.data.description || "",
           telephone: "",
         });
-        setSelectedImage(res.data.avatar || "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp")
+        setSelectedImage(res.data.avatar)
         setBirthdate(res.data.birthday || "");
         setGenValue(res.data.gender || "");
       });
@@ -173,11 +173,20 @@ function Profile(props) {
             <div className="row">
               <div className="col-lg-3">
                 <div className="profile-img">
-                  <img
+                  {selectedImage !== null ? (
+                    <img
                     src={"http://127.0.0.1:8000" + selectedImage}
                     className="rounded-circle"
                     alt="Avatar"
                   />
+                  ) : (
+                    <img
+                    src={image1}
+                    className="rounded-circle default"
+                    alt="Avatar"
+                  />
+                  )}
+                  
                 </div>
               </div>
               <div className="col-lg-8">

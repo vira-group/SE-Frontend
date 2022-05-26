@@ -10,6 +10,13 @@ import "../../css/Profile.css";
 export default function Myhotelscard(props) {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
 
+  const handleClick = () => {
+    let hotelid = props.id;
+    console.log('hotel id: ', hotelid);
+    const url = "http://localhost:3000/adminpanel/" + hotelid + "/statistics";
+    window.location.href = url;
+  }
+
   return (
     <div class="col">
       <div class="card h-100">
@@ -19,7 +26,7 @@ export default function Myhotelscard(props) {
           <p class="card-text">{props.description}</p>
         </div>
         <div className="card-footer myhotels">
-          <button type="button" className="btn btn-primary view-hotel-button">
+          <button type="button" className="btn btn-primary view-hotel-button" onClick={handleClick}>
             View details
           </button>
         </div>
