@@ -222,6 +222,7 @@ class Reservation extends React.Component {
 	render() {
 		console.log(this.state.ischeck1);
 		this.state.get_price = this.calculatePrice();
+		console.log(this.state.phone);
 		return (
 			<div>
 				{/* <div /> */}
@@ -312,10 +313,18 @@ class Reservation extends React.Component {
 							</button>
 						</div>
 
+
+
+
+
 						<div className="col-12 col-lg-4">
 							<div className="card-containter ">
 								<div className="card-body">
 									<div class="shadow p-3 mb-5 bg-body rounded">
+
+
+
+									
 										<div className="row   m-3">
 											<div className="col" style={{ display: 'flex', alignItems: 'left' }}>
 												<div
@@ -405,10 +414,12 @@ class Reservation extends React.Component {
 											<div className="col col-sm-8 " style={{ fontWeight: 'bold' }}>
 												<span className="ms-2"> Number of passengers : </span>
 											</div>
-											<div style={{ justifyContent: 'end', color: 'grey' }}>
-												{' '}
+											
+											
+											<div   style={{  color: 'grey' }}>
 												{JSON.parse(localStorage.getItem('i3'))}
 											</div>
+										
 										</div>
 
 										<div className="">
@@ -588,56 +599,6 @@ class Reservation extends React.Component {
 										</div>
 									</div>
 									<div class="col-md-4 ">
-										<PhoneInput
-											country={'us'}
-											value={this.state.phone}
-											onChange={(phone) => this.setState({ phone })}
-										/>
-
-										<input
-											required
-											fullWidth
-											id="phone"
-											label="phone"
-											name="phone"
-											autoComplete="text"
-											placeholder="0999-999-9999*"
-											className={
-												this.state.error.phone.p1.length > 0 ||
-												this.state.error.phone.p3.length > 0 ||
-												this.state.error.phone.p2.length > 0 ? (
-													'is-invalid form-control'
-												) : (
-													'form-control'
-												)
-											}
-											value={this.state['phone']}
-											onChange={this.formValChange}
-										/>
-
-										<div className="mt-3 ">
-											{this.state.error.phone.p1.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p1}
-													<br />
-												</p>
-											)}
-
-											{this.state.error.phone.p3.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p3}
-													<br />
-												</p>
-											)}
-											{this.state.error.phone.p2.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p2}
-													<br />
-												</p>
-											)}
-										</div>
-									</div>
-									<div class="col-md-4 ">
 										<input
 											required
 											fullWidth
@@ -672,6 +633,41 @@ class Reservation extends React.Component {
 												</p>
 											)}
 										</div>
+									</div>
+									<div class="col-md-4 ">
+											<PhoneInput
+											country={'us'}
+											id="phone"
+											label="phone"
+											name="phone"
+											fullWidth
+											required
+											value={this.state['phone']}
+											onChange={(phone) => this.setState({ phone })}
+										/>
+
+										{/* 										
+										<div className="mt-3 ">
+											{this.state.error.phone.p1.length > 0 && (
+												<p className="err">
+													{this.state.error.phone.p1}
+													<br />
+												</p>
+											)}
+
+											{this.state.error.phone.p3.length > 0 && (
+												<p className="err">
+													{this.state.error.phone.p3}
+													<br />
+												</p>
+											)}
+											{this.state.error.phone.p2.length > 0 && (
+												<p className="err">
+													{this.state.error.phone.p2}
+													<br />
+												</p>
+											)}
+										</div> */}
 									</div>
 									<div className="">
 										<hr className="hr-text" />

@@ -8,8 +8,6 @@ import RoomIcon from '@material-ui/icons/Room';
 
 
 
-
-
 class CreateHotel extends Component {
 	constructor(props) {
 		super(props);

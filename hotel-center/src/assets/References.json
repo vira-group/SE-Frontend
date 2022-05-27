@@ -13,5 +13,7 @@
   "url_hotelrooms": "/hotel/room/",
   "url_reserveroom" : "/hotel/reserve/",
   "url_edit_profile": "/accounts/users/me/",
-  "url_hotel_search": "/hotel/1/search/"
+  "url_hotel_search": "/hotel/1/search/",
+  "url_hotel_search": ""
+
 }
