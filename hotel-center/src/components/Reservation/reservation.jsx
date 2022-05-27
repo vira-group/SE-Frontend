@@ -5,9 +5,12 @@ import { one_room_reserve, room_image } from '../../Utils/connection';
 import references from '../../assets/References.json';
 import { cookies, makeURL } from '../../Utils/common';
 import axios from 'axios';
-import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
-import Popup from "./Popup.jsx" ;
+
+import Popup from './Popup.jsx';
+
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
 
@@ -34,7 +37,7 @@ class Reservation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			err  : "" ,
+			err: '',
 			start_day: '2022-05-18',
 			end_day: '2022-05-23',
 			price_per_day: '1',
@@ -100,22 +103,24 @@ class Reservation extends React.Component {
 			fields['phone'] = '';
 			fields['nationalcode'] = '';
 			this.setState({ fields: fields });
-	
-			console.log( one_room_reserve(
-				JSON.parse(localStorage.getItem('i1')).split('T')[0],
-				JSON.parse(localStorage.getItem('i2')).split('T')[0],
-				this.state.fields['firstname'],
-				this.state.fields['lastname'],
-				this.state.room,
-				this.state.price_per_day,
-				this.state.fields['nationalcode'],
-				this.state.fields['phone']
-			));
+
+			console.log(
+				one_room_reserve(
+					JSON.parse(localStorage.getItem('i1')).split('T')[0],
+					JSON.parse(localStorage.getItem('i2')).split('T')[0],
+					this.state.fields['firstname'],
+					this.state.fields['lastname'],
+					this.state.room,
+					this.state.price_per_day,
+					this.state.fields['nationalcode'],
+					this.state.fields['phone']
+				)
+			);
 
 			// console.log("ddddddssdsd" , is_sent) ;
 		}
 	}
-	
+
 	async componentDidMount() {
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
 		var splitted = window.location.toString().split('/');
@@ -219,13 +224,10 @@ class Reservation extends React.Component {
 		this.state.get_price = this.calculatePrice();
 		return (
 			<div>
-
-
-
 				{/* <div /> */}
-{/* <div><Popup  data={this.state}></Popup> </div> */}
-		
-<div className="containter m-5">
+				{/* <div><Popup  data={this.state}></Popup> </div> */}
+
+				<div className="containter m-5">
 					<div className="row justify-content-center">
 						<div
 							id="carouselExampleIndicators"
@@ -587,9 +589,9 @@ class Reservation extends React.Component {
 									</div>
 									<div class="col-md-4 ">
 										<PhoneInput
-											placeholder="Enter phone number"
-											onChange={this.formValChange}
-											value={this.state['phone']}
+											country={'us'}
+											value={this.state.phone}
+											onChange={(phone) => this.setState({ phone })}
 										/>
 
 										<input
@@ -786,10 +788,6 @@ class Reservation extends React.Component {
 						</div>
 					</div>
 				</div>
-		
-		
-		
-		
 			</div>
 		);
 	}

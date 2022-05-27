@@ -10,7 +10,6 @@ import RoomIcon from '@material-ui/icons/Room';
 
 
 
-
 class CreateHotel extends Component {
 	constructor(props) {
 		super(props);
@@ -19,6 +18,11 @@ class CreateHotel extends Component {
 	render() {
 		return (
 			<div class=" bg-white">
+
+
+
+
+
 				<div className="container ">
 					<div className="row align-items-center ">
 						{/* <div class="p-3  rounded ms-3" > */}
