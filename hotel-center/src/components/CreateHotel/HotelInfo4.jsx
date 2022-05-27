@@ -7,9 +7,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-import Image_upload from "./Image_upload"
-import Countries from "./Countries"
-import Facilities from "./Facilities" ;
+import Image_upload from './Image_upload';
+import Countries from './Countries';
+import Facilities from './Facilities';
 const datePickerTheme = createTheme({
 	palette: {
 		primary: {
@@ -143,153 +143,15 @@ class HotelInfo extends React.Component {
 				<br />
 				<br />
 				<br />
-				<br />
 				<form noValidate onSubmit={this.onSubmit} className="row g-3 needs-validation mx-3">
 					<div className="row">
-							
+					
 					<div className="col-md-1 ">
 						</div>
-			
-						<div className="col-md-7">
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Name :</label>
-								</div>
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="Name"
-										label="Name"
-										name="Name"
-										placeholder="Name*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-											this.state.error.Name.u1.length > 0 ||
-											this.state.error.Name.u2.length > 0 ? (
-												'is-invalid form-control lg'
-											) : (
-												'form-control'
-											)
-										}
-										value={this.state['Name']}
-										onChange={this.formValChange}
-									/>
-									<div className="mt-3 ">
-										{this.state.error.Name.u1.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u1}
-												<br />
-											</p>
-										)}
-										{this.state.error.Name.u2.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u2}
-												<br />
-											</p>
-										)}
-									</div>
-								</div>
-							</div>
-
-							<hr class="dashed" />
-
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Country :</label>
-								</div>
-								<div className="col-md-8">
-						
-						
-					
-								
-					<div
-					>
-					<Countries></Countries>
-					
-					
-					</div>
-								</div>
-							</div>
-
-							<hr class="dashed" />
-
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">State :</label>
-								</div>
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="State"
-										label="State"
-										name="State"
-										placeholder="State*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-											this.state.error.Name.u1.length > 0 ||
-											this.state.error.Name.u2.length > 0 ? (
-												'is-invalid form-control lg'
-											) : (
-												'form-control'
-											)
-										}
-										value={this.state['State']}
-										onChange={this.formValChange}
-									/>
-								</div>
-							</div>
-
-							<hr class="dashed" />
-
-
-	
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Address :</label>
-								</div>
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="Address"
-										label="Address"
-										name="Address"
-										placeholder="Address*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-												'form-control'
-											
-										}
-										value={this.state['Address']}
-										onChange={this.formValChange}
-									/>
-									{/* <div className="mt-3 ">
-										{this.state.error.Name.u1.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u1}
-												<br />
-											</p>
-										)}
-										{this.state.error.Name.u2.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u2}
-												<br />
-											</p>
-										)}
-									</div> */}
-								</div>
-							</div>
-	
-	
-	
+						<div className="col-md-5 ">
+							<Facilities />
+						</div>
+						<div className="col-md-2 ">
 						</div>
 						<div className="col-md-4">
 							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
@@ -304,7 +166,6 @@ class HotelInfo extends React.Component {
 							</div>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		);

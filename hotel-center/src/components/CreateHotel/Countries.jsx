@@ -78,9 +78,26 @@ class Countries extends Component {
     return (
       <div>
         <CountryDropdown
+       
+       className={
+					
+          'form-control'
+
+      }
+
           value={country}
           onChange={(val) => this.selectCountry(val)} />
+      
+      
+      <br></br>
+      
         <RegionDropdown
+       
+       className={
+					
+          'form-control'
+
+      }
           country={country}
           value={region}
           onChange={(val) => this.selectRegion(val)} />

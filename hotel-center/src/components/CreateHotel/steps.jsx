@@ -2,24 +2,22 @@ import Stepper from './Stepper';
 import React, { Component } from 'react';
 // import Country from "./Countries";
 
-
-
-
-
-
+import HotelInfo2 from './HotelInfo2';
+import HotelInfo3 from './HotelInfo3';
+import HotelInfo4 from './HotelInfo4';
 
 import HotelInfo from './HotelInfo';
+import '../../css/Profile.css';
 export default class steps extends Component {
+	// const [birthdate, setBirthdate] = useState(null);
 
-    // const [birthdate, setBirthdate] = useState(null);
-
-    constructor() {
+	constructor() {
 		super();
 
 		this.state = {
-			currentStep: 1
-
-			};
+			currentStep: 1,
+			page: null
+		};
 	}
 
 	handleClick(clickType) {
@@ -36,7 +34,15 @@ export default class steps extends Component {
 
 	render() {
 		const { currentStep } = this.state;
-
+		if (this.state.currentStep === 1) {
+			this.state.page = <HotelInfo />;
+		} else if (this.state.currentStep === 2) {
+			this.state.page = <HotelInfo2 />;
+		} else if (this.state.currentStep === 3) {
+			this.state.page = <HotelInfo3 />;
+		} else if (this.state.currentStep === 4) {
+			this.state.page = <HotelInfo4 />;
+		}
 		return (
 			<div className="containter m-5">
 				<div className="row justify-content-center">
@@ -49,12 +55,40 @@ export default class steps extends Component {
 										currentStepNumber={currentStep - 1}
 										steps={stepsArray}
 										stepColor="#cd9a2d"
+							
+							
+							
 									/>
+
+									<br></br>
+									
+								{this.state.page}
+							
+									<br></br>
+								<div className="row">
+								<div className="col-md-1"></div>
+									<div className="col-md-1 edit-profile ms-4">
+										<button
+											className="btn edit-hotel"
+											//   onClick={handleClick}
+											onClick={() => this.handleClick()}
+										>
+											Previous
+										</button>
+									</div>
+
+									<div className="col-md-1 edit-profile ms-1">
+										<button
+											className="btn edit-hotel"
+											//   onClick={handleClick}
+
+											onClick={() => this.handleClick('next')}
+										>
+											Next
+										</button>
+									</div>
 								</div>
-                                    <HotelInfo></HotelInfo>
-
-
-
+								</div>
 							</div>
 						</div>
 					</div>
@@ -64,77 +98,10 @@ export default class steps extends Component {
 	}
 }
 
-
-
 const stepsArray = [
 	// "Create your account",
-	'Add personal info',
-	'Add payment details',
-	'Complete registration',
-	'Registration complete'
+	'Initial Hotel info',
+	'Add details',
+	'Upload images',
+	'Hotel facilities'
 ];
-
-
-
-
-// import Stepper from './Stepper';
-// import React, { Component } from 'react';
-// // import Country from "./Countries";
-
-// import HotelInfo from './HotelInfo';
-// export default class CreateHotel extends Component {
-// 	constructor() {
-// 		super();
-
-// 		this.state = {
-// 			currentStep: 1
-
-// 			};
-// 	}
-
-// 	handleClick(clickType) {
-// 		const { currentStep } = this.state;
-// 		let newStep = currentStep;
-// 		clickType === 'next' ? newStep++ : newStep--;
-
-// 		if (newStep > 0 && newStep <= 5) {
-// 			this.setState({
-// 				currentStep: newStep
-// 			});
-// 		}
-// 	}
-
-// 	render() {
-// 		const { currentStep } = this.state;
-
-// 		return (
-// 			<div className="containter m-5">
-// 				<div className="row justify-content-center">
-// 					<div className="col-12 col-md-8">
-// 						<div className="card-body">
-// 							<div className="shadow p-3 mb-5 bg-body rounded">
-// 								<div className="stepper-container-horizontal">
-// 									<Stepper
-// 										direction="horizontal"
-// 										currentStepNumber={currentStep - 1}
-// 										steps={stepsArray}
-// 										stepColor="#cd9a2d"
-// 									/>
-// 								</div>
-// <HotelInfo></HotelInfo>
-// 							</div>
-// 						</div>
-// 					</div>
-// 				</div>
-// 			</div>
-// 		);
-// 	}
-// }
-
-// const stepsArray = [
-// 	// "Create your account",
-// 	'Add personal info',
-// 	'Add payment details',
-// 	'Complete registration',
-// 	'Registration complete'
-// ];

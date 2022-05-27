@@ -151,9 +151,71 @@ class HotelInfo extends React.Component {
 						</div>
 			
 						<div className="col-md-7">
+						<div className="row">
+								<div className="col-md-4">
+									<label className="ms-2 mt-1 form-label">check in range :</label>
+								</div>
+								<div className="col-md-8">
+									<ThemeProvider theme={datePickerTheme}>
+										<LocalizationProvider dateAdapter={AdapterDateFns}>
+											<DatePicker
+												label="Choose a date"
+												value={this.state.birthdate}
+												onChange={(newValue) => {
+													this.setBirthdate(newValue);
+												}}
+												renderInput={(params) => (
+													<TextField
+														{...params}
+														required
+														fullWidth
+														size="small"
+														variant="outlined"
+													/>
+												)}
+											/>
+										</LocalizationProvider>
+									</ThemeProvider>
+								</div>
+							</div>
+
+							<hr class="dashed" />
+					
 							<div className="row">
 								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Name :</label>
+									<label className="ms-2 mt-1 form-label">check out range :</label>
+								</div>
+								<div className="col-md-8">
+									<ThemeProvider theme={datePickerTheme}>
+										<LocalizationProvider dateAdapter={AdapterDateFns}>
+											<DatePicker
+												label="Choose a date"
+												value={this.state.birthdate}
+												onChange={(newValue) => {
+													this.setBirthdate(newValue);
+												}}
+												renderInput={(params) => (
+													<TextField
+														{...params}
+														required
+														fullWidth
+														size="small"
+														variant="outlined"
+													/>
+												)}
+											/>
+										</LocalizationProvider>
+									</ThemeProvider>
+								</div>
+							</div>
+
+
+
+							<hr class="dashed" />
+
+							<div className="row">
+								<div className="col-md-4">
+									<label className="ms-2 mt-1 form-label">Description :</label>
 								</div>
 								<div className="col-md-8">
 									{' '}
@@ -163,7 +225,7 @@ class HotelInfo extends React.Component {
 										id="Name"
 										label="Name"
 										name="Name"
-										placeholder="Name*"
+										placeholder="description*"
 										autoComplete="text"
 										aria-describedby="inputGroup-sizing-sm"
 										className={
@@ -193,102 +255,23 @@ class HotelInfo extends React.Component {
 									</div>
 								</div>
 							</div>
-
-							<hr class="dashed" />
-
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Country :</label>
-								</div>
-								<div className="col-md-8">
-						
-						
-					
-								
-					<div
-					>
-					<Countries></Countries>
-					
-					
-					</div>
-								</div>
-							</div>
-
-							<hr class="dashed" />
-
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">State :</label>
-								</div>
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="State"
-										label="State"
-										name="State"
-										placeholder="State*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-											this.state.error.Name.u1.length > 0 ||
-											this.state.error.Name.u2.length > 0 ? (
-												'is-invalid form-control lg'
-											) : (
-												'form-control'
-											)
-										}
-										value={this.state['State']}
-										onChange={this.formValChange}
-									/>
-								</div>
-							</div>
-
 							<hr class="dashed" />
 
 
-	
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Address :</label>
-								</div>
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="Address"
-										label="Address"
-										name="Address"
-										placeholder="Address*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-												'form-control'
-											
-										}
-										value={this.state['Address']}
-										onChange={this.formValChange}
-									/>
-									{/* <div className="mt-3 ">
-										{this.state.error.Name.u1.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u1}
-												<br />
-											</p>
-										)}
-										{this.state.error.Name.u2.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u2}
-												<br />
-											</p>
-										)}
-									</div> */}
-								</div>
-							</div>
-	
-	
+							{/* <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">Age</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={age}
+    label="Age"
+    onChange={handleChange}
+  >
+    <MenuItem value={10}>Ten</MenuItem>
+    <MenuItem value={20}>Twenty</MenuItem>
+    <MenuItem value={30}>Thirty</MenuItem>
+  </Select>
+</FormControl> */}
 	
 						</div>
 						<div className="col-md-4">
