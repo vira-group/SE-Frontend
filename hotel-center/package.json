@@ -25,6 +25,7 @@
     "formik": "^2.2.9",
     "jquery": "^3.6.0",
     "material-ui-dropzone": "^3.5.0",
+    "material-ui-phone-number": "^3.0.0",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",
     "node-sass": "^7.0.1",

@@ -211,6 +211,7 @@ export const one_room_reserve = async (
   phone_number
 ) => {
   let message = "";
+  let err = ""; 
   console.log(cookies.get("Authorization"));
   await axios
     .post(
@@ -234,9 +235,11 @@ export const one_room_reserve = async (
     .then((response) => {
       console.log(response);
       console.log("everything right");
-      message = response.data;
+      err = "everything right" ;
+      message = response.status;
     })
     .catch((error) => {
+      message = error.response.status ;
       if (error.response.status == 400) {
         window.alert("Please enter valid data.");
       }

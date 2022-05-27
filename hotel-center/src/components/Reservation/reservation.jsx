@@ -7,7 +7,7 @@ import { cookies, makeURL } from '../../Utils/common';
 import axios from 'axios';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-
+import Popup from "./Popup.jsx" ;
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
 
@@ -34,6 +34,7 @@ class Reservation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			err  : "" ,
 			start_day: '2022-05-18',
 			end_day: '2022-05-23',
 			price_per_day: '1',
@@ -100,7 +101,7 @@ class Reservation extends React.Component {
 			fields['nationalcode'] = '';
 			this.setState({ fields: fields });
 	
-			const is_sent = one_room_reserve(
+			console.log( one_room_reserve(
 				JSON.parse(localStorage.getItem('i1')).split('T')[0],
 				JSON.parse(localStorage.getItem('i2')).split('T')[0],
 				this.state.fields['firstname'],
@@ -109,7 +110,9 @@ class Reservation extends React.Component {
 				this.state.price_per_day,
 				this.state.fields['nationalcode'],
 				this.state.fields['phone']
-			);
+			));
+
+			// console.log("ddddddssdsd" , is_sent) ;
 		}
 	}
 	
@@ -216,9 +219,13 @@ class Reservation extends React.Component {
 		this.state.get_price = this.calculatePrice();
 		return (
 			<div>
-				<div />
 
-				<div className="containter m-5">
+
+
+				{/* <div /> */}
+{/* <div><Popup  data={this.state}></Popup> </div> */}
+		
+<div className="containter m-5">
 					<div className="row justify-content-center">
 						<div
 							id="carouselExampleIndicators"
@@ -779,6 +786,10 @@ class Reservation extends React.Component {
 						</div>
 					</div>
 				</div>
+		
+		
+		
+		
 			</div>
 		);
 	}
