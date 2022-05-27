@@ -99,17 +99,7 @@ class Reservation extends React.Component {
 			fields['phone'] = '';
 			fields['nationalcode'] = '';
 			this.setState({ fields: fields });
-			console.log(
-				'dataaaaaaaaa ',
-				JSON.parse(localStorage.getItem('i1')).split('T')[0],
-				JSON.parse(localStorage.getItem('i2')).split('T')[0],
-				this.state.fields['firstname'],
-				this.state.fields['lastname'],
-				this.state.room,
-				this.state.price_per_day,
-				this.state.fields['nationalcode'],
-				this.state.fields['phone']
-			);
+	
 			const is_sent = one_room_reserve(
 				JSON.parse(localStorage.getItem('i1')).split('T')[0],
 				JSON.parse(localStorage.getItem('i2')).split('T')[0],
@@ -122,6 +112,7 @@ class Reservation extends React.Component {
 			);
 		}
 	}
+	
 	async componentDidMount() {
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
 		var splitted = window.location.toString().split('/');
