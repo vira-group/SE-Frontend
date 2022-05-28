@@ -9,6 +9,9 @@ import BoyIcon from "@mui/icons-material/Boy";
 import EscalatorWarningIcon from "@mui/icons-material/EscalatorWarning";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import HomeIcon from "@mui/icons-material/Home";
+import axios from "axios";
+import { makeURL, cookies } from "../../../Utils/common";
+import references from "../../../assets/References.json";
 
 //name: month name   //Total: total income for that month
 const incomeData = [
@@ -41,10 +44,67 @@ const widgetData = {
 export default function Statistics() {
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
+  const [emptyRooms, setEmptyRooms] = useState(null);
+  const [fullRooms, setFullRooms] = useState(null);
+  const [incomes, setIncomes] = useState(null);
+  const [reserves, setReserves] = useState(null);
 
   useEffect(() => {
     setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
+    let hotelid = window.location.pathname.split("/")[2];
+    axios
+      .get(makeURL(references.url_admimpanel_mainpage + hotelid + "/"), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((res) => {
+        console.log(
+          "adminpanel res: ",
+          res.data.spaces_status.empty,
+          "\n",
+          res.data.incomes,
+          "\n",
+          res.data.reserves
+        );
+        setEmptyRooms(res.data.spaces_status.empty);
+        setFullRooms(res.data.spaces_status.full);
+        setIncomes(res.data.incomes);
+        setReserves(res.data.reserves);
+      })
+      .catch((err) => {
+        console.log("adminpanel err: ", err);
+      });
   }, []);
+
+  var singleroom = [];
+  var doubleroom = [];
+  var tripleroom = [];
+  var suiteroom = [];
+
+  if (emptyRooms) {
+    emptyRooms.forEach((erooms) => {
+      if (erooms.room_type === "singleRoom") {
+        singleroom.push(erooms.name);
+      } else if (erooms.room_type === "doubleRoom") {
+        doubleroom.push(erooms.name);
+      } else if (erooms.room_type === "tripleRoom") {
+        tripleroom.push(erooms.name);
+      } else {
+        suiteroom.push(erooms.name);
+      }
+    });
+  }
+  console.log(
+    "arrays for statistic: ",
+    singleroom,
+    "\n",
+    doubleroom,
+    "\n",
+    tripleroom,
+    "\n",
+    suiteroom
+  );
 
   const handleToggleSidebar = (value) => {
     setToggled(value);

@@ -23,6 +23,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PreviewMultipleImages from "./PreviewMultipleImages";
 import Sidebar from "../layout/Sidebar";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
+import { fontSize } from "@mui/system";
 
 const textfieldTheme = createTheme({
   palette: {
@@ -105,10 +106,11 @@ function Createroom(props) {
   const [facilities, setFacilities] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  const [t1, setT1] = useState("Single room");
-  const [t2, setT2] = useState("Double room");
-  const [t3, setT3] = useState("Triple room");
-  const [t4, setT4] = useState("Suite room");
+  const [roomid, setRoomid] = useState(null);
+  const t1 = "singleRoom";
+  const t2 = "doubleRoom";
+  const t3 = "tripleRoom";
+  const t4 = "suiteRoom";
 
   useEffect(() => {
     setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
@@ -127,7 +129,6 @@ function Createroom(props) {
   const formik = useFormik({
     initialValues: {
       number: "",
-      type: "",
       size: "",
       view: "",
       sleeps: "",
@@ -139,6 +140,7 @@ function Createroom(props) {
 
   const handletypeChange = (event) => {
     setType(event.target.value);
+    // console.log(event.target.value);
   };
 
   const handleIncludebreakfast = (event, newValue) => {
@@ -156,7 +158,76 @@ function Createroom(props) {
   // }, [selectedImage]);
 
   const handleClick = () => {
-    console.log("facilities: ", facilities);
+    let hotelid = window.location.pathname.split("/")[2];
+    let option = "";
+    includebreakfast === "Yes" ? (option = "Breakfast") : (option = "");
+    // console.log("type: ", type);
+    // console.log(formik.values.price,"\n", formik.values.size,"\n", formik.values.sleeps,
+    // "\n",type,"\n", formik.values.view,"\n", formik.values.morefacilities,"\n", option,
+    // "\n",facilities);
+    var allfacilities = [];
+    allfacilities = facilities.concat(formik.values.morefacilities.split(","));
+    // console.log("all facilities final: ",allfacilities);
+    var listForBack = [];
+    for (var i = 0; i < allfacilities.length; i++) {
+      let temp = { name: allfacilities[i] };
+      listForBack.push(temp);
+    }
+    console.log("result: ", listForBack);
+
+    axios
+      .post(
+        makeURL(references.url_hotelrooms + hotelid + "/"),
+        {
+          type: type,
+          size: formik.values.size,
+          view: formik.values.view,
+          sleeps: formik.values.sleeps,
+          price: formik.values.price,
+          option: option,
+          room_facilities: listForBack,
+        },
+        {
+          headers: {
+            Authorization: cookies.get("Authorization"),
+          },
+        }
+      )
+      .then((res) => {
+        console.log("response for createroom page: ", res.data);
+        setRoomid(res.data.id);
+      })
+      .catch((err) => {
+        console.log("error for createroom page: ", err);
+      });
+  };
+
+  const handleRoomSpaceClick = () => {
+    var roomSpaces = [];
+    var myarr = formik.values.number.split(",");
+    for (var j = 0; j < myarr.length; j++) {
+      let temp1 = { name: myarr[j] };
+      roomSpaces.push(temp1);
+    }
+    console.log("roomspaces: ", roomSpaces);
+    if (roomid) {
+      axios
+        .post(
+          makeURL(references.url_hotelrooms + roomid + "/spaces/"),
+          { names: roomSpaces },
+          {
+            headers: {
+              Authorization: cookies.get("Authorization"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log("response for adding room space: ", res.data);
+        })
+        .catch((err) => {
+          console.log("error for adding room space: ", err);
+        });
+    }
   };
 
   return (
@@ -185,78 +256,40 @@ function Createroom(props) {
             Create Room
           </h2>
           <div className="container mt-4 p-4 edit-hotel-form border">
-            <div className="row">
-              <div className="mb-3 col-md-6">
-                <div className="row">
-                  <div className="col-lg-3 col-md-4 mt-lg-3">
-                    <label
-                      for="exampleFormControlInput2"
-                      className="ms-2 mt-1 form-label"
-                    >
-                      Type of room
-                    </label>
-                  </div>
-                  <div className="col-lg-8 mt-lg-3">
-                    <ThemeProvider theme={textfieldTheme}>
-                      <FormControl fullWidth required>
-                        <InputLabel
-                          id="demo-simple-select-label"
-                          style={{ textAlign: "center" }}
-                        >
-                          Type
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          placeholder={t1}
-                          size="small"
-                          value="Single room"
-                          label="Type"
-                          onChange={handletypeChange}
-                        >
-                          <MenuItem value={t1}>Single room</MenuItem>
-                          <MenuItem value={t2}>Double room</MenuItem>
-                          <MenuItem value={t3}>Triple room</MenuItem>
-                          <MenuItem value={t4}>Suit room</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </ThemeProvider>
-                  </div>
+            <div className="mb-3 col-md-12">
+              <div className="row">
+                <div className="col-lg-2 col-md-3 mt-lg-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Type of room
+                  </label>
                 </div>
-              </div>
-
-              <div className="mb-3 col-md-6">
-                <div className="row mt-3">
-                  <div className="col-lg-3 col-md-4">
-                    <label
-                      for="exampleFormControlInput2"
-                      className="ms-2 mt-1 form-label"
-                    >
-                      Rooms number
-                    </label>
-                  </div>
-                  <div className="col-lg-8">
-                    <ThemeProvider theme={textfieldTheme}>
-                      <TextField
-                        required
-                        fullWidth
-                        placeholder="101,102,103"
-                        id="number"
-                        size="small"
-                        label="Room number"
-                        InputLabelProps={{ shrink: true }}
-                        value={formik.values.number}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={
-                          formik.touched.number && Boolean(formik.errors.number)
-                        }
-                        helperText={
-                          formik.touched.number && formik.errors.number
-                        }
-                      />
-                    </ThemeProvider>
-                  </div>
+                <div className="col-lg-9 mt-lg-3">
+                  <ThemeProvider theme={textfieldTheme}>
+                    <FormControl fullWidth required>
+                      <InputLabel
+                        id="demo-simple-select-label"
+                        style={{ textAlign: "center" }}
+                      >
+                        Type
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        placeholder=""
+                        value={type}
+                        label="Type"
+                        onChange={handletypeChange}
+                      >
+                        <MenuItem value={t1}>Single room</MenuItem>
+                        <MenuItem value={t2}>Double room</MenuItem>
+                        <MenuItem value={t3}>Triple room</MenuItem>
+                        <MenuItem value={t4}>Suit room</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </ThemeProvider>
                 </div>
               </div>
             </div>
@@ -519,6 +552,7 @@ function Createroom(props) {
                 </div>
               </div>
             </div>
+
             <hr class="dashed"></hr>
 
             <div className="mb-3 col-12">
@@ -531,6 +565,58 @@ function Createroom(props) {
               <div className="col-4 edit-hotel mb-3">
                 <button className="btn edit-hotel" onClick={handleClick}>
                   Create room
+                </button>
+              </div>
+            </div>
+
+            <hr class="dashed"></hr>
+
+            <div className="mb-3 col-md-12">
+              <div className="row mt-3">
+                <Typography sx={{ mb: 3 }}>
+                  Please first create your room and then add the numbers of rooms you have below.
+                </Typography>
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Room spaces
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <ThemeProvider theme={textfieldTheme}>
+                    <TextField
+                      required
+                      fullWidth
+                      placeholder="101,102,103"
+                      id="number"
+                      size="small"
+                      label="Room number"
+                      InputLabelProps={{ shrink: true }}
+                      value={formik.values.number}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.number && Boolean(formik.errors.number)
+                      }
+                      helperText={
+                        "Please seperate each room number with a comma. i,e 101,102"
+                      }
+                    />
+                  </ThemeProvider>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-4"></div>
+              <div className="col-4"></div>
+              <div className="col-4 edit-hotel mb-3">
+                <button
+                  className="btn edit-hotel"
+                  onClick={handleRoomSpaceClick}
+                >
+                  Add room spaces
                 </button>
               </div>
             </div>
