@@ -288,3 +288,49 @@ export const hotel_search = async (
     
   return mes;
 };
+
+export const create_hotel = async (
+  
+  name ,
+  city ,
+  state ,
+  address , 
+  description ,
+  phone_numbers ,
+  facilities 
+
+  ) => {
+  let message = "";
+  let err = ""; 
+  console.log(cookies.get("Authorization"));
+  await axios
+    .post(
+      makeURL(references.url_addhotel),
+      {
+        
+  name   :name,
+  city :city,
+  state :state,
+  address  : address, 
+  description : description,
+  phone_numbers :phone_numbers,
+  facilities: facilities 
+},
+      {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      }
+    )
+    .then((response) => {
+      console.log(response);
+      console.log("everything right");
+      message = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      message = false;
+    });
+
+  return message;
+};

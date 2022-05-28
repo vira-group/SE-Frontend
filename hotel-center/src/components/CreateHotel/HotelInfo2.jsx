@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-// import Image_upload from "./Image_upload"
-
 import { TextField, Grid } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-import Image_upload from "./Image_upload"
-import Countries from "./Countries"
-import Facilities from "./Facilities" ;
 const datePickerTheme = createTheme({
 	palette: {
 		primary: {
@@ -146,12 +141,22 @@ class HotelInfo extends React.Component {
 				<br />
 				<form noValidate onSubmit={this.onSubmit} className="row g-3 needs-validation mx-3">
 					<div className="row">
-							
-					<div className="col-md-1 ">
+						<div className="col-sm-1 " />
+
+						<div className="col-12  col-xl-4  d-xl-none mb-5">
+							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
+								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
+									Description :
+								</div>
+								<div className="row m-2">
+								Your accommodation will be displayed according to what you post on the site. Therefore, please enter the description realistically and in accordance with the site instructions to increase your chances of booking.	</div>
+							</div>
 						</div>
-			
-						<div className="col-md-7">
-						<div className="row">
+					
+					
+					
+						<div className="col-12 col-xl-7">
+							<div className="row">
 								<div className="col-md-4">
 									<label className="ms-2 mt-1 form-label">check in range :</label>
 								</div>
@@ -180,7 +185,7 @@ class HotelInfo extends React.Component {
 							</div>
 
 							<hr class="dashed" />
-					
+
 							<div className="row">
 								<div className="col-md-4">
 									<label className="ms-2 mt-1 form-label">check out range :</label>
@@ -209,14 +214,13 @@ class HotelInfo extends React.Component {
 								</div>
 							</div>
 
-
-
 							<hr class="dashed" />
 
 							<div className="row">
 								<div className="col-md-4">
 									<label className="ms-2 mt-1 form-label">Description :</label>
 								</div>
+
 								<div className="col-md-8">
 									{' '}
 									<input
@@ -257,7 +261,6 @@ class HotelInfo extends React.Component {
 							</div>
 							<hr class="dashed" />
 
-
 							{/* <FormControl fullWidth>
   <InputLabel id="demo-simple-select-label">Age</InputLabel>
   <Select
@@ -272,22 +275,18 @@ class HotelInfo extends React.Component {
     <MenuItem value={30}>Thirty</MenuItem>
   </Select>
 </FormControl> */}
-	
 						</div>
-						<div className="col-md-4">
+
+						<div className="col-12 col-xl-4 d-none d-xl-block">
 							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
 								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
 									Description :
 								</div>
 								<div className="row m-2">
-									Font Awesome 6 includes five icons styles: solid, regular, light, duotone, and the
-									new THIN style — not to mention all of our brand icons. And coming later in 2022 is
-									the entirely new SHARP family of styles.
-								</div>
+								Your accommodation will be displayed according to what you post on the site. Therefore, please enter the description realistically and in accordance with the site instructions to increase your chances of booking.		</div>
 							</div>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		);

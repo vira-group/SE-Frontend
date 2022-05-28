@@ -5,9 +5,7 @@ import { one_room_reserve, room_image } from '../../Utils/connection';
 import references from '../../assets/References.json';
 import { cookies, makeURL } from '../../Utils/common';
 import axios from 'axios';
-
 import Popup from './Popup.jsx';
-
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
@@ -121,6 +119,12 @@ class Reservation extends React.Component {
 		}
 	}
 
+
+
+
+
+
+
 	async componentDidMount() {
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
 		var splitted = window.location.toString().split('/');
@@ -159,6 +163,8 @@ class Reservation extends React.Component {
 				parseInt(this.state.price_per_day) +
 			'$';
 	}
+
+
 	formValChange = (e) => {
 		let fields = this.state.fields;
 		fields[e.target.name] = e.target.value;
@@ -195,7 +201,7 @@ class Reservation extends React.Component {
 				error.phone.p2 = value.length < 11 ? '*Too short for a phone number' : '';
 
 				error.phone.p3 = !value ? '*Password field must not be empty' : '';
-
+ 
 				break;
 
 			case 'nationalcode':

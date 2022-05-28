@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import pic from '../../statics/img/Hotel_Booking.gif';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import RoomServiceIcon from '@mui/icons-material/RoomService';
-
 import PaidIcon from '@mui/icons-material/Paid';
-import RoomIcon from '@material-ui/icons/Room';
-
-
 
 class CreateHotel extends Component {
 	constructor(props) {
@@ -16,18 +12,12 @@ class CreateHotel extends Component {
 	render() {
 		return (
 			<div class=" bg-white">
-
-
-
-
-
 				<div className="container ">
 					<div className="row align-items-center ">
 						{/* <div class="p-3  rounded ms-3" > */}
 						<div className="col-md-5 mb-md-0 mb-5 pb-md-0 pb-3 d-md-none">
 							<img
 								className="w-100 mx-md-0 mx-auto w3-animate-zoom"
-								// src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSev44Zk2qkotqm2DH-0qrckRiyH6kzjOIukQ&usqp=CAU"
 								src={pic}
 								style={{ borderRadius: '10%' }}
 								alt="Illustration"
@@ -36,7 +26,6 @@ class CreateHotel extends Component {
 						<div className="col-lg-6 offset-lg-1 col-md-7 text-md-start text-center">
 							<div className="mx-md-0 mx-auto">
 								<h2 className="mb-md-5 mb-4" 	style={{ fontWeight :'bolder', fontSize: '29px', fontFamily: 'serif' }}>Why Hotel Center</h2>
-
 								<div className="d-md-flex align-items-start d-block mb-4 pb-2">
 									<HandshakeIcon   style={{color : "#c99015"}} />{' '}
 									<div className="ps-md-2">
@@ -49,7 +38,6 @@ class CreateHotel extends Component {
 										<p className="mb-0 fs-sm">Your trust in us guarantees your credibility. </p>
 									</div>
 								</div>
-
 								<div className="d-md-flex align-items-start d-block mb-4 pb-2">
 									<RoomServiceIcon  style={{color : "#c99015"}}/>
 									<div className="ps-md-2">
@@ -64,7 +52,6 @@ class CreateHotel extends Component {
 										</p>
 									</div>
 								</div>
-
 								<div className="d-md-flex align-items-start d-block">
 									<PaidIcon  style={{color : " #c99015"}} />
 									<div className="ps-md-2">
@@ -81,11 +68,9 @@ class CreateHotel extends Component {
 								</div>
 							</div>
 						</div>
-						{/* </div> */}
 						<div className="d-none d-md-block col-md-5 mb-md-0 mb-5 pb-md-0 pb-3">
 							<img
 								className="w-100 mx-md-0 mx-auto w3-animate-zoom"
-								// src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSev44Zk2qkotqm2DH-0qrckRiyH6kzjOIukQ&usqp=CAU"
 								src={pic}
 								style={{ borderRadius: '10%' }}
 								alt="Illustration"
@@ -118,5 +103,4 @@ class CreateHotel extends Component {
 		);
 	}
 }
-
 export default CreateHotel;

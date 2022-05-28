@@ -1,20 +1,17 @@
 import Stepper from './Stepper';
 import React, { Component } from 'react';
-// import Country from "./Countries";
-
 import HotelInfo2 from './HotelInfo2';
 import HotelInfo3 from './HotelInfo3';
 import HotelInfo4 from './HotelInfo4';
-
 import HotelInfo from './HotelInfo';
 import '../../css/Profile.css';
 export default class steps extends Component {
-	// const [birthdate, setBirthdate] = useState(null);
-
 	constructor() {
 		super();
 
 		this.state = {
+			
+			btn : null ,
 			currentStep: 1,
 			page: null
 		};
@@ -36,11 +33,32 @@ export default class steps extends Component {
 		const { currentStep } = this.state;
 		if (this.state.currentStep === 1) {
 			this.state.page = <HotelInfo />;
+			this.state.btn = (
+				<button className="btn edit-hotel" onClick={() => this.handleClick('next')}>
+					Next
+				</button>
+			);
 		} else if (this.state.currentStep === 2) {
 			this.state.page = <HotelInfo2 />;
+			this.state.btn = (
+				<button className="btn edit-hotel" onClick={() => this.handleClick('next')}>
+					Next
+				</button>
+			);
 		} else if (this.state.currentStep === 3) {
 			this.state.page = <HotelInfo3 />;
+			this.state.btn = (
+				<button className="btn edit-hotel" onClick={() => this.handleClick('next')}>
+					Next
+				</button>
+			);
 		} else if (this.state.currentStep === 4) {
+			this.state.btn = (
+				<button className="btn edit-hotel" type="submit" onClick={() => this.handleClick('next')}>
+					Submit
+				</button>
+			);
+
 			this.state.page = <HotelInfo4 />;
 		}
 		return (
@@ -49,45 +67,29 @@ export default class steps extends Component {
 					<div className="col-12 col-md-8">
 						<div className="card-body">
 							<div className="shadow p-3 mb-5 bg-body rounded">
-								<div className="stepper-container-horizontal d-none d-md-block">
-									<Stepper
-										direction="horizontal"
-										currentStepNumber={currentStep - 1}
-										steps={stepsArray}
-										stepColor="#cd9a2d"
-							
-							
-							
-									/>
-
-									<br></br>
-									
-								{this.state.page}
-							
-									<br></br>
-								<div className="row">
-								<div className="col-md-1"></div>
-									<div className="col-md-1 edit-profile ms-4">
-										<button
-											className="btn edit-hotel"
-											//   onClick={handleClick}
-											onClick={() => this.handleClick()}
-										>
-											Previous
-										</button>
+								<div className="stepper-container-horizontal  ">
+									<div className="d-none d-lg-block">
+										<Stepper
+											direction="horizontal"
+											currentStepNumber={currentStep - 1}
+											steps={stepsArray}
+											stepColor="#cd9a2d"
+										/>
 									</div>
+									<br />
+									{this.state.page}
 
-									<div className="col-md-1 edit-profile ms-1">
-										<button
-											className="btn edit-hotel"
-											//   onClick={handleClick}
-
-											onClick={() => this.handleClick('next')}
-										>
-											Next
-										</button>
+									<br />
+									<div className="row">
+										<div className="col-sm-1" />
+										<div className="col-sm-1 zero">
+											<button className="btn edit-hotel" onClick={() => this.handleClick()}>
+												Previous
+											</button>
+										</div>
+										<div className="col-sm-1 ">{this.state.btn}</div>
+										<div className="col-sm-8" />
 									</div>
-								</div>
 								</div>
 							</div>
 						</div>
@@ -97,11 +99,4 @@ export default class steps extends Component {
 		);
 	}
 }
-
-const stepsArray = [
-	// "Create your account",
-	'Initial Hotel info',
-	'Add details',
-	'Upload images',
-	'Hotel facilities'
-];
+const stepsArray = [ 'Initial Hotel info', 'Add details', 'Upload images', 'Hotel facilities' ];

@@ -1,25 +1,5 @@
 import React, { Component } from 'react';
-// import Image_upload from "./Image_upload"
-
-import { TextField, Grid } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-
-import Image_upload from "./Image_upload"
-import Countries from "./Countries"
-import Facilities from "./Facilities" ;
-const datePickerTheme = createTheme({
-	palette: {
-		primary: {
-			main: '#cd9a2b',
-			dark: '#cd9a2b',
-			light: '#d7ae55',
-			contrastText: '#fff'
-		}
-	}
-});
+import Countries from './Countries';
 
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
@@ -47,22 +27,19 @@ class HotelInfo extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			birthdate: null,
-			message: '',
 			fields: {},
-			get_price: 1,
 			error: {
 				Name: {
 					u1: '',
 					u2: ''
 				},
 
-				Name: {
+				State: {
 					u1: '',
 					u2: ''
 				},
 
-				Name: {
+				Address: {
 					u1: '',
 					u2: ''
 				}
@@ -73,7 +50,6 @@ class HotelInfo extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
-	setBirthdate = (e) => {};
 	formValChange = (e) => {
 		let fields = this.state.fields;
 		fields[e.target.name] = e.target.value;
@@ -92,26 +68,26 @@ class HotelInfo extends React.Component {
 				error.Name.u2 = !value ? '*This field must not be empty!' : '';
 				break;
 
-			case 'Name':
-				error.Name.u1 =
+			case 'State':
+				error.State.u1 =
 					(typeof value !== 'undefined' && value.length < 3) ||
 					value.length > 15 ||
 					!value.match(/^[A-Z a-z]+$/)
-						? '*Please enter a valid  name'
+						? '*Please enter a valid  State'
 						: '';
 
-				error.Name.u2 = !value ? '*This field must not be empty!' : '';
+				error.State.u2 = !value ? '*This field must not be empty!' : '';
 				break;
 
-			case 'Name':
-				error.Name.u1 =
+			case 'Address':
+				error.Address.u1 =
 					(typeof value !== 'undefined' && value.length < 3) ||
-					value.length > 15 ||
+					value.length > 100 ||
 					!value.match(/^[A-Z a-z]+$/)
-						? '*Please enter a valid  name'
+						? '*Please enter a valid  Address'
 						: '';
 
-				error.Name.u2 = !value ? '*This field must not be empty!' : '';
+				error.Address.u2 = !value ? '*This field must not be empty!' : '';
 				break;
 
 			default:
@@ -123,19 +99,22 @@ class HotelInfo extends React.Component {
 			error,
 			[name]: value
 		});
-	};
-
-	onSubmit(e) {
-		e.preventDefault();
 
 		if (formvalid2(this.state)) {
 			let fields = {};
 			fields['Name'] = '';
-			fields['lastname'] = '';
-			fields['phone'] = '';
-			fields['nationalcode'] = '';
+			fields['State'] = '';
+			fields['Address'] = '';
 			this.setState({ fields: fields });
+
+			localStorage.setItem('Name', JSON.stringify(this.state.fields['Name']));
+			localStorage.setItem('State', JSON.stringify(this.state.fields['State']));
+			localStorage.setItem('Address', JSON.stringify(this.state.fields['Address']));
 		}
+	};
+
+	onSubmit(e) {
+		e.preventDefault();
 	}
 	render() {
 		return (
@@ -144,13 +123,31 @@ class HotelInfo extends React.Component {
 				<br />
 				<br />
 				<br />
-				<form noValidate onSubmit={this.onSubmit} className="row g-3 needs-validation mx-3">
+				<form noValidate className="row g-3 needs-validation mx-3">
 					<div className="row">
-							
-					<div className="col-md-1 ">
+						<div className="col-sm-1 " />
+
+						<div className="col-12  col-xl-4  d-xl-none mb-5">
+							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
+								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
+									Description :
+								</div>
+								<div className="row m-2">
+									The location and address of your accommodation will be sent to the guest after
+									booking in the form of fields , so try to enter the information accurately and
+									correctly. By selecting the country , city is also activated and allows you to
+									select. Additional description of the location, including dirt road, landscape,
+									access, etc. should be entered in the address section.
+								</div>
+							</div>
 						</div>
-			
-						<div className="col-md-7">
+
+						<br></br>
+						<br></br>
+						<br></br>
+						<br></br>
+
+						<div className="col-12 col-xl-7">
 							<div className="row">
 								<div className="col-md-4">
 									<label className="ms-2 mt-1 form-label">Name :</label>
@@ -201,16 +198,9 @@ class HotelInfo extends React.Component {
 									<label className="ms-2 mt-1 form-label">Country :</label>
 								</div>
 								<div className="col-md-8">
-						
-						
-					
-								
-					<div
-					>
-					<Countries></Countries>
-					
-					
-					</div>
+									<div>
+										<Countries />
+									</div>
 								</div>
 							</div>
 
@@ -232,8 +222,8 @@ class HotelInfo extends React.Component {
 										autoComplete="text"
 										aria-describedby="inputGroup-sizing-sm"
 										className={
-											this.state.error.Name.u1.length > 0 ||
-											this.state.error.Name.u2.length > 0 ? (
+											this.state.error.State.u1.length > 0 ||
+											this.state.error.State.u2.length > 0 ? (
 												'is-invalid form-control lg'
 											) : (
 												'form-control'
@@ -247,8 +237,6 @@ class HotelInfo extends React.Component {
 
 							<hr class="dashed" />
 
-
-	
 							<div className="row">
 								<div className="col-md-4">
 									<label className="ms-2 mt-1 form-label">Address :</label>
@@ -264,47 +252,43 @@ class HotelInfo extends React.Component {
 										placeholder="Address*"
 										autoComplete="text"
 										aria-describedby="inputGroup-sizing-sm"
-										className={
-												'form-control'
-											
-										}
+										className={'form-control'}
 										value={this.state['Address']}
 										onChange={this.formValChange}
 									/>
-									{/* <div className="mt-3 ">
-										{this.state.error.Name.u1.length > 0 && (
+									<div className="mt-3 ">
+										{this.state.error.Address.u1.length > 0 && (
 											<p className="err">
-												{this.state.error.Name.u1}
+												{this.state.error.Address.u1}
 												<br />
 											</p>
 										)}
-										{this.state.error.Name.u2.length > 0 && (
+										{this.state.error.Address.u2.length > 0 && (
 											<p className="err">
-												{this.state.error.Name.u2}
+												{this.state.error.Address.u2}
 												<br />
 											</p>
 										)}
-									</div> */}
+									</div>
 								</div>
 							</div>
-	
-	
-	
 						</div>
-						<div className="col-md-4">
+
+						<div className="col-12 col-xl-4 d-none d-xl-block">
 							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
 								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
 									Description :
 								</div>
 								<div className="row m-2">
-									Font Awesome 6 includes five icons styles: solid, regular, light, duotone, and the
-									new THIN style — not to mention all of our brand icons. And coming later in 2022 is
-									the entirely new SHARP family of styles.
+									The location and address of your accommodation will be sent to the guest after
+									booking in the form of fields , so try to enter the information accurately and
+									correctly. By selecting the country , city is also activated and allows you to
+									select. Additional description of the location, including dirt road, landscape,
+									access, etc. should be entered in the address section.
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		);
