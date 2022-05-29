@@ -235,19 +235,29 @@ function HotelInfo(props) {
         });
 
 
+		// name   :name,
+		// city :city,
+		// state :state,
+		// address  : address, 
+		// description : description,
+		// phone_numbers :phone_numbers,
+		// facilities: facilities 
 
-		console.log(create_hotel(
+		console.log("request",create_hotel(
 			formik.values.name,
 			formik.values.city,
 
 
 			formik.values.address,
-			 formik.values.description,
-		 facilitiesListForBack,
+			formik.values.address,
+
+			formik.values.description,
 			formik.values.phone,
-		formik.values.country,
-			 formattedcheckinDate,
-			formattedcheckoutDate,
+			facilitiesListForBack
+
+			// formik.values.country,
+			//  formattedcheckinDate,
+			// formattedcheckoutDate,
 		  
 
 

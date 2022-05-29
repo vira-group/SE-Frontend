@@ -87,6 +87,19 @@ function HotelInfo2(props) {
   let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
   let formattedcheckoutDate = moment(tempcheckout).format("hh:mm");
 
+
+	localStorage.setItem('i1', JSON.stringify(formik.values.name));
+	localStorage.setItem('i2', JSON.stringify(formik.values.address));
+	localStorage.setItem('i3', JSON.stringify(formik.values.description));
+	// localStorage.setItem('i4', JSON.stringify(facilitiesListForBack));
+	localStorage.setItem('i5', JSON.stringify(formik.values.phone));
+	localStorage.setItem('i6', JSON.stringify(formik.values.country));
+	localStorage.setItem('i7', JSON.stringify(formik.values.city));
+	localStorage.setItem('i8', JSON.stringify(formattedcheckinDate));
+	localStorage.setItem('i9', JSON.stringify(formattedcheckoutDate));
+
+
+
   const styles = makeStyles(() => ({
     root: {
       "&$checked": {
@@ -118,10 +131,6 @@ function HotelInfo2(props) {
     setToggled(value);
   };
 
-  // const handletypeChange = (event, newValue) => {
-  //   setType(newValue);
-  // };
-
   useEffect(() => {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
@@ -130,37 +139,37 @@ function HotelInfo2(props) {
 
   let hotelid = window.location.pathname.split("/")[2];
 
-  useEffect(() => {
-    let facilityarray = [];
-    console.log(hotelid);
-    axios
-      .get(makeURL(references.url_one_hotel + hotelid + "/"), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((res) => {
-        setValue(res.data);
-        console.log(res.data);
-        formik.setValues({
-          name: res.data.name || "",
-          address: res.data.address || "",
-          description: res.data.description || "",
-          phone: res.data.phone_numbers || "",
-          country: res.data.country || "",
-          city: res.data.city || "",
-        });
-        for (var i = 0; i < res.data.facilities.length; i++) {
-          facilityarray.push(res.data.facilities[i].name);
-        }
-        setFacilities(facilityarray || "");
-        setCheckin(res.data.check_in_range + "am" || "");
-        setCheckout(res.data.check_out_range + "pm" || "")
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+//   useEffect(() => {
+//     let facilityarray = [];
+//     console.log(hotelid);
+//     axios
+//       .get(makeURL(references.url_one_hotel + hotelid + "/"), {
+//         headers: {
+//           Authorization: cookies.get("Authorization"),
+//         },
+//       })
+//       .then((res) => {
+//         setValue(res.data);
+//         console.log(res.data);
+//         formik.setValues({
+//           name: res.data.name || "",
+//           address: res.data.address || "",
+//           description: res.data.description || "",
+//           phone: res.data.phone_numbers || "",
+//           country: res.data.country || "",
+//           city: res.data.city || "",
+//         });
+//         for (var i = 0; i < res.data.facilities.length; i++) {
+//           facilityarray.push(res.data.facilities[i].name);
+//         }
+//         setFacilities(facilityarray || "");
+//         setCheckin(res.data.check_in_range + "am" || "");
+//         setCheckout(res.data.check_out_range + "pm" || "")
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   }, []);
 
   const handleClick = () => {
     let filled =
@@ -209,18 +218,6 @@ function HotelInfo2(props) {
     console.log("facilities list: ",facilitiesListForBack)
 
     if (filled) {
-      // let form_data = new FormData();
-      // form_data.append("name", formik.values.name);
-      // form_data.append("address", formik.values.address);
-      // form_data.append("description", formik.values.description);
-      // form_data.append("facilities", facilities);
-      // form_data.append("phone_number", formik.values.phone);
-      // form_data.append("country", formik.values.country);
-      // form_data.append("city", formik.values.city);
-      // form_data.append("header", selectedImage, selectedImage.name);
-      // form_data.append("check_in_range",formattedcheckinDate);
-      // form_data.append("check_out_range",formattedcheckoutDate);
-      // form_data.append("facilities",facilitiesListForBack);
       
 
       axios
@@ -250,11 +247,9 @@ function HotelInfo2(props) {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      {/* <Sidebar
-        toggled={toggled}
-        handleToggleSidebar={handleToggleSidebar}
-        id={hotelId}
-      /> */}
+      
+
+
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
           <a href="/" className="navbar-brand logo d-md-none">
@@ -268,11 +263,23 @@ function HotelInfo2(props) {
             <MenuIcon fontSize="large" />
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+		
         <div className="container py-5 px-lg-5">
-          <h2 className="mb-4 fw-bold d-flex">
+          {/* <h2 className="mb-4 fw-bold d-flex">
             <EditIcon className="me-2" fontSize="large" />
             Edit Hotel
-          </h2>
+          </h2> */}
+
+
           <div className="container mt-4 p-4 edit-hotel-form border">
             <div className="mb-3 col-12">
               <div className="row mt-3">
