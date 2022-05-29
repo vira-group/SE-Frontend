@@ -70,7 +70,7 @@ export default function Myhotels(props) {
           <div class="row row-cols-1 row-cols-md-3 g-4">
             {hotel ? hotel.map((h) => (
               <MyhotelsCard
-              img={references.base_url +  h.header}
+              img={references.url_address +  h.header}
               title={h.name}
               description= {h.description.slice(0, 250) + " ..."}
               id = {h.id}

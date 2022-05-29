@@ -44,10 +44,7 @@ const widgetData = {
 export default function Statistics() {
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
-  const [emptyRooms, setEmptyRooms] = useState(null);
-  const [fullRooms, setFullRooms] = useState(null);
-  const [incomes, setIncomes] = useState(null);
-  const [reserves, setReserves] = useState(null);
+  const [roomPercentage, setRoompercentage] = useState(null);
 
   useEffect(() => {
     setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
@@ -59,52 +56,14 @@ export default function Statistics() {
         },
       })
       .then((res) => {
-        console.log(
-          "adminpanel res: ",
-          res.data.spaces_status.empty,
-          "\n",
-          res.data.incomes,
-          "\n",
-          res.data.reserves
-        );
-        setEmptyRooms(res.data.spaces_status.empty);
-        setFullRooms(res.data.spaces_status.full);
-        setIncomes(res.data.incomes);
-        setReserves(res.data.reserves);
+        console.log("adminpanel res: ", res.data.spaces_percentage);
+        setRoompercentage(res.data.spaces_percentage);
       })
       .catch((err) => {
         console.log("adminpanel err: ", err);
       });
   }, []);
 
-  var singleroom = [];
-  var doubleroom = [];
-  var tripleroom = [];
-  var suiteroom = [];
-
-  if (emptyRooms) {
-    emptyRooms.forEach((erooms) => {
-      if (erooms.room_type === "singleRoom") {
-        singleroom.push(erooms.name);
-      } else if (erooms.room_type === "doubleRoom") {
-        doubleroom.push(erooms.name);
-      } else if (erooms.room_type === "tripleRoom") {
-        tripleroom.push(erooms.name);
-      } else {
-        suiteroom.push(erooms.name);
-      }
-    });
-  }
-  console.log(
-    "arrays for statistic: ",
-    singleroom,
-    "\n",
-    doubleroom,
-    "\n",
-    tripleroom,
-    "\n",
-    suiteroom
-  );
 
   const handleToggleSidebar = (value) => {
     setToggled(value);
@@ -139,14 +98,14 @@ export default function Statistics() {
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
               <Widget
                 type="single room"
-                percent={widgetData["singleRoom"]}
+                percent={parseInt(roomPercentage["singleRoom"])}
                 icon={<BoyIcon className="me-1" fontSize="medium" />}
               />
             </div>
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
               <Widget
                 type="double room"
-                percent={widgetData["doubleRoom"]}
+                percent={parseInt(roomPercentage["doubleRoom"])}
                 icon={
                   <EscalatorWarningIcon className="me-2" fontSize="medium" />
                 }
@@ -155,14 +114,14 @@ export default function Statistics() {
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
               <Widget
                 type="triple room"
-                percent={widgetData["tripleRoom"]}
+                percent={parseInt(roomPercentage["tripleRoom"])}
                 icon={<FamilyRestroomIcon className="me-2" fontSize="medium" />}
               />
             </div>
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
               <Widget
                 type="suite room"
-                percent={widgetData["suiteRoom"]}
+                percent={parseInt(roomPercentage["suiteRoom"])}
                 icon={<HomeIcon className="me-2" fontSize="medium" />}
               />
             </div>

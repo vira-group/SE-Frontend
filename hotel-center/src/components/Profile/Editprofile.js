@@ -115,7 +115,7 @@ function Profile(props) {
     console.log("filled:", filled);
 
     if (filled) {
-      // console.log(selectedImage);
+      console.log(selectedImage);
       let form_data = new FormData();
       form_data.append('avatar', selectedImage, selectedImage.name);
       form_data.append('email',formik.values.email);
@@ -175,7 +175,7 @@ function Profile(props) {
                 <div className="profile-img">
                   {selectedImage !== null ? (
                     <img
-                    src={"http://127.0.0.1:8000" + selectedImage}
+                    src={references.url_address + selectedImage}
                     className="rounded-circle"
                     alt="Avatar"
                   />

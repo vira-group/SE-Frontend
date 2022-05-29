@@ -556,7 +556,7 @@ function Createroom(props) {
             <hr class="dashed"></hr>
 
             <div className="mb-3 col-12">
-              <PreviewMultipleImages />
+              <PreviewMultipleImages roomid={roomid}/>
             </div>
 
             <div className="row mt-2 d-fit-content">
