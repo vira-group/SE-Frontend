@@ -43,6 +43,11 @@ class HotelInfo extends React.Component {
 					u1: '',
 					u2: ''
 				}
+			,	Description: {
+					u1: '',
+					u2: ''
+				}
+			
 			}
 		};
 
@@ -50,6 +55,11 @@ class HotelInfo extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
+	// async componentDidMount() {
+	// 	localStorage.setItem('Name', JSON.stringify(this.state.fields['Name']));
+	// 	localStorage.setItem('State', JSON.stringify(this.state.fields['State']));
+	// 	localStorage.setItem('Address', JSON.stringify(this.state.fields['Address']));
+	// }
 	formValChange = (e) => {
 		let fields = this.state.fields;
 		fields[e.target.name] = e.target.value;
@@ -78,7 +88,15 @@ class HotelInfo extends React.Component {
 
 				error.State.u2 = !value ? '*This field must not be empty!' : '';
 				break;
-
+				case 'Description':
+					error.Description.u1 =
+						(typeof value !== 'undefined' && value.length < 10) 
+							? '*You should enter more than 10 characters.'
+							: '';
+	
+					error.Description.u2 = !value ? '*This field must not be empty!' : '';
+					break;
+	
 			case 'Address':
 				error.Address.u1 =
 					(typeof value !== 'undefined' && value.length < 3) ||
@@ -105,12 +123,14 @@ class HotelInfo extends React.Component {
 			fields['Name'] = '';
 			fields['State'] = '';
 			fields['Address'] = '';
+			fields['Description'] = '';
 			this.setState({ fields: fields });
-
-			localStorage.setItem('Name', JSON.stringify(this.state.fields['Name']));
-			localStorage.setItem('State', JSON.stringify(this.state.fields['State']));
-			localStorage.setItem('Address', JSON.stringify(this.state.fields['Address']));
 		}
+
+		localStorage.setItem('Name', JSON.stringify(this.state.fields['Name']));
+		localStorage.setItem('State', JSON.stringify(this.state.fields['State']));
+		localStorage.setItem('Address', JSON.stringify(this.state.fields['Address']));
+		localStorage.setItem('Description', JSON.stringify(this.state.fields['Description']));
 	};
 
 	onSubmit(e) {
@@ -142,10 +162,10 @@ class HotelInfo extends React.Component {
 							</div>
 						</div>
 
-						<br></br>
-						<br></br>
-						<br></br>
-						<br></br>
+						<br />
+						<br />
+						<br />
+						<br />
 
 						<div className="col-12 col-xl-7">
 							<div className="row">
@@ -266,6 +286,52 @@ class HotelInfo extends React.Component {
 										{this.state.error.Address.u2.length > 0 && (
 											<p className="err">
 												{this.state.error.Address.u2}
+												<br />
+											</p>
+										)}
+									</div>
+								</div>
+							</div>
+
+							<hr class="dashed" />
+
+							<div className="row">
+								<div className="col-md-4">
+									<label className="ms-2 mt-1 form-label">Description :</label>
+								</div>
+
+								<div className="col-md-8">
+									{' '}
+									<input
+										required
+										fullWidth
+										id="Description"
+										label="Description"
+										name="Description"
+										placeholder="description*"
+										autoComplete="text"
+										aria-describedby="inputGroup-sizing-sm"
+										className={
+											this.state.error.Description.u1.length > 0 ||
+											this.state.error.Description.u2.length > 0 ? (
+												'is-invalid form-control lg'
+											) : (
+												'form-control'
+											)
+										}
+										value={this.state['Description']}
+										onChange={this.formValChange}
+									/>
+									<div className="mt-3 ">
+										{this.state.error.Description.u1.length > 0 && (
+											<p className="err">
+												{this.state.error.Description.u1}
+												<br />
+											</p>
+										)}
+										{this.state.error.Description.u2.length > 0 && (
+											<p className="err">
+												{this.state.error.Description.u2}
 												<br />
 											</p>
 										)}

@@ -154,13 +154,14 @@ class HotelInfo extends React.Component {
 									Description :
 								</div>
 								<div className="row m-2">
-								Accommodation pictures play an important role in better viewing and booking guests, so we suggest you upload the photos according to the instructions below.
-Keep the residence clean and tidy when shooting; As delivered to the guest.
-
-Preferably hold the camera horizontally when shooting.
-The number of acceptable images for the site is at least 5 images.
-Accommodation images include various spaces including common area, bedroom, yard, kitchen, landscape, bathroom and special facilities.
-Choose your best image as the index image.				</div>
+									Accommodation pictures play an important role in better viewing and booking guests,
+									so we suggest you upload the photos according to the instructions below. Keep the
+									residence clean and tidy when shooting; As delivered to the guest. Preferably hold
+									the camera horizontally when shooting. The number of acceptable images for the site
+									is at least 5 images. Accommodation images include various spaces including common
+									area, bedroom, yard, kitchen, landscape, bathroom and special facilities. Choose
+									your best image as the index image.{' '}
+								</div>
 							</div>
 						</div>
 
@@ -172,13 +173,14 @@ Choose your best image as the index image.				</div>
 									Description :
 								</div>
 								<div className="row m-2">
-								Accommodation pictures play an important role in better viewing and booking guests, so we suggest you upload the photos according to the instructions below.
-Keep the residence clean and tidy when shooting; As delivered to the guest.
-
-Preferably hold the camera horizontally when shooting.
-The number of acceptable images for the site is at least 5 images.
-Accommodation images include various spaces including common area, bedroom, yard, kitchen, landscape, bathroom and special facilities.
-Choose your best image as the index image.</div>
+									Accommodation pictures play an important role in better viewing and booking guests,
+									so we suggest you upload the photos according to the instructions below. Keep the
+									residence clean and tidy when shooting; As delivered to the guest. Preferably hold
+									the camera horizontally when shooting. The number of acceptable images for the site
+									is at least 5 images. Accommodation images include various spaces including common
+									area, bedroom, yard, kitchen, landscape, bathroom and special facilities. Choose
+									your best image as the index image.
+								</div>
 							</div>
 						</div>
 					</div>

@@ -96,6 +96,7 @@ function ResponsiveDatePickers(props) {
 									<DatePicker
 										disablePast
 										minDate={checkinDate ? new Date(checkinDate.getTime() + oneDay) : null}
+									
 										label="Check out"
 										value={checkoutDate}
 										onChange={(newValue) => {

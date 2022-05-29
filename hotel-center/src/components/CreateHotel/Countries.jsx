@@ -5,14 +5,22 @@ class Countries extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { country: '', region: '' };
+
+		// localStorage.setItem('Country', JSON.stringify(this.state.country));
+
+
 	}
 
 	selectCountry(val) {
 		this.setState({ country: val });
+		// localStorage.setItem('Country', JSON.stringify(this.state.country));
+
 	}
 
 	selectRegion(val) {
 		this.setState({ region: val });
+		localStorage.setItem('City', JSON.stringify(this.state.region));
+
 	}
 
 	render() {

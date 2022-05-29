@@ -96,14 +96,14 @@ class HotelInfo extends React.Component {
 									Description :
 								</div>
 								<div className="row m-2">
-								Your accommodation can be an apartment, house, suite, villa, eco-lodge, guest house, hotel or cottage. Please select one of these items to specify its type to be displayed in the desired category.						</div>
+								</div>
 							</div>
 						</div>
 
-{/* <div className="col-1 d-sm-none " ></div> */}
+						{/* <div className="col-1 d-sm-none " ></div> */}
 						<div className="col-12 col-xl-7">
 							{/* <div className="col-md-5 "> */}
-							
+
 							<Facilities />
 						</div>
 
@@ -113,7 +113,7 @@ class HotelInfo extends React.Component {
 									Description :
 								</div>
 								<div className="row m-2">
-								Your accommodation can be an apartment, house, suite, villa, eco-lodge, guest house, hotel or cottage. Please select one of these items to specify its type to be displayed in the desired category.	</div>
+								</div>
 							</div>
 						</div>
 					</div>

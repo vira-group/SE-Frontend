@@ -4,7 +4,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-
+import TimePickers from './TimePickers';
+import Type from './Type';
 const datePickerTheme = createTheme({
 	palette: {
 		primary: {
@@ -149,141 +150,29 @@ class HotelInfo extends React.Component {
 									Description :
 								</div>
 								<div className="row m-2">
-								Your accommodation will be displayed according to what you post on the site. Therefore, please enter the description realistically and in accordance with the site instructions to increase your chances of booking.	</div>
-							</div>
-						</div>
-					
-					
-					
-						<div className="col-12 col-xl-7">
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">check in range :</label>
-								</div>
-								<div className="col-md-8">
-									<ThemeProvider theme={datePickerTheme}>
-										<LocalizationProvider dateAdapter={AdapterDateFns}>
-											<DatePicker
-												label="Choose a date"
-												value={this.state.birthdate}
-												onChange={(newValue) => {
-													this.setBirthdate(newValue);
-												}}
-												renderInput={(params) => (
-													<TextField
-														{...params}
-														required
-														fullWidth
-														size="small"
-														variant="outlined"
-													/>
-												)}
-											/>
-										</LocalizationProvider>
-									</ThemeProvider>
-								</div>
-							</div>
-
-							<hr class="dashed" />
-
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">check out range :</label>
-								</div>
-								<div className="col-md-8">
-									<ThemeProvider theme={datePickerTheme}>
-										<LocalizationProvider dateAdapter={AdapterDateFns}>
-											<DatePicker
-												label="Choose a date"
-												value={this.state.birthdate}
-												onChange={(newValue) => {
-													this.setBirthdate(newValue);
-												}}
-												renderInput={(params) => (
-													<TextField
-														{...params}
-														required
-														fullWidth
-														size="small"
-														variant="outlined"
-													/>
-												)}
-											/>
-										</LocalizationProvider>
-									</ThemeProvider>
-								</div>
-							</div>
-
-							<hr class="dashed" />
-
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Description :</label>
-								</div>
-
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="Name"
-										label="Name"
-										name="Name"
-										placeholder="description*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-											this.state.error.Name.u1.length > 0 ||
-											this.state.error.Name.u2.length > 0 ? (
-												'is-invalid form-control lg'
-											) : (
-												'form-control'
-											)
-										}
-										value={this.state['Name']}
-										onChange={this.formValChange}
-									/>
-									<div className="mt-3 ">
-										{this.state.error.Name.u1.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u1}
-												<br />
-											</p>
-										)}
-										{this.state.error.Name.u2.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u2}
-												<br />
-											</p>
-										)}
+								Your accommodation can be an apartment, house, suite, villa, eco-lodge, guest house,
+									hotel or cottage. Please select one of these items to specify its type to be
+									displayed in the desired category.{' '}
 									</div>
-								</div>
 							</div>
-							<hr class="dashed" />
-
-							{/* <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Age</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={age}
-    label="Age"
-    onChange={handleChange}
-  >
-    <MenuItem value={10}>Ten</MenuItem>
-    <MenuItem value={20}>Twenty</MenuItem>
-    <MenuItem value={30}>Thirty</MenuItem>
-  </Select>
-</FormControl> */}
 						</div>
 
+						<br />
+						<br />
+						<br />
+
+						<TimePickers />
+					
 						<div className="col-12 col-xl-4 d-none d-xl-block">
 							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
 								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
 									Description :
 								</div>
 								<div className="row m-2">
-								Your accommodation will be displayed according to what you post on the site. Therefore, please enter the description realistically and in accordance with the site instructions to increase your chances of booking.		</div>
+								Your accommodation can be an apartment, house, suite, villa, eco-lodge, guest house,
+									hotel or cottage. Please select one of these items to specify its type to be
+									displayed in the desired category.{' '}
+								</div>
 							</div>
 						</div>
 					</div>
