@@ -235,14 +235,7 @@ function HotelInfo(props) {
         });
 
 
-		name ,
-		city ,
-		state ,
-		address , 
-		description ,
-		phone_numbers ,
-		facilities 
-	  
+
 		console.log(create_hotel(
 			formik.values.name,
 			formik.values.city,
