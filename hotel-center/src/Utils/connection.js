@@ -289,6 +289,17 @@ export const hotel_search = async (
   return mes;
 };
 
+"name": "Shahr",
+    "city": "Tehran",
+    "state": "Tehran",
+    "address" : "Tehranpars",
+    "description": "nice place to relax",
+    "phone_numbers": "09123456543",
+    "facilities": [
+        {
+            "name": "parking"
+        }
+        
 export const create_hotel = async (
   
   name ,

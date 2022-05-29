@@ -1,364 +1,770 @@
-import React, { Component } from 'react';
-import Countries from './Countries';
+import * as React from "react";
+import { TextField, Grid, Typography } from "@mui/material";
+// import Logo from "../../../statics/logo/logo2.png";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const formvalid2 = ({ error, ...rest }) => {
-	let isValid = false;
+import {  create_hotel } from '../../Utils/connection';
 
-	Object.values(error).forEach((val) => {
-		if (val.length > 0) {
-			isValid = false;
-		} else {
-			isValid = true;
-		}
-	});
 
-	Object.values(rest).forEach((val) => {
-		if (val === null) {
-			isValid = false;
-		} else {
-			isValid = true;
-		}
-	});
+import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import references from "../../assets/References.json";
+import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import moment from "moment";
+import { makeStyles } from "@mui/styles";
+import PreviewMultipleImages from "./PreviewMultipleImages";
+// import Sidebar from "../layout/Sidebar";
+import EditIcon from "@mui/icons-material/Edit";
 
-	return isValid;
-};
+const textfieldTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#cd9a2b",
+      dark: "#cd9a2b",
+      light: "#d7ae55",
+      contrastText: "#fff",
+    },
+  },
+});
 
-class HotelInfo extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			fields: {},
-			error: {
-				Name: {
-					u1: '',
-					u2: ''
-				},
+const facilitieslist = [
+  "Taxi service",
+  "Sofa",
+  "Bathroom",
+  "Telephone",
+  "WiFi",
+  "Room service",
+  "Television",
+  "Gym",
+  "Restaurant",
+  "Bar",
+];
 
-				State: {
-					u1: '',
-					u2: ''
-				},
+const validationSchema = yup.object({
+  name: yup
+    .string()
+    .max(30, "Must be 15 characters or less")
+    .min(2, "Must be at least 2 characters")
+    .required("Required!"),
+  address: yup
+    .string()
+    .max(200, "Must be 200 characters or less")
+    .min(7, "Must be at least 7 characters")
+    .required("Required!"),
+  email: yup.string().email("Invalid email address").required("Required"),
+  phone: yup.number().required("Required!"),
+  description: yup.string().max(1000, "Can't be more than 500 characters."),
+  country: yup
+    .string()
+    .max(20, "Must be 20 characters or less")
+    .min(2, "Must be at least 2 characters")
+    .required("Required!"),
+  city: yup
+    .string()
+    .max(20, "Must be 20 characters or less")
+    .min(2, "Must be at least 2 characters")
+    .required("Required!"),
+});
 
-				Address: {
-					u1: '',
-					u2: ''
-				}
-			,	Description: {
-					u1: '',
-					u2: ''
-				}
+function HotelInfo(props) {
+  const [toggled, setToggled] = useState(false);
+  const [hotelId, setHotelId] = useState(null);
+  const CHARACTER_LIMIT = 1000;
+  // const [type, setType] = useState(null);
+  const [value, setValue] = useState(null);
+  const [facilities, setFacilities] = useState([]);
+  const [checkin, setCheckin] = useState(null);
+  const [checkout, setCheckout] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+
+  let tempcheckin = checkin; // value from your state
+  let tempcheckout = checkout; // value from your state
+  let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
+  let formattedcheckoutDate = moment(tempcheckout).format("hh:mm");
+
+  const styles = makeStyles(() => ({
+    root: {
+      "&$checked": {
+        color: "#cd9a2d",
+      },
+    },
+    checked: {},
+  }));
+  const c = styles();
+
+  useEffect(() => {
+    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
+  }, []);
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      address: "",
+      email: "",
+      phone: "",
+      description: "",
+      country: "",
+      city: "",
+    },
+    validationSchema: validationSchema,
+  });
+ 
+ 
+  useEffect(() => {
+    if (selectedImage) {
+      setImageUrl(URL.createObjectURL(selectedImage));
+    }
+  }, [selectedImage]);
+
+  let hotelid = window.location.pathname.split("/")[2];
+
+  useEffect(() => {
+    let facilityarray = [];
+    console.log(hotelid);
+    axios
+      .get(makeURL(references.url_one_hotel + hotelid + "/"), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((res) => {
+        setValue(res.data);
+        console.log(res.data);
+        formik.setValues({
+          name: res.data.name || "",
+          address: res.data.address || "",
+          description: res.data.description || "",
+          phone: res.data.phone_numbers || "",
+          country: res.data.country || "",
+          city: res.data.city || "",
+        });
+        for (var i = 0; i < res.data.facilities.length; i++) {
+          facilityarray.push(res.data.facilities[i].name);
+        }
+        setFacilities(facilityarray || "");
+        setCheckin(res.data.check_in_range + "am" || "");
+        setCheckout(res.data.check_out_range + "pm" || "")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleClick = () => {
+    let filled =
+      !Boolean(formik.errors.name) &&
+      !Boolean(formik.errors.address) &&
+      !Boolean(formik.errors.description) &&
+      !Boolean(formik.errors.phone) &&
+      !Boolean(formik.errors.country) &&
+      !Boolean(formik.errors.city) &&
+      // facilities.length != 0 &&
+      formattedcheckinDate != "Invalid time" &&
+      formattedcheckoutDate != "Invalid time";
+    console.log("filled: ", filled);
+    console.log(
+      "informations validation: ",
+      !Boolean(formik.errors.name),
+      "\n",
+      !Boolean(formik.errors.address),
+      "\n",
+      !Boolean(formik.errors.description),
+      "\n",
+      !Boolean(formik.errors.phone),
+      "\n",
+      facilities.length,
+      "\n",
+      formattedcheckinDate,
+      "\n",
+      formattedcheckoutDate,
+      "\n",
+      !Boolean(formik.errors.name) &&
+        !Boolean(formik.errors.address) &&
+        !Boolean(formik.errors.description) &&
+        !Boolean(formik.errors.phone) &&
+        // facilities.length != 0 &&
+        formattedcheckinDate != " Invalid date" &&
+        formattedcheckoutDate != " Invalid date"
+    );
+    console.log("checkin time: ",formattedcheckinDate);
+    console.log("checkout time: ",formattedcheckoutDate);
+
+    var facilitiesListForBack = [];
+    for(var i=0;i<facilities.length;i++){
+      let temp = {"name" : facilities[i]};
+      facilitiesListForBack.push(temp);
+    }
+    console.log("facilities list: ",facilitiesListForBack)
+
+
+	console.log(filled,"poppop") ;
+    // if (filled) {
+
+	
+
+      axios
+        .post(makeURL(references.url_addhotel+ "/"), {
+          name: formik.values.name,
+          address: formik.values.address,
+          description: formik.values.description,
+          facilities: facilitiesListForBack,
+          phone_number: formik.values.phone,
+          country: formik.values.country,
+          city: formik.values.city,
+          check_in_range: formattedcheckinDate,
+          check_out_range: formattedcheckoutDate,
+        }, {
+          headers: {
+            Authorization: cookies.get("Authorization"),
+          },
+        })
+        .then((res) => {
+          console.log(res.data,"llllllllllllllll");
+        })
+        .catch((err) => {
+          console.log("llllllllllllllll");
+          console.log(err);
+        });
+
+
+		name ,
+		city ,
+		state ,
+		address , 
+		description ,
+		phone_numbers ,
+		facilities 
+	  
+		console.log(create_hotel(
+			formik.values.name,
+			formik.values.city,
+
+
+			formik.values.address,
+			 formik.values.description,
+		 facilitiesListForBack,
+			formik.values.phone,
+		formik.values.country,
+			 formattedcheckinDate,
+			formattedcheckoutDate,
+		  
+
+
+
+		));
+
+	create_hotel();
+    // }
+  };
+
+  return (
+    <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
+      {/* <Sidebar
+        toggled={toggled}
+        handleToggleSidebar={handleToggleSidebar}
+        id={hotelId}
+      /> */}
+      <div className="w-100 admin-content">
+        <div className="adminpanel-header-mobile">
+          <a href="/" className="navbar-brand logo d-md-none">
+            {/* <img src={Logo} alt="Hotel Center" /> */}
+            <span className="fw-bold logo-text-font">Hotel Center</span>
+          </a>
+          <div
+            className="btn-toggle d-md-none"
+            // onClick={() => handleToggleSidebar(true)}
 			
-			}
-		};
+			>
+            <MenuIcon fontSize="large" />
+          </div>
+        </div>
+        <div className="container py-5 px-lg-5">
+          <h2 className="mb-4 fw-bold d-flex">
+            <EditIcon className="me-2" fontSize="large" />
+            Edit Hotel
+          </h2>
+          <div className="container mt-4 p-4 edit-hotel-form border">
+            <div className="mb-3 col-12">
+              <div className="row mt-3">
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Name
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <ThemeProvider theme={textfieldTheme}>
+                    <TextField
+                      required
+                      fullWidth
+                      placeholder="Something hotel"
+                      id="name"
+                      size="small"
+                      label="Name"
+                      InputLabelProps={{ shrink: true }}
+                      value={formik.values.name}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={formik.touched.name && Boolean(formik.errors.name)}
+                      helperText={formik.touched.name && formik.errors.name}
+                    />
+                  </ThemeProvider>
+                </div>
+              </div>
+            </div>
 
-		this.formValChange = this.formValChange.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
-	}
+            <hr class="dashed"></hr>
 
-	// async componentDidMount() {
-	// 	localStorage.setItem('Name', JSON.stringify(this.state.fields['Name']));
-	// 	localStorage.setItem('State', JSON.stringify(this.state.fields['State']));
-	// 	localStorage.setItem('Address', JSON.stringify(this.state.fields['Address']));
-	// }
-	formValChange = (e) => {
-		let fields = this.state.fields;
-		fields[e.target.name] = e.target.value;
-		const { name, value } = e.target;
-		let error = { ...this.state.error };
+            <div className="mb-3 col-12">
+              <div className="row mt-3">
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Header picture
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <input
+                    type="file"
+                    name="myImage"
+                    accept="image/*"
+                    onChange={(event) => {
+                      console.log(event.target.files[0]);
+                      setSelectedImage(event.target.files[0]);
+                    }}
+                  />
+                  {imageUrl && selectedImage && (
+                    <Box mt={2} textAlign="left">
+                      <div>Image Preview:</div>
+                      <img
+                        className="company-logo"
+                        src={imageUrl}
+                        alt={selectedImage.name}
+                        height="82px !important"
+                        width="150px !important"
+                      />
+                    </Box>
+                  )}
+                </div>
+              </div>
+            </div>
 
-		switch (name) {
-			case 'Name':
-				error.Name.u1 =
-					(typeof value !== 'undefined' && value.length < 3) ||
-					value.length > 15 ||
-					!value.match(/^[A-Z a-z]+$/)
-						? '*Please enter a valid  name'
-						: '';
+            <hr class="dashed"></hr>
 
-				error.Name.u2 = !value ? '*This field must not be empty!' : '';
-				break;
+            <div className="mb-3 col-12">
+              <div className="row">
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Address
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <ThemeProvider theme={textfieldTheme}>
+                    <TextField
+                      required
+                      fullWidth
+                      placeholder="London, 22B Baker street"
+                      id="address"
+                      size="small"
+                      label="Address"
+                      InputLabelProps={{ shrink: true }}
+                      value={formik.values.address}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.address && Boolean(formik.errors.address)
+                      }
+                      helperText={
+                        formik.touched.address && formik.errors.address
+                      }
+                    />
+                  </ThemeProvider>
+                </div>
+              </div>
+            </div>
 
-			case 'State':
-				error.State.u1 =
-					(typeof value !== 'undefined' && value.length < 3) ||
-					value.length > 15 ||
-					!value.match(/^[A-Z a-z]+$/)
-						? '*Please enter a valid  State'
-						: '';
+            <hr class="dashed"></hr>
 
-				error.State.u2 = !value ? '*This field must not be empty!' : '';
-				break;
-				case 'Description':
-					error.Description.u1 =
-						(typeof value !== 'undefined' && value.length < 10) 
-							? '*You should enter more than 10 characters.'
-							: '';
-	
-					error.Description.u2 = !value ? '*This field must not be empty!' : '';
-					break;
-	
-			case 'Address':
-				error.Address.u1 =
-					(typeof value !== 'undefined' && value.length < 3) ||
-					value.length > 100 ||
-					!value.match(/^[A-Z a-z]+$/)
-						? '*Please enter a valid  Address'
-						: '';
+            {/* <div className="mb-3 col-12">
+              <div className="row">
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Type
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <RadioGroup
+                    row
+                    aria-label="level"
+                    name="row-radio-buttons-group"
+                    value={type}
+                    onChange={handletypeChange}
+                  >
+                    <FormControlLabel
+                      value="Hotel"
+                      control={
+                        <Radio
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                        />
+                      }
+                      label="Hotel"
+                    />
+                    <FormControlLabel
+                      value="Villa"
+                      control={
+                        <Radio
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                        />
+                      }
+                      label="Villa"
+                    />
+                    <FormControlLabel
+                      value="House"
+                      control={
+                        <Radio
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                        />
+                      }
+                      label="House"
+                    />
+                  </RadioGroup>
+                </div>
+              </div>
+            </div>
 
-				error.Address.u2 = !value ? '*This field must not be empty!' : '';
-				break;
+            <hr class="dashed"></hr> */}
 
-			default:
-				break;
-		}
+            <div className="mb-3 col-12">
+              <div className="row">
+                <div className="col-lg-6">
+                  <div className="row">
+                    <div className="col-lg-4 col-md-5">
+                      <label
+                        for="exampleFormControlInput2"
+                        className="ms-2 mt-1 form-label"
+                      >
+                        Country
+                      </label>
+                    </div>
+                    <div className="col-lg-8">
+                      <ThemeProvider theme={textfieldTheme}>
+                        <TextField
+                          required
+                          fullWidth
+                          placeholder="USA"
+                          id="country"
+                          size="small"
+                          label="County"
+                          InputLabelProps={{ shrink: true }}
+                          value={formik.values.country}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          error={
+                            formik.touched.country &&
+                            Boolean(formik.errors.country)
+                          }
+                          helperText={
+                            formik.touched.country && formik.errors.country
+                          }
+                        />
+                      </ThemeProvider>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6">
+                  <div className="row">
+                    <div className="col-lg-2 col-md-3">
+                      <label
+                        for="exampleFormControlInput2"
+                        className="mt-1 form-label"
+                      >
+                        City
+                      </label>
+                    </div>
+                    <div className="col-lg-8">
+                      <ThemeProvider theme={textfieldTheme}>
+                        <TextField
+                          required
+                          fullWidth
+                          placeholder="New York"
+                          id="city"
+                          size="small"
+                          label="City"
+                          InputLabelProps={{ shrink: true }}
+                          value={formik.values.city}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          error={
+                            formik.touched.city && Boolean(formik.errors.city)
+                          }
+                          helperText={formik.touched.city && formik.errors.city}
+                        />
+                      </ThemeProvider>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-		this.setState({
-			fields,
-			error,
-			[name]: value
-		});
+            <hr class="dashed"></hr>
 
-		if (formvalid2(this.state)) {
-			let fields = {};
-			fields['Name'] = '';
-			fields['State'] = '';
-			fields['Address'] = '';
-			fields['Description'] = '';
-			this.setState({ fields: fields });
-		}
+            <div className="mb-3 col-12">
+              <div className="row">
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Time range
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <div className="row">
+                    <div className="col-lg-6">
+                      <div className="col-lg-12 checkin-inp">
+                        <ThemeProvider theme={textfieldTheme}>
+                          <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <TimePicker
+                              label="Checkin time"
+                              value={checkin}
+                              onChange={(newValue) => {
+                                setCheckin(newValue);
+                              }}
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  required
+                                  fullWidth
+                                  size="small"
+                                  variant="outlined"
+                                />
+                              )}
+                            />
+                          </LocalizationProvider>
+                        </ThemeProvider>
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="col-lg-12 mt-2 mt-lg-0 checkout-inp">
+                        <ThemeProvider theme={textfieldTheme}>
+                          <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <TimePicker
+                              label="Checkout time"
+                              value={checkout}
+                              onChange={(newValue) => {
+                                setCheckout(newValue);
+                              }}
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  required
+                                  fullWidth
+                                  size="small"
+                                  variant="outlined"
+                                />
+                              )}
+                            />
+                          </LocalizationProvider>
+                        </ThemeProvider>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-		localStorage.setItem('Name', JSON.stringify(this.state.fields['Name']));
-		localStorage.setItem('State', JSON.stringify(this.state.fields['State']));
-		localStorage.setItem('Address', JSON.stringify(this.state.fields['Address']));
-		localStorage.setItem('Description', JSON.stringify(this.state.fields['Description']));
-	};
+            <hr class="dashed"></hr>
 
-	onSubmit(e) {
-		e.preventDefault();
-	}
-	render() {
-		return (
-			<div>
-				<br />
-				<br />
-				<br />
-				<br />
-				<form noValidate className="row g-3 needs-validation mx-3">
-					<div className="row">
-						<div className="col-sm-1 " />
+            <div className="mb-3 col-12">
+              <div className="row">
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlInput3"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Phone number
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <ThemeProvider theme={textfieldTheme}>
+                    <TextField
+                      required
+                      fullWidth
+                      placeholder="09912141869"
+                      id="phone"
+                      size="small"
+                      label="Phone number"
+                      InputLabelProps={{ shrink: true }}
+                      value={formik.values.phone}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.phone && Boolean(formik.errors.phone)
+                      }
+                      helperText={formik.touched.phone && formik.errors.phone}
+                    />
+                  </ThemeProvider>
+                </div>
+              </div>
+            </div>
 
-						<div className="col-12  col-xl-4  d-xl-none mb-5">
-							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
-								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
-									Description :
-								</div>
-								<div className="row m-2">
-									The location and address of your accommodation will be sent to the guest after
-									booking in the form of fields , so try to enter the information accurately and
-									correctly. By selecting the country , city is also activated and allows you to
-									select. Additional description of the location, including dirt road, landscape,
-									access, etc. should be entered in the address section.
-								</div>
-							</div>
-						</div>
+            <hr class="dashed"></hr>
 
-						<br />
-						<br />
-						<br />
-						<br />
+            <div className="mb-3 col-12">
+              <div className="row">
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlInput4"
+                    className="ms-2 mt-1 form-label"
+                  >
+                    Email
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <ThemeProvider theme={textfieldTheme}>
+                    <TextField
+                      required
+                      fullWidth
+                      placeholder="yf7901@gamil.com"
+                      id="email"
+                      size="small"
+                      label="Email"
+                      InputLabelProps={{ shrink: true }}
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.email && Boolean(formik.errors.email)
+                      }
+                      helperText={formik.touched.email && formik.errors.email}
+                    />
+                  </ThemeProvider>
+                </div>
+              </div>
+            </div>
 
-						<div className="col-12 col-xl-7">
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Name :</label>
-								</div>
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="Name"
-										label="Name"
-										name="Name"
-										placeholder="Name*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-											this.state.error.Name.u1.length > 0 ||
-											this.state.error.Name.u2.length > 0 ? (
-												'is-invalid form-control lg'
-											) : (
-												'form-control'
-											)
-										}
-										value={this.state['Name']}
-										onChange={this.formValChange}
-									/>
-									<div className="mt-3 ">
-										{this.state.error.Name.u1.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u1}
-												<br />
-											</p>
-										)}
-										{this.state.error.Name.u2.length > 0 && (
-											<p className="err">
-												{this.state.error.Name.u2}
-												<br />
-											</p>
-										)}
-									</div>
-								</div>
-							</div>
+            <hr class="dashed"></hr>
 
-							<hr class="dashed" />
+            <div className="mb-3 col-12">
+              <div className="row">
+                <div className="col-lg-2 col-md-3">
+                  <label
+                    for="exampleFormControlTextarea1"
+                    className="ms-2 form-label"
+                  >
+                    Description
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <ThemeProvider theme={textfieldTheme}>
+                    <TextField
+                      fullWidth
+                      id="description"
+                      placeholder=""
+                      multiline
+                      autoComplete="description"
+                      label="Description"
+                      InputLabelProps={{ shrink: true }}
+                      inputProps={{ maxLength: CHARACTER_LIMIT }}
+                      value={formik.values.description}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.description &&
+                        Boolean(formik.errors.description)
+                      }
+                      helperText={`${formik.values.description.length}/${CHARACTER_LIMIT}`}
+                    />
+                  </ThemeProvider>
+                </div>
+              </div>
+            </div>
 
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Country :</label>
-								</div>
-								<div className="col-md-8">
-									<div>
-										<Countries />
-									</div>
-								</div>
-							</div>
+            <hr class="dashed"></hr>
 
-							<hr class="dashed" />
+            <div className="mb-3 col-12">
+              <div className="row">
+                <div className="col-lg-2 col-md-3 ">
+                  <label
+                    for="exampleFormControlTextarea1"
+                    className="ms-2 form-label"
+                  >
+                    Facilities
+                  </label>
+                </div>
+                <div className="col-lg-9">
+                  <Autocomplete
+                    multiple
+                    id="facilities"
+                    value={facilities}
+                    options={facilitieslist}
+                    onChange={(event, value) => {
+                      setFacilities(value);
+                    }}
+                    getOptionLabel={(option) => option}
+                    filterSelectedOptions
+                    renderInput={(params) => (
+                      <ThemeProvider theme={textfieldTheme}>
+                        <TextField
+                          fullWidth
+                          required
+                          {...params}
+                          label="Facilities"
+                        />
+                      </ThemeProvider>
+                    )}
+                  />
+                </div>
+              </div>
+            </div>
 
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">State :</label>
-								</div>
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="State"
-										label="State"
-										name="State"
-										placeholder="State*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-											this.state.error.State.u1.length > 0 ||
-											this.state.error.State.u2.length > 0 ? (
-												'is-invalid form-control lg'
-											) : (
-												'form-control'
-											)
-										}
-										value={this.state['State']}
-										onChange={this.formValChange}
-									/>
-								</div>
-							</div>
+            <hr class="dashed"></hr>
 
-							<hr class="dashed" />
+            <div className="mb-3 col-12">
+              <PreviewMultipleImages />
+            </div>
 
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Address :</label>
-								</div>
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="Address"
-										label="Address"
-										name="Address"
-										placeholder="Address*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={'form-control'}
-										value={this.state['Address']}
-										onChange={this.formValChange}
-									/>
-									<div className="mt-3 ">
-										{this.state.error.Address.u1.length > 0 && (
-											<p className="err">
-												{this.state.error.Address.u1}
-												<br />
-											</p>
-										)}
-										{this.state.error.Address.u2.length > 0 && (
-											<p className="err">
-												{this.state.error.Address.u2}
-												<br />
-											</p>
-										)}
-									</div>
-								</div>
-							</div>
-
-							<hr class="dashed" />
-
-							<div className="row">
-								<div className="col-md-4">
-									<label className="ms-2 mt-1 form-label">Description :</label>
-								</div>
-
-								<div className="col-md-8">
-									{' '}
-									<input
-										required
-										fullWidth
-										id="Description"
-										label="Description"
-										name="Description"
-										placeholder="description*"
-										autoComplete="text"
-										aria-describedby="inputGroup-sizing-sm"
-										className={
-											this.state.error.Description.u1.length > 0 ||
-											this.state.error.Description.u2.length > 0 ? (
-												'is-invalid form-control lg'
-											) : (
-												'form-control'
-											)
-										}
-										value={this.state['Description']}
-										onChange={this.formValChange}
-									/>
-									<div className="mt-3 ">
-										{this.state.error.Description.u1.length > 0 && (
-											<p className="err">
-												{this.state.error.Description.u1}
-												<br />
-											</p>
-										)}
-										{this.state.error.Description.u2.length > 0 && (
-											<p className="err">
-												{this.state.error.Description.u2}
-												<br />
-											</p>
-										)}
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className="col-12 col-xl-4 d-none d-xl-block">
-							<div class="p-3  rounded ms-3" style={{ border: '.1px solid #cd9a2d' }}>
-								<div className="row m-2 mb-3" style={{ color: '#cd9a2d' }}>
-									Description :
-								</div>
-								<div className="row m-2">
-									The location and address of your accommodation will be sent to the guest after
-									booking in the form of fields , so try to enter the information accurately and
-									correctly. By selecting the country , city is also activated and allows you to
-									select. Additional description of the location, including dirt road, landscape,
-									access, etc. should be entered in the address section.
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		);
-	}
+            <div className="row mt-2 d-fit-content">
+              <div className="col-4"></div>
+              <div className="col-4"></div>
+              <div className="col-4 edit-hotel mb-3">
+                <button className="btn edit-hotel" onClick={handleClick}>
+                  Edit hotel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default HotelInfo;

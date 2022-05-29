@@ -5,6 +5,8 @@ import HotelInfo3 from './HotelInfo3';
 import HotelInfo4 from './HotelInfo4';
 import HotelInfo from './HotelInfo';
 import '../../css/Profile.css';
+import Editprofile1 from "../Profile/Editprofile1"
+import profiledata2 from "../Profile/profiledata2"
 export default class steps extends Component {
 	constructor() {
 		super();
@@ -32,7 +34,7 @@ export default class steps extends Component {
 	render() {
 		const { currentStep } = this.state;
 		if (this.state.currentStep === 1) {
-			this.state.page = <HotelInfo />;
+			this.state.page = <HotelInfo/>;
 			this.state.btn = (
 				<button className="btn edit-hotel" onClick={() => this.handleClick('next')}>
 					Next
@@ -46,7 +48,7 @@ export default class steps extends Component {
 				</button>
 			);
 		} else if (this.state.currentStep === 3) {
-			this.state.page = <HotelInfo3 />;
+			this.state.page = <HotelInfo3/>;
 			this.state.btn = (
 				<button className="btn edit-hotel" onClick={() => this.handleClick('next')}>
 					Next
