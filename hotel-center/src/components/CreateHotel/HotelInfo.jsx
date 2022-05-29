@@ -1,18 +1,18 @@
 import * as React from "react";
 import { TextField, Grid, Typography } from "@mui/material";
-// import Logo from "../../../statics/logo/logo2.png";
+import Logo from "../../../statics/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-import {  create_hotel } from '../../Utils/connection';
-
-
 import { cookies, makeURL, set_cookie } from "../../Utils/common";
 import references from "../../assets/References.json";
 import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
+import { useHistory, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -20,7 +20,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
 import { makeStyles } from "@mui/styles";
 import PreviewMultipleImages from "./PreviewMultipleImages";
-// import Sidebar from "../layout/Sidebar";
+import Sidebar from "../layout/Sidebar";
 import EditIcon from "@mui/icons-material/Edit";
 
 const textfieldTheme = createTheme({
@@ -73,7 +73,7 @@ const validationSchema = yup.object({
     .required("Required!"),
 });
 
-function HotelInfo(props) {
+function Edithotel(props) {
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
   const CHARACTER_LIMIT = 1000;
@@ -116,8 +116,15 @@ function HotelInfo(props) {
     },
     validationSchema: validationSchema,
   });
- 
- 
+
+  const handleToggleSidebar = (value) => {
+    setToggled(value);
+  };
+
+  // const handletypeChange = (event, newValue) => {
+  //   setType(newValue);
+  // };
+
   useEffect(() => {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
@@ -204,14 +211,23 @@ function HotelInfo(props) {
     }
     console.log("facilities list: ",facilitiesListForBack)
 
-
-	console.log(filled,"poppop") ;
-    // if (filled) {
-
-	
+    if (filled) {
+      // let form_data = new FormData();
+      // form_data.append("name", formik.values.name);
+      // form_data.append("address", formik.values.address);
+      // form_data.append("description", formik.values.description);
+      // form_data.append("facilities", facilities);
+      // form_data.append("phone_number", formik.values.phone);
+      // form_data.append("country", formik.values.country);
+      // form_data.append("city", formik.values.city);
+      // form_data.append("header", selectedImage, selectedImage.name);
+      // form_data.append("check_in_range",formattedcheckinDate);
+      // form_data.append("check_out_range",formattedcheckoutDate);
+      // form_data.append("facilities",facilitiesListForBack);
+      
 
       axios
-        .post(makeURL(references.url_addhotel+ "/"), {
+        .put(makeURL(references.url_one_hotel + hotelid + "/"), {
           name: formik.values.name,
           address: formik.values.address,
           description: formik.values.description,
@@ -227,45 +243,12 @@ function HotelInfo(props) {
           },
         })
         .then((res) => {
-          console.log(res.data,"llllllllllllllll");
+          console.log(res.data);
         })
         .catch((err) => {
-          console.log("llllllllllllllll");
           console.log(err);
         });
-
-
-		// name   :name,
-		// city :city,
-		// state :state,
-		// address  : address, 
-		// description : description,
-		// phone_numbers :phone_numbers,
-		// facilities: facilities 
-
-		console.log("request",create_hotel(
-			formik.values.name,
-			formik.values.city,
-
-
-			formik.values.address,
-			formik.values.address,
-
-			formik.values.description,
-			formik.values.phone,
-			facilitiesListForBack
-
-			// formik.values.country,
-			//  formattedcheckinDate,
-			// formattedcheckoutDate,
-		  
-
-
-
-		));
-
-	create_hotel();
-    // }
+    }
   };
 
   return (
@@ -277,15 +260,14 @@ function HotelInfo(props) {
       /> */}
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
-          <a href="/" className="navbar-brand logo d-md-none">
-            {/* <img src={Logo} alt="Hotel Center" /> */}
+          {/* <a href="/" className="navbar-brand logo d-md-none">
+            <img src={Logo} alt="Hotel Center" />
             <span className="fw-bold logo-text-font">Hotel Center</span>
-          </a>
+          </a> */}
           <div
             className="btn-toggle d-md-none"
-            // onClick={() => handleToggleSidebar(true)}
-			
-			>
+            onClick={() => handleToggleSidebar(true)}
+          >
             <MenuIcon fontSize="large" />
           </div>
         </div>
@@ -770,4 +752,4 @@ function HotelInfo(props) {
   );
 }
 
-export default HotelInfo;
+export default Edithotel;
