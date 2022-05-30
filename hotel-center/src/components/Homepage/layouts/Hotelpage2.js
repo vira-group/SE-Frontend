@@ -59,7 +59,7 @@ const labels = {
 };
 
 const Icons = {
-  "Taxi Service": <LocalTaxiRoundedIcon />,
+  "Taxi service": <LocalTaxiRoundedIcon />,
   Sofa: <ChairRoundedIcon />,
   Bathroom: <ShowerRoundedIcon />,
   Telephone: <PhoneRoundedIcon />,

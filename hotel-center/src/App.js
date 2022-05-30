@@ -33,6 +33,41 @@ import './css/Reserve.css';
 import './css/Hotelpage.css';
 import './css/Hotelpage2.css';
 
+
+
+
+import hotelPage from "./components/HotelPage/hotelPage";
+import Navbar from "./components/Homepage/layouts/Navbar";
+import Footer from "./components/Homepage/layouts/Footer";
+import Profile from "./components/Profile/Editprofile";
+import IncreaseCredit from "./components/Profile/IncreaseCredit";
+import Favorites from "./components/Profile/Favorites";
+import Myhotels from "./components/Profile/Myhotels";
+import reservation from './components/Reservation/reservation';
+import Edithotel from "./components/AdminPanel/Pages/Edithotel";
+import Createroom from "./components/AdminPanel/Pages/Createroom";
+import Statistics from "./components/AdminPanel/Pages/Statistics";
+import RoomsStatus from "./components/AdminPanel/Pages/RoomsStatus";
+import "./components/AdminPanel/style/adminpanel.scss";
+import "./components/AdminPanel/style/widget.scss";
+import "./components/AdminPanel/style/chart.scss";
+import "./components/AdminPanel/style/roomStatus.scss";
+import "./css/Navbar.css";
+import "./css/Homepage.css";
+import "./css/Verify.css";
+import "./css/Average_rating.css";
+import "./css/Profile.css";
+import "./css/IncreaseCredit.css";
+import "./css/Favorites.css";
+import "./css/Reserve.css";
+import "./css/Hotelpage.css";
+import "./css/Hotelpage2.css";
+import "./css/Edithotel.css";
+import "./css/Edithotel.css"
+
+
+
+
 function App() {
 	return (
 		<div className="App">
@@ -53,11 +88,32 @@ function App() {
 					<Route exact path="/createHotel/steps" component={steps} />
 					<Route exact path="/auth/activate/:handle/:handle1" component={account_activation} />
 					<Route exact path="/reserve/:price_per_day/:name/:city/:id" component={Reservation} />
+          <Route
+            exact
+            path="/adminpanel/:id/statistics"
+            component={Statistics}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/createrooom"
+            component={Createroom}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/edithotel"
+            component={Edithotel}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/roomsstatus"
+            component={RoomsStatus}
+          />
+
 				</Switch>
 			</BrowserRouter>
 			<Footer />
 		</div>
 	);
-}
+  
 
-export default App;
+  }

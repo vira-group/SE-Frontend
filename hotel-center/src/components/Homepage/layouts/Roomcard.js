@@ -200,7 +200,7 @@ export default function Roomcard(props) {
                           <img
                             class="img-responsive w-100"
                             style={{ borderRadius: "5px" }}
-                            src={"http://127.0.0.1:8000" + rimg.image}
+                            src={references.base_address + rimg.image}
                           ></img>
                         </div>
                       ))
@@ -211,7 +211,7 @@ export default function Roomcard(props) {
                           <img
                             class="img-responsive w-100"
                             style={{ borderRadius: "5px" }}
-                            src={"http://127.0.0.1:8000" + rimg.image}
+                            src={references.base_address + rimg.image}
                           ></img>
                         </div>
                       ))

@@ -64,7 +64,7 @@ export default function Favorites2() {
               isFavorite={true}
             />
             <SingleFavoriteCard
-              img={image2}
+              img={image3}
               title="Eden hotel Amsterdam"
               description="Situated in the heart of the city centre, Eden Hotel
               Amsterdam offers warm-coloured rooms and free WiFi. The
