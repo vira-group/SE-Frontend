@@ -95,30 +95,30 @@ export const me = async () => {
 };
 
 export const logout = async () => {
-	let message = '';
-	// console.log(cookies.get('Authorization'));
-	await axios
-		.post(
-			makeURL(references.url_logout),
-			{},
-			{
-				headers: {
-					Authorization: cookies.get('Authorization')
-				}
-			}
-		)
-		.then((response) => {
-			// console.log(response);
-			cookies.remove('Authorization');
-			message = true;
-		})
-		.then(() => {
-			window.location.reload();
-		})
-		.catch((error) => {
-			// console.log(error);
-			message = false;
-		});
+  let message = "";
+  // console.log(cookies.get('Authorization'));
+  await axios
+    .post(
+      makeURL(references.url_logout),
+      {},
+      {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      }
+    )
+    .then((response) => {
+      // console.log(response);
+      cookies.remove("Authorization");
+      message = true;
+    })
+    .then(() => {
+      window.location.href = "http://localhost:3000/";
+    })
+    .catch((error) => {
+      // console.log(error);
+      message = false;
+    });
 
 	return message;
 };
@@ -204,39 +204,37 @@ export const one_room_reserve = async (
 	national_code,
 	phone_number
 ) => {
-	let message = '';
-	let err = '';
-	console.log(cookies.get('Authorization'));
-	await axios
-		.post(
-			makeURL(references.url_reserveroom),
-			{
-				start_day: start_day,
-				end_day: end_day,
-				firstname: firstname,
-				lastname: lastname,
-				room: room,
-				price_per_day: price_per_day,
-				national_code: national_code,
-				phone_number: phone_number
-			},
-			{
-				headers: {
-					Authorization: cookies.get('Authorization')
-				}
-			}
-		)
-		.then((response) => {
-			console.log(response);
-			console.log('everything right');
-			err = 'everything right';
-			message = response.status;
-		})
-		.catch((error) => {
-			message = error.response.status;
-			if (error.response.status == 400) {
-				window.alert('Please enter valid data.');
-			}
+  let message = "";
+  console.log(cookies.get("Authorization"));
+  await axios
+    .post(
+      makeURL(references.url_reserveroom),
+      {
+        start_day: start_day,
+        end_day: end_day,
+        firstname: firstname,
+        lastname: lastname,
+        room: room,
+        price_per_day: price_per_day,
+        national_code: national_code,
+        phone_number: phone_number,
+      },
+      {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      }
+    )
+    .then((response) => {
+      console.log(response);
+      console.log("everything right");
+      message = response.data;
+      window.alert("everything right");
+    })
+    .catch((error) => {
+      if (error.response.status == 400) {
+        window.alert("Please enter valid data.");
+      }
 
 			if (error.response.status == 406) {
 				window.alert('Your wallet balance is not enough.');
