@@ -231,18 +231,7 @@ function Edithotel(props) {
         id={hotelId}
       /> */}
       <div className="w-100 admin-content">
-        <div className="adminpanel-header-mobile">
-          <a href="/" className="navbar-brand logo d-md-none">
-            {/* <img src={Logo} alt="Hotel Center" /> */}
-            <span className="fw-bold logo-text-font">Hotel Center</span>
-          </a>
-          <div
-            className="btn-toggle d-md-none"
-            onClick={() => handleToggleSidebar(true)}
-          >
-            <MenuIcon fontSize="large" />
-          </div>
-        </div>
+    
 
         
         <div className="container py-5 px-lg-5">
