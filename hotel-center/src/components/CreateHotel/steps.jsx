@@ -5,15 +5,16 @@ import HotelInfo3 from './HotelInfo3';
 import HotelInfo4 from './HotelInfo4';
 import HotelInfo from './HotelInfo';
 import '../../css/Profile.css';
-import Editprofile1 from "../Profile/Editprofile1"
-import profiledata2 from "../Profile/profiledata2"
+import Editprofile1 from '../Profile/Editprofile1';
+import profiledata2 from '../Profile/profiledata2';
 export default class steps extends Component {
 	constructor() {
 		super();
 
 		this.state = {
-			
-			btn : null ,
+			btn: null,
+			btn2: null,
+
 			currentStep: 1,
 			page: null
 		};
@@ -34,10 +35,16 @@ export default class steps extends Component {
 	render() {
 		const { currentStep } = this.state;
 		if (this.state.currentStep === 1) {
-			this.state.page = <HotelInfo/>;
+			this.state.page = <HotelInfo />;
 			this.state.btn = (
 				<button className="btn edit-hotel" onClick={() => this.handleClick('next')}>
 					Next
+				</button>
+			);
+
+			this.state.btn2 = (
+				<button className="btn edit-hotel" onClick={() => this.handleClick()}>
+					Previous
 				</button>
 			);
 		} else if (this.state.currentStep === 2) {
@@ -47,19 +54,31 @@ export default class steps extends Component {
 					Next
 				</button>
 			);
+
+			this.state.btn2 = (
+				<button className="btn edit-hotel" onClick={() => this.handleClick()}>
+					Previous
+				</button>
+			);
 		} else if (this.state.currentStep === 3) {
-			this.state.page = <HotelInfo3/>;
+			this.state.page = <HotelInfo3 />;
 			this.state.btn = (
 				<button className="btn edit-hotel" onClick={() => this.handleClick('next')}>
 					Next
 				</button>
 			);
-		} else if (this.state.currentStep === 4) {
-			this.state.btn = (
-				<button className="btn edit-hotel" type="submit" onClick={() => this.handleClick('next')}>
-					Submit
+			this.state.btn2 = (
+				<button className="btn edit-hotel" onClick={() => this.handleClick()}>
+					Previous
 				</button>
 			);
+		} else if (this.state.currentStep === 4) {
+			this.state.btn = (
+				<button className="btn edit-hotel" onClick={() => this.handleClick()}>
+					Previous
+				</button>
+			);
+			this.state.btn2 = <div />;
 
 			this.state.page = <HotelInfo4 />;
 		}
@@ -79,19 +98,22 @@ export default class steps extends Component {
 										/>
 									</div>
 									<br />
-									{this.state.page}
-
 									<br />
 									<div className="row">
 										<div className="col-sm-1" />
+										<div className="col-sm-8" />
+
 										<div className="col-sm-1 zero">
 											<button className="btn edit-hotel" onClick={() => this.handleClick()}>
 												Previous
 											</button>
 										</div>
 										<div className="col-sm-1 ">{this.state.btn}</div>
-										<div className="col-sm-8" />
 									</div>
+
+									{this.state.page}
+
+									<br />
 								</div>
 							</div>
 						</div>

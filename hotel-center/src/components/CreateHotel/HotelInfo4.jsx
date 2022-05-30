@@ -4,13 +4,16 @@ import { TextField, Grid, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import { cookies, makeURL, set_cookie } from "../../Utils/common";
 import references from "../../assets/References.json";
 import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
+import { useHistory, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -19,6 +22,8 @@ import { makeStyles } from "@mui/styles";
 import PreviewMultipleImages from "./PreviewMultipleImages";
 // import Sidebar from "../layout/Sidebar";
 import EditIcon from "@mui/icons-material/Edit";
+
+import DomainAddIcon from "@mui/icons-material/DomainAdd";
 
 const textfieldTheme = createTheme({
   palette: {
@@ -70,7 +75,7 @@ const validationSchema = yup.object({
     .required("Required!"),
 });
 
-function HotelInfo4(props) {
+function Edithotel(props) {
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
   const CHARACTER_LIMIT = 1000;
@@ -97,9 +102,9 @@ function HotelInfo4(props) {
   }));
   const c = styles();
 
-  useEffect(() => {
-    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
-  }, []);
+  // useEffect(() => {
+  //   setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
+  // }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -128,39 +133,6 @@ function HotelInfo4(props) {
     }
   }, [selectedImage]);
 
-  let hotelid = window.location.pathname.split("/")[2];
-
-  useEffect(() => {
-    let facilityarray = [];
-    console.log(hotelid);
-    axios
-      .get(makeURL(references.url_one_hotel + hotelid + "/"), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((res) => {
-        setValue(res.data);
-        console.log(res.data);
-        formik.setValues({
-          name: res.data.name || "",
-          address: res.data.address || "",
-          description: res.data.description || "",
-          phone: res.data.phone_numbers || "",
-          country: res.data.country || "",
-          city: res.data.city || "",
-        });
-        for (var i = 0; i < res.data.facilities.length; i++) {
-          facilityarray.push(res.data.facilities[i].name);
-        }
-        setFacilities(facilityarray || "");
-        setCheckin(res.data.check_in_range + "am" || "");
-        setCheckout(res.data.check_out_range + "pm" || "")
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   const handleClick = () => {
     let filled =
@@ -198,15 +170,15 @@ function HotelInfo4(props) {
         formattedcheckinDate != " Invalid date" &&
         formattedcheckoutDate != " Invalid date"
     );
-    console.log("checkin time: ",formattedcheckinDate);
-    console.log("checkout time: ",formattedcheckoutDate);
+    console.log("checkin time: ", formattedcheckinDate);
+    console.log("checkout time: ", formattedcheckoutDate);
 
     var facilitiesListForBack = [];
-    for(var i=0;i<facilities.length;i++){
-      let temp = {"name" : facilities[i]};
+    for (var i = 0; i < facilities.length; i++) {
+      let temp = { name: facilities[i] };
       facilitiesListForBack.push(temp);
     }
-    console.log("facilities list: ",facilitiesListForBack)
+    console.log("facilities list: ", facilitiesListForBack);
 
     if (filled) {
       // let form_data = new FormData();
@@ -221,24 +193,27 @@ function HotelInfo4(props) {
       // form_data.append("check_in_range",formattedcheckinDate);
       // form_data.append("check_out_range",formattedcheckoutDate);
       // form_data.append("facilities",facilitiesListForBack);
-      
 
       axios
-        .put(makeURL(references.url_one_hotel + hotelid + "/"), {
-          name: formik.values.name,
-          address: formik.values.address,
-          description: formik.values.description,
-          facilities: facilitiesListForBack,
-          phone_number: formik.values.phone,
-          country: formik.values.country,
-          city: formik.values.city,
-          check_in_range: formattedcheckinDate,
-          check_out_range: formattedcheckoutDate,
-        }, {
-          headers: {
-            Authorization: cookies.get("Authorization"),
+        .post(
+          makeURL(references.url_addhotel),
+          {
+            name: formik.values.name,
+            address: formik.values.address,
+            description: formik.values.description,
+            facilities: facilitiesListForBack,
+            phone_number: formik.values.phone,
+            country: formik.values.country,
+            city: formik.values.city,
+            check_in_range: formattedcheckinDate,
+            check_out_range: formattedcheckoutDate,
           },
-        })
+          {
+            headers: {
+              Authorization: cookies.get("Authorization"),
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
         })
@@ -268,10 +243,14 @@ function HotelInfo4(props) {
             <MenuIcon fontSize="large" />
           </div>
         </div>
+
+        
         <div className="container py-5 px-lg-5">
           <h2 className="mb-4 fw-bold d-flex">
-            <EditIcon className="me-2" fontSize="large" />
-            Edit Hotel
+            {/* <EditIcon className="me-2" fontSize="large" /> */}
+            <DomainAddIcon className="me-2" fontSize="large" />
+          
+            Create Hotel
           </h2>
           <div className="container mt-4 p-4 edit-hotel-form border">
             <div className="mb-3 col-12">
@@ -536,6 +515,7 @@ function HotelInfo4(props) {
                             <TimePicker
                               label="Checkin time"
                               value={checkin}
+                              ampm={false}
                               onChange={(newValue) => {
                                 setCheckin(newValue);
                               }}
@@ -749,4 +729,4 @@ function HotelInfo4(props) {
   );
 }
 
-export default HotelInfo4;
+export default Edithotel;

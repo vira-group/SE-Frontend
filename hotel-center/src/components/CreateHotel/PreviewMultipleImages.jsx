@@ -26,7 +26,10 @@ function PreviewMultipleImages() {
           file.map((item, index) => {
             return (
               <div className="col" key={item}>
+              
                 <img src={item} className="m-3" alt="" style={{width: "200px", height:"100px"}}/>
+              
+              
                 <button type="button" className="btn edit-hotel" onClick={() => deleteFile(index)}>
                   delete
                 </button>
