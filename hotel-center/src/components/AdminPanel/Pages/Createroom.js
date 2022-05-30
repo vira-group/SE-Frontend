@@ -262,6 +262,7 @@ function Createroom(props) {
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
+                    title="element1"
                   >
                     Type of room
                   </label>
@@ -302,6 +303,7 @@ function Createroom(props) {
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
+                    title="element2"
                   >
                     Breakfast
                   </label>
@@ -353,6 +355,7 @@ function Createroom(props) {
                       <label
                         for="exampleFormControlInput2"
                         className="ms-2 mt-1 form-label"
+                        title="element3"
                       >
                         Room view
                       </label>
@@ -386,6 +389,7 @@ function Createroom(props) {
                       <label
                         for="exampleFormControlInput2"
                         className="ms-2 mt-1 form-label"
+                        title="element4"
                       >
                         Room size
                       </label>
@@ -425,6 +429,7 @@ function Createroom(props) {
                       <label
                         for="exampleFormControlInput2"
                         className="ms-2 mt-1 form-label"
+                        title="element5"
                       >
                         Room price
                       </label>
@@ -460,6 +465,7 @@ function Createroom(props) {
                       <label
                         for="exampleFormControlInput2"
                         className="ms-2 mt-1 form-label"
+                        title="element6"
                       >
                         Room sleeps
                       </label>
@@ -500,6 +506,7 @@ function Createroom(props) {
                   <label
                     for="exampleFormControlTextarea1"
                     className="ms-2 form-label"
+                    title="element7"
                   >
                     Room facilities
                   </label>
@@ -555,6 +562,10 @@ function Createroom(props) {
 
             <hr class="dashed"></hr>
 
+            <div className="mb-3 col-12">
+              <PreviewMultipleImages />
+            </div>
+
             <div className="row mt-2 d-fit-content">
               <div className="col-4"></div>
               <div className="col-4"></div>
@@ -576,6 +587,7 @@ function Createroom(props) {
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
+                    title="element8"
                   >
                     Room spaces
                   </label>
@@ -616,13 +628,6 @@ function Createroom(props) {
                 </button>
               </div>
             </div>
-
-            <hr class="dashed"></hr>
-
-            <div className="mb-3 col-12">
-              <PreviewMultipleImages roomid={roomid}/>
-            </div>
-
           </div>
         </div>
       </div>
