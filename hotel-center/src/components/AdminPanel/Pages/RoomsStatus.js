@@ -18,6 +18,9 @@ import FormControl from "@mui/material/FormControl";
 import { GoldenTextField } from "../../../theme/GoldenTextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
+import { makeURL, cookies } from "../../../Utils/common";
+import references from "../../../assets/References.json";
 
 function createData(roomNumber, roomType, roomStatus, roomDescription) {
   return {
@@ -103,8 +106,11 @@ export default function RoomsStatus() {
   const [roomType, setRoomType] = React.useState("");
   const [roomNumber, setRoomNumber] = React.useState(0);
   const [filteredRows, setFilteredRows] = React.useState(rows);
+  const [emptyRooms, setEmptyRooms] = useState(null);
+  const [fullRooms, setFullRooms] = useState(null);
 
   useEffect(() => {
+    let hotelid = window.location.pathname.split("/")[2];
     setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
     let newFilteredRows = rows.filter((row) => {
       let checkNumber = false;
@@ -118,6 +124,23 @@ export default function RoomsStatus() {
       return checkNumber && checkStatus && checkType;
     });
     setFilteredRows(newFilteredRows);
+
+    axios.get(makeURL(references.url_admimpanel_mainpage + hotelid + "/"),{
+      headers: {
+        Authorization: cookies.get("Authorization"),
+      },
+    })
+    .then((res) => {
+      console.log("response for rooms status: ", res.data.spaces_status.empty, res.data.spaces_status.full);
+      setEmptyRooms(res.data.spaces_status.empty);
+      setFullRooms(res.data.spaces_status.full);
+      for(var i = 0; i < emptyRooms.length; i++){
+        createData()
+      }
+    })
+    .catch((err) => {
+      console.log("error: ", err)
+    })
   }, [roomStatus, roomType, roomNumber]);
 
   const handleToggleSidebar = (value) => {

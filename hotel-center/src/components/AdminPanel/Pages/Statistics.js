@@ -98,14 +98,14 @@ export default function Statistics() {
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
               <Widget
                 type="single room"
-                percent={parseInt(roomPercentage["singleRoom"])}
+                percent={roomPercentage ? (parseInt(roomPercentage["singleRoom"])) : (widgetData["singleRoom"])}
                 icon={<BoyIcon className="me-1" fontSize="medium" />}
               />
             </div>
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
               <Widget
                 type="double room"
-                percent={parseInt(roomPercentage["doubleRoom"])}
+                percent={roomPercentage ? (parseInt(roomPercentage["doubleRoom"])) : (widgetData["doubleRoom"])}
                 icon={
                   <EscalatorWarningIcon className="me-2" fontSize="medium" />
                 }
@@ -114,14 +114,14 @@ export default function Statistics() {
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
               <Widget
                 type="triple room"
-                percent={parseInt(roomPercentage["tripleRoom"])}
+                percent={roomPercentage ? (parseInt(roomPercentage["tripleRoom"])) : (widgetData["tripleRoom"])}
                 icon={<FamilyRestroomIcon className="me-2" fontSize="medium" />}
               />
             </div>
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
               <Widget
                 type="suite room"
-                percent={parseInt(roomPercentage["suiteRoom"])}
+                percent={roomPercentage ? (parseInt(roomPercentage["suiteRoom"])) : (widgetData["suiteRoom"])}
                 icon={<HomeIcon className="me-2" fontSize="medium" />}
               />
             </div>
