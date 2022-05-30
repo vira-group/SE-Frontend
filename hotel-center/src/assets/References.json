@@ -6,10 +6,15 @@
     "url_me" : "/auth/users/me/",
     "url_logout" : "/auth/token/logout/",
 
-
-    "url_onehotel" : "/hotel/hotels",
-    "url_onehotelImage" : "/hotel",
-    "url_allhotels" : "/hotel/hotels?search=",
-    "url_one_hotel" : "/hotel/hotels/",
-    "url_hotelrooms" : "/hotel/room/"
+  "url_onehotel": "/hotel/hotels",
+  "url_onehotelImage": "/hotel",
+  "url_allhotels": "/hotel/hotels/?search=",
+  "url_one_hotel": "/hotel/hotels/",
+  "url_allhotels_facilities": "/hotel/hotels/?",
+  "url_hotelrooms": "/hotel/room/",
+  "url_reserveroom" : "/hotel/reserve/",
+  "url_edit_profile": "/accounts/users/me/",
+  "url_hotel_search": "/hotel/1/search/",
+  "url_myhotels": "/hotel/myhotels/",
+  "url_admimpanel_mainpage" : "/hotel/admin/panel/"
 }

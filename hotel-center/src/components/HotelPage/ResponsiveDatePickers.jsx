@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 // import '../../css/hotelPage.css';
 
-
 import Popover from '@mui/material/Popover';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -19,6 +18,7 @@ function ResponsiveDatePickers(props) {
 	const [ anchor, setAnchor ] = React.useState(null);
 	const [ numberOfAdults, setNumberOfAdults ] = React.useState(1);
 	const [ numberOfChildren, setNumberOfChildren ] = React.useState(0);
+	// console.log('eeeeeee', checkinDate);
 
 	const handleClick = (event) => {
 		setAnchor(event.currentTarget);
@@ -27,6 +27,8 @@ function ResponsiveDatePickers(props) {
 	const handleClose = () => {
 		setAnchor(null);
 	};
+	
+	
 
 	const handleChangeNumber = (actionType, guestType) => {
 		actionType === 'dec'
@@ -36,29 +38,37 @@ function ResponsiveDatePickers(props) {
 			: guestType === 'adults'
 				? setNumberOfAdults(numberOfAdults + 1)
 				: setNumberOfChildren(numberOfChildren + 1);
-	};
+
+				localStorage.setItem('i3', JSON.stringify(numberOfAdults+numberOfChildren+1));
+
+			};
 
 	const open = Boolean(anchor);
 	const id = open ? 'popover' : undefined;
 
+	// console.log("eeeeeee" ,checkinDate);
+
 	return (
-		<div className="card  card1 ">
-			<div className="card-body" style={{ position: 'sticky', top: '11vh' }}>
-				<div className="col col-md-12 align-items-center">
-					<div className="d-flex justify-content-center">
+		<div className="card  card1 "  title='AccordionSummery'>
+			<div className="card-body" style={{ position: 'sticky', top: '11vh' }}  title = 'card-body'  >
+				<div className="col col-md-12 align-items-center"    title='align-items-center' >
+					<div className="d-flex justify-content-center"  title='justifycontentcenter'>
 						<div className="row">
 							<div className="col-6">
-								<LocalizationProvider dateAdapter={AdapterDateFns}>
+								<LocalizationProvider dateAdapter={AdapterDateFns}  title = 'L'>
 									<DatePicker
+									title ='DatePicker'
 										disablePast
 										maxDate={checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null}
 										label="Check in"
 										value={checkinDate}
-										style={{borderRadius: '5px'}}
+										style={{ borderRadius: '5px' }}
 										onChange={(newValue) => {
 											setCheckinDate(newValue);
+											localStorage.setItem('i1', JSON.stringify(checkinDate));
+
 										}}
-										renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
+										renderInput={(params) => <GoldenTextField {...params} variant="outlined"   title='GoldenTextField' />}
 									/>
 								</LocalizationProvider>
 							</div>
@@ -69,8 +79,11 @@ function ResponsiveDatePickers(props) {
 										minDate={checkinDate ? new Date(checkinDate.getTime() + oneDay) : null}
 										label="Check out"
 										value={checkoutDate}
+										
 										onChange={(newValue) => {
 											setCheckoutDate(newValue);
+											localStorage.setItem('i2', JSON.stringify(checkoutDate));
+	
 										}}
 										renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
 									/>
@@ -94,6 +107,7 @@ function ResponsiveDatePickers(props) {
 					</div>
 
 					<Popover
+					title = 'Popover'
 						id={id}
 						open={open}
 						anchorEl={anchor}
@@ -107,17 +121,18 @@ function ResponsiveDatePickers(props) {
 							horizontal: 'right'
 						}}
 					>
-						<div className="p-3 number-of-guests-form">
-							<div className="mb-3 d-flex align-items-center">
-								<p className="mb-0 me-auto">Adults</p>
+						<div className="p-3 number-of-guests-form"  title='number-of-guests-form'>
+							<div className="mb-3 d-flex align-items-center"  >
+								<p className="mb-0 me-auto"   title ='r' > Adults</p>
 								<button
+								title='button'
 									type="button"
 									className="btn btn-primary decrease-button"
 									onClick={() => handleChangeNumber('dec', 'adults')}
 									disabled={numberOfAdults <= 1}
 								>
-									<span>
-										<RemoveIcon />
+									<span >
+										<RemoveIcon  />
 									</span>
 								</button>
 								<p className="mb-0 px-3">{numberOfAdults}</p>
@@ -127,7 +142,7 @@ function ResponsiveDatePickers(props) {
 									onClick={() => handleChangeNumber('inc', 'adults')}
 								>
 									<span>
-										<AddIcon />
+										<AddIcon titel='AddIcon' />
 									</span>
 								</button>
 							</div>
@@ -161,7 +176,8 @@ function ResponsiveDatePickers(props) {
 
 					<div className="d-flex justify-content-center">
 						<div className="row w-100">
-							<button className="btn btn-dark">
+							<button className="btn btn-dark"  title='btn-dark'>
+								{' '}
 								check availability
 							</button>
 						</div>

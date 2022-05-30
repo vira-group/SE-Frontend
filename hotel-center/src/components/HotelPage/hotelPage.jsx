@@ -9,14 +9,11 @@
 import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
 import * as React from 'react';
 import Helmet from 'react-helmet';
-// import '../../css/hotelPage.css';
-import '../../css/Hotelpage.css';
-
 import ResponsiveDatePickers from './ResponsiveDatePickers';
 import SimpleAccordion from './accordion';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-
 import Hotelpage2 from '../Homepage/layouts/Hotelpage2';
+
 
 
 class Hotelpage extends React.Component {

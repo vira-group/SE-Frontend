@@ -2,11 +2,97 @@ import * as React from "react";
 import Helmet from "react-helmet";
 import Rating from "@mui/material/Rating";
 import { useState, useEffect } from "react";
+import { Typography, Button, Link } from "@mui/material";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import references from "../../../assets/References.json";
 import "../../../css/Hotelcard.css";
+import axios from "axios";
+import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import { makeStyles } from "@mui/styles";
 
-export default function Filter() {
+export default function Filter(props) {
+  const styles = makeStyles(() => ({
+    root: {
+      "&$checked": {
+        color: "black",
+      },
+    },
+    checked: {},
+  }));
+  const c = styles();
+
   const [value, setValue] = React.useState(1);
+  const [state, setState] = useState(null);
+  const [filterIson, setFilterIsOn] = useState(false);
+  const [filteredHotel, setFilteredhotel] = useState(null);
+
+  // hotel facilities
+  const [hf1, setHf1] = useState(false);
+  const [hf2, setHf2] = useState(false);
+  const [hf3, setHf3] = useState(false);
+  const [hf4, setHf4] = useState(false);
+  const [hf5, setHf5] = useState(false);
+  const [hf6, setHf6] = useState(false);
+  const [hf7, setHf7] = useState(false);
+  const [hf8, setHf8] = useState(false);
+  const [hf9, setHf9] = useState(false);
+  const [hf10, setHf10] = useState(false);
+
+  var selectedhfs = "";
+
+  const handleSearchclick = () => {
+    setFilterIsOn(true);
+    // console.log("star value:", value);
+    if (hf1) selectedhfs += "facilities=Parking&";
+    if (hf2) selectedhfs += "facilities=Room service&";
+    if (hf3) selectedhfs += "facilities=Restaurant&";
+    if (hf4) selectedhfs += "facilities=Sofa&";
+    if (hf5) selectedhfs += "facilities=Bathroom&";
+    if (hf6) selectedhfs += "facilities=Taxi service&";
+    if (hf7) selectedhfs += "facilities=WiFi&";
+    if (hf8) selectedhfs += "facilities=Bar&";
+    if (hf9) selectedhfs += "facilities=Telephone&";
+    if (hf10) selectedhfs += "facilities=Television&";
+    if (value) selectedhfs += "rate=" + value + "&";
+
+    console.log(
+      "selected hotel facilities: ",
+      references.url_allhotels_facilities + selectedhfs
+    );
+
+    axios
+      .get(makeURL(references.url_allhotels_facilities + selectedhfs), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((response) => {
+        console.log("filter response: ", response.data);
+        setFilteredhotel(response.data);
+        // document.location.reload(true);
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      });
+  };
+
+  const removeFilters = () => {
+    if (hf1) setHf1(false);
+    if (hf2) setHf2(false);
+    if (hf3) setHf3(false);
+    if (hf4) setHf4(false);
+    if (hf5) setHf5(false);
+    if (hf6) setHf6(false);
+    if (hf7) setHf7(false);
+    if (hf8) setHf8(false);
+    if (hf9) setHf9(false);
+    if (hf10) setHf10(false);
+    document.location.reload(true);
+  };
+
   return (
     <div>
       <div className="mt-5">
@@ -21,6 +107,7 @@ export default function Filter() {
                 value={value}
                 onChange={(event, newValue) => {
                   setValue(newValue);
+                  // console.log('star value:',newValue);
                 }}
               />
             </div>
@@ -49,236 +136,169 @@ export default function Filter() {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f1"
-                ></input>
-                <label className="form-check-label" for="f1">
-                  Parking
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f2"
-                ></input>
-                <label className="form-check-label" for="f2">
-                  Restraunt
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f3"
-                ></input>
-                <label className="form-check-label" for="f3">
-                  Room service
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f4"
-                ></input>
-                <label className="form-check-label" for="f4">
-                  Gym
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f5"
-                ></input>
-                <label className="form-check-label" for="f5">
-                  WiFi
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f6"
-                ></input>
-                <label className="form-check-label" for="f6">
-                  Swimming pool
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f7"
-                ></input>
-                <label className="form-check-label" for="f7">
-                  Family rooms
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f8"
-                ></input>
-                <label className="form-check-label" for="f8">
-                  Taxi service
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="f9"
-                ></input>
-                <label className="form-check-label" for="f9">
-                  Non-smoking rooms
-                </label>
-              </div>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf1}
+                      onClick={() => setHf1(!hf1)}
+                    />
+                  }
+                  label="Parking"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf2}
+                      onClick={() => setHf2(!hf2)}
+                    />
+                  }
+                  label="Room service"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf3}
+                      onClick={() => setHf3(!hf3)}
+                    />
+                  }
+                  label="Restaurant"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf4}
+                      onClick={() => setHf4(!hf4)}
+                    />
+                  }
+                  label="Sofa"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf5}
+                      onClick={() => setHf5(!hf5)}
+                    />
+                  }
+                  label="Bathroom"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf6}
+                      onClick={() => setHf6(!hf6)}
+                    />
+                  }
+                  label="Taxi service"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf7}
+                      onClick={() => setHf7(!hf7)}
+                    />
+                  }
+                  label="WiFi"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf8}
+                      onClick={() => setHf8(!hf8)}
+                    />
+                  }
+                  label="Bar"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf9}
+                      onClick={() => setHf9(!hf9)}
+                    />
+                  }
+                  label="Telephone"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      classes={{
+                        root: c.root,
+                        checked: c.checked,
+                      }}
+                      checked={hf10}
+                      onClick={() => setHf10(!hf10)}
+                    />
+                  }
+                  label="Television"
+                />
+              </FormGroup>
             </div>
           </div>
         </div>
-        <div className="accordion-item mt-2">
-          <h2 className="accordion-header" id="headingThree">
-            <button
-              className="accordion-button filter-acc collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
-              aria-expanded="false"
-              aria-controls="collapseThree"
-            >
-              Room facilities
-            </button>
-          </h2>
-          <div className="">
-            <hr className="mb-0 mt-0 hr-text"></hr>
-          </div>
-          <div
-            id="collapseThree"
-            className="accordion-collapse collapse"
-            aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r1"
-                ></input>
-                <label className="form-check-label" for="r1">
-                  Air conditioning
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r2"
-                ></input>
-                <label className="form-check-label" for="r2">
-                  Wardrobe or closet
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r3"
-                ></input>
-                <label className="form-check-label" for="r3">
-                  Ironing facilities
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r4"
-                ></input>
-                <label className="form-check-label" for="r4">
-                  Heating
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r5"
-                ></input>
-                <label className="form-check-label" for="r5">
-                  Coffee machine
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r6"
-                ></input>
-                <label className="form-check-label" for="r6">
-                  Desk
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r7"
-                ></input>
-                <label className="form-check-label" for="r7">
-                  Cable channels
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r8"
-                ></input>
-                <label className="form-check-label" for="r8">
-                  Minibar
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="r9"
-                ></input>
-                <label className="form-check-label" for="r9">
-                  Safety deposit box
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button className="btn btn-primary hotel-room w-100 mt-1">
+        <button
+          className="btn btn-primary hotel-room w-100 mt-1"
+          onClick={handleSearchclick}
+        >
           Search
         </button>
+        <div className="">
+          {filterIson == true && (
+            <Typography sx={{ textAlign: "center" }}>
+              <Button
+                style={{
+                  color: "black",
+                  textTransform: "unset",
+                  marginTop: "15px",
+                }}
+              >
+                <Link
+                  underline="hover"
+                  sx={{ cursor: "pointer",  }}
+                  color="inherit"
+                  onClick={removeFilters}
+                >
+                  Remove all filters
+                </Link>
+              </Button>
+            </Typography>
+          )}
+        </div>
       </div>
     </div>
   );

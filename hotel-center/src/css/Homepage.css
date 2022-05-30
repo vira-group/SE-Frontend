@@ -97,6 +97,11 @@
   background-color: #d3b065;
 }
 
+/*****************************************footer******************************************/
+.footer-bg-color {
+  background-color: #cd9a2d;
+}
+
 /* X-small devices */
 @media only screen and (max-width: 575.98px) {
   #carousel {
@@ -141,9 +146,4 @@
 
 /* Extra Extra Large devices */
 @media only screen and (min-width: 1400px) {
-}
-
-/*****************************************footer******************************************/
-.footer-bg-color {
-  background-color: #cd9a2d;
 }
