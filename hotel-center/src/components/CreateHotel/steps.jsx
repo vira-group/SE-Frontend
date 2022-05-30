@@ -100,15 +100,13 @@ export default class steps extends Component {
 									<br />
 									<br />
 									<div className="row">
-										<div className="col-sm-1" />
-										<div className="col-sm-8" />
+										<div className="col-5 col-md-1" />
+										<div className="col-5 col-md-8" />
 
-										<div className="col-sm-1 zero">
-											<button className="btn edit-hotel" onClick={() => this.handleClick()}>
-												Previous
-											</button>
+										<div className="col-1 col-md-1 ">
+										{this.state.btn2}
 										</div>
-										<div className="col-sm-1 ">{this.state.btn}</div>
+										<div className="col-1 col-md-1  zero ">{this.state.btn}</div>
 									</div>
 
 									{this.state.page}
