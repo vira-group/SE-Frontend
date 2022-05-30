@@ -175,7 +175,7 @@ function Profile(props) {
                 <div className="profile-img">
                   {selectedImage !== null ? (
                     <img
-                    src={references.url_address + selectedImage}
+                    src={references.base_address + selectedImage}
                     className="rounded-circle"
                     alt="Avatar"
                   />
