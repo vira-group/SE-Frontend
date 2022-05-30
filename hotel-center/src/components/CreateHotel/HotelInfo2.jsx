@@ -17,9 +17,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
+// import image1 from "../../statics/img/pics/avatar.jpg";
 import image1 from "../../statics/img/pics/avatar.jpg";
-
 const datePickerTheme = createTheme({
   palette: {
     primary: {
@@ -50,7 +50,6 @@ const validationSchema = yup.object({
   gender: yup.string().required("Required!"),
   birthdate: yup.date().required("Required!"),
 });
-
 
 function Profile(props) {
   const CHARACTER_LIMIT = 250;
@@ -166,17 +165,16 @@ function Profile(props) {
   return (
     <div className="container">
       <div className="row pt-5">
-        <div className="col-lg-3">
-          <Sidebar />
-        </div>
-        <div className="col-lg-9">
+      
+      <div className="col-sm-1"></div>
+        <div className="col-12    py-5 px-lg-5">
           <div className="container edit-profile-form border">
             <div className="row">
               <div className="col-lg-3">
                 <div className="profile-img">
                   {selectedImage !== null ? (
                     <img
-                    src={references.base_address + selectedImage}
+                    src={references.url_address + selectedImage}
                     className="rounded-circle"
                     alt="Avatar"
                   />
@@ -190,6 +188,7 @@ function Profile(props) {
                   
                 </div>
               </div>
+              {/* <br></br> */}
               <div className="col-lg-8">
                 <input
                   type="file"
@@ -527,6 +526,8 @@ function Profile(props) {
             </div>
           </div>
         </div>
+      <div className="col-sm-1"></div>
+
       </div>
     </div>
   );

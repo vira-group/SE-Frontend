@@ -70,7 +70,6 @@ hr.dashed {
   border: none !important;
   box-shadow: none !important;
 }
-
 /***********************Sidebar*************************/
 .profile-sidebar {
   background-color: white;
@@ -88,6 +87,11 @@ hr.dashed {
 
 /* X-small devices */
 @media only screen and (max-width: 575.98px) {
+
+  .zero{
+    margin-right: 1%;
+  }
+
   .profile-sidebar .row a {
     width: 20%;
     margin: auto;
@@ -109,6 +113,10 @@ hr.dashed {
 
 /* Small devices */
 @media only screen and (min-width: 576px) and (max-width: 767.98px) {
+  
+  .zero{
+  margin-right: 13%;
+  }
   .profile-sidebar .row a {
     width: 20%;
     margin: auto;
@@ -130,6 +138,10 @@ hr.dashed {
 
 /* Medium devices */
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
+
+  .zero{
+    margin-right: 15%;
+  }
   .profile-sidebar .row a {
     width: 20%;
     margin: auto;
@@ -150,12 +162,24 @@ hr.dashed {
 
 /* Large devices */
 @media only screen and (min-width: 992px) and (max-width: 1199.98px) {
+  
+.zero{
+  margin-right: 8%;
+}
 }
 
 /* Extra Large devices */
 @media only screen and (min-width: 1200px) and (max-width: 1399.98px) {
+
+  .zero{
+    margin-right: 5%;
+  }
 }
 
 /* Extra Extra Large devices */
 @media only screen and (min-width: 1400px) {
+
+  .zero{
+    margin-right: 1%;
+  }
 }

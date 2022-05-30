@@ -1,13 +1,12 @@
-import { Route, Switch, BrowserRouter } from "react-router-dom";
-import Verify from "./verify";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { render } from "@testing-library/react";
-import Homepage from "./components/Homepage/Homepage";
-import account_activation from "../src/components/account_activation/account_activation";
-import login from "./components/Login/Login";
-import Sign_up from "./components/Sign_up/sign_up";
-import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
-// import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import Verify from './verify';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { render } from '@testing-library/react';
+import Homepage from './components/Homepage/Homepage';
+import account_activation from '../src/components/account_activation/account_activation';
+import login from './components/Login/Login';
+import Sign_up from './components/Sign_up/sign_up';
+import Hotelcard from './components/Homepage/layouts/Newhotelcard';
 import hotelPage from "./components/HotelPage/hotelPage";
 import Navbar from "./components/Homepage/layouts/Navbar";
 import Footer from "./components/Homepage/layouts/Footer";
@@ -20,6 +19,8 @@ import Edithotel from "./components/AdminPanel/Pages/Edithotel";
 import Createroom from "./components/AdminPanel/Pages/Createroom";
 import Statistics from "./components/AdminPanel/Pages/Statistics";
 import RoomsStatus from "./components/AdminPanel/Pages/RoomsStatus";
+import CreateHotel from './components/CreateHotel/CreateHotel';
+import steps from './components/CreateHotel/steps';
 import "./components/AdminPanel/style/adminpanel.scss";
 import "./components/AdminPanel/style/widget.scss";
 import "./components/AdminPanel/style/chart.scss";
@@ -57,6 +58,7 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/sign-up" component={Sign_up} />
           <Route exact path="/login" component={login} />
+          <Route exact path="/createHotel/steps" component={steps} />
           <Route
             exact
             path="/auth/activate/:handle/:handle1"

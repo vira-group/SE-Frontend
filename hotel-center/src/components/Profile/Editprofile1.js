@@ -18,7 +18,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
 import Sidebar from "./Sidebar";
-import image1 from "../../statics/img/pics/avatar.jpg";
+import image1 from "../../statics/img/Landmark/h1.jpg"
 
 const datePickerTheme = createTheme({
   palette: {
@@ -42,7 +42,7 @@ const validationSchema = yup.object({
     .max(20, "Must be 20 characters or less")
     .min(2, "Must be at least 2 characters")
     .required("Required!"),
-  nationalcode: yup.string().max(10, "Must be less than 10 digits").required("Required!"),
+  nationalcode: yup.string().required("Required!"),
   email: yup.string().email("Invalid email address").required("Required"),
   phone: yup.number().required("Required!"),
   aboutme: yup.string().max(250, "Can't be more than 250 characters."),
@@ -98,7 +98,7 @@ function Profile(props) {
           aboutme: res.data.description || "",
           telephone: "",
         });
-        setSelectedImage(res.data.avatar)
+        setSelectedImage(res.data.avatar || "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp")
         setBirthdate(res.data.birthday || "");
         setGenValue(res.data.gender || "");
       });
@@ -116,7 +116,7 @@ function Profile(props) {
     console.log("filled:", filled);
 
     if (filled) {
-      console.log(selectedImage);
+      // console.log(selectedImage);
       let form_data = new FormData();
       form_data.append('avatar', selectedImage, selectedImage.name);
       form_data.append('email',formik.values.email);
@@ -166,31 +166,19 @@ function Profile(props) {
   return (
     <div className="container">
       <div className="row pt-5">
-        <div className="col-lg-3">
-          <Sidebar />
-        </div>
-        <div className="col-lg-9">
+        <div className="col-lg-12">
           <div className="container edit-profile-form border">
             <div className="row">
               <div className="col-lg-3">
                 <div className="profile-img">
-                  {selectedImage !== null ? (
-                    <img
-                    src={references.base_address + selectedImage}
+                  <img
+                    src={"http://127.0.0.1:8000" + selectedImage}
                     className="rounded-circle"
                     alt="Avatar"
                   />
-                  ) : (
-                    <img
-                    src={image1}
-                    className="rounded-circle default"
-                    alt="Avatar"
-                  />
-                  )}
-                  
                 </div>
               </div>
-              <div className="col-lg-8">
+              <div className="col-lg-8" style={{ marginTop: "52px" }}>
                 <input
                   type="file"
                   name="myImage"
@@ -384,7 +372,7 @@ function Profile(props) {
             </div>
 
             <hr class="dashed"></hr>
-
+            <div style={{display:"none"}}>
             <div className="mb-3 col-9">
               <div className="row">
                 <div className="col-lg-3">
@@ -512,6 +500,7 @@ function Profile(props) {
                   />
                 </div>
               </div>
+            </div>
             </div>
             <div className="row mt-2 d-fit-content">
               <div className="col-4"></div>

@@ -106,21 +106,30 @@ export default function Hotelpage() {
   useEffect(() => {
     const queryString = window.location.toString();
     const hotelid = queryString.slice(-1);
-    axios
-      .get(makeURL(references.url_hotelrooms + hotelid + "/"), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((response) => {
-        console.log("rooms response:", response.data);
-        // console.log("rooms response:", response.data.option);
-        setRooms(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    
+    setRooms(JSON.parse(localStorage.getItem('rooms')));
+
+    
+    // axios
+    //   .get(makeURL(references.url_hotelrooms + hotelid + "/"), {
+    //     headers: {
+    //       Authorization: cookies.get("Authorization"),
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log("rooms response:", response.data);
+      
+      
+    //     setRooms(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  
+  
+    }, []);
+
+
 
   return hotel ? (
     <div>
