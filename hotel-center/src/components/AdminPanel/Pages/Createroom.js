@@ -560,12 +560,6 @@ function Createroom(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
-
-            <div className="mb-3 col-12">
-              <PreviewMultipleImages />
-            </div>
-
             <div className="row mt-2 d-fit-content">
               <div className="col-4"></div>
               <div className="col-4"></div>
@@ -581,7 +575,8 @@ function Createroom(props) {
             <div className="mb-3 col-md-12">
               <div className="row mt-3">
                 <Typography sx={{ mb: 3 }}>
-                  Please first create your room and then add the numbers of rooms you have below.
+                  Please first create your room and then add the numbers of
+                  rooms you have below.
                 </Typography>
                 <div className="col-lg-2 col-md-3">
                   <label
@@ -627,6 +622,12 @@ function Createroom(props) {
                   Add room spaces
                 </button>
               </div>
+            </div>
+
+            <hr class="dashed"></hr>
+
+            <div className="mb-3 col-12">
+              <PreviewMultipleImages />
             </div>
           </div>
         </div>

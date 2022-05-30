@@ -13,7 +13,7 @@ import * as yup from "yup";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -157,8 +157,16 @@ function Edithotel(props) {
           facilityarray.push(res.data.facilities[i].name);
         }
         setFacilities(facilityarray || "");
-        setCheckin(res.data.check_in_range + "am" || "");
-        setCheckout(res.data.check_out_range + "pm" || "")
+        var temp1 = res.data.check_in_range.split(":");
+        var temp2 = res.data.check_out_range.split(":");
+        setCheckin(
+          new Date(2022, 5, 29, parseInt(temp1[0]), parseInt(temp1[1])) || ""
+        );
+        setCheckout(
+          new Date(2022, 5, 29, parseInt(temp2[0]), parseInt(temp2[1])) ||
+            "" ||
+            ""
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -201,15 +209,15 @@ function Edithotel(props) {
         formattedcheckinDate != " Invalid date" &&
         formattedcheckoutDate != " Invalid date"
     );
-    console.log("checkin time: ",formattedcheckinDate);
-    console.log("checkout time: ",formattedcheckoutDate);
+    console.log("checkin time: ", formattedcheckinDate);
+    console.log("checkout time: ", formattedcheckoutDate);
 
     var facilitiesListForBack = [];
-    for(var i=0;i<facilities.length;i++){
-      let temp = {"name" : facilities[i]};
+    for (var i = 0; i < facilities.length; i++) {
+      let temp = { name: facilities[i] };
       facilitiesListForBack.push(temp);
     }
-    console.log("facilities list: ",facilitiesListForBack)
+    console.log("facilities list: ", facilitiesListForBack);
 
     if (filled) {
       // let form_data = new FormData();
@@ -224,24 +232,27 @@ function Edithotel(props) {
       // form_data.append("check_in_range",formattedcheckinDate);
       // form_data.append("check_out_range",formattedcheckoutDate);
       // form_data.append("facilities",facilitiesListForBack);
-      
 
       axios
-        .put(makeURL(references.url_one_hotel + hotelid + "/"), {
-          name: formik.values.name,
-          address: formik.values.address,
-          description: formik.values.description,
-          facilities: facilitiesListForBack,
-          phone_number: formik.values.phone,
-          country: formik.values.country,
-          city: formik.values.city,
-          check_in_range: formattedcheckinDate,
-          check_out_range: formattedcheckoutDate,
-        }, {
-          headers: {
-            Authorization: cookies.get("Authorization"),
+        .put(
+          makeURL(references.url_one_hotel + hotelid + "/"),
+          {
+            name: formik.values.name,
+            address: formik.values.address,
+            description: formik.values.description,
+            facilities: facilitiesListForBack,
+            phone_number: formik.values.phone,
+            country: formik.values.country,
+            city: formik.values.city,
+            check_in_range: formattedcheckinDate,
+            check_out_range: formattedcheckoutDate,
           },
-        })
+          {
+            headers: {
+              Authorization: cookies.get("Authorization"),
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
         })
@@ -544,6 +555,7 @@ function Edithotel(props) {
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <TimePicker
                               label="Checkin time"
+                              ampm={false}
                               value={checkin}
                               onChange={(newValue) => {
                                 setCheckin(newValue);
@@ -568,6 +580,7 @@ function Edithotel(props) {
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <TimePicker
                               label="Checkout time"
+                              ampm={false}
                               value={checkout}
                               onChange={(newValue) => {
                                 setCheckout(newValue);
