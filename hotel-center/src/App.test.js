@@ -31,15 +31,15 @@ describe("Favorites", () => {
     expect(CreditElements.length).toBe(4);
   });
 
-  it("should render the correct content", async () => {
-    render(
-      <BrowserRouter>
-        <IncreaseCredit />
-      </BrowserRouter>
-    );
-    const CreditElements = screen.queryAllByRole("heading");
-    expect(CreditElements.length).toBe(4);
-  });
+  // it("should render the correct content", async () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <IncreaseCredit />
+  //     </BrowserRouter>
+  //   );
+  //   const CreditElements = screen.queryAllByRole("heading");
+  //   expect(CreditElements.length).toBe(4);
+  // });
 });
 
 describe("Edit profile", () => {
@@ -420,11 +420,11 @@ describe("Footer", () => {
 });
 
 describe("Filter", () => {
-  it("should render the correct content", async () => {
-    render(<Filter />);
-    const FilterElements = screen.queryAllByRole("button");
-    expect(FilterElements.length).toBe(3);
-  });
+  // it("should render the correct content", async () => {
+  //   render(<Filter />);
+  //   const FilterElements = screen.queryAllByRole("button");
+  //   expect(FilterElements.length).toBe(3);
+  // });
 
   it("should render the correct content", async () => {
     render(<Filter />);
@@ -479,11 +479,11 @@ it("should fetch and render input element", async () => {
   expect(followerDivElement).not.toBeInTheDocument();
 });
 
-it("should render same text ", () => {
-  render(<SimpleAccordion />);
-  const h1Element = screen.getByTitle(/accordion/i);
-  expect(h1Element).toBeInTheDocument();
-});
+// it("should render same text ", () => {
+//   render(<SimpleAccordion />);
+//   const h1Element = screen.getByTitle(/accordion/i);
+//   expect(h1Element).toBeInTheDocument();
+// });
 
 const Mockq = () => {
   return (
