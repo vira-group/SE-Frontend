@@ -42,7 +42,7 @@ export default function Myhotels(props) {
   }, []);
 
   const handleClick = () => {
-    window.location.href = "http://localhost:3000/CreateHotel";
+    window.location.href = "http://localhost:3000/createHotel/steps";
   };
   // useEffect(() => {
   //   // console.log(cookies.get("Authorization"));

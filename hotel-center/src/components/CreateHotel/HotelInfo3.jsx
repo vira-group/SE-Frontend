@@ -29,7 +29,7 @@ export default function Verify() {
 						<Grid item style={{ textAlign: 'center'}} xs={12}>
 							<Typography variant="h5"
               
-              style={{ fontWeight: 'bold', fontSize: '23px', fontFamily: 'serif' }} >You can create your hotel now.</Typography>
+              style={{ fontWeight: 'bold', fontSize: '23px', fontFamily: 'serif', marginTop:"1rem" }} >You can create your hotel now.</Typography>
 						</Grid>
 						<div className="verify-img">
 							<img src={image1} className="responsive-img" width="400" height="400" />

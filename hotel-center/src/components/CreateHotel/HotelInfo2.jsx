@@ -42,7 +42,10 @@ const validationSchema = yup.object({
     .max(20, "Must be 20 characters or less")
     .min(2, "Must be at least 2 characters")
     .required("Required!"),
-  nationalcode: yup.string().max(10, "Must be less than 10 digits").required("Required!"),
+  nationalcode: yup
+    .string()
+    .max(10, "Must be less than 10 digits")
+    .required("Required!"),
   email: yup.string().email("Invalid email address").required("Required"),
   phone: yup.number().required("Required!"),
   aboutme: yup.string().max(250, "Can't be more than 250 characters."),
@@ -97,7 +100,7 @@ function Profile(props) {
           aboutme: res.data.description || "",
           telephone: "",
         });
-        setSelectedImage(res.data.avatar)
+        setSelectedImage(res.data.avatar);
         setBirthdate(res.data.birthday || "");
         setGenValue(res.data.gender || "");
       });
@@ -117,22 +120,21 @@ function Profile(props) {
     if (filled) {
       console.log(selectedImage);
       let form_data = new FormData();
-      form_data.append('avatar', selectedImage, selectedImage.name);
-      form_data.append('email',formik.values.email);
-      form_data.append('firstName',formik.values.firstname);
-      form_data.append('lastName',formik.values.lastname);
-      form_data.append('birthday',formattedDate);
-      form_data.append('gender',genValue);
-      form_data.append('phone_number',formik.values.phone);
-      form_data.append('national_code',formik.values.nationalcode);
-      form_data.append('description',formik.values.aboutme);
+      form_data.append("avatar", selectedImage, selectedImage.name);
+      form_data.append("email", formik.values.email);
+      form_data.append("firstName", formik.values.firstname);
+      form_data.append("lastName", formik.values.lastname);
+      form_data.append("birthday", formattedDate);
+      form_data.append("gender", genValue);
+      form_data.append("phone_number", formik.values.phone);
+      form_data.append("national_code", formik.values.nationalcode);
+      form_data.append("description", formik.values.aboutme);
       axios
         .put(
           makeURL(references.url_edit_profile),
-          
-            form_data
-          
-          ,
+
+          form_data,
+
           {
             headers: {
               Authorization: cookies.get("Authorization"),
@@ -164,28 +166,26 @@ function Profile(props) {
 
   return (
     <div className="container">
-      <div className="row pt-5">
-      
-      <div className="col-sm-1"></div>
-        <div className="col-12    py-5 px-lg-5">
+      <div className="row">
+        <div className="col-sm-1"></div>
+        <div className="col-12 py-5 px-lg-5">
           <div className="container edit-profile-form border">
             <div className="row">
               <div className="col-lg-3">
                 <div className="profile-img">
                   {selectedImage !== null ? (
                     <img
-                    src={references.url_address + selectedImage}
-                    className="rounded-circle"
-                    alt="Avatar"
-                  />
+                      src={references.url_address + selectedImage}
+                      className="rounded-circle"
+                      alt="Avatar"
+                    />
                   ) : (
                     <img
-                    src={image1}
-                    className="rounded-circle default"
-                    alt="Avatar"
-                  />
+                      src={image1}
+                      className="rounded-circle default"
+                      alt="Avatar"
+                    />
                   )}
-                  
                 </div>
               </div>
               {/* <br></br> */}
@@ -204,7 +204,7 @@ function Profile(props) {
 
             <hr class="dashed"></hr>
 
-            <div className="mb-3 col-9">
+            <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
@@ -274,7 +274,7 @@ function Profile(props) {
 
             <hr class="dashed"></hr>
 
-            <div className="mb-3 col-9">
+            <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
@@ -310,7 +310,7 @@ function Profile(props) {
 
             <hr class="dashed"></hr>
 
-            <div className="mb-3 col-9">
+            <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
@@ -350,7 +350,7 @@ function Profile(props) {
 
             <hr class="dashed"></hr>
 
-            <div className="mb-3 col-9">
+            <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3 ms-2">
                   <label for="date" className="col-1 col-form-label">
@@ -384,7 +384,7 @@ function Profile(props) {
 
             <hr class="dashed"></hr>
 
-            <div className="mb-3 col-9">
+            <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
@@ -415,7 +415,7 @@ function Profile(props) {
 
             <hr class="dashed"></hr>
 
-            <div className="mb-3 col-9">
+            <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
@@ -446,7 +446,7 @@ function Profile(props) {
 
             <hr class="dashed"></hr>
 
-            <div className="mb-3 col-9">
+            <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
@@ -481,7 +481,7 @@ function Profile(props) {
 
             <hr class="dashed"></hr>
 
-            <div className="mb-3 col-9">
+            <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
@@ -516,18 +516,14 @@ function Profile(props) {
               <div className="col-4"></div>
               <div className="col-4"></div>
               <div className="col-4 edit-profile">
-                <button
-                  className="btn edit-hotel"
-                  onClick={handleClick}
-                >
+                <button className="btn edit-hotel" onClick={handleClick}>
                   Edit profile
                 </button>
               </div>
             </div>
           </div>
         </div>
-      <div className="col-sm-1"></div>
-
+        <div className="col-sm-1"></div>
       </div>
     </div>
   );

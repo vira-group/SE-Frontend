@@ -26,7 +26,7 @@ export default function Verify() {
 					}}
 				>
 					<Grid container style={{  justifyContent: 'center' }}>
-						<Grid item style={{ textAlign: 'center'}} xs={12}>
+						<Grid item style={{ textAlign: 'center', marginTop:"1rem"}} xs={12}>
 							<Typography variant="h5"
 									style={{ fontWeight: 'bold', fontSize: '23px', fontFamily: 'serif' }}
 							>Please complete your profile information to continue.</Typography>

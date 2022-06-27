@@ -1,13 +1,30 @@
 import axios from "axios";
+import * as React from "react";
 import { useState, useEffect } from "react";
 import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 import references from "../../../assets/References.json";
 import ImagesGallery from "./ImagesGallery";
-
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 function PreviewMultipleImages(props) {
+  const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [file, setFile] = useState([]);
   const [images, setImages] = useState([]);
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   function uploadSingleFile(e) {
     setFile([...file, URL.createObjectURL(e.target.files[0])]);
@@ -17,56 +34,87 @@ function PreviewMultipleImages(props) {
 
   function upload(e) {
     const url = window.location.pathname.split("/")[3];
+    const Alert = React.forwardRef(function Alert(props, ref) {
+      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const handleClose = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+
+      setOpen(false);
+    };
     // console.log(url);
     let hotelid = window.location.pathname.split("/")[2];
     e.preventDefault();
     console.log(images);
-    images.forEach((image) => {
-      let form_data = new FormData();
-      form_data.append("image", image, image.name);
-      url === "edithotel" ? (
-        axios
-        .post(
-          makeURL(references.url_onehotelImage + "/" + hotelid + "/images/"),
+    let filled = images.length != 0;
 
-          form_data,
+    if (!filled) {
+      setOpen(true);
+      setMessage("Please choose a picture to upload.");
+    }
 
-          {
-            headers: {
-              Authorization: cookies.get("Authorization"),
-            },
-          }
-        )
-        .then((response) => {
-          console.log("status code: ", response.data);
-          // document.location.reload(true);
-        })
-        .catch((error) => {
-          console.log("error: ", error);
-        })
-      ) : (
-        axios
-        .post(
-          makeURL(references.url_hotelrooms + props.roomid + "/images/"),
+    if (filled) {
+      images.forEach((image) => {
+        let form_data = new FormData();
+        form_data.append("image", image, image.name);
+        url === "edithotel"
+          ? axios
+              .post(
+                makeURL(
+                  references.url_onehotelImage + "/" + hotelid + "/images/"
+                ),
 
-          form_data,
+                form_data,
 
-          {
-            headers: {
-              Authorization: cookies.get("Authorization"),
-            },
-          }
-        )
-        .then((response) => {
-          console.log("status code: ", response.data);
-          // document.location.reload(true);
-        })
-        .catch((error) => {
-          console.log("error: ", error);
-        })
-      )
-      
-    });
+                {
+                  headers: {
+                    Authorization: cookies.get("Authorization"),
+                  },
+                }
+              )
+              .then((response) => {
+                console.log("status code: ", response.data);
+                setOpen(true);
+                setLoading(false);
+                setMessage("Your picture was uploaded successfully!");
+                // document.location.reload(true);
+              })
+              .catch((error) => {
+                console.log("error: ", error);
+                setLoading(false);
+                setOpen(true);
+                setMessage("An error occurred.Please try again.");
+              })
+          : axios
+              .post(
+                makeURL(references.url_hotelrooms + props.roomid + "/images/"),
+
+                form_data,
+
+                {
+                  headers: {
+                    Authorization: cookies.get("Authorization"),
+                  },
+                }
+              )
+              .then((response) => {
+                console.log("status code: ", response.data);
+                setOpen(true);
+                setLoading(false);
+                setMessage("Your picture was uploaded successfully!");
+                // document.location.reload(true);
+              })
+              .catch((error) => {
+                console.log("error: ", error);
+                setLoading(false);
+                setOpen(true);
+                setMessage("An error occurred.Please try again.");
+              });
+      });
+    }
   }
 
   function deleteFile(e) {
@@ -118,6 +166,20 @@ function PreviewMultipleImages(props) {
       <button type="button" className="btn m-2 edit-hotel" onClick={upload}>
         Upload
       </button>
+
+      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity={
+            message === "Your picture was uploaded successfully!"
+              ? "success"
+              : "error"
+          }
+          sx={{ width: "100%" }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </form>
   );
 }

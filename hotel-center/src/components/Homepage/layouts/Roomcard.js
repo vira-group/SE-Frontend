@@ -34,7 +34,7 @@ export default function Roomcard(props) {
         console.log("images response:", response.data);
         console.log("roomid: ", roomid);
         setRoomimg(response.data);
-        localStorage.setItem('items', JSON.stringify(response.data));
+        localStorage.setItem("items", JSON.stringify(response.data));
       })
       .catch((error) => {
         console.log(error);
@@ -45,32 +45,39 @@ export default function Roomcard(props) {
     console.log("this is for images in cards:", roomimg[0].image);
   };
 
+  const types = {
+    singleRoom: "Single Room",
+    doubleRoom: "Double Room",
+    tripleRoom: "Triple Room",
+    suiteRoom: "Suite Room",
+  };
+
   const handleReserveClick = () => {
-		let s =
-			'http://localhost:3000/reserve/:start_day/:end_day/:' +
-			props.price +
-			'/' +
-			roomimg +
-			'/' +
-			props.name +
-			'/:num_passenger/' +
-			props.city +
-			'/' +
-			props.id +
-			'/';
+    let s =
+      "http://localhost:3000/reserve/:start_day/:end_day/:" +
+      props.price +
+      "/" +
+      roomimg +
+      "/" +
+      props.name +
+      "/:num_passenger/" +
+      props.city +
+      "/" +
+      props.id +
+      "/";
 
-		console.log('button clicked', s);
+    console.log("button clicked", s);
 
-		window.location.href =
-			'http://localhost:3000/reserve/' +
-			props.price +
-			'/' +
-			props.name +
-			'/' +
-			props.city +
-			'/' +
-			props.id ;
-	};
+    window.location.href =
+      "http://localhost:3000/reserve/" +
+      props.price +
+      "/" +
+      props.name +
+      "/" +
+      props.city +
+      "/" +
+      props.id;
+  };
 
   return (
     <div className="card hotelpage-card mt-3 mb-3">
@@ -85,7 +92,7 @@ export default function Roomcard(props) {
                 data-bs-target={"#roomModal-" + props.id}
                 onClick={handleClick}
               >
-                {props.type}
+                {types[props.type]}
               </button>
             </div>
             <div className="row">
@@ -96,19 +103,20 @@ export default function Roomcard(props) {
                     <small>Adult</small>
                   </span>
                 </div>
-              ) : (props.sleeps === 2 ?
-                (<div className="col">
+              ) : props.sleeps === 2 ? (
+                <div className="col">
                   <PeopleAltIcon />
                   <span className="ms-2 card-text">
                     <small>Double</small>
                   </span>
-                </div>) : (props.sleeps >= 3 ? 
-                (<div className="col">
-                <span className="ms-2 card-text">
-                  <small>{props.sleeps} Sleeps</small>
-                </span>
-              </div>) : null)
-              )}
+                </div>
+              ) : props.sleeps >= 3 ? (
+                <div className="col">
+                  <span className="ms-2 card-text">
+                    <small>{props.sleeps} Sleeps</small>
+                  </span>
+                </div>
+              ) : null}
 
               {props.option === "Breakfast" ? (
                 <div className="col">
@@ -167,7 +175,10 @@ export default function Roomcard(props) {
               </div>
             </div>
             {/* <div className="row"> */}
-            <button className="btn btn-primary hotel-room" onClick={handleReserveClick}>
+            <button
+              className="btn btn-primary hotel-room"
+              onClick={handleReserveClick}
+            >
               Reserve the room
             </button>
             {/* </div> */}
