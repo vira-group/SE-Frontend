@@ -9,8 +9,8 @@
   padding: 20px;
   padding-top: 10px;
   margin-top: 30px;
-  background: $soft-red;
-  border-radius: 10px;
+  background: $white;
+  border-radius: 5px;
   animation: come-in 1.5s ease-in-out;
 
   .profile-pic {
@@ -31,7 +31,7 @@
     height: 100px;
     border: 2px solid $light-gray;
     color: $dark-blue;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 15px 25px;
     resize: none;
     scrollbar-width: none;
@@ -55,6 +55,31 @@
     align-items: center;
   }
 
+
+
+
+
+  
+.hotel-roomc.btn-primary,
+.hotel-roomc.btn-primary:active { 
+  background-color: #cd9a2d !important;
+  border-color: #cd9a2d !important;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hotel-roomc.btn-primary:focus {
+  background-color: #cd9a2d !important;
+  border-color: #cd9a2d !important;
+  box-shadow: none;
+  color: black;
+}
+
+.hotel-roomc.btn-primary:hover {
+  box-shadow: none;
+}
+
+
   .add-btn {
     color: $white;
     font-weight: $fw-bold;
@@ -62,7 +87,7 @@
     padding: 15px 30px;
     background:$brown;
     border: 0;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: 0.3s;
     cursor: pointer;
 

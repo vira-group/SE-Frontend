@@ -38,9 +38,21 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
       />
       <div className="send-btn-container">
         <div className="profile-pic"></div>
-        <button className="add-btn" onClick={clickHandler}>
+
+        
+        
+
+
+        <button 
+        // className="add-btn"
+        className="btn btn-primary hotel-room"
+        
+         onClick={clickHandler}>
           {buttonValue}
         </button>
+
+
+
       </div>
     </div>
   );
