@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./Styles/Comment.scss";
 
 import AddComment from "./AddComment";
-import ReplyContainer from "./ReplyContainer";
+// import ReplyContainer from "./ReplyContainer";
 import DeleteModal from "./DeleteModal";
 import CommentVotes from "./CommentVotes";
 import CommentHeader from "./CommentHeader";
@@ -19,7 +19,7 @@ const Comment = ({
   commentDelete,
   setDeleteModalState,
 }) => {
-  const [replying, setReplying] = useState(false);
+  // const [replying, setReplying] = useState(false);
   const [time, setTime] = useState("");
   const [vote, setVoted] = useState(false);
   const [score, setScore] = useState(commentData.score);
@@ -37,11 +37,11 @@ const Comment = ({
     localStorage.setItem("voteState", vote);
   }, [differenceInTime, vote]);
 
-  const addReply = (newReply) => {
-    const replies = [...commentData.replies, newReply];
-    updateReplies(replies, commentData.id);
-    setReplying(false);
-  };
+  // const addReply = (newReply) => {
+  //   const replies = [...commentData.replies, newReply];
+  //   updateReplies(replies, commentData.id);
+  //   setReplying(false);
+  // };
 
   const updateComment = () => {
     editComment(content, commentData.id, "comment");
@@ -73,7 +73,7 @@ const Comment = ({
         <div className="comment--body">
           <CommentHeader
             commentData={commentData}
-            setReplying={setReplying}
+            // setReplying={setReplying}
             setDeleting={setDeleting}
             setDeleteModalState={setDeleteModalState}
             setEditing={setEditing}
@@ -103,21 +103,21 @@ const Comment = ({
           setScore={setScore}
           updateScore={updateScore}
           commentData={commentData}
-          setReplying={setReplying}
+          // setReplying={setReplying}
           setDeleting={setDeleting}
           setDeleteModalState={setDeleteModalState}
           setEditing={setEditing}
         />{" "}
       </div>
 
-      {replying && (
+      {/* {replying && (
         <AddComment
           buttonValue={"reply"}
           addComments={addReply}
           replyingTo={commentData.username}
         />
-      )}
-      {commentData.replies !== [] && (
+      )} */}
+      {/* {commentData.replies !== [] && (
         <ReplyContainer
           key={commentData.replies.id}
           commentData={commentData.replies}
@@ -128,7 +128,7 @@ const Comment = ({
           deleteComment={deleteComment}
           setDeleteModalState={setDeleteModalState}
         />
-      )}
+      )} */}
 
       {deleting && (
         <DeleteModal

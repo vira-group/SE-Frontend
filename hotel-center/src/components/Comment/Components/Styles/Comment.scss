@@ -32,7 +32,7 @@
         cursor: pointer;
 
         &:hover svg path {
-          fill: $moderate-blue;
+          fill:$brown;
         }
       }
 
@@ -44,7 +44,7 @@
       .votes-counter {
         font-size: 1.1rem;
         margin-block: 8px;
-        color: $moderate-blue;
+        color: $brown;
         font-weight: $fw-medium;
       }
     }
@@ -77,7 +77,7 @@
           font-weight: $fw-regular;
           font-size: 0.9rem;
           padding: 2px 10px 3px;
-          background: $moderate-blue;
+          background: $brown;
           border-radius: 3px;
           margin-left: 10px;
         }
@@ -100,7 +100,7 @@
         word-break: break;
 
         .replyingTo {
-          color: $moderate-blue;
+          color: $brown;
           font-weight: $fw-bold;
           display: inline-block;
           margin-right: 10px;
@@ -134,7 +134,7 @@
         font-weight: $fw-bold;
         text-transform: uppercase;
         padding: 15px 30px;
-        background: $moderate-blue;
+        background: $brown;
         border: 0;
         border-radius: 10px;
         transition: 0.3s;
@@ -179,7 +179,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      color: $moderate-blue;
+      color: $brown;
       font-weight: $fw-bold;
       padding: 5px;
       background: transparent;

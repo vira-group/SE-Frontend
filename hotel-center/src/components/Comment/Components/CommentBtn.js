@@ -26,14 +26,14 @@ const CommentBtn = ({commentData, setReplying, setDeleting, setDeleteModalState,
 
   return (
     <div className="comment--btn">
-      <button
+      {/* <button
         className={`reply-btn ${
           !commentData.currentUser ? "" : "display--none"
         }`}
         onClick={showAddComment}
       >
         <IconReply /> Reply
-      </button>
+      </button> */}
       <button
         className={`delete-btn ${
           commentData.currentUser ? "" : "display--none"
