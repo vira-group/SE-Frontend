@@ -37,7 +37,7 @@ import "./css/Hotelpage.css";
 import "./css/Hotelpage2.css";
 import "./css/Edithotel.css";
 import "./css/Edithotel.css";
-
+import Feedback from "./components/Comment/Feedback";
 function App() {
   return (
     <div className="App h-100">
@@ -59,6 +59,10 @@ function App() {
           <Route exact path="/sign-up" component={Sign_up} />
           <Route exact path="/login" component={login} />
           <Route exact path="/createHotel/steps" component={steps} />
+          <Route exact path="/createHotel" component={CreateHotel} />
+          <Route exact path="/feedback" component={Feedback} />
+       
+       
           <Route
             exact
             path="/auth/activate/:handle/:handle1"
