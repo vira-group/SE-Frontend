@@ -36,7 +36,7 @@ import "./css/Reserve.css";
 import "./css/Hotelpage.css";
 import "./css/Hotelpage2.css";
 import "./css/Edithotel.css";
-import "./css/Edithotel.css";
+import "./css/NewAndTopHotels.css";
 
 function App() {
   return (
