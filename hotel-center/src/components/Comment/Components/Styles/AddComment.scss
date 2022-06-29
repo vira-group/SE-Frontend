@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 120%;
+  width: 100%;
   padding: 20px;
   padding-top: 10px;
   margin-top: 30px;
@@ -63,9 +63,13 @@
 .hotel-roomc.btn-primary,
 .hotel-roomc.btn-primary:active { 
   background-color: #cd9a2d !important;
+  
   border-color: #cd9a2d !important;
   outline: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 15px 30px;
+
+
 }
 
 .hotel-roomc.btn-primary:focus {
@@ -73,6 +77,8 @@
   border-color: #cd9a2d !important;
   box-shadow: none;
   color: black;
+  padding: 15px 30px;
+
 }
 
 .hotel-roomc.btn-primary:hover {

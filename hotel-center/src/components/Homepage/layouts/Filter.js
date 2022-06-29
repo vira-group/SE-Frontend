@@ -12,7 +12,7 @@ import "../../../css/Hotelcard.css";
 import axios from "axios";
 import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 import { makeStyles } from "@mui/styles";
-
+   
 export default function Filter(props) {
   const styles = makeStyles(() => ({
     root: {
@@ -96,6 +96,8 @@ export default function Filter(props) {
   return (
     <div>
       <div className="mt-5">
+        
+        
         <div className="card">
           <div className="card-body">
             <h7 className="card-title" title="stars">
@@ -113,6 +115,8 @@ export default function Filter(props) {
             </div>
           </div>
         </div>
+
+
         <div className="accordion-item mt-2">
           <h2 className="accordion-header" id="headingTwo">
             <button

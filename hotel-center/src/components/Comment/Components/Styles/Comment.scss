@@ -128,6 +128,46 @@
     
       }
 
+
+
+
+  
+      .hotel-roomc.btn-primary,
+      .hotel-roomc.btn-primary:active { 
+        background-color: #cd9a2d !important;
+        
+        border-color: #cd9a2d !important;
+        outline: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        // padding-left: 100px 30px 50px 70px;
+        align-self: flex-end;
+        width: max-content;
+        padding: 15px 30px;
+      
+      
+      }
+      
+      .hotel-roomc.btn-primary:focus {
+        background-color: #cd9a2d !important;
+        border-color: #cd9a2d !important;
+        box-shadow: none;
+        color: black;
+
+        align-self: flex-end;
+        width: max-content;
+
+        padding: 15px 30px;
+      
+      }
+      
+      .hotel-roomc.btn-primary:hover {
+        box-shadow: none;
+      }
+      
+      
+
+
+
       .update-btn{
         align-self: flex-end;
         width: max-content;

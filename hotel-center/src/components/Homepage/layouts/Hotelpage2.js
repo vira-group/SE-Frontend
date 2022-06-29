@@ -7,7 +7,7 @@ import {
 	Grid,
 	Box,
 	Button,
-	Typography, 
+	Typography,
 	Container,
 	Divider,
 	TextField,
@@ -138,6 +138,7 @@ export default function Hotelpage() {
 					<div className="col-lg-4">
 						<ResponsiveDatePickers />
 					</div>
+
 					<div className="col-lg-8">
 						<div className="row">
 							<h3 className="mb-3 mt-3">Facilities of the hotel</h3>
@@ -211,9 +212,11 @@ export default function Hotelpage() {
 								</div>
 							</div>
 						</div>
+
 						<div className="">
 							<hr className="mb-0 mt-0 hr-text" />
 						</div>
+
 						<h3 className="mb-3 mt-3">Available rooms</h3>
 						{rooms ? (
 							rooms.map((r) => (
@@ -262,160 +265,33 @@ export default function Hotelpage() {
 
 						{/* <br></br>
 <br></br> */}
-<br></br>
+						<br />
+
+						<div className="col d-inline-flex">
+							<h5>Feedback and comments</h5>
+							<Box
+								sx={{
+									width: 200,
+									display: 'flex',
+									alignItems: 'center',
+									marginBottom: '10px',
+									marginLeft: '5px'
+								}}
+							>
+								<Rating
+									name="text-feedback"
+									value={value}
+									readOnly
+									precision={0.5}
+									emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+								/>
+								<Box sx={{ ml: 2 }}>{labels[value]}</Box>
+							</Box>
+						</div>
 
 
-<div className="col d-inline-flex">
 
-								<h5>Feedback and comments</h5>
-								<Box
-									sx={{
-										width: 200,
-										display: 'flex',
-										alignItems: 'center',
-										marginBottom: '10px',
-										marginLeft: '5px'
-									}}
-								>
-									<Rating
-										name="text-feedback"
-										value={value}
-										readOnly
-										precision={0.5}
-										emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-									/>
-									<Box sx={{ ml: 2 }}>{labels[value]}</Box>
-								</Box>
-							</div>
-
-						<Feedback />
-
-						{/* <div className="row mt-3 mb-3">
-						
-							<div className="row">
-								<div className="col-md-6 d-grid">
-									<div className="mb-4 card comments-1">
-										<div className="card-body">
-											<h5 className="card-title">Alex</h5>
-											<div className="row">
-												<div className="col">
-													<h6 className="card-subtitle mb-2 text-muted">
-														January 2022 <span className="border-start" />
-														<span className="ms-1">
-															4
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																width="16"
-																height="16"
-																fill="currentColor"
-																className="ms-1 mb-1 bi bi-star-fill"
-																viewBox="0 0 16 16"
-															>
-																<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-															</svg>
-														</span>
-													</h6>
-												</div>
-											</div>
-											<p className="card-text">Amazing experience!</p>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 d-grid">
-									<div className="mb-4 card d-flex-inline comments-2 ">
-										<div className="card-body">
-											<h5 className="card-title">Diana</h5>
-											<div className="row">
-												<div className="col">
-													<h6 className="card-subtitle mb-2 text-muted">
-														April 2019 <span className="border-start" />
-														<span className="ms-1">
-															2
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																width="16"
-																height="16"
-																fill="currentColor"
-																className="ms-1 mb-1 bi bi-star-fill"
-																viewBox="0 0 16 16"
-															>
-																<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-															</svg>
-														</span>
-													</h6>
-												</div>
-											</div>
-											<p className="card-text">
-												event for young people on Friday with loud noise, music and not expected
-												for the venue well into the early hours.
-											</p>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 d-grid">
-									<div className="mb-4 card d-flex-inline comments-3">
-										<div className="card-body">
-											<h5 className="card-title">Chris</h5>
-											<div className="row">
-												<div className="col">
-													<h6 className="card-subtitle mb-2 text-muted">
-														June 2021 <span className="border-start" />
-														<span className="ms-1">
-															4
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																width="16"
-																height="16"
-																fill="currentColor"
-																className="ms-1 mb-1 bi bi-star-fill"
-																viewBox="0 0 16 16"
-															>
-																<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-															</svg>
-														</span>
-													</h6>
-												</div>
-											</div>
-											<p className="card-text">
-												Breakfast was exceptional. Nice setup. Good food.pleasant staff
-											</p>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 d-grid">
-									<div className="mb-4 card d-inline-grid comments-4">
-										<div className="card-body">
-											<h5 className="card-title">Lionel</h5>
-											<div className="row">
-												<div className="col">
-													<h6 className="card-subtitle mb-2 text-muted">
-														October 2021 <span className="border-start" />
-														<span className="ms-1">
-															3
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																width="16"
-																height="16"
-																fill="currentColor"
-																className="ms-1 mb-1 bi bi-star-fill"
-																viewBox="0 0 16 16"
-															>
-																<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-															</svg>
-														</span>
-													</h6>
-												</div>
-											</div>
-
-											<p className="card-text">
-												it was lovely to eat breakfast in such wonderful surroundings but the
-												breakfast itself was not to a level I would have expected.
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> */}
+						<Feedback></Feedback>
 					</div>
 				</div>
 			</div>

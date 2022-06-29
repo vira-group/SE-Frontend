@@ -737,6 +737,13 @@ class Reservation extends React.Component {
 											Reserve
 										</button>
 									</div>
+									
+									
+									
+									
+									
+								
+								
 									<div
 										class="modal fade"
 										id="exampleModal"
@@ -744,6 +751,8 @@ class Reservation extends React.Component {
 										aria-labelledby="exampleModalLabel"
 										aria-hidden="true"
 									>
+								
+								
 										<div className="modal-dialog modal-dialog-centered">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -757,6 +766,10 @@ class Reservation extends React.Component {
 														aria-label="Close"
 													/>
 												</div>
+									
+									
+									
+									
 												<div class="modal-body">
 													If confirmed, the room will be reserved for you and the cost will be
 													deducted from your account.
@@ -785,6 +798,13 @@ class Reservation extends React.Component {
 											</div>
 										</div>
 									</div>
+								
+								
+								
+								
+								
+								
+								
 								</form>
 							</div>
 						</div>

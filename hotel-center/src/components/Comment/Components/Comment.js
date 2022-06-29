@@ -91,7 +91,17 @@ const Comment = ({
             />
           )}
           {editing && (
-            <button className="update-btn" onClick={updateComment}>
+
+     
+
+            <button 
+            
+            className="btn btn-primary hotel-roomc"
+     
+            
+            // className="update-btn"
+            
+             onClick={updateComment}>
               update
             </button>
           )}
