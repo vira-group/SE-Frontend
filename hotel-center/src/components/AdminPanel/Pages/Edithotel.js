@@ -77,6 +77,8 @@ const validationSchema = yup.object({
 
 function Edithotel(props) {
   const [message, setMessage] = useState("");
+  const [message1, setMessage1] = useState("");
+  const [open1, setOpen1] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggled, setToggled] = useState(false);
@@ -136,6 +138,7 @@ function Edithotel(props) {
     }
 
     setOpen(false);
+    setOpen1(false);
   };
 
   // const handletypeChange = (event, newValue) => {
@@ -243,18 +246,6 @@ function Edithotel(props) {
 
     if (filled) {
       setLoading(true);
-      // let form_data = new FormData();
-      // form_data.append("name", formik.values.name);
-      // form_data.append("address", formik.values.address);
-      // form_data.append("description", formik.values.description);
-      // form_data.append("facilities", facilities);
-      // form_data.append("phone_number", formik.values.phone);
-      // form_data.append("country", formik.values.country);
-      // form_data.append("city", formik.values.city);
-      // form_data.append("header", selectedImage, selectedImage.name);
-      // form_data.append("check_in_range",formattedcheckinDate);
-      // form_data.append("check_out_range",formattedcheckoutDate);
-      // form_data.append("facilities",facilitiesListForBack);
 
       axios
         .put(
@@ -280,13 +271,54 @@ function Edithotel(props) {
           console.log(res.data);
           setOpen(true);
           setLoading(false);
-          setMessage("Your hotel was submitted successfully!");
+          setMessage("Your hotel was editted successfully!");
         })
         .catch((err) => {
           console.log(err);
           setLoading(false);
           setOpen(true);
           setMessage("Please fill in the blanks.");
+        });
+    }
+  };
+
+  const handleUploadClick = () => {
+    setLoading(true);
+    if (!selectedImage) {
+      setOpen1(true);
+      setLoading(false);
+      setMessage1("Please upload a picture.");
+    }
+
+    if (selectedImage) {
+      let form_data = new FormData();
+      form_data.append("image", selectedImage, selectedImage.name);
+      axios
+        .post(
+          makeURL(
+            references.url_onehotelImage +
+              "/" +
+              hotelid +
+              "/images/?is_header=true"
+          ),
+          form_data,
+          {
+            headers: {
+              Authorization: cookies.get("Authorization"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log("uploading hotel header: ", res.data);
+          setLoading(false);
+          setOpen1(true);
+          setMessage1("Your image uploaded successfully!");
+        })
+        .catch((err) => {
+          console.log("unable to upload.error: ", err);
+          setLoading(false);
+          setOpen1(true);
+          setMessage1("Something went wrong. Please try again.");
         });
     }
   };
@@ -372,6 +404,37 @@ function Edithotel(props) {
                       setSelectedImage(event.target.files[0]);
                     }}
                   />
+                  <button
+                    className="btn edit-hotel"
+                    onClick={handleUploadClick}
+                  >
+                    {loading ? (
+                      <CircularProgress
+                        style={{ color: "#fff" }}
+                        size="1.5rem"
+                      />
+                    ) : (
+                      "Upload"
+                    )}
+                  </button>
+                  <Snackbar
+                    open={open1}
+                    autoHideDuration={4000}
+                    onClose={handleClose}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity={
+                        message1 === "Your image uploaded successfully!"
+                          ? "success"
+                          : "error"
+                      }
+                      sx={{ width: "100%" }}
+                    >
+                      {message1}
+                    </Alert>
+                  </Snackbar>
                   {imageUrl && selectedImage && (
                     <Box mt={2} textAlign="left">
                       <div>Image Preview:</div>
@@ -406,7 +469,7 @@ function Edithotel(props) {
                     <TextField
                       required
                       fullWidth
-                      placeholder="London, 22B Baker street"
+                      placeholder="London, 21B Baker street"
                       id="address"
                       size="small"
                       label="Address"
@@ -579,7 +642,7 @@ function Edithotel(props) {
                 <div className="col-lg-9">
                   <div className="row">
                     <div className=" mt-1 col-lg-6">
-                      <div className="col-lg-12 checkin-inp">
+                      <div className="mb-md-3 col-lg-12 checkin-inp">
                         <ThemeProvider theme={textfieldTheme}>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <TimePicker

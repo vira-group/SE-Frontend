@@ -36,40 +36,13 @@ function createData(roomNumber, roomType, roomStatus, roomDescription) {
 //              type: "singleRoom",
 //              status: "reserved",
 //              description: "sjdhfshfisof"
-//            }, 
+//            },
 //            {},...]
 
 // rows = [..., newData]
 
 // type   -> singleRoom, doubleRoom, tripleRoom, suiteRoom
 // status -> available, reserved
-const rows = [
-  createData(101, "singleRoom", "available", "room 101 description"),
-  createData(102, "singleRoom", "available", "room 102 description"),
-  createData(103, "singleRoom", "available", "room 103 description"),
-  createData(104, "singleRoom", "reserved", "room 104 description"),
-  createData(
-    105,
-    "doubleRoom",
-    "reserved",
-    "room 105 description room 105 description room 105 description room 105 description"
-  ),
-  createData(106, "singleRoom", "available", "room 106 description"),
-  createData(107, "singleRoom", "reserved", "room 107 description"),
-  createData(108, "singleRoom", "reserved", "room 108 description"),
-  createData(109, "doubleRoom", "available", "room 109 description"),
-  createData(110, "doubleRoom", "reserved", "room 110 description"),
-  createData(201, "singleRoom", "available", "room 201 description"),
-  createData(202, "singleRoom", "available", "room 202 description"),
-  createData(203, "singleRoom", "available", "room 203 description"),
-  createData(204, "tripleRoom", "reserved", "room 204 description"),
-  createData(205, "doubleRoom", "reserved", "room 205 description"),
-  createData(206, "singleRoom", "available", "room 206 description"),
-  createData(207, "singleRoom", "reserved", "room 207 description"),
-  createData(208, "tripleRoom", "reserved", "room 208 description"),
-  createData(209, "doubleRoom", "available", "room 209 description"),
-  createData(210, "suiteRoom", "reserved", "room 210 description"),
-];
 
 const StyledTablePagination = styled(TablePagination)(({ theme }) => ({
   ".MuiTablePagination-selectLabel": {
@@ -104,44 +77,62 @@ export default function RoomsStatus() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [roomStatus, setRoomStatus] = React.useState("");
   const [roomType, setRoomType] = React.useState("");
-  const [roomNumber, setRoomNumber] = React.useState(0);
-  const [filteredRows, setFilteredRows] = React.useState(rows);
-  const [emptyRooms, setEmptyRooms] = useState(null);
-  const [fullRooms, setFullRooms] = useState(null);
+  const [roomNumber, setRoomNumber] = React.useState("");
+  const [rows, setRows] = useState([]);
+  const [filteredRows, setFilteredRows] = React.useState([]);
 
   useEffect(() => {
-    let hotelid = window.location.pathname.split("/")[2];
-    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
     let newFilteredRows = rows.filter((row) => {
       let checkNumber = false;
       let checkStatus = false;
       let checkType = false;
-      checkNumber = roomNumber
-        ? parseInt(roomNumber) === parseInt(row.roomNumber)
-        : true;
+      checkNumber = roomNumber ? row.roomNumber.includes(roomNumber) : true;
       checkStatus = roomStatus ? roomStatus === row.roomStatus : true;
       checkType = roomType ? roomType === row.roomType : true;
       return checkNumber && checkStatus && checkType;
     });
     setFilteredRows(newFilteredRows);
-
-    axios.get(makeURL(references.url_admimpanel_mainpage + hotelid + "/"),{
-      headers: {
-        Authorization: cookies.get("Authorization"),
-      },
-    })
-    .then((res) => {
-      console.log("response for rooms status: ", res.data.spaces_status.empty, res.data.spaces_status.full);
-      setEmptyRooms(res.data.spaces_status.empty);
-      setFullRooms(res.data.spaces_status.full);
-      for(var i = 0; i < emptyRooms.length; i++){
-        createData()
-      }
-    })
-    .catch((err) => {
-      console.log("error: ", err)
-    })
   }, [roomStatus, roomType, roomNumber]);
+
+  useEffect(() => {
+    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
+    let hotelid = window.location.pathname.split("/")[2];
+    let newRows = [];
+
+    axios
+      .get(makeURL(references.url_admimpanel_mainpage + hotelid + "/"), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((res) => {
+        console.log("response for rooms status: ", res.data);
+        for (const [key1, value1] of Object.entries(res.data.spaces_status)) {
+          if (key1 === "empty") {
+            for (const [key2, value2] of Object.entries(value1)) {
+              value2.forEach((item) => {
+                newRows.push(
+                  createData(item.name, item.room_type, "available", "-")
+                );
+              });
+            }
+          } else {
+            for (const [key2, value2] of Object.entries(value1)) {
+              value2.forEach((item) => {
+                newRows.push(
+                  createData(item.name, item.room_type, "reserved", "-")
+                );
+              });
+            }
+          }
+        }
+        setRows(newRows);
+        setFilteredRows(newRows);
+      })
+      .catch((err) => {
+        console.log("error: ", err);
+      });
+  }, []);
 
   const handleToggleSidebar = (value) => {
     setToggled(value);
@@ -167,16 +158,18 @@ export default function RoomsStatus() {
   };
 
   const handleChangeRoomNumber = (event) => {
-    if (!isNaN(event.target.value)) {
-      setRoomNumber(parseInt(event.target.value));
-    }
-    if (!event.target.value) {
-      setRoomNumber(0);
-    }
+    setRoomNumber(event.target.value);
+
+    // if (!isNaN(event.target.value)) {
+    //   setRoomNumber(parseInt(event.target.value));
+    // }
+    // if (!event.target.value) {
+    //   setRoomNumber(0);
+    // }
   };
 
   const handleClearFilters = (event) => {
-    setRoomNumber(0);
+    setRoomNumber("");
     setRoomStatus("");
     setRoomType("");
   };

@@ -18,6 +18,7 @@ export default function Homepage() {
         },
       })
       .then((response) => {
+        console.log("this is the homepage response: ", response.data)
         setHotels(response.data);
       })
       .catch((error) => {
