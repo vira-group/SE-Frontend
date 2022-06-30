@@ -22,7 +22,8 @@ import { makeStyles } from "@mui/styles";
 import PreviewMultipleImages from "./PreviewMultipleImages";
 // import Sidebar from "../layout/Sidebar";
 import EditIcon from "@mui/icons-material/Edit";
-
+import PhoneInput from 'react-phone-input-2';
+import Countries from "./Countries";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 
 const textfieldTheme = createTheme({
@@ -422,6 +423,15 @@ function Edithotel(props) {
                   <div className="row">
                     <div className="col-lg-6">
                       <ThemeProvider theme={textfieldTheme}>
+                       
+                       
+                       
+                       
+                       
+                       <Countries></Countries>
+                       
+                       
+                       
                         <TextField
                           required
                           fullWidth
@@ -551,8 +561,14 @@ function Edithotel(props) {
                 </div>
                 <div className="col-lg-9">
                   <ThemeProvider theme={textfieldTheme}>
-                    <TextField
-                      required
+                    
+                  <PhoneInput
+										country={'us'}
+
+
+
+
+                    required
                       fullWidth
                       placeholder="09912141869"
                       id="phone"
@@ -566,7 +582,12 @@ function Edithotel(props) {
                         formik.touched.phone && Boolean(formik.errors.phone)
                       }
                       helperText={formik.touched.phone && formik.errors.phone}
-                    />
+
+									/>
+
+
+                    
+
                   </ThemeProvider>
                 </div>
               </div>
