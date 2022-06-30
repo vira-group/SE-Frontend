@@ -211,11 +211,7 @@ export default function Roomcard(props) {
                           <img
                             class="img-responsive w-100"
                             style={{ borderRadius: "5px" }}
-<<<<<<< HEAD
                             src={rimg.image_url}
-=======
-                            src={references.base_address + rimg.image}
->>>>>>> sprint5
                           ></img>
                         </div>
                       ))
@@ -226,11 +222,7 @@ export default function Roomcard(props) {
                           <img
                             class="img-responsive w-100"
                             style={{ borderRadius: "5px" }}
-<<<<<<< HEAD
-                            src={rimg.image_url}
-=======
-                            src={references.base_address + rimg.image}
->>>>>>> sprint5
+                            src={rimg.image_url}  
                           ></img>
                         </div>
                       ))
