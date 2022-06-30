@@ -4,10 +4,18 @@ import { GoldenTextField } from "../../theme/GoldenTextField";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
 import WhiteLogo from "../../statics/logo/white_logo_3.png";
+import axios from "axios";
+import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import references from "../../assets/References.json";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import { CircularProgress } from "@mui/material";
 
 export default function Credit() {
   const [amountOfMoney, setAmountOfMoney] = useState(0);
-
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChangeAmountOfMoney = (event) => {
     if (!isNaN(event.target.value)) {
@@ -18,8 +26,45 @@ export default function Credit() {
     }
   };
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const handlePay = () => {
     console.log(amountOfMoney);
+    setLoading(true);
+    if (amountOfMoney) {
+      axios
+        .post(
+          makeURL(references.url_add_credit),
+          { credit: amountOfMoney },
+          {
+            headers: {
+              Authorization: cookies.get("Authorization"),
+            },
+          }
+        )
+        .then((response) => {
+          setOpen(true);
+          setLoading(false);
+          console.log("response for credits: ", response.data);
+          setMessage("Account balance increased successfully.");
+        })
+        .catch((error) => {
+          setLoading(false);
+          setOpen(true);
+          console.log("an error occured: ", error);
+          setMessage("An error occured.Please try again.");
+        });
+    }
   };
 
   return (
@@ -93,8 +138,30 @@ export default function Credit() {
                   onClick={handlePay}
                   disabled={amountOfMoney === 0}
                 >
-                  Pay
+                  {loading ? (
+                    <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
+                  ) : (
+                    "Pay"
+                  )}
                 </button>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={4000}
+                  onClose={handleClose}
+                  anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity={
+                      message === "Account balance increased successfully."
+                        ? "success"
+                        : "error"
+                    }
+                    sx={{ width: "100%" }}
+                  >
+                    {message}
+                  </Alert>
+                </Snackbar>
               </div>
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <h6>Your wallet balance</h6>

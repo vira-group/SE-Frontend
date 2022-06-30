@@ -60,6 +60,8 @@ function Profile(props) {
   const CHARACTER_LIMIT = 250;
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
+  const [message1, setMessage1] = useState("");
+  const [open1, setOpen1] = useState(false);
   const [loading, setLoading] = useState(false);
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
@@ -92,6 +94,7 @@ function Profile(props) {
     }
 
     setOpen(false);
+    setOpen1(false);
   };
 
   const genhandleChange = (event, newValue) => {
@@ -106,7 +109,7 @@ function Profile(props) {
         },
       })
       .then((res) => {
-        // console.log('response of profile: ',res.data);
+        console.log("response of profile: ", res.data);
         setState(res.data);
         formik.setValues({
           firstname: res.data.firstName || "",
@@ -141,17 +144,6 @@ function Profile(props) {
 
     if (filled) {
       setLoading(true);
-      // console.log(selectedImage);
-      let form_data = new FormData();
-      // form_data.append("avatar", selectedImage, selectedImage.name);
-      // form_data.append('email',formik.values.email);
-      // form_data.append('firstName',formik.values.firstname);
-      // form_data.append('lastName',formik.values.lastname);
-      // form_data.append('birthday',formattedDate);
-      // form_data.append('gender',genValue);
-      // form_data.append('phone_number',formik.values.phone);
-      // form_data.append('national_code',formik.values.nationalcode);
-      // form_data.append('description',formik.values.aboutme);
       axios
         .put(
           makeURL(references.url_edit_profile),
@@ -164,7 +156,6 @@ function Profile(props) {
             phone_number: formik.values.phone,
             national_code: formik.values.nationalcode,
             description: formik.values.aboutme,
-            // form_data,
           },
           {
             headers: {
@@ -201,6 +192,39 @@ function Profile(props) {
     );
   };
 
+  const handleUploadClick = () => {
+    setLoading(true);
+    if (!selectedImage) {
+      setOpen1(true);
+      setLoading(false);
+      setMessage1("Please upload a picture.");
+    }
+
+    if (selectedImage) {
+      let form_data = new FormData();
+      form_data.append("avatar", selectedImage, selectedImage.name);
+      axios
+        .put(makeURL(references.url_edit_profile), form_data, {
+          headers: {
+            Authorization: cookies.get("Authorization"),
+          },
+        })
+        .then((res) => {
+          console.log("uploading profile image: ", res.data);
+          setLoading(false);
+          setOpen1(true);
+          setMessage1("Your image uploaded successfully!");
+          window.location.reload(true);
+        })
+        .catch((err) => {
+          console.log("unable to upload.error: ", err);
+          setLoading(false);
+          setOpen1(true);
+          setMessage1("Something went wrong. Please try again.");
+        });
+    }
+  };
+
   return (
     <div className="container">
       <div className="row pt-5">
@@ -227,7 +251,7 @@ function Profile(props) {
                   )}
                 </div>
               </div>
-              <div className="col-lg-8">
+              <div className="col-lg-8 d-flex align-items-center">
                 <input
                   type="file"
                   name="myImage"
@@ -237,6 +261,31 @@ function Profile(props) {
                     setSelectedImage(event.target.files[0]);
                   }}
                 />
+                <button className="btn edit-hotel" onClick={handleUploadClick}>
+                  {loading ? (
+                    <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
+                  ) : (
+                    "Upload"
+                  )}
+                </button>
+                <Snackbar
+                  open={open1}
+                  autoHideDuration={4000}
+                  onClose={handleClose}
+                  anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity={
+                      message1 === "Your image uploaded successfully!"
+                        ? "success"
+                        : "error"
+                    }
+                    sx={{ width: "100%" }}
+                  >
+                    {message1}
+                  </Alert>
+                </Snackbar>
               </div>
             </div>
 

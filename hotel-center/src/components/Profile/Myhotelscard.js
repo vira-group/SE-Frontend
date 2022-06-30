@@ -12,10 +12,10 @@ export default function Myhotelscard(props) {
 
   const handleClick = () => {
     let hotelid = props.id;
-    console.log('hotel id: ', hotelid);
+    console.log("hotel id: ", hotelid);
     const url = "http://localhost:3000/adminpanel/" + hotelid + "/statistics";
     window.location.href = url;
-  }
+  };
 
   return (
     <div class="col">
@@ -26,7 +26,11 @@ export default function Myhotelscard(props) {
           <p class="card-text">{props.description}</p>
         </div>
         <div className="card-footer myhotels">
-          <button type="button" className="btn btn-primary view-hotel-button" onClick={handleClick}>
+          <button
+            type="button"
+            className="btn btn-primary view-hotel-button"
+            onClick={handleClick}
+          >
             View details
           </button>
         </div>
