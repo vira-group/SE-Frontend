@@ -1,11 +1,11 @@
 import * as React from "react";
 import { TextField, Grid, Typography } from "@mui/material";
-import Logo from "../../../statics/logo/logo2.png";
+// import Logo from "../../../statics/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
-import references from "../../../assets/References.json";
+import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import references from "../../assets/References.json";
 import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
 import { useHistory, useParams } from "react-router-dom";
 import { useFormik } from "formik";
@@ -20,10 +20,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
 import { makeStyles } from "@mui/styles";
 import PreviewMultipleImages from "./PreviewMultipleImages";
-import Sidebar from "../layout/Sidebar";
+// import Sidebar from "../layout/Sidebar";
 import EditIcon from "@mui/icons-material/Edit";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+
+import DomainAddIcon from "@mui/icons-material/DomainAdd";
 
 const textfieldTheme = createTheme({
   palette: {
@@ -76,9 +76,6 @@ const validationSchema = yup.object({
 });
 
 function Edithotel(props) {
-  const [message, setMessage] = useState("");
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
   const CHARACTER_LIMIT = 1000;
@@ -105,9 +102,9 @@ function Edithotel(props) {
   }));
   const c = styles();
 
-  useEffect(() => {
-    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
-  }, []);
+  // useEffect(() => {
+  //   setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
+  // }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -126,18 +123,6 @@ function Edithotel(props) {
     setToggled(value);
   };
 
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   // const handletypeChange = (event, newValue) => {
   //   setType(newValue);
   // };
@@ -147,48 +132,6 @@ function Edithotel(props) {
       setImageUrl(URL.createObjectURL(selectedImage));
     }
   }, [selectedImage]);
-
-  let hotelid = window.location.pathname.split("/")[2];
-
-  useEffect(() => {
-    let facilityarray = [];
-    console.log(hotelid);
-    axios
-      .get(makeURL(references.url_one_hotel + hotelid + "/"), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((res) => {
-        setValue(res.data);
-        console.log(res.data);
-        formik.setValues({
-          name: res.data.name || "",
-          address: res.data.address || "",
-          description: res.data.description || "",
-          phone: res.data.phone_numbers || "",
-          country: res.data.country || "",
-          city: res.data.city || "",
-        });
-        for (var i = 0; i < res.data.facilities.length; i++) {
-          facilityarray.push(res.data.facilities[i].name);
-        }
-        setFacilities(facilityarray || "");
-        var temp1 = res.data.check_in_range.split(":");
-        var temp2 = res.data.check_out_range.split(":");
-        setCheckin(
-          new Date(2022, 5, 29, parseInt(temp1[0]), parseInt(temp1[1])) || ""
-        );
-        setCheckout(
-          new Date(2022, 5, 29, parseInt(temp2[0]), parseInt(temp2[1])) ||
-            "" ||
-            ""
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   const handleClick = () => {
     let filled =
@@ -229,11 +172,6 @@ function Edithotel(props) {
     console.log("checkin time: ", formattedcheckinDate);
     console.log("checkout time: ", formattedcheckoutDate);
 
-    if (!filled) {
-      setOpen(true);
-      setMessage("Please fill in the blanks.");
-    }
-
     var facilitiesListForBack = [];
     for (var i = 0; i < facilities.length; i++) {
       let temp = { name: facilities[i] };
@@ -242,7 +180,6 @@ function Edithotel(props) {
     console.log("facilities list: ", facilitiesListForBack);
 
     if (filled) {
-      setLoading(true);
       // let form_data = new FormData();
       // form_data.append("name", formik.values.name);
       // form_data.append("address", formik.values.address);
@@ -257,8 +194,8 @@ function Edithotel(props) {
       // form_data.append("facilities",facilitiesListForBack);
 
       axios
-        .put(
-          makeURL(references.url_one_hotel + hotelid + "/"),
+        .post(
+          makeURL(references.url_addhotel),
           {
             name: formik.values.name,
             address: formik.values.address,
@@ -278,52 +215,35 @@ function Edithotel(props) {
         )
         .then((res) => {
           console.log(res.data);
-          setOpen(true);
-          setLoading(false);
-          setMessage("Your hotel was submitted successfully!");
         })
         .catch((err) => {
           console.log(err);
-          setLoading(false);
-          setOpen(true);
-          setMessage("Please fill in the blanks.");
         });
     }
   };
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar
+      {/* <Sidebar
         toggled={toggled}
         handleToggleSidebar={handleToggleSidebar}
         id={hotelId}
-      />
-      <div className="w-100 admin-content">
-        <div className="adminpanel-header-mobile">
-          <a href="/" className="navbar-brand logo d-md-none">
-            <img src={Logo} alt="Hotel Center" />
-            <span className="fw-bold logo-text-font">Hotel Center</span>
-          </a>
-          <div
-            className="btn-toggle d-md-none"
-            onClick={() => handleToggleSidebar(true)}
-          >
-            <MenuIcon fontSize="large" />
-          </div>
-        </div>
+      /> */}
+
+      <div className="w-100">
         <div className="container py-5 px-lg-5">
           <h2 className="mb-4 fw-bold d-flex">
-            <EditIcon className="me-2" fontSize="large" />
-            Edit Hotel
+            {/* <EditIcon className="me-2" fontSize="large" /> */}
+            <DomainAddIcon className="me-2" fontSize="large" />
+            Create Hotel
           </h2>
           <div className="container mt-4 p-4 edit-hotel-form border">
             <div className="mb-3 col-12">
               <div className="row mt-3">
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
-                    title="e1"
                   >
                     Name
                   </label>
@@ -349,15 +269,14 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row mt-3">
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
-                    title="e2"
                   >
                     Header Picture
                   </label>
@@ -388,15 +307,14 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
-                    title="e3"
                   >
                     Address
                   </label>
@@ -426,7 +344,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             {/* <div className="mb-3 col-12">
               <div className="row">
@@ -491,18 +409,18 @@ function Edithotel(props) {
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-3">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                    title="e4"
+                  >
+                    Country & City
+                  </label>
+                </div>
+                <div className="col-lg-9">
                   <div className="row">
-                    <div className="col-lg-4">
-                      <label
-                        for="exampleFormControlInput2"
-                        className="ms-2 mt-1 form-label"
-                        title="e4"
-                      >
-                        Country
-                      </label>
-                    </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-6">
                       <ThemeProvider theme={textfieldTheme}>
                         <TextField
                           required
@@ -525,20 +443,7 @@ function Edithotel(props) {
                         />
                       </ThemeProvider>
                     </div>
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="row">
-                    <div className="col-lg-2">
-                      <label
-                        for="exampleFormControlInput2"
-                        className="ms-2 mt-1 form-label"
-                        title="e5"
-                      >
-                        City
-                      </label>
-                    </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-6">
                       <ThemeProvider theme={textfieldTheme}>
                         <TextField
                           required
@@ -563,29 +468,28 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
-                    title="e6"
                   >
-                    Time Range
+                    Time range
                   </label>
                 </div>
                 <div className="col-lg-9">
                   <div className="row">
-                    <div className=" mt-1 col-lg-6">
+                    <div className="col-lg-6">
                       <div className="col-lg-12 checkin-inp">
                         <ThemeProvider theme={textfieldTheme}>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <TimePicker
                               label="Checkin time"
-                              ampm={false}
                               value={checkin}
+                              ampm={false}
                               onChange={(newValue) => {
                                 setCheckin(newValue);
                               }}
@@ -603,13 +507,13 @@ function Edithotel(props) {
                         </ThemeProvider>
                       </div>
                     </div>
-                    <div className="mt-1 col-lg-6">
-                      <div className="col-lg-12 checkout-inp">
+                    <div className="col-lg-6">
+                      <div className="col-lg-12 mt-2 mt-lg-0 checkout-inp">
                         <ThemeProvider theme={textfieldTheme}>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <TimePicker
                               label="Checkout time"
-                              ampm={false}
+															ampm={false}
                               value={checkout}
                               onChange={(newValue) => {
                                 setCheckout(newValue);
@@ -633,17 +537,16 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <label
                     for="exampleFormControlInput3"
                     className="ms-2 mt-1 form-label"
-                    title="e7"
                   >
-                    Phone Number
+                    Phone number
                   </label>
                 </div>
                 <div className="col-lg-9">
@@ -669,15 +572,14 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <label
                     for="exampleFormControlInput4"
                     className="ms-2 mt-1 form-label"
-                    title="e8"
                   >
                     Email
                   </label>
@@ -705,15 +607,14 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <label
                     for="exampleFormControlTextarea1"
                     className="ms-2 form-label"
-                    title="e9"
                   >
                     Description
                   </label>
@@ -743,15 +644,14 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <label
                     for="exampleFormControlTextarea1"
                     className="ms-2 form-label"
-                    title="e10"
                   >
                     Facilities
                   </label>
@@ -782,42 +682,21 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <PreviewMultipleImages />
             </div>
 
             <div className="row mt-2 d-fit-content">
-              <div className="col-lg-4 col-md-2"></div>
-              <div className="col-lg-4 col-md-2"></div>
-              <div className="col-lg-4 col-md-8 edit-hotel mb-3">
+              <div className="col-4" />
+              <div className="col-4" />
+              <div className="col-4 edit-hotel mb-3">
                 <button className="btn edit-hotel" onClick={handleClick}>
-                  {loading ? (
-                    <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
-                  ) : (
-                    "Edit Hotel"
-                  )}
+                  Edit hotel
                 </button>
               </div>
             </div>
-
-            <Snackbar
-              open={open}
-              autoHideDuration={4000}
-              onClose={handleClose}
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            >
-              <Alert
-                onClose={handleClose}
-                severity={
-                  message === "Please fill in the blanks." ? "error" : "success"
-                }
-                sx={{ width: "100%" }}
-              >
-                {message}
-              </Alert>
-            </Snackbar>
           </div>
         </div>
       </div>

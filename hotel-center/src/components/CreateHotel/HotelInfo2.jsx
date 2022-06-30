@@ -17,12 +17,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
+// import image1 from "../../statics/img/pics/avatar.jpg";
 import image1 from "../../statics/img/pics/avatar.jpg";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-
-const textFieldTheme = createTheme({
+const datePickerTheme = createTheme({
   palette: {
     primary: {
       main: "#cd9a2b",
@@ -58,9 +56,6 @@ const validationSchema = yup.object({
 
 function Profile(props) {
   const CHARACTER_LIMIT = 250;
-  const [message, setMessage] = useState("");
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
   const [state, setState] = useState(null);
@@ -81,18 +76,6 @@ function Profile(props) {
     },
     validationSchema: validationSchema,
   });
-
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   const genhandleChange = (event, newValue) => {
     setGenValue(newValue);
@@ -134,38 +117,24 @@ function Profile(props) {
       formattedDate != "Invalid date";
     console.log("filled:", filled);
 
-    if (!filled) {
-      setOpen(true);
-      setMessage("Please fill in the blanks.");
-    }
-
     if (filled) {
-      setLoading(true);
-      // console.log(selectedImage);
+      console.log(selectedImage);
       let form_data = new FormData();
-      // form_data.append("avatar", selectedImage, selectedImage.name);
-      // form_data.append('email',formik.values.email);
-      // form_data.append('firstName',formik.values.firstname);
-      // form_data.append('lastName',formik.values.lastname);
-      // form_data.append('birthday',formattedDate);
-      // form_data.append('gender',genValue);
-      // form_data.append('phone_number',formik.values.phone);
-      // form_data.append('national_code',formik.values.nationalcode);
-      // form_data.append('description',formik.values.aboutme);
+      form_data.append("avatar", selectedImage, selectedImage.name);
+      form_data.append("email", formik.values.email);
+      form_data.append("firstName", formik.values.firstname);
+      form_data.append("lastName", formik.values.lastname);
+      form_data.append("birthday", formattedDate);
+      form_data.append("gender", genValue);
+      form_data.append("phone_number", formik.values.phone);
+      form_data.append("national_code", formik.values.nationalcode);
+      form_data.append("description", formik.values.aboutme);
       axios
         .put(
           makeURL(references.url_edit_profile),
-          {
-            email: formik.values.email,
-            firstName: formik.values.firstname,
-            lastName: formik.values.lastname,
-            birthday: formattedDate,
-            gender: genValue,
-            phone_number: formik.values.phone,
-            national_code: formik.values.nationalcode,
-            description: formik.values.aboutme,
-            // form_data,
-          },
+
+          form_data,
+
           {
             headers: {
               Authorization: cookies.get("Authorization"),
@@ -174,16 +143,10 @@ function Profile(props) {
         )
         .then((response) => {
           console.log("status code: ", response.status);
-          // document.location.reload(true);
-          setOpen(true);
-          setLoading(false);
-          setMessage("Your profile was submitted successfully!");
+          document.location.reload(true);
         })
         .catch((error) => {
           console.log("error: ", error);
-          setLoading(false);
-          setOpen(true);
-          setMessage("Please fill in the blanks.");
         });
     }
 
@@ -203,18 +166,16 @@ function Profile(props) {
 
   return (
     <div className="container">
-      <div className="row pt-5">
-        <div className="col-lg-3">
-          <Sidebar />
-        </div>
-        <div className="col-lg-9">
+      <div className="row">
+        <div className="col-sm-1"></div>
+        <div className="col-12 py-5 px-lg-5">
           <div className="container edit-profile-form border">
             <div className="row">
               <div className="col-lg-3">
                 <div className="profile-img">
                   {selectedImage !== null ? (
                     <img
-                      src={references.base_address + selectedImage}
+                      src={references.url_address + selectedImage}
                       className="rounded-circle"
                       alt="Avatar"
                     />
@@ -227,6 +188,7 @@ function Profile(props) {
                   )}
                 </div>
               </div>
+              {/* <br></br> */}
               <div className="col-lg-8">
                 <input
                   type="file"
@@ -249,56 +211,50 @@ function Profile(props) {
                     for="exampleFormControlInput1"
                     className="ms-2 mt-1 form-label"
                   >
-                    Full Name
+                    Full name
                   </label>
                 </div>
                 <div className="col-lg-8">
                   <Grid container spacing={3}>
                     <Grid item xs={6}>
-                      <ThemeProvider theme={textFieldTheme}>
-                        <TextField
-                          required
-                          fullWidth
-                          placeholder="Eric"
-                          id="firstname"
-                          size="small"
-                          label="First name"
-                          InputLabelProps={{ shrink: true }}
-                          value={formik.values.firstname}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          error={
-                            formik.touched.firstname &&
-                            Boolean(formik.errors.firstname)
-                          }
-                          helperText={
-                            formik.touched.firstname && formik.errors.firstname
-                          }
-                        />
-                      </ThemeProvider>
+                      <TextField
+                        required
+                        placeholder="Eric"
+                        id="firstname"
+                        size="small"
+                        label="First name"
+                        InputLabelProps={{ shrink: true }}
+                        value={formik.values.firstname}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={
+                          formik.touched.firstname &&
+                          Boolean(formik.errors.firstname)
+                        }
+                        helperText={
+                          formik.touched.firstname && formik.errors.firstname
+                        }
+                      />
                     </Grid>
                     <Grid item xs={6}>
-                      <ThemeProvider theme={textFieldTheme}>
-                        <TextField
-                          required
-                          fullWidth
-                          placeholder="Hodson"
-                          id="lastname"
-                          size="small"
-                          label="Last name"
-                          InputLabelProps={{ shrink: true }}
-                          value={formik.values.lastname}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          error={
-                            formik.touched.lastname &&
-                            Boolean(formik.errors.lastname)
-                          }
-                          helperText={
-                            formik.touched.lastname && formik.errors.lastname
-                          }
-                        />
-                      </ThemeProvider>
+                      <TextField
+                        required
+                        placeholder="Hodson"
+                        id="lastname"
+                        size="small"
+                        label="Last name"
+                        InputLabelProps={{ shrink: true }}
+                        value={formik.values.lastname}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={
+                          formik.touched.lastname &&
+                          Boolean(formik.errors.lastname)
+                        }
+                        helperText={
+                          formik.touched.lastname && formik.errors.lastname
+                        }
+                      />
                     </Grid>
                   </Grid>
 
@@ -325,32 +281,29 @@ function Profile(props) {
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
                   >
-                    National Code
+                    National code
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      required
-                      fullWidth
-                      placeholder="0023839813"
-                      id="nationalcode"
-                      size="small"
-                      label="National code"
-                      InputLabelProps={{ shrink: true }}
-                      value={formik.values.nationalcode}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.nationalcode &&
-                        Boolean(formik.errors.nationalcode)
-                      }
-                      helperText={
-                        formik.touched.nationalcode &&
-                        formik.errors.nationalcode
-                      }
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="0023839813"
+                    id="nationalcode"
+                    size="small"
+                    label="National code"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.nationalcode}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.nationalcode &&
+                      Boolean(formik.errors.nationalcode)
+                    }
+                    helperText={
+                      formik.touched.nationalcode && formik.errors.nationalcode
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -368,31 +321,29 @@ function Profile(props) {
                   </label>
                 </div>
                 <div className="col-lg-9">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <RadioGroup
-                      row
-                      aria-label="level"
-                      name="row-radio-buttons-group"
-                      value={genValue}
-                      onChange={genhandleChange}
-                    >
-                      <FormControlLabel
-                        value="Male"
-                        control={<Radio />}
-                        label="Male"
-                      />
-                      <FormControlLabel
-                        value="Female"
-                        control={<Radio />}
-                        label="Female"
-                      />
-                      <FormControlLabel
-                        value="Other"
-                        control={<Radio />}
-                        label="Other"
-                      />
-                    </RadioGroup>
-                  </ThemeProvider>
+                  <RadioGroup
+                    row
+                    aria-label="level"
+                    name="row-radio-buttons-group"
+                    value={genValue}
+                    onChange={genhandleChange}
+                  >
+                    <FormControlLabel
+                      value="Male"
+                      control={<Radio />}
+                      label="Male"
+                    />
+                    <FormControlLabel
+                      value="Female"
+                      control={<Radio />}
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="Other"
+                      control={<Radio />}
+                      label="Other"
+                    />
+                  </RadioGroup>
                 </div>
               </div>
             </div>
@@ -407,7 +358,7 @@ function Profile(props) {
                   </label>
                 </div>
                 <div className="col-lg-8 birthday-inp">
-                  <ThemeProvider theme={textFieldTheme}>
+                  <ThemeProvider theme={datePickerTheme}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DatePicker
                         label="Birthdate"
@@ -440,28 +391,24 @@ function Profile(props) {
                     for="exampleFormControlInput3"
                     className="ms-2 mt-1 form-label"
                   >
-                    Phone Number
+                    Phone number
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      required
-                      fullWidth
-                      placeholder="09912141869"
-                      id="phone"
-                      size="small"
-                      label="Phone number"
-                      InputLabelProps={{ shrink: true }}
-                      value={formik.values.phone}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.phone && Boolean(formik.errors.phone)
-                      }
-                      helperText={formik.touched.phone && formik.errors.phone}
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="09912141869"
+                    id="phone"
+                    size="small"
+                    label="Phone number"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.phone && Boolean(formik.errors.phone)}
+                    helperText={formik.touched.phone && formik.errors.phone}
+                  />
                 </div>
               </div>
             </div>
@@ -475,28 +422,24 @@ function Profile(props) {
                     for="exampleFormControlInput4"
                     className="ms-2 mt-1 form-label"
                   >
-                    Email Address
+                    Email address
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      required
-                      fullWidth
-                      placeholder="yf7901@gamil.com"
-                      id="email"
-                      size="small"
-                      label="Email"
-                      InputLabelProps={{ shrink: true }}
-                      value={formik.values.email}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.email && Boolean(formik.errors.email)
-                      }
-                      helperText={formik.touched.email && formik.errors.email}
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="yf7901@gamil.com"
+                    id="email"
+                    size="small"
+                    label="Email"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                  />
                 </div>
               </div>
             </div>
@@ -514,26 +457,24 @@ function Profile(props) {
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      fullWidth
-                      placeholder="02632552012"
-                      id="telephone"
-                      size="small"
-                      label="Telephone"
-                      InputLabelProps={{ shrink: true }}
-                      value={formik.values.telephone}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.telephone &&
-                        Boolean(formik.errors.telephone)
-                      }
-                      helperText={
-                        formik.touched.telephone && formik.errors.telephone
-                      }
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    fullWidth
+                    placeholder="02632552012"
+                    id="telephone"
+                    size="small"
+                    label="Telephone"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.telephone}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.telephone &&
+                      Boolean(formik.errors.telephone)
+                    }
+                    helperText={
+                      formik.touched.telephone && formik.errors.telephone
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -547,29 +488,27 @@ function Profile(props) {
                     for="exampleFormControlTextarea1"
                     className="ms-2 form-label"
                   >
-                    About Me
+                    About me
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      fullWidth
-                      id="aboutme"
-                      placeholder=""
-                      multiline
-                      autoComplete="aboutme"
-                      label="About me"
-                      InputLabelProps={{ shrink: true }}
-                      inputProps={{ maxLength: CHARACTER_LIMIT }}
-                      value={formik.values.aboutme}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.aboutme && Boolean(formik.errors.aboutme)
-                      }
-                      helperText={`${formik.values.aboutme.length}/${CHARACTER_LIMIT}`}
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    fullWidth
+                    id="aboutme"
+                    placeholder=""
+                    multiline
+                    autoComplete="aboutme"
+                    label="About me"
+                    InputLabelProps={{ shrink: true }}
+                    inputProps={{ maxLength: CHARACTER_LIMIT }}
+                    value={formik.values.aboutme}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.aboutme && Boolean(formik.errors.aboutme)
+                    }
+                    helperText={`${formik.values.aboutme.length}/${CHARACTER_LIMIT}`}
+                  />
                 </div>
               </div>
             </div>
@@ -578,32 +517,13 @@ function Profile(props) {
               <div className="col-4"></div>
               <div className="col-4 edit-profile">
                 <button className="btn edit-hotel" onClick={handleClick}>
-                  {loading ? (
-                    <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
-                  ) : (
-                    "Edit Profile"
-                  )}
+                  Edit profile
                 </button>
               </div>
             </div>
-            <Snackbar
-              open={open}
-              autoHideDuration={4000}
-              onClose={handleClose}
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            >
-              <Alert
-                onClose={handleClose}
-                severity={
-                  message === "Please fill in the blanks." ? "error" : "success"
-                }
-                sx={{ width: "100%" }}
-              >
-                {message}
-              </Alert>
-            </Snackbar>
           </div>
         </div>
+        <div className="col-sm-1"></div>
       </div>
     </div>
   );

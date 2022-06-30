@@ -5,12 +5,10 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
-// import '../../css/hotelPage.css';
 
 class SimpleAccordion extends React.Component {
 	constructor(props) {
 		super(props);
-		// console.log(props.data);
 	}
 
 	state = {
@@ -34,23 +32,26 @@ class SimpleAccordion extends React.Component {
 		const sec = this.state.description.slice(250, 100000);
 
 		return (
-			<div  title='accordion1' data-testid= "accordion1" >
-				<Accordion data-testid="accordion"  title='accordion' style={{ borderRadius: '5px' }}>
+			<div title="accordion1" data-testid="accordion1">
+				<Accordion data-testid="accordion" title="accordion" style={{ borderRadius: '5px' }}>
 					<AccordionSummary
-
-title='AccordionSummery'
-						expandIcon={<ExpandMoreIcon   data-testid="expand" title='expandMoreIcon' />}
+						title="AccordionSummery"
+						expandIcon={<ExpandMoreIcon data-testid="expand" title="expandMoreIcon" />}
 						aria-controls="panel1a-content"
 						id="panel1a-header"
 					>
-
-						<Typography   data-testid="typo"  title='Typography' >{first} ...</Typography>
+						<Typography data-testid="typo" title="Typography">
+							{first} ...
+						</Typography>
 					</AccordionSummary>
 
-					<AccordionDetails title='AccordionDetails'>
+					<AccordionDetails title="AccordionDetails">
 						<Typography data-testid="test" />
 						{sec}
-						<a  title='href'  data-testid="a"   href=""> {this.state.phone_numbers}</a>
+						<a title="href" data-testid="a" href="">
+							{' '}
+							{this.state.phone_numbers}
+						</a>
 					</AccordionDetails>
 				</Accordion>
 			</div>

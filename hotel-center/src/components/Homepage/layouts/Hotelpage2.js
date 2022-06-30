@@ -80,6 +80,8 @@ export default function Hotelpage() {
   const [f1, setf1] = useState(null);
   const [f2, setf2] = useState(null);
   const [rooms, setRooms] = useState(null);
+  const [checkin, setCheckin] = useState("");
+  const [checkout, setCheckout] = useState("");
 
   useEffect(() => {
     // console.log(cookies.get("Authorization"));
@@ -97,6 +99,8 @@ export default function Hotelpage() {
         setFacility(response.data.facilities);
         setf1(response.data.facilities.slice(0, 4));
         setf2(response.data.facilities.slice(4, 8));
+        setCheckin(response.data.check_in_range);
+        setCheckout(response.data.check_out_range);
       })
       .catch((error) => {
         console.log(error);
@@ -106,6 +110,9 @@ export default function Hotelpage() {
   useEffect(() => {
     const queryString = window.location.toString();
     const hotelid = queryString.slice(-1);
+
+    setRooms(JSON.parse(localStorage.getItem("rooms")));
+
     axios
       .get(makeURL(references.url_hotelrooms + hotelid + "/"), {
         headers: {
@@ -114,7 +121,6 @@ export default function Hotelpage() {
       })
       .then((response) => {
         console.log("rooms response:", response.data);
-        // console.log("rooms response:", response.data.option);
         setRooms(response.data);
       })
       .catch((error) => {
@@ -132,7 +138,7 @@ export default function Hotelpage() {
           </div>
           <div className="col-lg-8">
             <div className="row">
-              <h3 className="mb-3">Facilities of the room</h3>
+              <h3 className="mb-3 mt-3">Facilities of the hotel</h3>
               <div className="col">
                 <div className="mb-3 row">
                   <div className="col">
@@ -240,7 +246,7 @@ export default function Hotelpage() {
                     <AlarmIcon fontSize="large" />
                   </h6>
                   <h5 className="card-title">Check in time</h5>
-                  <p className="card-text">02:00 (P.M)</p>
+                  <p className="card-text">{checkin}</p>
                 </div>
               </div>
               <div className="mb-3 card rule-card" style={{ width: "15rem" }}>
@@ -249,7 +255,7 @@ export default function Hotelpage() {
                     <AlarmIcon fontSize="large" />
                   </h6>
                   <h5 className="card-title">Check out time</h5>
-                  <p className="card-text">12:00 (Noon)</p>
+                  <p className="card-text">{checkout}</p>
                 </div>
               </div>
             </div>

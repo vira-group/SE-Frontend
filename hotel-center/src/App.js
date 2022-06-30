@@ -7,7 +7,6 @@ import account_activation from "../src/components/account_activation/account_act
 import login from "./components/Login/Login";
 import Sign_up from "./components/Sign_up/sign_up";
 import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
-// import Hotelpage2 from "./components/Homepage/layouts/Hotelpage";
 import hotelPage from "./components/HotelPage/hotelPage";
 import Navbar from "./components/Homepage/layouts/Navbar";
 import Footer from "./components/Homepage/layouts/Footer";
@@ -15,11 +14,13 @@ import Profile from "./components/Profile/Editprofile";
 import IncreaseCredit from "./components/Profile/IncreaseCredit";
 import Favorites from "./components/Profile/Favorites";
 import Myhotels from "./components/Profile/Myhotels";
-import reservation from './components/Reservation/reservation';
+import reservation from "./components/Reservation/reservation";
 import Edithotel from "./components/AdminPanel/Pages/Edithotel";
 import Createroom from "./components/AdminPanel/Pages/Createroom";
 import Statistics from "./components/AdminPanel/Pages/Statistics";
 import RoomsStatus from "./components/AdminPanel/Pages/RoomsStatus";
+import CreateHotel from "./components/CreateHotel/CreateHotel";
+import steps from "./components/CreateHotel/steps";
 import "./components/AdminPanel/style/adminpanel.scss";
 import "./components/AdminPanel/style/widget.scss";
 import "./components/AdminPanel/style/chart.scss";
@@ -35,7 +36,7 @@ import "./css/Reserve.css";
 import "./css/Hotelpage.css";
 import "./css/Hotelpage2.css";
 import "./css/Edithotel.css";
-import "./css/Edithotel.css"
+import "./css/Edithotel.css";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/sign-up" component={Sign_up} />
           <Route exact path="/login" component={login} />
+          <Route exact path="/createHotel/steps" component={steps} />
           <Route
             exact
             path="/auth/activate/:handle/:handle1"
@@ -77,11 +79,7 @@ function App() {
             path="/adminpanel/:id/createrooom"
             component={Createroom}
           />
-          <Route
-            exact
-            path="/adminpanel/:id/edithotel"
-            component={Edithotel}
-          />
+          <Route exact path="/adminpanel/:id/edithotel" component={Edithotel} />
           <Route
             exact
             path="/adminpanel/:id/roomsstatus"

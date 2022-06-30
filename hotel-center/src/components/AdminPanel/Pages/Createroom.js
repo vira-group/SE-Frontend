@@ -24,6 +24,8 @@ import PreviewMultipleImages from "./PreviewMultipleImages";
 import Sidebar from "../layout/Sidebar";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import { fontSize } from "@mui/system";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const textfieldTheme = createTheme({
   palette: {
@@ -98,6 +100,13 @@ const validationSchema = yup.object({
 });
 
 function Createroom(props) {
+  const [msg1, setMsg1] = useState("");
+  const [msg2, setMsg2] = useState("");
+  const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
   const [type, setType] = useState("");
@@ -138,6 +147,20 @@ function Createroom(props) {
     validationSchema: validationSchema,
   });
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen1(false);
+    setOpen2(false);
+    setOpen(false);
+  };
+
   const handletypeChange = (event) => {
     setType(event.target.value);
     // console.log(event.target.value);
@@ -161,10 +184,38 @@ function Createroom(props) {
     let hotelid = window.location.pathname.split("/")[2];
     let option = "";
     includebreakfast === "Yes" ? (option = "Breakfast") : (option = "");
-    // console.log("type: ", type);
-    // console.log(formik.values.price,"\n", formik.values.size,"\n", formik.values.sleeps,
-    // "\n",type,"\n", formik.values.view,"\n", formik.values.morefacilities,"\n", option,
-    // "\n",facilities);
+    let filled =
+      !Boolean(formik.errors.size) &&
+      !Boolean(formik.errors.view) &&
+      !Boolean(formik.errors.sleeps) &&
+      !Boolean(formik.errors.price) &&
+      type != "" &&
+      includebreakfast != null;
+    // && facilities.length != 0;
+
+    // console.log(
+    //   formik.values.price,
+    //   "\t",
+    //   !Boolean(formik.errors.price),
+    //   "\n",
+    //   formik.values.size,
+    //   "\t",
+    //   !Boolean(formik.errors.size),
+    //   "\n",
+    //   formik.values.sleeps,
+    //   "\t",
+    //   !Boolean(formik.errors.sleeps),
+    //   "\n",
+    //   type,
+    //   "\n",
+    //   formik.values.view,
+    //   "\t",
+    //   !Boolean(formik.errors.view),
+    //   "\n",
+    //   option,
+    //   "\n",
+    //   facilities
+    // );
     var allfacilities = [];
     allfacilities = facilities.concat(formik.values.morefacilities.split(","));
     // console.log("all facilities final: ",allfacilities);
@@ -173,33 +224,47 @@ function Createroom(props) {
       let temp = { name: allfacilities[i] };
       listForBack.push(temp);
     }
-    console.log("result: ", listForBack);
+    // console.log("result: ", listForBack);
+    console.log(filled);
 
-    axios
-      .post(
-        makeURL(references.url_hotelrooms + hotelid + "/"),
-        {
-          type: type,
-          size: formik.values.size,
-          view: formik.values.view,
-          sleeps: formik.values.sleeps,
-          price: formik.values.price,
-          option: option,
-          room_facilities: listForBack,
-        },
-        {
-          headers: {
-            Authorization: cookies.get("Authorization"),
+    if (!filled) {
+      setOpen(true);
+      setMessage("Please fill in the blanks.");
+    }
+
+    if (filled) {
+      axios
+        .post(
+          makeURL(references.url_hotelrooms + hotelid + "/"),
+          {
+            type: type,
+            size: formik.values.size,
+            view: formik.values.view,
+            sleeps: formik.values.sleeps,
+            price: formik.values.price,
+            option: option,
+            room_facilities: listForBack,
           },
-        }
-      )
-      .then((res) => {
-        console.log("response for createroom page: ", res.data);
-        setRoomid(res.data.id);
-      })
-      .catch((err) => {
-        console.log("error for createroom page: ", err);
-      });
+          {
+            headers: {
+              Authorization: cookies.get("Authorization"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log("response for createroom page: ", res.data);
+          setRoomid(res.data.id);
+          setOpen1(true);
+          setLoading(false);
+          setMsg1("Your room was created successfully!");
+        })
+        .catch((err) => {
+          console.log("error for createroom page: ", err);
+          setLoading(false);
+          setOpen1(true);
+          setMsg1("Something went wrong.Please try again.");
+        });
+    }
   };
 
   const handleRoomSpaceClick = () => {
@@ -223,9 +288,15 @@ function Createroom(props) {
         )
         .then((res) => {
           console.log("response for adding room space: ", res.data);
+          setOpen2(true);
+          setLoading(false);
+          setMsg2("Your room spaces were created successfully!");
         })
         .catch((err) => {
           console.log("error for adding room space: ", err);
+          setLoading(false);
+          setOpen2(true);
+          setMsg2("An error occurred.Please try again.");
         });
     }
   };
@@ -258,12 +329,13 @@ function Createroom(props) {
           <div className="container mt-4 p-4 edit-hotel-form border">
             <div className="mb-3 col-md-12">
               <div className="row">
-                <div className="col-lg-2 col-md-3 mt-lg-3">
+                <div className="col-lg-2 mt-lg-3">
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
+                    title="element1"
                   >
-                    Type of room
+                    Type Of Room
                   </label>
                 </div>
                 <div className="col-lg-9 mt-lg-3">
@@ -283,10 +355,10 @@ function Createroom(props) {
                         label="Type"
                         onChange={handletypeChange}
                       >
-                        <MenuItem value={t1}>Single room</MenuItem>
-                        <MenuItem value={t2}>Double room</MenuItem>
-                        <MenuItem value={t3}>Triple room</MenuItem>
-                        <MenuItem value={t4}>Suit room</MenuItem>
+                        <MenuItem value={t1}>Single Room</MenuItem>
+                        <MenuItem value={t2}>Double Room</MenuItem>
+                        <MenuItem value={t3}>Triple Room</MenuItem>
+                        <MenuItem value={t4}>Suite Room</MenuItem>
                       </Select>
                     </FormControl>
                   </ThemeProvider>
@@ -298,10 +370,11 @@ function Createroom(props) {
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-2 col-md-3">
+                <div className="col-lg-2">
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
+                    title="element2"
                   >
                     Breakfast
                   </label>
@@ -349,12 +422,13 @@ function Createroom(props) {
               <div className="row">
                 <div className="mb-3 col-6">
                   <div className="row mt-3">
-                    <div className="col-lg-3 col-md-4">
+                    <div className="col-lg-3">
                       <label
                         for="exampleFormControlInput2"
                         className="ms-2 mt-1 form-label"
+                        title="element3"
                       >
-                        Room view
+                        Room View
                       </label>
                     </div>
                     <div className="col-lg-8">
@@ -382,12 +456,13 @@ function Createroom(props) {
 
                 <div className="mb-3 col-6">
                   <div className="row mt-3">
-                    <div className="col-lg-3 col-md-4">
+                    <div className="col-lg-3">
                       <label
                         for="exampleFormControlInput2"
                         className="ms-2 mt-1 form-label"
+                        title="element4"
                       >
-                        Room size
+                        Room Size
                       </label>
                     </div>
                     <div className="col-lg-8">
@@ -421,12 +496,13 @@ function Createroom(props) {
               <div className="row">
                 <div className="mb-3 col-6">
                   <div className="row mt-3">
-                    <div className="col-lg-3 col-md-4">
+                    <div className="col-lg-3">
                       <label
                         for="exampleFormControlInput2"
                         className="ms-2 mt-1 form-label"
+                        title="element5"
                       >
-                        Room price
+                        Room Price
                       </label>
                     </div>
                     <div className="col-lg-8">
@@ -456,12 +532,13 @@ function Createroom(props) {
 
                 <div className="mb-3 col-6">
                   <div className="row mt-3">
-                    <div className="col-lg-3 col-md-4">
+                    <div className="col-lg-3">
                       <label
                         for="exampleFormControlInput2"
                         className="ms-2 mt-1 form-label"
+                        title="element6"
                       >
-                        Room sleeps
+                        Room Sleeps
                       </label>
                     </div>
                     <div className="col-lg-8">
@@ -496,12 +573,13 @@ function Createroom(props) {
 
             <div className="mb-3 col-12">
               <div className="row">
-                <div className="col-lg-2 col-md-3 mt-3">
+                <div className="col-lg-2 mt-3">
                   <label
                     for="exampleFormControlTextarea1"
                     className="ms-2 form-label"
+                    title="element7"
                   >
-                    Room facilities
+                    Room Facilities
                   </label>
                 </div>
                 <div className="col-lg-9">
@@ -553,35 +631,54 @@ function Createroom(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
-
-            <div className="mb-3 col-12">
-              <PreviewMultipleImages roomid={roomid}/>
-            </div>
-
             <div className="row mt-2 d-fit-content">
-              <div className="col-4"></div>
-              <div className="col-4"></div>
-              <div className="col-4 edit-hotel mb-3">
+              <div className="col-lg-4 col-md-2"></div>
+              <div className="col-lg-4 col-md-2"></div>
+              <div className="col-lg-4 col-md-8 edit-hotel mb-3">
                 <button className="btn edit-hotel" onClick={handleClick}>
-                  Create room
+                  {loading ? (
+                    <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
+                  ) : (
+                    "Create Room"
+                  )}
                 </button>
               </div>
             </div>
+
+            <Snackbar
+              open={open1}
+              autoHideDuration={4000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+              <Alert
+                onClose={handleClose}
+                severity={
+                  msg1 === "Something went wrong.Please try again."
+                    ? "error"
+                    : "success"
+                }
+                sx={{ width: "100%" }}
+              >
+                {msg1}
+              </Alert>
+            </Snackbar>
 
             <hr class="dashed"></hr>
 
             <div className="mb-3 col-md-12">
               <div className="row mt-3">
                 <Typography sx={{ mb: 3 }}>
-                  Please first create your room and then add the numbers of rooms you have below.
+                  Please first create your room and then add the numbers of
+                  rooms you have below.
                 </Typography>
-                <div className="col-lg-2 col-md-3">
+                <div className="col-lg-2">
                   <label
                     for="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
+                    title="element8"
                   >
-                    Room spaces
+                    Room Spaces
                   </label>
                 </div>
                 <div className="col-lg-9">
@@ -609,16 +706,62 @@ function Createroom(props) {
               </div>
             </div>
             <div className="row">
-              <div className="col-4"></div>
-              <div className="col-4"></div>
-              <div className="col-4 edit-hotel mb-3">
+              <div className="col-lg-4 col-md-2"></div>
+              <div className="col-lg-4 col-md-2"></div>
+              <div className="col-lg-4 col-md-8 edit-hotel mb-3">
                 <button
                   className="btn edit-hotel"
                   onClick={handleRoomSpaceClick}
                 >
-                  Add room spaces
+                  {loading ? (
+                    <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
+                  ) : (
+                    "Add Room Spaces"
+                  )}
                 </button>
               </div>
+            </div>
+
+            <Snackbar
+              open={open2}
+              autoHideDuration={4000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+              <Alert
+                onClose={handleClose}
+                severity={
+                  msg2 === "An error occurred.Please try again."
+                    ? "error"
+                    : "success"
+                }
+                sx={{ width: "100%" }}
+              >
+                {msg2}
+              </Alert>
+            </Snackbar>
+
+            <Snackbar
+              open={open}
+              autoHideDuration={4000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+              <Alert
+                onClose={handleClose}
+                severity={
+                  message === "Please fill in the blanks." ? "error" : "success"
+                }
+                sx={{ width: "100%" }}
+              >
+                {message}
+              </Alert>
+            </Snackbar>
+
+            <hr class="dashed"></hr>
+
+            <div className="mb-3 col-12">
+              <PreviewMultipleImages roomid={roomid} />
             </div>
           </div>
         </div>

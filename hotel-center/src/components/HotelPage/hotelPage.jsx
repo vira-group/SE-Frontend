@@ -1,11 +1,3 @@
-// import pic1 from './../../statics/img/pic (1).jpg';
-// import pic2 from './../../statics/img/pic (2).jpg';
-// import pic3 from './../../statics/img/pic (3).jpg';
-// import pic4 from './../../statics/img/pic (4).jpg';
-// import pic5 from './../../statics/img/pic (5).jpg';
-// import pic6 from './../../statics/img/pic (6).jpg';
-// import pic7 from './../../statics/img/pic (7).jpg';
-// import pic8 from './../../statics/img/pic (8).jpg';
 import { one_hotel_connection, one_hotel_image } from '../../Utils/connection';
 import * as React from 'react';
 import Helmet from 'react-helmet';
@@ -13,9 +5,6 @@ import ResponsiveDatePickers from './ResponsiveDatePickers';
 import SimpleAccordion from './accordion';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import Hotelpage2 from '../Homepage/layouts/Hotelpage2';
-
-
-
 class Hotelpage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -40,7 +29,6 @@ class Hotelpage extends React.Component {
 		var splitted = window.location.toString().split('/');
 		await this.setState({ id: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.id);
-		//window.alert(this.state.id);
 		one_hotel_connection(this.state.id).then((res) => {
 			this.setState({ city: res.city });
 			this.setState({ name: res.name });
@@ -68,11 +56,11 @@ class Hotelpage extends React.Component {
 						<div className="container d-none d-md-block">
 							<br />
 							<br />
-							<div className="row-md-12"  title='HotelName'>
+							<div className="row-md-12" title="HotelName">
 								<h2>{this.state.name}</h2>
 							</div>
 							<div className="row ">
-								<div className="col-5 icon2  gx-3 col-sm-1 d-flex" >
+								<div className="col-5 icon2  gx-3 col-sm-1 d-flex">
 									<FmdGoodIcon />
 									{this.state.city},{this.state.state}
 								</div>
@@ -99,7 +87,6 @@ class Hotelpage extends React.Component {
 										<div className="col-12 gy-3">
 											<img
 												src={this.state.header}
-												// src={pic1}
 												className="img-fluid"
 												alt="..."
 												style={{ borderRadius: '5px' }}
@@ -120,7 +107,6 @@ class Hotelpage extends React.Component {
 										<div className="col-6 gy-3">
 											<img
 												src={this.state.image2}
-												// src={pic2}
 												className="img-fluid"
 												alt="..."
 												style={{ borderRadius: '5px' }}
@@ -130,7 +116,6 @@ class Hotelpage extends React.Component {
 										<div className="col-6 gy-3">
 											<img
 												src={this.state.image3}
-												// src={pic3}
 												className="img-fluid"
 												alt="..."
 												style={{ borderRadius: '5px' }}
@@ -212,13 +197,6 @@ class Hotelpage extends React.Component {
 					<br />
 
 					<div className="row">
-						{/* <div className="div" style={{ display: 'flex', top: '0' }}> */}
-						{/* <div className="col-12 col-md-4 " style={{ marginBottom: 10 }}>
-							<div style={{ position: 'sticky', top: '11vh' }}>
-								<ResponsiveDatePickers />
-							</div>
-						</div> */}
-
 						<div className="col">
 							<SimpleAccordion data={this.state} />
 						</div>
