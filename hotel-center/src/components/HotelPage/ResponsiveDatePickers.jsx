@@ -26,10 +26,22 @@ function ResponsiveDatePickers(props) {
 	const handleClose = () => {
 		setAnchor(null);
 	};
+
 	localStorage.setItem('i1', JSON.stringify(checkinDate));
 	localStorage.setItem('i2', JSON.stringify(checkoutDate));
-	console.log(checkoutDate ? checkoutDate : 'no');
+
+	console.log(props.id, 'idfd');
+	// console.log(checkoutDate ? checkoutDate : 'no');
+
+	console.log(checkinDate ? checkinDate : 'no');
+
+	// console.log(numberOfAdults ? numberOfAdults : 'no');
+	// console.log(numberOfChildren ? numberOfChildren : 'no');
+	// console.log(props.id, 'id');
 	const handlesearch = () => {
+		window.location.href =
+			'http://localhost:3000/hotelpage/2111/21/' + (numberOfAdults + numberOfChildren) + '/' + props.id;
+
 		axios
 			.get(makeURL(references.url_hotel_search), {
 				headers: {
@@ -96,7 +108,6 @@ function ResponsiveDatePickers(props) {
 									<DatePicker
 										disablePast
 										minDate={checkinDate ? new Date(checkinDate.getTime() + oneDay) : null}
-									
 										label="Check out"
 										value={checkoutDate}
 										onChange={(newValue) => {

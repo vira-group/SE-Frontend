@@ -50,7 +50,7 @@ function App() {
 					<Route exact path="/profile/IncreaseCredit" component={IncreaseCredit} />
 					<Route exact path="/profile/favorites" component={Favorites} />
 					<Route exact path="/myhotels" component={Myhotels} />
-					<Route exact path="/hotelpage/:handle" component={hotelPage} />
+					<Route exact path="/hotelpage/:datein/:dateout/:num/:handle" component={hotelPage} />
 					<Route exact path="/verify-email" component={Verify} />
 					<Route exact path="/" component={Homepage} />
 					<Route exact path="/sign-up" component={Sign_up} />

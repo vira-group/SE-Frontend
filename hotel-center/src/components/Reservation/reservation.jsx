@@ -9,6 +9,7 @@ import Popup from './Popup.jsx';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import './reserve.css';
+
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
 
@@ -36,6 +37,8 @@ class Reservation extends React.Component {
 		super(props);
 		this.state = {
 			err: '',
+			
+			
 			start_day: '2022-05-18',
 			end_day: '2022-05-23',
 			price_per_day: '1',
@@ -43,14 +46,14 @@ class Reservation extends React.Component {
 			name: '',
 			city: '',
 			num_passenger: '10',
-
+			get_price: 1,
+			
 			ischeck1: false,
 			ischeck2: false,
 			room: 1,
 			emailtxt: '',
 			message: '',
 			fields: {},
-			get_price: 1,
 			error: {
 				firstname: {
 					u1: '',
@@ -81,6 +84,8 @@ class Reservation extends React.Component {
 		let payment = (parseInt(e[2]) - parseInt(s[2]) + 1) * parseInt(this.state.price_per_day);
 		return payment;
 	}
+
+
 
 	handlecheck1() {
 		this.setState({ ischeck1: true });
@@ -115,21 +120,28 @@ class Reservation extends React.Component {
 				)
 			);
 
-			// console.log("ddddddssdsd" , is_sent) ;
 		}
 	}
 
 	async componentDidMount() {
+		console.log("dd");
+		console.log(JSON.parse(localStorage.getItem('i2')).split('T')[0],"dateeeee");
+	
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
 		var splitted = window.location.toString().split('/');
+		
+		
 		await this.setState({ room: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.room);
 
 		await this.setState({ city: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.city);
+		
 		await this.setState({ name: decodeURIComponent(splitted.pop()) });
+		
 		await this.setState({ price_per_day: decodeURIComponent(splitted.pop()) });
-		decodeURIComponent(this.state.price_pe0r_day);
+		decodeURIComponent(this.state.price_per_day);
+		console.log(this.state.price_per_day,"pr");
 
 		document.getElementById('pic1').src = JSON.parse(localStorage.getItem('items'))[0].image
 			? 'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[0].image
@@ -150,6 +162,8 @@ class Reservation extends React.Component {
 			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[3].image;
 		document.getElementById('dateout').innerHTML = JSON.parse(localStorage.getItem('i2')).split('T')[0];
 		document.getElementById('datein').innerHTML = JSON.parse(localStorage.getItem('i1')).split('T')[0];
+		console.log(JSON.parse(localStorage.getItem('i2')).split('T')[0],"dateeeee");
+		console.log(	<small id="dateout" />);
 		document.getElementById('person').innerHTML =
 			(parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) -
 				parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) +
@@ -219,14 +233,14 @@ class Reservation extends React.Component {
 	};
 
 	render() {
-		console.log(this.state.ischeck1);
+	
 		this.state.get_price = this.calculatePrice();
-		console.log(this.state.phone);
+		
+	
 		return (
 			<div>
-				{/* <div /> */}
-				{/* <div><Popup  data={this.state}></Popup> </div> */}
-
+	
+	
 				<div className="containter m-5">
 					<div className="row justify-content-center">
 						<div
@@ -312,6 +326,10 @@ class Reservation extends React.Component {
 							</button>
 						</div>
 
+
+
+
+
 						<div className="col-12 col-lg-4">
 							<div className="card-containter ">
 								<div className="card-body">
@@ -346,6 +364,7 @@ class Reservation extends React.Component {
 															}}
 														>
 															<small id="datein" />
+															date1
 														</span>
 													</div>
 												</div>
@@ -379,6 +398,7 @@ class Reservation extends React.Component {
 																color: 'grey'
 															}}
 														>
+														date2
 															<small id="dateout" />
 														</span>
 													</div>
@@ -447,6 +467,13 @@ class Reservation extends React.Component {
 								</div>
 							</div>
 						</div>
+
+
+
+
+
+
+
 						<div className="col-12 col-md-8 ">
 							<div className="container d-none d-md-block">
 								<br />

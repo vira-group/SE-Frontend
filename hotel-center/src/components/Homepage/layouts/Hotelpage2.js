@@ -73,8 +73,9 @@ const Icons = {
 	Bar: <LocalBarIcon />
 };
 
-export default function Hotelpage() {
+export default function Hotelpage(props) {
 	const value = 3.5;
+
 	// const { hotelid } = useParams();
 	const [ hotel, setHotel ] = useState(null);
 	const [ facility, setFacility ] = useState(null);
@@ -84,8 +85,24 @@ export default function Hotelpage() {
 	const [ rooms, setRooms ] = useState(null);
 	const [ checkin, setCheckin ] = useState('');
 	const [ checkout, setCheckout ] = useState('');
+	const [ datein, setdatein ] = useState('');
+	const [ dateout, setdateout ] = useState('');
+	const [ num, setnum ] = useState('');
 
 	useEffect(() => {
+
+
+		var splitted = window.location.toString().split('/');
+		
+		setdatein(decodeURIComponent(splitted.pop()));
+		// setCheckin({ checkin: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(datein);
+		console.log(datein,"asdsa");
+
+console.log(checkin,"cheee");
+
+
+		console.log(props.id, "hotel2id");
 		// console.log(cookies.get("Authorization"));
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
@@ -136,7 +153,7 @@ export default function Hotelpage() {
 			<div className="container">
 				<div className="row mt-5">
 					<div className="col-lg-4">
-						<ResponsiveDatePickers />
+						<ResponsiveDatePickers id={props.id} />
 					</div>
 
 					<div className="col-lg-8">
@@ -221,6 +238,9 @@ export default function Hotelpage() {
 						{rooms ? (
 							rooms.map((r) => (
 								<Roomcard
+								datein = {datein}
+								dateout = {dateout}
+								num = {num}
 									name={r.hotel_info.name}
 									city={r.hotel_info.city}
 									id={r.id}
@@ -289,9 +309,7 @@ export default function Hotelpage() {
 							</Box>
 						</div>
 
-
-
-						<Feedback></Feedback>
+						<Feedback />
 					</div>
 				</div>
 			</div>
