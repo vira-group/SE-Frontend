@@ -28,14 +28,14 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
 	return (
 		<div className="add-comment">
 			<div className="profile-pic" />{' '}
-			<Rating
+			{/* <Rating
 				name="simple-controlled"
 				value={5}
 				// onChange={(event, newValue) => {
 				// 	setValue(newValue);
 				// 	// console.log('star value:',newValue);
 				// }}
-			/>
+			/> */}
 			<textarea
 				className="comment-input"
 				placeholder="Add a comment"

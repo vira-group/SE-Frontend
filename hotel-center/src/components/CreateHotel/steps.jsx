@@ -5,6 +5,7 @@ import HotelInfo3 from "./HotelInfo3";
 import HotelInfo4 from "./HotelInfo4";
 import HotelInfo from "./HotelInfo";
 import "../../css/Profile.css";
+import "../CreateHotel/create.css"
 import Editprofile1 from "../Profile/Editprofile1";
 import profiledata2 from "../Profile/profiledata2";
 export default class steps extends Component {
@@ -39,7 +40,7 @@ export default class steps extends Component {
       this.state.btn = (
         <span className="ms-4">
           <button
-            className="btn edit-hotel"
+            className="btn edit-hotel1"
             onClick={() => this.handleClick("next")}
           >
             Next
@@ -49,7 +50,7 @@ export default class steps extends Component {
 
       this.state.btn2 = (
         <span className="me-4">
-          <button className="btn edit-hotel" onClick={() => this.handleClick()}>
+          <button className="btn edit-hotel1" onClick={() => this.handleClick()}>
             Previous
           </button>
         </span>
@@ -59,7 +60,7 @@ export default class steps extends Component {
       this.state.btn = (
         <span className="ms-4">
           <button
-            className="btn edit-hotel"
+            className="btn edit-hotel1"
             onClick={() => this.handleClick("next")}
           >
             Next
@@ -69,7 +70,7 @@ export default class steps extends Component {
 
       this.state.btn2 = (
         <span className="me-4">
-          <button className="btn edit-hotel" onClick={() => this.handleClick()}>
+          <button className="btn edit-hotel1" onClick={() => this.handleClick()}>
             Previous
           </button>
         </span>
@@ -79,7 +80,7 @@ export default class steps extends Component {
       this.state.btn = (
         <span className="ms-4">
           <button
-            className="btn edit-hotel"
+            className="btn edit-hotel1"
             onClick={() => this.handleClick("next")}
           >
             Next
@@ -88,14 +89,14 @@ export default class steps extends Component {
       );
       this.state.btn2 = (
         <span className="me-4">
-          <button className="btn edit-hotel" onClick={() => this.handleClick()}>
+          <button className="btn edit-hotel1" onClick={() => this.handleClick()}>
             Previous
           </button>
         </span>
       );
     } else if (this.state.currentStep === 4) {
       this.state.btn = (
-        <button className="btn edit-hotel" onClick={() => this.handleClick()}>
+        <button className="btn edit-hotel1" onClick={() => this.handleClick()}>
           Previous
         </button>
       );
