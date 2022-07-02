@@ -26,19 +26,20 @@ const DeleteModal = ({ setDeleting, deleteComment, setDeleteModalState }) => {
         </div> */}
 
 				{/* <div className="btn-container"> */}
-				<div class="modal-footer" style={{ color: '#cd9a2d' }}>
+				<div class="modal-footer" style={{ color: '#000000' }}>
 					<button
 						// className="cancel-btn"
+						type="button"
 						class="btn btn-outline-dark"
 						data-bs-dismiss="modal"
-						style={{ color: '#cd9a2d' }}
 						onClick={cancelDelete}
 					>
 						No, cancel
 					</button>
+
 					<button
 						//  className="delete-btn"
-						class="btn btn-dark"
+						className="btn btn-primary hotel-room"
 						style={{ backgroundColor: '#cd9a2d' }}
 						onClick={deleteBtnClick}
 					>

@@ -8,7 +8,7 @@ import axios from 'axios';
 import Popup from './Popup.jsx';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-
+import './reserve.css';
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
 
@@ -119,12 +119,6 @@ class Reservation extends React.Component {
 		}
 	}
 
-
-
-
-
-
-
 	async componentDidMount() {
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
 		var splitted = window.location.toString().split('/');
@@ -164,7 +158,6 @@ class Reservation extends React.Component {
 			'$';
 	}
 
-
 	formValChange = (e) => {
 		let fields = this.state.fields;
 		fields[e.target.name] = e.target.value;
@@ -201,7 +194,7 @@ class Reservation extends React.Component {
 				error.phone.p2 = value.length < 11 ? '*Too short for a phone number' : '';
 
 				error.phone.p3 = !value ? '*Password field must not be empty' : '';
- 
+
 				break;
 
 			case 'nationalcode':
@@ -319,18 +312,10 @@ class Reservation extends React.Component {
 							</button>
 						</div>
 
-
-
-
-
 						<div className="col-12 col-lg-4">
 							<div className="card-containter ">
 								<div className="card-body">
 									<div class="shadow p-3 mb-5 bg-body rounded">
-
-
-
-									
 										<div className="row   m-3">
 											<div className="col" style={{ display: 'flex', alignItems: 'left' }}>
 												<div
@@ -420,12 +405,10 @@ class Reservation extends React.Component {
 											<div className="col col-sm-8 " style={{ fontWeight: 'bold' }}>
 												<span className="ms-2"> Number of passengers : </span>
 											</div>
-											
-											
-											<div   style={{  color: 'grey' }}>
+
+											<div style={{ color: 'grey' }}>
 												{JSON.parse(localStorage.getItem('i3'))}
 											</div>
-										
 										</div>
 
 										<div className="">
@@ -641,7 +624,7 @@ class Reservation extends React.Component {
 										</div>
 									</div>
 									<div class="col-md-4 ">
-											<PhoneInput
+										<PhoneInput
 											country={'us'}
 											id="phone"
 											label="phone"
@@ -737,13 +720,6 @@ class Reservation extends React.Component {
 											Reserve
 										</button>
 									</div>
-									
-									
-									
-									
-									
-								
-								
 									<div
 										class="modal fade"
 										id="exampleModal"
@@ -751,8 +727,6 @@ class Reservation extends React.Component {
 										aria-labelledby="exampleModalLabel"
 										aria-hidden="true"
 									>
-								
-								
 										<div className="modal-dialog modal-dialog-centered">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -766,10 +740,7 @@ class Reservation extends React.Component {
 														aria-label="Close"
 													/>
 												</div>
-									
-									
-									
-									
+
 												<div class="modal-body">
 													If confirmed, the room will be reserved for you and the cost will be
 													deducted from your account.
@@ -777,34 +748,29 @@ class Reservation extends React.Component {
 												<br />
 												<br />
 												<br />
-												<div class="modal-footer" style={{ color: '#cd9a2d' }}>
+												<div class="modal-footer" style={{ color: '#000000' }}>
 													<button
 														type="button"
 														class="btn btn-outline-dark"
 														data-bs-dismiss="modal"
-														style={{ color: '#cd9a2d' }}
 													>
 														Close
 													</button>
+
 													<button
 														onClick={this.handleSubmit}
 														type="submit"
-														class="btn btn-dark"
+														className="btn btn-primary hotel-room"
 														style={{ backgroundColor: '#cd9a2d' }}
 													>
 														Confirm
 													</button>
+
+													
 												</div>
 											</div>
 										</div>
 									</div>
-								
-								
-								
-								
-								
-								
-								
 								</form>
 							</div>
 						</div>
