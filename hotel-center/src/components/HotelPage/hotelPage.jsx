@@ -43,7 +43,7 @@ class Hotelpage extends React.Component {
 			this.setState({ start_date: res.start_date });
 		});
 
-		console.log(this.state.id, 'hotelpagesend');
+		// console.log(this.state.id, 'hotelpagesend');
 
 		one_hotel_image(this.state.id).then((res) => {
 			this.setState({ image1: res[0].image });
@@ -56,7 +56,7 @@ class Hotelpage extends React.Component {
 	render() {
 
 
-		console.log(this.state.id ,"iddddd");
+		// console.log(this.state.id ,"iddddd");
 		return (
 			<div className="div">
 				<div className="div">

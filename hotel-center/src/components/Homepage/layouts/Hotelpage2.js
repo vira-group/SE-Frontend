@@ -90,20 +90,8 @@ export default function Hotelpage(props) {
 	const [ num, setnum ] = useState('');
 
 	useEffect(() => {
-
-
-		var splitted = window.location.toString().split('/');
 		
-		setdatein(decodeURIComponent(splitted.pop()));
-		// setCheckin({ checkin: decodeURIComponent(splitted.pop()) });
-		decodeURIComponent(datein);
-		console.log(datein,"asdsa");
 
-console.log(checkin,"cheee");
-
-
-		console.log(props.id, "hotel2id");
-		// console.log(cookies.get("Authorization"));
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
 		axios
@@ -238,9 +226,9 @@ console.log(checkin,"cheee");
 						{rooms ? (
 							rooms.map((r) => (
 								<Roomcard
-								datein = {datein}
-								dateout = {dateout}
-								num = {num}
+									datein={datein}
+									dateout={dateout}
+									num={num}
 									name={r.hotel_info.name}
 									city={r.hotel_info.city}
 									id={r.id}

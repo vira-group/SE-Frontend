@@ -30,10 +30,10 @@ function ResponsiveDatePickers(props) {
 	localStorage.setItem('i1', JSON.stringify(checkinDate));
 	localStorage.setItem('i2', JSON.stringify(checkoutDate));
 
-	console.log(props.id, 'idfd');
+	// console.log(props.id, 'idfd');
 	// console.log(checkoutDate ? checkoutDate : 'no');
 
-	console.log(checkinDate ? checkinDate : 'no');
+	// console.log(checkinDate ? checkinDate : 'no');
 
 	// console.log(numberOfAdults ? numberOfAdults : 'no');
 	// console.log(numberOfChildren ? numberOfChildren : 'no');
