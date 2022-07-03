@@ -1,12 +1,7 @@
 import * as React from "react";
-import Helmet from "react-helmet";
-import Image1 from "../../../statics/img/room1.jpg";
-import Image2 from "../../../statics/img/room2.jpg";
-import Image3 from "../../../statics/img/room3.jpg";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import BedroomChildRoundedIcon from "@mui/icons-material/BedroomChildRounded";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useState } from "react";
 import { useEffect, setState } from "react";
@@ -139,16 +134,14 @@ export default function Roomcard(props) {
                   className="accordion-button collapsed d-flex justify-content-center"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
+                  data-bs-target={"#roomAccordion-" + props.id}
                   aria-expanded="false"
-                  aria-controls={"roomAccor-" + props.id}
-                  // onClick={handleRuleclick}
                 >
                   <small>Booking cancellation rules</small>
                 </button>
               </h2>
               <div
-                id={"roomAccor-" + props.id}
+                id= {"roomAccordion-" + props.id}
                 className="accordion-collapse collapse"
                 aria-labelledby="headingThree"
                 data-bs-parent="#accordionExample"

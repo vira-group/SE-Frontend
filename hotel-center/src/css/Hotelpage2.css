@@ -42,14 +42,25 @@
   border-radius: 5px !important;
 }
 
-.accordion-button {
-  border-color: transparent !important;
-  
+
+.accordion-button:focus {
+  color:#cd9a2d;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: white;
 }
 
-.accordion-button:hover,
-.accordion-button:active {
+.accordion-button:hover{
   color:#cd9a2d;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: white;
+}
+.accordion-button:active{
+  color:#cd9a2d;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: white;
 }
 
 .hotelpage-accordion-header .accordion-button:not(.collapsed) {
