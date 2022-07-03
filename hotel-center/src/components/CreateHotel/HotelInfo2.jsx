@@ -22,7 +22,7 @@ import moment from 'moment';
 import image1 from '../../statics/img/pics/avatar.jpg';
 import NumericInput from 'material-ui-numeric-input';
 import PhoneInput from 'react-phone-input-2';
-
+import EditIcon from '@mui/icons-material/Edit';
 const datePickerTheme = createTheme({
 	palette: {
 		primary: {
@@ -163,6 +163,10 @@ function Profile(props) {
 			<div className="row">
 				<div className="col-sm-1" />
 				<div className="col-12 py-5 px-lg-5">
+					<h2 className="mb-4 fw-bold d-flex">
+						<EditIcon className="me-2" fontSize="large" />
+						Edit Profile
+					</h2>
 					<div className="container edit-profile-form border">
 						<div className="row">
 							<div className="col-lg-3">
