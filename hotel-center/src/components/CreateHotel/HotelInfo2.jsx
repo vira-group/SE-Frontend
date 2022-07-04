@@ -18,12 +18,14 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import moment from 'moment';
 // import Sidebar from "./Sidebar";
-// import image1 from "../../statics/img/pics/avatar.jpg";
 import image1 from '../../statics/img/pics/avatar.jpg';
-import NumericInput from 'material-ui-numeric-input';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 import PhoneInput from 'react-phone-input-2';
 import EditIcon from '@mui/icons-material/Edit';
-const datePickerTheme = createTheme({
+
+const textFieldTheme = createTheme({
 	palette: {
 		primary: {
 			main: '#cd9a2b',
@@ -56,10 +58,15 @@ const validationSchema = yup.object({
 
 function Profile(props) {
 	const CHARACTER_LIMIT = 250;
+	const [ message, setMessage ] = useState('');
+	const [ open, setOpen ] = useState(false);
+	const [ loading, setLoading ] = useState(false);
 	const [ genValue, setGenValue ] = useState('Male');
 	const [ birthdate, setBirthdate ] = useState(null);
 	const [ state, setState ] = useState(null);
 	const [ selectedImage, setSelectedImage ] = useState(null);
+	const [ phone2, setphone2 ] = useState(null);
+	const [ tele, settele ] = useState(null);
 	let date = birthdate; // value from your state
 	let formattedDate = moment(date).format('YYYY-MM-DD');
 	const formik = useFormik({
@@ -68,14 +75,26 @@ function Profile(props) {
 			lastname: '',
 			nationalcode: '',
 			email: '',
-			phone: '',
+
 			aboutme: '',
-			telephone: '',
+
 			gender: '',
 			birthdate: ''
 		},
 		validationSchema: validationSchema
 	});
+
+	const Alert = React.forwardRef(function Alert(props, ref) {
+		return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+	});
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		setOpen(false);
+	};
 
 	const genhandleChange = (event, newValue) => {
 		setGenValue(newValue);
@@ -90,16 +109,16 @@ function Profile(props) {
 			})
 			.then((res) => {
 				// console.log('response of profile: ',res.data);
-				setState(res.data);
+				setState(res.data, res.status, 'fffffffffffffffffffffffffffffffff');
 				formik.setValues({
 					firstname: res.data.firstName || '',
 					lastname: res.data.lastName || '',
 					nationalcode: res.data.national_code || '',
 					email: res.data.email || '',
-					phone: res.data.phone_number || '',
-					aboutme: res.data.description || '',
-					telephone: ''
+					aboutme: res.data.description || ''
 				});
+				settele('');
+				setphone2(res.data.phone_number);
 				setSelectedImage(res.data.avatar);
 				setBirthdate(res.data.birthday || '');
 				setGenValue(res.data.gender || '');
@@ -112,35 +131,52 @@ function Profile(props) {
 			!Boolean(formik.errors.lastname) &&
 			!Boolean(formik.errors.nationalcode) &&
 			!Boolean(formik.errors.email) &&
-			!Boolean(formik.errors.phone) &&
 			genValue.length != 0 &&
 			formattedDate != 'Invalid date';
 		console.log('filled:', filled);
 
+		if (!filled) {
+			setOpen(true);
+			setMessage('Please fill in the blanks.');
+		}
+
 		if (filled) {
-			console.log(selectedImage);
+			setLoading(true);
 			let form_data = new FormData();
-			form_data.append('avatar', selectedImage, selectedImage.name);
-			form_data.append('email', formik.values.email);
-			form_data.append('firstName', formik.values.firstname);
-			form_data.append('lastName', formik.values.lastname);
-			form_data.append('birthday', formattedDate);
-			form_data.append('gender', genValue);
-			form_data.append('phone_number', formik.values.phone);
-			form_data.append('national_code', formik.values.nationalcode);
-			form_data.append('description', formik.values.aboutme);
 			axios
-				.put(makeURL(references.url_edit_profile), form_data, {
-					headers: {
-						Authorization: cookies.get('Authorization')
+				.put(
+					makeURL(references.url_edit_profile),
+					{
+						email: formik.values.email,
+						firstName: formik.values.firstname,
+						lastName: formik.values.lastname,
+						birthday: formattedDate,
+						gender: genValue,
+
+						phone_number: phone2,
+
+						national_code: formik.values.nationalcode,
+						description: formik.values.aboutme
+						// form_data,
+					},
+					{
+						headers: {
+							Authorization: cookies.get('Authorization')
+						}
 					}
-				})
+				)
 				.then((response) => {
 					console.log('status code: ', response.status);
-					document.location.reload(true);
+					// document.location.reload(true);
+					setOpen(true);
+					setLoading(false);
+					setMessage('Your profile was submitted successfully!');
 				})
 				.catch((error) => {
 					console.log('error: ', error);
+					setLoading(false);
+					setOpen(true);
+					setMessage('Please fill in the blanks.');
 				});
 		}
 
@@ -151,65 +187,65 @@ function Profile(props) {
 			genValue,
 			formattedDate,
 			formik.values.email,
-			formik.values.phone,
+			tele,
 			formik.values.aboutme,
-			formik.values.telephone,
+			phone2,
 			selectedImage
 		);
 	};
 
 	return (
 		<div className="container">
-			<div className="row">
-				<div className="col-sm-1" />
-				<div className="col-12 py-5 px-lg-5">
-					<h2 className="mb-4 fw-bold d-flex">
-						<EditIcon className="me-2" fontSize="large" />
-						Edit Profile
-					</h2>
-					<div className="container edit-profile-form border">
-						<div className="row">
-							<div className="col-lg-3">
-								<div className="profile-img">
-									{selectedImage !== null ? (
-										<img
-											src={references.url_address + selectedImage}
-											className="rounded-circle"
-											alt="Avatar"
-										/>
-									) : (
-										<img src={image1} className="rounded-circle default" alt="Avatar" />
-									)}
-								</div>
-							</div>
-							{/* <br></br> */}
-							<div className="col-lg-8">
-								<input
-									type="file"
-									name="myImage"
-									accept="image/*"
-									onChange={(event) => {
-										console.log(event.target.files[0]);
-										setSelectedImage(event.target.files[0]);
-									}}
-								/>
+			<div className="col-12 py-5 px-lg-5">
+				<h2 className="mb-4 fw-bold d-flex">
+					<EditIcon className="me-2" fontSize="large" />
+					Edit Profile
+				</h2>
+
+				<div className="container edit-profile-form border">
+					<div className="row">
+						<div className="col-lg-3">
+							<div className="profile-img">
+								{selectedImage !== null ? (
+									<img
+										src={references.base_address + selectedImage}
+										className="rounded-circle"
+										alt="Avatar"
+									/>
+								) : (
+									<img src={image1} className="rounded-circle default" alt="Avatar" />
+								)}
 							</div>
 						</div>
+						<div className="col-lg-8">
+							<input
+								type="file"
+								name="myImage"
+								accept="image/*"
+								onChange={(event) => {
+									console.log(event.target.files[0]);
+									setSelectedImage(event.target.files[0]);
+								}}
+							/>
+						</div>
+					</div>
 
-						<hr class="dashed" />
+					<hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<div className="row">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput1" className="ms-2 mt-1 form-label">
-										Full name
-									</label>
-								</div>
-								<div className="col-lg-8">
-									<Grid container spacing={3}>
-										<Grid item xs={6}>
+					<div className="mb-3 col-12">
+						<div className="row">
+							<div className="col-lg-3">
+								<label for="exampleFormControlInput1" className="ms-2 mt-1 form-label">
+									Full Name
+								</label>
+							</div>
+							<div className="col-lg-8">
+								<Grid container spacing={3}>
+									<Grid item xs={6}>
+										<ThemeProvider theme={textFieldTheme}>
 											<TextField
 												required
+												fullWidth
 												placeholder="Eric"
 												id="firstname"
 												size="small"
@@ -221,10 +257,13 @@ function Profile(props) {
 												error={formik.touched.firstname && Boolean(formik.errors.firstname)}
 												helperText={formik.touched.firstname && formik.errors.firstname}
 											/>
-										</Grid>
-										<Grid item xs={6}>
+										</ThemeProvider>
+									</Grid>
+									<Grid item xs={6}>
+										<ThemeProvider theme={textFieldTheme}>
 											<TextField
 												required
+												fullWidth
 												placeholder="Hodson"
 												id="lastname"
 												size="small"
@@ -236,10 +275,11 @@ function Profile(props) {
 												error={formik.touched.lastname && Boolean(formik.errors.lastname)}
 												helperText={formik.touched.lastname && formik.errors.lastname}
 											/>
-										</Grid>
+										</ThemeProvider>
 									</Grid>
+								</Grid>
 
-									{/* <input
+								{/* <input
                     type="name"
                     className="form-control"
                     id="exampleFormControlInput1"
@@ -249,29 +289,21 @@ function Profile(props) {
                     // error={formik.touched.fullname && Boolean(formik.errors.fullname)}
                     // helperText={formik.touched.fullname && formik.errors.fullname}
                   ></input> */}
-								</div>
 							</div>
 						</div>
+					</div>
 
-						<hr class="dashed" />
+					<hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<div className="row">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label">
-										National code
-									</label>
-								</div>
-								<div className="col-lg-8">
-									{/* <NumericInput
-										name="example"
-										precision={3}
-										decimalChar=","
-										thousandChar="."
-										label="Example"
-										onChange={(event) => console.log(event.target.value)}
-										variant="outlined"
-									/> */}
+					<div className="mb-3 col-12">
+						<div className="row">
+							<div className="col-lg-3">
+								<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label">
+									National Code
+								</label>
+							</div>
+							<div className="col-lg-8">
+								<ThemeProvider theme={textFieldTheme}>
 									<TextField
 										required
 										fullWidth
@@ -286,20 +318,22 @@ function Profile(props) {
 										error={formik.touched.nationalcode && Boolean(formik.errors.nationalcode)}
 										helperText={formik.touched.nationalcode && formik.errors.nationalcode}
 									/>
-								</div>
+								</ThemeProvider>
 							</div>
 						</div>
+					</div>
 
-						<hr class="dashed" />
+					<hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<div className="row">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label">
-										Gender
-									</label>
-								</div>
-								<div className="col-lg-9">
+					<div className="mb-3 col-12">
+						<div className="row">
+							<div className="col-lg-3">
+								<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label">
+									Gender
+								</label>
+							</div>
+							<div className="col-lg-9">
+								<ThemeProvider theme={textFieldTheme}>
 									<RadioGroup
 										row
 										aria-label="level"
@@ -311,54 +345,71 @@ function Profile(props) {
 										<FormControlLabel value="Female" control={<Radio />} label="Female" />
 										<FormControlLabel value="Other" control={<Radio />} label="Other" />
 									</RadioGroup>
-								</div>
+								</ThemeProvider>
 							</div>
 						</div>
+					</div>
 
-						<hr class="dashed" />
+					<hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<div className="row">
-								<div className="col-lg-3 ms-2">
-									<label for="date" className="col-1 col-form-label">
-										Birthday
-									</label>
-								</div>
-								<div className="col-lg-8 birthday-inp">
-									<ThemeProvider theme={datePickerTheme}>
-										<LocalizationProvider dateAdapter={AdapterDateFns}>
-											<DatePicker
-												label="Birthdate"
-												value={birthdate}
-												onChange={(newValue) => {
-													setBirthdate(newValue);
-												}}
-												renderInput={(params) => (
-													<TextField
-														{...params}
-														required
-														fullWidth
-														size="small"
-														variant="outlined"
-													/>
-												)}
-											/>
-										</LocalizationProvider>
-									</ThemeProvider>
-								</div>
+					<div className="mb-3 col-12">
+						<div className="row">
+							<div className="col-lg-3 ms-2">
+								<label for="date" className="col-1 col-form-label">
+									Birthday
+								</label>
+							</div>
+							<div className="col-lg-8 birthday-inp">
+								<ThemeProvider theme={textFieldTheme}>
+									<LocalizationProvider dateAdapter={AdapterDateFns}>
+										<DatePicker
+											label="Birthdate"
+											value={birthdate}
+											onChange={(newValue) => {
+												setBirthdate(newValue);
+											}}
+											renderInput={(params) => (
+												<TextField
+													{...params}
+													required
+													fullWidth
+													size="small"
+													variant="outlined"
+												/>
+											)}
+										/>
+									</LocalizationProvider>
+								</ThemeProvider>
 							</div>
 						</div>
+					</div>
 
-						<hr class="dashed" />
+					<hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<div className="row">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput3" className="ms-2 mt-1 form-label">
-										Phone number
-									</label>
-								</div>
-								<div className="col-lg-8">
+					<div className="mb-3 col-12">
+						<div className="row">
+							<div className="col-lg-3">
+								<label for="exampleFormControlInput3" className="ms-2 mt-1 form-label">
+									Phone Number
+								</label>
+							</div>
+							<div className="col-lg-8">
+								<ThemeProvider theme={textFieldTheme}>
+									{/* <TextField
+										required
+										fullWidth
+										placeholder="09912141869"
+										id="phone"
+										size="small"
+										label="Phone number"
+										InputLabelProps={{ shrink: true }}
+										value={formik.values.phone}
+										onChange={formik.handleChange}
+										onBlur={formik.handleBlur}
+										error={formik.touched.phone && Boolean(formik.errors.phone)}
+										helperText={formik.touched.phone && formik.errors.phone}
+									/> */}
+
 									<PhoneInput
 										country={'us'}
 										size="large"
@@ -367,27 +418,33 @@ function Profile(props) {
 										name="phone"
 										fullWidth
 										required
-										value={formik.values.phone}
-										onChange={formik.handleChange}
-										InputLabelProps={{ shrink: true }}
-										onBlur={formik.handleBlur}
-										error={formik.touched.phone && Boolean(formik.errors.phone)}
-										helperText={formik.touched.phone && formik.errors.phone}
+										value={phone2}
+										onChange={(val) => {
+											setphone2(val);
+											console.log('pho', val);
+										}}
+
+										// InputLabelProps={{ shrink: true }}
+										// onBlur={formik.handleBlur}
+										// error={formik.touched.phone && Boolean(formik.errors.phone)}
+										// helperText={formik.touched.phone && formik.errors.phone}
 									/>
-								</div>
+								</ThemeProvider>
 							</div>
 						</div>
+					</div>
 
-						<hr class="dashed" />
+					<hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<div className="row">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput4" className="ms-2 mt-1 form-label">
-										Email address
-									</label>
-								</div>
-								<div className="col-lg-8">
+					<div className="mb-3 col-12">
+						<div className="row">
+							<div className="col-lg-3">
+								<label for="exampleFormControlInput4" className="ms-2 mt-1 form-label">
+									Email Address
+								</label>
+							</div>
+							<div className="col-lg-8">
+								<ThemeProvider theme={textFieldTheme}>
 									<TextField
 										required
 										fullWidth
@@ -402,20 +459,22 @@ function Profile(props) {
 										error={formik.touched.email && Boolean(formik.errors.email)}
 										helperText={formik.touched.email && formik.errors.email}
 									/>
-								</div>
+								</ThemeProvider>
 							</div>
 						</div>
+					</div>
 
-						<hr class="dashed" />
+					<hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<div className="row">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput5" className="ms-2 mt-1 form-label">
-										Telephone
-									</label>
-								</div>
-								<div className="col-lg-8">
+					<div className="mb-3 col-12">
+						<div className="row">
+							<div className="col-lg-3">
+								<label for="exampleFormControlInput5" className="ms-2 mt-1 form-label">
+									Telephone
+								</label>
+							</div>
+							<div className="col-lg-8">
+								<ThemeProvider theme={textFieldTheme}>
 									<PhoneInput
 										country={'us'}
 										name="phone"
@@ -431,20 +490,42 @@ function Profile(props) {
 										error={formik.touched.telephone && Boolean(formik.errors.telephone)}
 										helperText={formik.touched.telephone && formik.errors.telephone}
 									/>
-								</div>
+
+									{/* 				  
+				    <TextField
+                      fullWidth
+                      placeholder="02632552012"
+                      id="telephone"
+                      size="small"
+                      label="Telephone"
+                      InputLabelProps={{ shrink: true }}
+                      value={formik.values.telephone}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      error={
+                        formik.touched.telephone &&
+                        Boolean(formik.errors.telephone)
+                      }
+                      helperText={
+                        formik.touched.telephone && formik.errors.telephone
+                      }
+                    /> */}
+								</ThemeProvider>
 							</div>
 						</div>
+					</div>
 
-						<hr class="dashed" />
+					<hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<div className="row">
-								<div className="col-lg-3">
-									<label for="exampleFormControlTextarea1" className="ms-2 form-label">
-										About me
-									</label>
-								</div>
-								<div className="col-lg-8">
+					<div className="mb-3 col-12">
+						<div className="row">
+							<div className="col-lg-3">
+								<label for="exampleFormControlTextarea1" className="ms-2 form-label">
+									About Me
+								</label>
+							</div>
+							<div className="col-lg-8">
+								<ThemeProvider theme={textFieldTheme}>
 									<TextField
 										fullWidth
 										id="aboutme"
@@ -460,21 +541,38 @@ function Profile(props) {
 										error={formik.touched.aboutme && Boolean(formik.errors.aboutme)}
 										helperText={`${formik.values.aboutme.length}/${CHARACTER_LIMIT}`}
 									/>
-								</div>
-							</div>
-						</div>
-						<div className="row mt-2 d-fit-content">
-							<div className="col-4" />
-							<div className="col-4" />
-							<div className="col-4 edit-profile">
-								<button className="btn edit-hotel" onClick={handleClick}>
-									Edit profile
-								</button>
+								</ThemeProvider>
 							</div>
 						</div>
 					</div>
+					<div className="row mt-2 d-fit-content">
+						<div className="col-4" />
+						<div className="col-4" />
+						<div className="col-4 edit-profile">
+							<button className="btn edit-hotel" onClick={handleClick}>
+								{loading ? (
+									<CircularProgress style={{ color: '#fff' }} size="1.5rem" />
+								) : (
+									'Edit Profile'
+								)}
+							</button>
+						</div>
+					</div>
+					<Snackbar
+						open={open}
+						autoHideDuration={4000}
+						onClose={handleClose}
+						anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+					>
+						<Alert
+							onClose={handleClose}
+							severity={message === 'Please fill in the blanks.' ? 'error' : 'success'}
+							sx={{ width: '100%' }}
+						>
+							{message}
+						</Alert>
+					</Snackbar>
 				</div>
-				<div className="col-sm-1" />
 			</div>
 		</div>
 	);

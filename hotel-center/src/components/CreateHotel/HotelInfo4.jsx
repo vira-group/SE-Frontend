@@ -17,7 +17,8 @@ import PreviewMultipleImages from './PreviewMultipleImages';
 import PhoneInput from 'react-phone-input-2';
 import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const textfieldTheme = createTheme({
 	palette: {
 		primary: {
@@ -69,6 +70,9 @@ const validationSchema = yup.object({
 });
 
 function Edithotel(props) {
+	const [ message, setMessage ] = useState('');
+	const [ open, setOpen ] = useState(false);
+	const [ loading, setLoading ] = useState(false);
 	const [ toggled, setToggled ] = useState(false);
 	const [ hotelId, setHotelId ] = useState(null);
 	const CHARACTER_LIMIT = 1000;
@@ -119,7 +123,17 @@ function Edithotel(props) {
 		setToggled(value);
 	};
 
-	// const handletypeChange = (event, newValue) => {
+	const Alert = React.forwardRef(function Alert(props, ref) {
+		return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+	});
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		setOpen(false);
+	}; // const handletypeChange = (event, newValue) => {
 	//   setType(newValue);
 	// };
 
@@ -164,7 +178,10 @@ function Edithotel(props) {
 		);
 		console.log('checkin time: ', formattedcheckinDate);
 		console.log('checkout time: ', formattedcheckoutDate);
-
+		if (!filled) {
+			setOpen(true);
+			setMessage('Please fill in the blanks.');
+		}
 		var facilitiesListForBack = [];
 		for (var i = 0; i < facilities.length; i++) {
 			let temp = { name: facilities[i] };
@@ -195,9 +212,15 @@ function Edithotel(props) {
 				)
 				.then((res) => {
 					console.log(res.data, 'responseeeeeeeee');
+					setOpen(true);
+					setLoading(false);
+					setMessage('Your hotel was submitted successfully!');
 				})
 				.catch((err) => {
 					console.log(err);
+					setLoading(false);
+					setOpen(true);
+					setMessage('Please fill in the blanks.');
 				});
 		}
 	};
@@ -238,9 +261,7 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<div className="row mt-3">
 								<div className="col-lg-3">
@@ -274,9 +295,7 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
@@ -304,9 +323,7 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
@@ -367,9 +384,7 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
@@ -433,9 +448,7 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
@@ -465,9 +478,7 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
@@ -495,9 +506,7 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
@@ -526,9 +535,7 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
@@ -556,22 +563,37 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-
 						<hr class="dashed" />
-
 						<div className="mb-3 col-12">
 							<PreviewMultipleImages />
 						</div>
-
 						<div className="row mt-2 d-fit-content">
 							<div className="col-4" />
 							<div className="col-4" />
 							<div className="col-4 edit-hotel mb-3">
 								<button className="btn edit-hotel" onClick={handleClick}>
-									Edit hotel
+									{loading ? (
+										<CircularProgress style={{ color: '#fff' }} size="1.5rem" />
+									) : (
+										'Create Hotel'
+									)}{' '}
 								</button>
 							</div>
 						</div>
+						<Snackbar
+							open={open}
+							autoHideDuration={4000}
+							onClose={handleClose}
+							anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+						>
+							<Alert
+								onClose={handleClose}
+								severity={message === 'Please fill in the blanks.' ? 'error' : 'success'}
+								sx={{ width: '100%' }}
+							>
+								{message}
+							</Alert>
+						</Snackbar>{' '}
 					</div>
 				</div>
 			</div>
