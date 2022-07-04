@@ -17,8 +17,6 @@
   "url_edit_profile": "/accounts/users/me/",
   "url_hotel_search": "/hotel/1/search/",
   "url_addhotel": "/hotel/hotels/",
-
-  
   "url_myhotels": "/hotel/myhotels/",
   "url_admimpanel_mainpage" : "/hotel/admin/panel/"
 }

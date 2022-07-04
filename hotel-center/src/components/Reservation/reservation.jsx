@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import Carousel from './carousel';
 import { one_room_reserve, room_image } from '../../Utils/connection';
-import references from '../../assets/References.json';
-import { cookies, makeURL } from '../../Utils/common';
-import axios from 'axios';
-import Popup from './Popup.jsx';
+// import references from '../../assets/References.json';
+// import { cookies, makeURL } from '../../Utils/common';
+// import axios from 'axios';
+// import Popup from './Popup.jsx';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import './reserve.css';
+import { Box, CircularProgress, Container, Autocomplete } from '@mui/material';
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
@@ -31,14 +35,20 @@ const formvalid2 = ({ error, ...rest }) => {
 
 	return isValid;
 };
+const Alert = React.forwardRef(function Alert(props, ref) {
+	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 class Reservation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			err: '',
-			
-			
+
+			message: '',
+			open: '',
+			loading: false,
+
 			start_day: '2022-05-18',
 			end_day: '2022-05-23',
 			price_per_day: '1',
@@ -47,12 +57,11 @@ class Reservation extends React.Component {
 			city: '',
 			num_passenger: '10',
 			get_price: 1,
-			
+
 			ischeck1: false,
 			ischeck2: false,
 			room: 1,
 			emailtxt: '',
-			message: '',
 			fields: {},
 			error: {
 				firstname: {
@@ -85,7 +94,13 @@ class Reservation extends React.Component {
 		return payment;
 	}
 
+	handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
 
+		this.setState({ open: false });
+	};
 
 	handlecheck1() {
 		this.setState({ ischeck1: true });
@@ -106,42 +121,53 @@ class Reservation extends React.Component {
 			fields['phone'] = '';
 			fields['nationalcode'] = '';
 			this.setState({ fields: fields });
+			this.setState({ open: true });
+			this.setState({ message: 'Please fill in the blanks.' });
 
-			console.log(
-				one_room_reserve(
-					JSON.parse(localStorage.getItem('i1')).split('T')[0],
-					JSON.parse(localStorage.getItem('i2')).split('T')[0],
-					this.state.fields['firstname'],
-					this.state.fields['lastname'],
-					this.state.room,
-					this.state.price_per_day,
-					this.state.fields['nationalcode'],
-					this.state.fields['phone']
-				)
+			var Resresponece = one_room_reserve(
+				JSON.parse(localStorage.getItem('i1')).split('T')[0],
+				JSON.parse(localStorage.getItem('i2')).split('T')[0],
+				this.state.fields['firstname'],
+				this.state.fields['lastname'],
+				this.state.room,
+				this.state.price_per_day,
+				this.state.fields['nationalcode'],
+				this.state.fields['phone']
 			);
 
+			console.log(Resresponece, 'resresponece');
+			if (!Resresponece) {
+				this.setState({ loading: false });
+
+				this.setState({ open: true });
+				this.setState({ message: 'Please fill in the blanks.' });
+			} else {
+				this.setState({ loading: false });
+
+				this.setState({ open: true });
+				this.setState({ message: 'Your hotel is reserved successfully!' });
+			}
 		}
 	}
 
 	async componentDidMount() {
-		console.log("dd");
-		console.log(JSON.parse(localStorage.getItem('i2')).split('T')[0],"dateeeee");
-	
+		console.log('dd');
+		console.log(JSON.parse(localStorage.getItem('i2')).split('T')[0], 'dateeeee');
+
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
 		var splitted = window.location.toString().split('/');
-		
-		
+
 		await this.setState({ room: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.room);
 
 		await this.setState({ city: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.city);
-		
+
 		await this.setState({ name: decodeURIComponent(splitted.pop()) });
-		
+
 		await this.setState({ price_per_day: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.price_per_day);
-		console.log(this.state.price_per_day,"pr");
+		console.log(this.state.price_per_day, 'pr');
 
 		document.getElementById('pic1').src = JSON.parse(localStorage.getItem('items'))[0].image
 			? 'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[0].image
@@ -162,8 +188,8 @@ class Reservation extends React.Component {
 			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[3].image;
 		document.getElementById('dateout').innerHTML = JSON.parse(localStorage.getItem('i2')).split('T')[0];
 		document.getElementById('datein').innerHTML = JSON.parse(localStorage.getItem('i1')).split('T')[0];
-		console.log(JSON.parse(localStorage.getItem('i2')).split('T')[0],"dateeeee");
-		console.log(	<small id="dateout" />);
+		console.log(JSON.parse(localStorage.getItem('i2')).split('T')[0], 'dateeeee');
+		console.log(<small id="dateout" />);
 		document.getElementById('person').innerHTML =
 			(parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) -
 				parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) +
@@ -233,14 +259,10 @@ class Reservation extends React.Component {
 	};
 
 	render() {
-	
 		this.state.get_price = this.calculatePrice();
-		
-	
+
 		return (
 			<div>
-	
-	
 				<div className="containter m-5">
 					<div className="row justify-content-center">
 						<div
@@ -326,10 +348,6 @@ class Reservation extends React.Component {
 							</button>
 						</div>
 
-
-
-
-
 						<div className="col-12 col-lg-4">
 							<div className="card-containter ">
 								<div className="card-body">
@@ -398,7 +416,7 @@ class Reservation extends React.Component {
 																color: 'grey'
 															}}
 														>
-														date2
+															date2
 															<small id="dateout" />
 														</span>
 													</div>
@@ -467,12 +485,6 @@ class Reservation extends React.Component {
 								</div>
 							</div>
 						</div>
-
-
-
-
-
-
 
 						<div className="col-12 col-md-8 ">
 							<div className="container d-none d-md-block">
@@ -704,7 +716,6 @@ class Reservation extends React.Component {
 										</label>
 										<br />
 										<lable className="col-12" class="form-check-label" for="flexCheckDefault">
-											{' '}
 											<p>
 												If your arrival time at the hotel is after 8 pm we assumes no
 												responsibility for the cancellation.
@@ -744,7 +755,11 @@ class Reservation extends React.Component {
 											data-bs-target="#exampleModal"
 											// disabled={!(this.state.ischeck1 && this.state.ischeck2)}
 										>
-											Reserve
+											{this.state.loading ? (
+												<CircularProgress style={{ color: '#fff' }} size="1.5rem" />
+											) : (
+												'Reserve'
+											)}
 										</button>
 									</div>
 									<div
@@ -792,8 +807,6 @@ class Reservation extends React.Component {
 													>
 														Confirm
 													</button>
-
-													
 												</div>
 											</div>
 										</div>
