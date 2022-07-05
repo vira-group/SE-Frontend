@@ -1,13 +1,11 @@
 .imgg
 {
-  color: red;
-
-  background-color: red;
 }
 .imgg:hover
 {
-opacity: 100px;
-width: 10000px;
+opacity: .8;
+
+/* width: 10000px; */
 }
 .btn-secondary,
 .btn-secondary:active,

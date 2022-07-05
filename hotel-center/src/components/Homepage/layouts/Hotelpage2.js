@@ -47,6 +47,7 @@ import references from '../../../assets/References.json';
 import Roomcard from './Roomcard';
 import ResponsiveDatePickers from '../../HotelPage/ResponsiveDatePickers';
 
+
 const labels = {
 	0.5: 'Useless',
 	1: 'Useless+',
@@ -88,12 +89,14 @@ export default function Hotelpage(props) {
 	const [ datein, setdatein ] = useState('');
 	const [ dateout, setdateout ] = useState('');
 	const [ num, setnum ] = useState('');
+	const [ com_id, setid ] = useState('');
 
 	useEffect(() => {
 		
 
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
+
 		axios
 			.get(makeURL(references.url_one_hotel + hotelid + '/'), {
 				headers: {
@@ -297,7 +300,7 @@ export default function Hotelpage(props) {
 							</Box>
 						</div>
 
-						<Feedback />
+						<Feedback   />
 					</div>
 				</div>
 			</div>

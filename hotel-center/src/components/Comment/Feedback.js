@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './Components/Styles/App.scss';
 import Comment from './Components/Comment';
 import AddComment from './Components/AddComment';
+import references from "../../assets/References.json";
+import axios from 'axios';
+// import { cookies, makeURL, set_cookie } from '../../../Utils/common';
+import { makeURL } from '../../Utils/common';
 
-const Feedback = () => {
+
+const Feedback = (props) => {
 	const [ comments, updateComments ] = useState([]);
 	const [ deleteModalState, setDeleteModalState ] = useState(false);
 
@@ -14,6 +19,32 @@ const Feedback = () => {
 	};
 
 	useEffect(() => {
+		// const queryString = window.location.toString();
+		const hotelid = props.hotelid
+		
+		axios
+		.get(makeURL(references.url_address + '/'  + hotelid + '/' + 'comments/'), {
+			// headers: {
+			// 	Authorization: cookies.get('Authorization')
+			// }
+		})
+		.then((response) => {
+			console.log('hotel comments', response.data);
+			updateComments(response.data);
+			console.log(comments ,"commsetes") ;
+		})
+		.catch((error) => {
+			console.log(error, 'comment error');
+		
+		});
+
+		
+	}, []);
+
+
+
+	useEffect(() => {
+	
 		localStorage.getItem('comments') !== null
 			? updateComments(JSON.parse(localStorage.getItem('comments')))
 			: getData();

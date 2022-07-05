@@ -19,13 +19,6 @@ const DeleteModal = ({ setDeleting, deleteComment, setDeleteModalState }) => {
 				<div class="modal-body">
 					Are you sure you want to delete this comment? This will remove the comment and can't be undone.
 				</div>
-
-				{/* <div className="confirmation-message">
-          Are you sure you want to delete this comment? This will remove the
-          comment and can't be undone.
-        </div> */}
-
-				{/* <div className="btn-container"> */}
 				<div class="modal-footer" style={{ color: '#000000' }}>
 					<button
 						// className="cancel-btn"
@@ -46,23 +39,6 @@ const DeleteModal = ({ setDeleting, deleteComment, setDeleteModalState }) => {
 						Yes, delete
 					</button>
 				</div>
-				{/*       
-        <div className="btn-container">
-          <button 
-          
-          className="cancel-btn"
-          
-           onClick={cancelDelete}>
-            No, cancel
-          </button>
-          <button
-          
-           className="delete-btn"
-          
-           onClick={deleteBtnClick}>
-            Yes, delete
-          </button>
-        </div> */}
 			</div>
 		</div>
 	);
