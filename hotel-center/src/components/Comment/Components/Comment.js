@@ -5,7 +5,6 @@ import "./Styles/Comment.scss";
 import AddComment from "./AddComment";
 // import ReplyContainer from "./ReplyContainer";
 import DeleteModal from "./DeleteModal";
-import CommentVotes from "./CommentVotes";
 import CommentHeader from "./CommentHeader";
 import CommentFooter from "./CommentFooter";
 
@@ -62,14 +61,7 @@ const Comment = ({
       }`}
     >
       <div className="comment">
-        {/* <CommentVotes
-          vote={vote}
-          setVoted={setVoted}
-          score={score}
-          setScore={setScore}
-          updateScore={updateScore}
-          commentData={commentData}
-        /> */}
+      
         <div className="comment--body">
           <CommentHeader
             commentData={commentData}
@@ -107,11 +99,11 @@ const Comment = ({
           )}
         </div>
         <CommentFooter
-          vote={vote}
-          setVoted={setVoted}
-          score={score}
-          setScore={setScore}
-          updateScore={updateScore}
+          // vote={vote}
+          // setVoted={setVoted}
+          // score={score}
+          // setScore={setScore}
+          // updateScore={updateScore}
           commentData={commentData}
           // setReplying={setReplying}
           setDeleting={setDeleting}
@@ -120,25 +112,6 @@ const Comment = ({
         />{" "}
       </div>
 
-      {/* {replying && (
-        <AddComment
-          buttonValue={"reply"}
-          addComments={addReply}
-          replyingTo={commentData.username}
-        />
-      )} */}
-      {/* {commentData.replies !== [] && (
-        <ReplyContainer
-          key={commentData.replies.id}
-          commentData={commentData.replies}
-          updateScore={updateScore}
-          commentPostedTime={commentPostedTime}
-          addReply={addReply}
-          editComment={editComment}
-          deleteComment={deleteComment}
-          setDeleteModalState={setDeleteModalState}
-        />
-      )} */}
 
       {deleting && (
         <DeleteModal

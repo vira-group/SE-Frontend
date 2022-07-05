@@ -89,10 +89,18 @@ class Hotelpage extends React.Component {
 								</div>
 							</div>
 
+
+
+
+
+
+
+
+
 							<div className="row">
 								<div className="col-6">
-									<div className="row">
-										<div className="col-12 gy-3">
+									<div className="row imgg" >
+										<div className="col-12 gy-3 imgg">
 											<img
 												src={this.state.header}
 												className="img-fluid"

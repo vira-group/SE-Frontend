@@ -111,71 +111,16 @@ const Feedback = () => {
 	};
 
 	return (
-		<main className="Feedback">
-			<div className="col-lg-8">
-				<div className="row">
-					<div className="col">
-						<div className="mb-3 row">
-							<div className="col">
-			
-      					{comments.map((comment) => (
-									<Comment
-										key={comment.id}
-										commentData={comment}
-										updateScore={updateScore}
-										updateReplies={updateReplies}
-										editComment={editComment}
-										commentDelete={commentDelete}
-										setDeleteModalState={setDeleteModalState}
-									/>
-								))}
-								<AddComment buttonValue={'send'} addComments={addComments} />
-								{/* {f1 ? (
-											f1.map((f) => (
-												<div className="mb-3 row">
-													<div className="col">{f.name}</div>
-													<div className="col">{Icons[f.name]}</div>
-												</div>
-											))
-										) : null} */}
-							</div>
-						</div>
-					</div>
-				</div>
-				<button
-					type="button"
-					className="mb-3 btn btn-secondary room-facilities"
-					data-bs-toggle="modal"
-					data-bs-target="#exampleModal1"
-				>
-					See all comment
-				</button>
-				<div
-					className="modal fade"
-					id="exampleModal1"
-					tabindex="-1"
-					aria-labelledby="AllFacilities"
-					aria-hidden="true"
-				>
-					<div className="modal-dialog modal-dialog-centered  modal-lg  modal-dialog-scrollable">
-						<div className="modal-content">
-							<div className="modal-header">
-								<h5 className="modal-title" id="AllFacilities">
-									comment of the hotel
-								</h5>
-								<button
-									type="button"
-									className="btn-close"
-									data-bs-dismiss="modal"
-									aria-label="Close"
-								/>
-							</div>
-							<div className="modal-body">
-								<div className="container">
+
+<main className="Feedback">
+				{' '}
+				<div className="col-lg-8">
+					<div className="row">
+						<div className="col">
+							<div className="mb-3 row">
+								<div className="col">
 									{comments.map((comment) => (
-				
-        <div>
-        						<Comment
+										<Comment
 											key={comment.id}
 											commentData={comment}
 											updateScore={updateScore}
@@ -184,11 +129,65 @@ const Feedback = () => {
 											commentDelete={commentDelete}
 											setDeleteModalState={setDeleteModalState}
 										/>
-							<hr className="mb-0 mt-0 hr-text" />
-						
-            </div>
-            			))}
-									{/* {facility ? (
+									))}
+									<AddComment buttonValue={'send'} addComments={addComments} />
+									{/* {f1 ? (
+											f1.map((f) => (
+												<div className="mb-3 row">
+													<div className="col">{f.name}</div>
+													<div className="col">{Icons[f.name]}</div>
+												</div>
+											))
+										) : null} */}
+								</div>
+							</div>
+						</div>
+					</div>
+					<button
+						type="button"
+						className="mb-3 btn btn-secondary room-facilities"
+						data-bs-toggle="modal"
+						data-bs-target="#exampleModal1"
+					>
+						See all comment
+					</button>
+					<div
+						className="modal fade"
+						id="exampleModal1"
+						tabindex="-1"
+						aria-labelledby="AllFacilities"
+						aria-hidden="true"
+					>
+						<div className="modal-dialog modal-dialog-centered  modal-lg  modal-dialog-scrollable">
+							<div className="modal-content">
+								<div className="modal-header">
+									<h5 className="modal-title" id="AllFacilities">
+										comment of the hotel
+									</h5>
+									<button
+										type="button"
+										className="btn-close"
+										data-bs-dismiss="modal"
+										aria-label="Close"
+									/>
+								</div>
+								<div className="modal-body">
+									<div className="container">
+										{comments.map((comment) => (
+											<div>
+												<Comment
+													key={comment.id}
+													commentData={comment}
+													updateScore={updateScore}
+													updateReplies={updateReplies}
+													editComment={editComment}
+													commentDelete={commentDelete}
+													setDeleteModalState={setDeleteModalState}
+												/>
+												<hr className="mb-0 mt-0 hr-text" />
+											</div>
+										))}
+										{/* {facility ? (
 												facility.map((f) => (
 													<div className="mb-3 row">
 														<div className="col">{f.name}</div>
@@ -199,15 +198,15 @@ const Feedback = () => {
 												))
 											) : null}
 						 */}
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<br />
-			</div>
 		</main>
+
 	);
 };
 

@@ -126,22 +126,27 @@ class Reservation extends React.Component {
 
 			console.log('hello');
 			var Resresponece = one_room_reserve(
-				'dd',
-				'dd',
-				'dd',
-				'dd',
-				1,
-				9,
-				87,
-				7656
-				// JSON.parse(localStorage.getItem('i1')).split('T')[0],
-				// JSON.parse(localStorage.getItem('i2')).split('T')[0],
-				// this.state.fields['firstname'],
-				// this.state.fields['lastname'],
-				// this.state.room,
-				// this.state.price_per_day,
-				// this.state.fields['nationalcode'],
-				// this.state.fields['phone']
+				// 'dd',
+				// 'dd',
+				// 'dd',
+				// 'dd',
+				// 1,
+				// 9,
+				// 87,
+				// 7656
+				JSON.parse(localStorage.getItem('i1')).split('T')[0],
+				JSON.parse(localStorage.getItem('i2')).split('T')[0],
+				
+
+				
+				this.state.fields['firstname'],
+				this.state.fields['lastname'],
+				this.state.room,
+				
+				this.state.price_per_day,
+				
+				this.state.fields['nationalcode'],
+				this.state.fields['phone']
 			);
 
 			console.log(Resresponece, 'resresponece');

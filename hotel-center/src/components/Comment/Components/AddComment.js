@@ -2,11 +2,19 @@ import { useState } from 'react';
 
 import './Styles/AddComment.scss';
 
-import Rating from '@mui/material/Rating';
+// import Rating from '@mui/material/Rating';
+
+// import React, { useState } from 'react';
+import { Rating } from 'react-simple-star-rating';
 
 const AddComment = ({ buttonValue, addComments, replyingTo }) => {
 	const replyingToUser = replyingTo ? `@${replyingTo}, ` : '';
 	const [ comment, setComment ] = useState('');
+	const [ ratingValue, setRatingValue ] = useState(0);
+
+	const handleRating = (rate) => {
+		setRatingValue(rate);
+	};
 
 	const clickHandler = () => {
 		if (comment === '' || comment === ' ') return;
@@ -27,15 +35,10 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
 
 	return (
 		<div className="add-comment">
-			<div className="profile-pic" />{' '}
-			{/* <Rating
-				name="simple-controlled"
-				value={5}
-				// onChange={(event, newValue) => {
-				// 	setValue(newValue);
-				// 	// console.log('star value:',newValue);
-				// }}
-			/> */}
+			<div>
+				<div className="profile-pic" />
+			</div>
+			<Rating onClick={handleRating} ratingValue={ratingValue} size={20} />
 			<textarea
 				className="comment-input"
 				placeholder="Add a comment"
@@ -45,13 +48,9 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
 				}}
 			/>
 			<div className="send-btn-container">
-				<div className="profile-pic" />
+				{/* <div className="profile-pic" /> */}
 
-				<button
-					// className="add-btn"
-					className="btn btn-primary hotel-roomc"
-					onClick={clickHandler}
-				>
+				<button className="btn btn-primary hotel-roomc" onClick={clickHandler}>
 					{buttonValue}
 				</button>
 			</div>
