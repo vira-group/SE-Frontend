@@ -42,11 +42,17 @@ export const Sign_up_connection = async (email, password) => {
 };
 
 export const login_connection = async (email, password) => {
-	// console.log(password, email)
+	localStorage.setItem('login_message', JSON.stringify('Already logged in'));
+	
 	let message = '';
 	if (cookies.get('Authorization') != undefined) {
+		localStorage.setItem('login_message', JSON.stringify('Already logged in'));
+
 		message = 'Already logged in';
+
 		window.alert('Already logged in');
+
+		return message;
 	} else {
 		await axios
 			.post(makeURL(references.url_login), {
@@ -58,16 +64,25 @@ export const login_connection = async (email, password) => {
 				set_cookie(response.data.auth_token);
 				// console.log(response);
 				message = true;
+				console.log(message, 'f1');
+
 				window.location.replace('/');
 			})
 			.catch((error) => {
 				if (error.response.status == 400) {
+		localStorage.setItem('login_message', JSON.stringify('Already logged in'));
+			
+					message = 'wrong email or password';
+					console.log(message, 'f2');
 					window.alert('wrong email or password');
 				}
 				// console.log(error);
-				message = false;
 			});
+		console.log(message, 'f3');
+
+		return message;
 	}
+	console.log(message, 'f3');
 
 	return message;
 };
@@ -309,4 +324,3 @@ export const create_hotel = async (name, city, state, address, description, phon
 
 	return message;
 };
-

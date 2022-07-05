@@ -1,10 +1,5 @@
 import { useState } from 'react';
-
 import './Styles/AddComment.scss';
-
-// import Rating from '@mui/material/Rating';
-
-// import React, { useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 
 const AddComment = ({ buttonValue, addComments, replyingTo }) => {
@@ -19,6 +14,7 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
 	const clickHandler = () => {
 		if (comment === '' || comment === ' ') return;
 
+		
 		const newComment = {
 			id: Math.floor(Math.random() * 100) + 5,
 			content: replyingToUser + comment,

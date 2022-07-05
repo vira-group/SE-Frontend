@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-
 import "./Styles/Comment.scss";
-
 import AddComment from "./AddComment";
 // import ReplyContainer from "./ReplyContainer";
 import DeleteModal from "./DeleteModal";

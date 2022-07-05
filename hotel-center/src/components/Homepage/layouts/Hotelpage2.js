@@ -153,7 +153,7 @@ export default function Hotelpage(props) {
 
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
-
+			setid(hotelid);
 		axios
 			.get(makeURL(references.url_one_hotel + hotelid + '/'), {
 				headers: {
@@ -497,7 +497,7 @@ export default function Hotelpage(props) {
 							</Box>
 						</div>
 
-						<Feedback   />
+						<Feedback id ={ com_id}  />
 					</div>
 				</div>
 			</div>

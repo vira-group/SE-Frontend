@@ -10,6 +10,8 @@ import { makeURL } from '../../Utils/common';
 
 const Feedback = (props) => {
 	const [ comments, updateComments ] = useState([]);
+	const [ comments1, updateComments1 ] = useState([]);
+	const [ comments2, updateComments2 ] = useState([]);
 	const [ deleteModalState, setDeleteModalState ] = useState(false);
 
 	const getData = async () => {
@@ -20,7 +22,7 @@ const Feedback = (props) => {
 
 	useEffect(() => {
 		// const queryString = window.location.toString();
-		const hotelid = props.hotelid
+		const hotelid = props.id
 		
 		axios
 		.get(makeURL(references.url_address + '/'  + hotelid + '/' + 'comments/'), {
@@ -31,6 +33,10 @@ const Feedback = (props) => {
 		.then((response) => {
 			console.log('hotel comments', response.data);
 			updateComments(response.data);
+			updateComments1(response.data.slice(0,10));
+			updateComments2(response.data.slice(11,49));
+
+
 			console.log(comments ,"commsetes") ;
 		})
 		.catch((error) => {
@@ -129,14 +135,15 @@ const Feedback = (props) => {
 
 		if (type === 'comment') {
 			updatedComments = updatedComments.filter((data) => data.id !== id);
-		} else if (type === 'reply') {
-			comments.forEach((comment) => {
-				if (comment.id === parentComment) {
-					updatedReplies = comment.replies.filter((data) => data.id !== id);
-					comment.replies = updatedReplies;
-				}
-			});
 		}
+		//  else if (type === 'reply') {
+		// 	comments.forEach((comment) => {
+		// 		if (comment.id === parentComment) {
+		// 			updatedReplies = comment.replies.filter((data) => data.id !== id);
+		// 			comment.replies = updatedReplies;
+		// 		}
+		// 	});
+		// }
 
 		updateComments(updatedComments);
 	};
