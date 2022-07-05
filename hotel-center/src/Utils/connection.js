@@ -309,3 +309,32 @@ export const create_hotel = async (name, city, state, address, description, phon
 
 	return message;
 };
+
+
+
+
+
+
+export const room_image = async (id) => {
+	let mes = '';
+	axios
+		.get(makeURL(references.url_hotelrooms + id + '/' + 'images/'), {
+			headers: {
+				Authorization: cookies.get('Authorization')
+			}
+		})
+		.then((response) => {
+			console.log('room reserve img:', response.data);
+			mes = response.data;
+			console.log('new messss', mes);
+			return mes;
+		})
+		.catch((error) => {
+			console.log(error);
+			mes = false;
+		});
+	console.log('ffff');
+	console.log(mes);
+	return mes;
+};
+
