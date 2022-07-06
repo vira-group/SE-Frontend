@@ -584,10 +584,12 @@ function Edithotel(props) {
 							open={open}
 							autoHideDuration={4000}
 							onClose={handleClose}
+
 							anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 						>
 							<Alert
 								onClose={handleClose}
+								
 								severity={message === 'Please fill in the blanks.' ? 'error' : 'success'}
 								sx={{ width: '100%' }}
 							>

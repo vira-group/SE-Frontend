@@ -67,8 +67,8 @@ class login extends React.Component {
 
 			if (cookies.get('Authorization') != undefined) {
 				// this.state.message = 'Already logged in';
-				this.setState({message : 'Already logged in'});
-		this.setState({ open: true });
+				this.setState({ message: 'Already logged in' });
+				this.setState({ open: true });
 
 				// window.alert('Already logged in');
 			} else {
@@ -196,16 +196,20 @@ class login extends React.Component {
 					</Box>
 					<Snackbar
 						open={this.state.open}
-						autoHideDuration={4000}
-						// onClose={handleClose()}
-						onClick={() => this.handleClose()}
+						autoHideDuration={2000}
 
+						onClose={() => this.setState({ open: false })}
 						anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 					>
 						<Alert
-							// onClose={handleClose}
-							onClick={() => this.handleClose()}
-							severity={this.state.message === ('wrong email or password'  || 'Already logged in') ? 'error' : 'success'}
+							onClose={() => this.setState({ open: false })}
+							severity={
+								this.state.message === ('wrong email or password' || 'Already logged in') ? (
+									'error'
+								) : (
+									'success'
+								)
+							}
 							sx={{ width: '100%' }}
 						>
 							{this.state.message}

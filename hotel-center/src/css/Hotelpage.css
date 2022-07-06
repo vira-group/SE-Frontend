@@ -1,12 +1,25 @@
+.imggh
+{transition: transform .2s; 
+}
+.imggh:hover
+{ 
+  transform: scale(1.1);
+}
+
+
 .imgg
-{
+{transition: transform .2s; 
+   opacity: 0.4;  
+
 }
 .imgg:hover
-{
-opacity: .8;
+{ 
+  opacity: 1;  
 
-/* width: 10000px; */
+  transform: scale(1.1);
 }
+
+
 .btn-secondary,
 .btn-secondary:active,
 .btn-secondary:focus {

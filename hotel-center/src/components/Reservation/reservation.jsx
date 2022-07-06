@@ -862,14 +862,12 @@ class Reservation extends React.Component {
 					</div>
 					<Snackbar
 						open={this.state.open}
-						autoHideDuration={4000}
-						// onClose={handleClose()}
-						onClick={() => this.handleClose()}
+						autoHideDuration={2000}
+						onClose={() => this.setState({ open: false })}
 						anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 					>
 						<Alert
-							// onClose={handleClose()}
-							onClick={() => this.handleClose()}
+							onClose={() => this.setState({ open: false })}
 							severity={
 								this.state.message === 'This room is reserved before.' ||
 								'Your wallet balance is not enough.' ||
