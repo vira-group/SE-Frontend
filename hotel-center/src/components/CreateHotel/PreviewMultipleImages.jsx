@@ -34,7 +34,6 @@ function PreviewMultipleImages(props) {
 	}
 
 	function upload(e) {
-		const url = window.location.pathname.split('/')[3];
 		const Alert = React.forwardRef(function Alert(props, ref) {
 			return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 		});
@@ -61,8 +60,7 @@ function PreviewMultipleImages(props) {
 			images.forEach((image) => {
 				let form_data = new FormData();
 				form_data.append('image', image, image.name);
-				url === 'edithotel'
-					? axios
+				 axios
 							.post(makeURL(references.url_onehotelImage + '/' + hotelid + '/images/'), form_data, {
 								headers: {
 									Authorization: cookies.get('Authorization')
@@ -81,25 +79,7 @@ function PreviewMultipleImages(props) {
 								setOpen(true);
 								setMessage('An error occurred.Please try again.');
 							})
-					: axios
-							.post(makeURL(references.url_hotelrooms + props.roomid + '/images/'), form_data, {
-								headers: {
-									Authorization: cookies.get('Authorization')
-								}
-							})
-							.then((response) => {
-								console.log('status code: ', response.data);
-								setOpen(true);
-								setLoading(false);
-								setMessage('Your picture was uploaded successfully!');
-								// document.location.reload(true);
-							})
-							.catch((error) => {
-								console.log('error: ', error);
-								setLoading(false);
-								setOpen(true);
-								setMessage('An error occurred.Please try again.');
-							});
+					
 			});
 		}
 	}

@@ -758,5 +758,5 @@ function Edithotel(props) {
 		</div>
 	);
 }
-
+ 
 export default Edithotel;

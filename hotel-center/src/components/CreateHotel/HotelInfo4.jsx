@@ -69,7 +69,7 @@ const validationSchema = yup.object({
 		.required('Required!')
 });
 
-function Edithotel(props) {
+function CreateHotel(props) {
 	const [ message, setMessage ] = useState('');
 	const [ open, setOpen ] = useState(false);
 	const [ loading, setLoading ] = useState(false);
@@ -226,22 +226,22 @@ function Edithotel(props) {
 	};
 
 	return (
-		<div className={`admin-panel ${toggled ? 'toggled' : ''} d-flex`}>
-			<div className="w-100">
-				<div className="container py-5 px-lg-5">
-					<h2 className="mb-4 fw-bold d-flex">
-						<DomainAddIcon className="me-2" fontSize="large" />
+		<div className={`admin-panel ${toggled ? 'toggled' : ''} d-flex`} title="a1">
+			<div className="w-100" title="a2">
+				<div className="container py-5 px-lg-5" title="a3">
+					<h2 className="mb-4 fw-bold d-flex" title="a4">
+						<DomainAddIcon className="me-2" fontSize="large" title="a5" />
 						Create Hotel
 					</h2>
-					<div className="container mt-4 p-4 edit-hotel-form border">
-						<div className="mb-3 col-12">
-							<div className="row mt-3">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label">
+					<div className="container mt-4 p-4 edit-hotel-form border" title="a6">
+						<div className="mb-3 col-12" title="a7">
+							<div className="row mt-3" title="a8">
+								<div className="col-lg-3" title="a9">
+									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label" title="f1">
 										Name
 									</label>
 								</div>
-								<div className="col-lg-9">
+								<div className="col-lg-9" title="a10">
 									<ThemeProvider theme={textfieldTheme}>
 										<TextField
 											required
@@ -261,16 +261,17 @@ function Edithotel(props) {
 								</div>
 							</div>
 						</div>
-						<hr class="dashed" />
-						<div className="mb-3 col-12">
-							<div className="row mt-3">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label">
+						<hr class="dashed" title="a11" />
+						<div className="mb-3 col-12" title="a12">
+							<div className="row mt-3" title="a13">
+								<div className="col-lg-3" title="a14">
+									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label" title="f2">
 										Header Picture
 									</label>
 								</div>
-								<div className="col-lg-9">
+								<div className="col-lg-9" title="a16">
 									<input
+										title="a15"
 										type="file"
 										name="myImage"
 										accept="image/*"
@@ -282,7 +283,7 @@ function Edithotel(props) {
 									{imageUrl &&
 									selectedImage && (
 										<Box mt={2} textAlign="left">
-											<div>Image Preview:</div>
+											<div >Image Preview:</div>
 											<img
 												className="company-logo"
 												src={imageUrl}
@@ -299,11 +300,11 @@ function Edithotel(props) {
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
-									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label">
+									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label" title="f3">
 										Address
 									</label>
 								</div>
-								<div className="col-lg-9">
+								<div className="col-lg-9" title="a18">
 									<ThemeProvider theme={textfieldTheme}>
 										<TextField
 											required
@@ -327,14 +328,14 @@ function Edithotel(props) {
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
-									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label" title="e4">
+									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label" title="f4">
 										Country & City
 									</label>
 								</div>
 
 								<div className="col-lg-9">
 									<div className="row">
-										<div className="col-lg-6">
+										<div className="col-lg-6" title="a19">
 											<ThemeProvider theme={textfieldTheme}>
 												<div className="div">
 													<div className="col-lg-12">
@@ -360,6 +361,7 @@ function Edithotel(props) {
 													<div className="col-lg-12">
 														{' '}
 														<RegionDropdown
+															title="a20"
 															style={{ color: '#555', border: '1px solid #555;' }}
 															className={' form-control '}
 															country={region}
@@ -387,8 +389,8 @@ function Edithotel(props) {
 						<hr class="dashed" />
 						<div className="mb-3 col-12">
 							<div className="row">
-								<div className="col-lg-3">
-									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label">
+								<div className="col-lg-3" title="a17">
+									<label for="exampleFormControlInput2" className="ms-2 mt-1 form-label" title="f6">
 										Time range
 									</label>
 								</div>
@@ -452,7 +454,7 @@ function Edithotel(props) {
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
-									<label for="exampleFormControlInput3" className="ms-2 mt-1 form-label">
+									<label for="exampleFormControlInput3" className="ms-2 mt-1 form-label" title="f7">
 										Phone number
 									</label>
 								</div>
@@ -482,7 +484,7 @@ function Edithotel(props) {
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
-									<label for="exampleFormControlInput4" className="ms-2 mt-1 form-label">
+									<label for="exampleFormControlInput4" className="ms-2 mt-1 form-label" title="f8">
 										Email
 									</label>
 								</div>
@@ -508,9 +510,9 @@ function Edithotel(props) {
 						</div>
 						<hr class="dashed" />
 						<div className="mb-3 col-12">
-							<div className="row">
+							<div className="row" title="f5">
 								<div className="col-lg-3">
-									<label for="exampleFormControlTextarea1" className="ms-2 form-label">
+									<label for="exampleFormControlTextarea1" className="ms-2 form-label" title="f9">
 										Description
 									</label>
 								</div>
@@ -539,7 +541,7 @@ function Edithotel(props) {
 						<div className="mb-3 col-12">
 							<div className="row">
 								<div className="col-lg-3">
-									<label for="exampleFormControlTextarea1" className="ms-2 form-label">
+									<label for="exampleFormControlTextarea1" className="ms-2 form-label" title="f10">
 										Facilities
 									</label>
 								</div>
@@ -584,12 +586,10 @@ function Edithotel(props) {
 							open={open}
 							autoHideDuration={4000}
 							onClose={handleClose}
-
 							anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 						>
 							<Alert
 								onClose={handleClose}
-								
 								severity={message === 'Please fill in the blanks.' ? 'error' : 'success'}
 								sx={{ width: '100%' }}
 							>
@@ -603,4 +603,4 @@ function Edithotel(props) {
 	);
 }
 
-export default Edithotel;
+export default CreateHotel;
