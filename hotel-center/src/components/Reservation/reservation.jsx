@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import Carousel from './carousel';
 import { one_room_reserve, room_image } from '../../Utils/connection';
-// import references from '../../assets/References.json';
-// import { cookies, makeURL } from '../../Utils/common';
-// import axios from 'axios';
+import references from '../../assets/References.json';
+import { cookies, makeURL } from '../../Utils/common';
+import axios from 'axios';
 // import Popup from './Popup.jsx';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -124,43 +124,74 @@ class Reservation extends React.Component {
 			this.setState({ open: true });
 			this.setState({ message: 'Please fill in the blanks.' });
 
-			console.log('hello');
-			var Resresponece = one_room_reserve(
-				// 'dd',
-				// 'dd',
-				// 'dd',
-				// 'dd',
-				// 1,
-				// 9,
-				// 87,
-				// 7656
-				JSON.parse(localStorage.getItem('i1')).split('T')[0],
-				JSON.parse(localStorage.getItem('i2')).split('T')[0],
-				
+			console.log(cookies.get('Authorization'));
+			axios
+				.post(
+					makeURL(references.url_reserveroom),
+					{
+						// start_day: JSON.parse(localStorage.getItem('i1')).split('T')[0],
 
-				
-				this.state.fields['firstname'],
-				this.state.fields['lastname'],
-				this.state.room,
-				
-				this.state.price_per_day,
-				
-				this.state.fields['nationalcode'],
-				this.state.fields['phone']
-			);
+						// end_day: JSON.parse(localStorage.getItem('i2')).split('T')[0],
 
-			console.log(Resresponece, 'resresponece');
-			if (!Resresponece) {
-				this.setState({ loading: false });
+						// firstname: this.state.fields['firstname'],
 
-				this.setState({ open: true });
-				this.setState({ message: 'Please fill in the blanks.' });
-			} else {
-				this.setState({ loading: false });
+						// lastname: this.state.fields['lastname'],
 
-				this.setState({ open: true });
-				this.setState({ message: 'Your hotel is reserved successfully!' });
-			}
+						// room: this.state.room,
+
+						// price_per_day: this.state.price_per_day,
+
+						// national_code: this.state.fields['nationalcode'],
+
+						// phone_number: this.state.fields['phone']
+
+						start_day: '2022-06-18',
+
+						end_day: '2022-06-20',
+
+						firstname: this.state.fields['firstname'],
+
+						lastname: this.state.fields['lastname'],
+
+						room: this.state.room,
+
+						price_per_day: 1,
+
+						national_code: this.state.fields['nationalcode'],
+
+						phone_number: this.state.fields['phone']
+					},
+					{
+						headers: {
+							Authorization: cookies.get('Authorization')
+						}
+					}
+				)
+				.then((response) => {
+					console.log(response);
+					console.log(response.data);
+
+					this.setState({ message: 'Your room is reserved successfully' });
+					// window.alert('everything right');
+				})
+				.catch((error) => {
+					if (error.response.status == 400) {
+						this.setState({ message: 'Please enter valid data.' });
+
+						// window.alert('Please enter valid data.');
+					}
+					if (error.response.status == 406) {
+						this.setState({ message: 'Your wallet balance is not enough.' });
+
+						// window.alert('Your wallet balance is not enough.');
+					}
+					if (error.response.status == 403) {
+						this.setState({ message: 'This room is reserved before.' });
+
+						// window.alert('This room is reserved before.');
+					}
+					console.log(error);
+				});
 		}
 	}
 
@@ -833,11 +864,21 @@ class Reservation extends React.Component {
 						open={this.state.open}
 						autoHideDuration={4000}
 						// onClose={handleClose()}
+						onClick={() => this.handleClose()}
 						anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 					>
 						<Alert
 							// onClose={handleClose()}
-							severity={this.state.message === 'Please fill in the blanks.' ? 'error' : 'success'}
+							onClick={() => this.handleClose()}
+							severity={
+								this.state.message === 'This room is reserved before.' ||
+								'Your wallet balance is not enough.' ||
+								'Please enter valid data.' ? (
+									'error'
+								) : (
+									'success'
+								)
+							}
 							sx={{ width: '100%' }}
 						>
 							{this.state.message}

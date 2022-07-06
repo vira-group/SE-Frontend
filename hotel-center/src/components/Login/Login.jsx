@@ -198,10 +198,13 @@ class login extends React.Component {
 						open={this.state.open}
 						autoHideDuration={4000}
 						// onClose={handleClose()}
+						onClick={() => this.handleClose()}
+
 						anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 					>
 						<Alert
 							// onClose={handleClose}
+							onClick={() => this.handleClose()}
 							severity={this.state.message === ('wrong email or password'  || 'Already logged in') ? 'error' : 'success'}
 							sx={{ width: '100%' }}
 						>

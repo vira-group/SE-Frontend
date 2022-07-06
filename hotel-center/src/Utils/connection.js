@@ -43,7 +43,7 @@ export const Sign_up_connection = async (email, password) => {
 
 export const login_connection = async (email, password) => {
 	localStorage.setItem('login_message', JSON.stringify('Already logged in'));
-	
+
 	let message = '';
 	if (cookies.get('Authorization') != undefined) {
 		localStorage.setItem('login_message', JSON.stringify('Already logged in'));
@@ -70,8 +70,8 @@ export const login_connection = async (email, password) => {
 			})
 			.catch((error) => {
 				if (error.response.status == 400) {
-		localStorage.setItem('login_message', JSON.stringify('Already logged in'));
-			
+					localStorage.setItem('login_message', JSON.stringify('Already logged in'));
+
 					message = 'wrong email or password';
 					console.log(message, 'f2');
 					window.alert('wrong email or password');
@@ -82,9 +82,6 @@ export const login_connection = async (email, password) => {
 
 		return message;
 	}
-	console.log(message, 'f3');
-
-	return message;
 };
 
 export const me = async () => {
