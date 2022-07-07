@@ -26,11 +26,11 @@ export default function Sidebar() {
           <p className="mb-0">My Hotels</p>
         </Link>
         <hr className="mb-2" />
-        <Link to="#" class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2">
+        {/* <Link to="#" class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2">
           <CardTravelIcon className="icon-style" />
           <p className="mb-0">My Travels</p>
         </Link>
-        <hr className="mb-2" />
+        <hr className="mb-2" /> */}
         <Link
           to="/profile/favorites"
           class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2"

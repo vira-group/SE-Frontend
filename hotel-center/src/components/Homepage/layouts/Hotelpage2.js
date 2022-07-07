@@ -34,7 +34,6 @@ import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 import references from "../../../assets/References.json";
 import Roomcard from "./Roomcard";
 import ResponsiveDatePickers from "../../HotelPage/ResponsiveDatePickers";
-import Chat from "../../Chat/Chatwithhotel";
 
 const labels = {
   0.5: "Useless",
@@ -129,7 +128,7 @@ export default function Hotelpage() {
           </div>
           <div className="col-lg-8">
             <div className="row">
-              <h3 className="mb-3 mt-3">Facilities of the hotel</h3>
+              <h3 className="mb-3 mt-3">Facilities Of The Hotel</h3>
               <div className="col">
                 <div className="mb-3 row">
                   <div className="col">
@@ -174,7 +173,7 @@ export default function Hotelpage() {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title" id="AllFacilities">
-                      Facilities of the hotel
+                      Hotel Facilities
                     </h5>
                     <button
                       type="button"
@@ -206,7 +205,7 @@ export default function Hotelpage() {
             <div className="">
               <hr className="mb-0 mt-0 hr-text"></hr>
             </div>
-            <h3 className="mb-3 mt-3">Available rooms</h3>
+            <h3 className="mb-3 mt-3">Types Of Rooms</h3>
             {rooms
               ? rooms.map((r) => (
                   <Roomcard
@@ -227,7 +226,7 @@ export default function Hotelpage() {
             </div>
 
             <div className="row mt-3 mb-3">
-              <h3 className="mb-3 mt-3 ms-1">Hotel rules</h3>
+              <h3 className="mb-3 mt-3 ms-1">Hotel Rules</h3>
               <div
                 className="mb-3 ms-3 me-2 card rule-card"
                 style={{ width: "15rem" }}
@@ -236,7 +235,7 @@ export default function Hotelpage() {
                   <h6 className="card-subtitle mb-2 text-muted">
                     <AlarmIcon fontSize="large" />
                   </h6>
-                  <h5 className="card-title">Check in time</h5>
+                  <h5 className="card-title">Check In Time</h5>
                   <p className="card-text">{checkin}</p>
                 </div>
               </div>
@@ -245,7 +244,7 @@ export default function Hotelpage() {
                   <h6 className="card-subtitle mb-2 text-muted">
                     <AlarmIcon fontSize="large" />
                   </h6>
-                  <h5 className="card-title">Check out time</h5>
+                  <h5 className="card-title">Check Out Time</h5>
                   <p className="card-text">{checkout}</p>
                 </div>
               </div>
@@ -257,7 +256,7 @@ export default function Hotelpage() {
 
             <div className="row mt-3 mb-3">
               <div className="col d-inline-flex">
-                <h5>Feedback and comments</h5>
+                <h5>Feedback And Comments</h5>
                 <Box
                   sx={{
                     width: 200,
@@ -415,52 +414,6 @@ export default function Hotelpage() {
                   <div class="bar-3"></div>
                 </div>
               </div> */}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="chat-box">
-        <button
-          type="button"
-          className="chat-button"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal1"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            fill="currentColor"
-            className="bi bi-chat-left-text"
-            viewBox="0 0 16 16"
-          >
-            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-          </svg>
-        </button>
-        <div
-          className="modal fade"
-          id="exampleModal1"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Messages
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">
-                <Chat/>
-              </div>
             </div>
           </div>
         </div>

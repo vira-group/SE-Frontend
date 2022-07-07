@@ -118,7 +118,7 @@ export default function Homepagecontent(props) {
       <div className="row">
         <div className="col-lg-3">
           <div>
-            <div className="mt-5">
+            <div className="mt-4">
               <div className="card">
                 <div className="card-body">
                   <h7 className="card-title" title="stars">
@@ -325,11 +325,30 @@ export default function Homepagecontent(props) {
             </div>
           </div>
         </div>
-        <div className="col-lg-9">
-        {filterIson == true ? (
-          filteredHotel ? (
-            <div className="">
-              {filteredHotel.map((h) => (
+        <div className="col-lg-9 favorites">
+          {filterIson == true ? (
+            filteredHotel ? (
+              <div className="row row-cols-1 row-cols-md-3 g-4">
+                {filteredHotel.map((h) => (
+                  <Newhotelcard
+                    address={h.address}
+                    description={h.description}
+                    image={h.header}
+                    name={h.name}
+                    rate={h.rate}
+                    reviews={h.reply_count}
+                    id={h.id}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="container">
+                test
+              </div>
+            )
+          ) : props.hotels ? (
+            <div className="row row-cols-1 row-cols-md-3 g-4">
+              {props.hotels.map((h) => (
                 <Newhotelcard
                   address={h.address}
                   description={h.description}
@@ -338,48 +357,22 @@ export default function Homepagecontent(props) {
                   rate={h.rate}
                   reviews={h.reply_count}
                   id={h.id}
+                  isFavorite={h.is_favorite}
                 />
               ))}
             </div>
           ) : (
             <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: "15vh",
-            }}
-          >
-            <CircularProgress size="5rem" style={{ color: "#cd9a2d" }} />
-          </Box>
-            
-          )
-        ) : props.hotels ? (
-          <div className="">
-            {props.hotels.map((h) => (
-              <Newhotelcard
-                address={h.address}
-                description={h.description}
-                image={h.header}
-                name={h.name}
-                rate={h.rate}
-                reviews={h.reply_count}
-                id={h.id}
-              />
-            ))}
-          </div>
-        ) : (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: "15vh",
-            }}
-          >
-            <CircularProgress size="5rem" style={{ color: "#cd9a2d" }} />
-          </Box>
-        )}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "15vh",
+              }}
+            >
+              <CircularProgress size="5rem" style={{ color: "#cd9a2d" }} />
+            </Box>
+          )}
         </div>
       </div>
     </div>

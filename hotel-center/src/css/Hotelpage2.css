@@ -2,17 +2,21 @@
 .room-facilities.btn-secondary:active {
   color: black;
   background-color: white;
+  border-color: #c4c3c3;
 }
 
 .room-facilities.btn-secondary:focus {
   color: black;
   background-color: white;
+  box-shadow: none;
+  border: #dddddd;
+  
 }
 
 .room-facilities.btn-secondary:hover {
   background-color: white;
   color: black;
-  box-shadow: 0 0 0 0.25rem rgb(130 138 145 / 50%);
+  box-shadow: 1px 1px 15px 0 rgba(205, 154, 45, 0.8);
 }
 
 .hotel-room.btn-primary,

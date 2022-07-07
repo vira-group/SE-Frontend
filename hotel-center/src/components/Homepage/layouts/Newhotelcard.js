@@ -8,77 +8,121 @@ import "../../../css/Hotelcard.css";
 import axios from "axios";
 import references from "../../../assets/References.json";
 import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 export default function Newhotelcard(props) {
   const [value2, setValue2] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(props.isFavorite);
+  const [hotelid, setHotelid] = useState(null);
+  const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsFavorite(!isFavorite);
+    // request to backend
+    axios
+      .post(
+        makeURL(references.url_addfavoritehotel),
+        { hotel_id: props.id },
+        {
+          headers: {
+            Authorization: cookies.get("Authorization"),
+          },
+        }
+      )
+      .then((response) => {
+        console.log("adding favorite hotel: ", response.data);
+        setOpen(true);
+        setMessage(
+          isFavorite === false
+            ? "Hotel was added to your favorites successfully!"
+            : "Hotel was removed from your favorites successfully!"
+        );
+      })
+      .catch((error) => {
+        console.log("failed to add favorite hotel: ", error);
+        setOpen(true);
+        setMessage("An error occured.Please try again.");
+      });
+  };
+
+  const handleRedirect = () => {
+    window.location = "http://localhost:3000/" + "hotelpage/" + props.id;
+  };
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
-    <div className="">
-      <Helmet bodyAttributes={{ style: "background-color : #f5f5f5" }}></Helmet>
-      <div className="card homepage-card mt-5">
-        <div className="card-body">
-          <div className="row">
-            <div className="col-md">
-              <img
-                src={"http://127.0.0.1:8000" + props.image}
-                className="card-img-top hotel-card-img"
-              ></img>
-            </div>
-            <div className="col-md-6">
-              <div className="col star d-lg-flex">
-                <h5 className="card-title">
-                  <a
-                    className="link hotel-links"
-                    href={"/hotelpage/" + props.id}
-                  >
-                    {props.name}
-                  </a>
-                </h5>
-                <Box
-                  sx={{
-                    width: 50,
-                    display: "flex",
-                    alignItems: "center",
-                    marginBottom: "10px",
-                    marginLeft: "2px",
-                  }}
-                >
-                  <Rating name="read-only" value={props.rate} readOnly />
-                </Box>
-              </div>
-              <a href="">{props.address}</a>
-              {/* <p className="mb-1">Metro access</p> */}
-              <p className="card-text">
-                {props.description.slice(0, 250) + " ..."}
-              </p>
-            </div>
-            <div className="col-md-2 d-none d-md-block">
-              <div className="row">
-                <div className="col-md-8 border-end-white">
-                  <p className="mb-1 rate ">Superb</p>
-                  <p className="mb-1 views">{props.reviews} reviews</p>
-                </div>
-                <div className="col-md-4" style={{ marginTop: "6px" }}>
-                  <span className="score ">{props.rate * 2}</span>
-                </div>
-              </div>
-              <a href="#" className="btn btn-primary hotel-card-btn hoverable">
-                Show prices
-              </a>
-            </div>
-            <div className="d-md-none row">
-              <div className="col-2 col-sm-4"></div>
-              <div className="col-8 col-sm-4 gy-2">
-                <a
-                  href="#"
-                  className="btn btn-primary hotel-card-btn hoverable w-100 text-align-center"
-                >
-                  Show prices
-                </a>
-              </div>
-              <div className="col-2 col-sm-4"></div>
-            </div>
-          </div>
+    <div class="col mt-5">
+      <div class="card h-100">
+        <img src={props.image} class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">
+            <a className="link hotel-links" href={"/hotelpage/" + props.id}>
+              {props.name}
+            </a>
+          </h5>
+          <Box
+            sx={{
+              width: 50,
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "5px",
+              marginLeft: "2px",
+            }}
+          >
+            <Rating name="read-only" value={props.rate} readOnly />
+          </Box>
+          <a href="">{props.address}</a>
+          <p class="card-text">{props.description.slice(0, 250) + " ..."}</p>
+        </div>
+        <div className="card-footer">
+          <button
+            type="button"
+            className="btn btn-primary view-hotel-button"
+            onClick={handleRedirect}
+          >
+            View details
+          </button>
+
+          <button className="btn favorite-btn-style" onClick={handleClick}>
+            {isFavorite ? (
+              <FavoriteIcon className="favorite-icon-style" />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
+          </button>
+          <Snackbar
+            open={open}
+            autoHideDuration={4000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          >
+            <Alert
+              onClose={handleClose}
+              severity={
+                message === "An error occured.Please try again."
+                  ? "error"
+                  : "success"
+              }
+              sx={{ width: "100%" }}
+            >
+              {message}
+            </Alert>
+          </Snackbar>
         </div>
       </div>
     </div>

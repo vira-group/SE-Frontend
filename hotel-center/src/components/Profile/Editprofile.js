@@ -54,6 +54,7 @@ const validationSchema = yup.object({
   telephone: yup.number(),
   gender: yup.string().required("Required!"),
   birthdate: yup.date().required("Required!"),
+  balance: yup.number(),
 });
 
 function Profile(props) {
@@ -80,6 +81,7 @@ function Profile(props) {
       telephone: "",
       gender: "",
       birthdate: "",
+      balance: "",
     },
     validationSchema: validationSchema,
   });
@@ -119,6 +121,7 @@ function Profile(props) {
           phone: res.data.phone_number || "",
           aboutme: res.data.description || "",
           telephone: "",
+          balance: res.data.balance || 0,
         });
         setSelectedImage(res.data.avatar);
         setBirthdate(res.data.birthday || "");
@@ -559,7 +562,7 @@ function Profile(props) {
                     for="exampleFormControlInput5"
                     className="ms-2 mt-1 form-label"
                   >
-                    Telephone
+                    Balance
                   </label>
                 </div>
                 <div className="col-lg-8">
@@ -567,20 +570,12 @@ function Profile(props) {
                     <TextField
                       fullWidth
                       placeholder="02632552012"
-                      id="telephone"
+                      id="balance"
                       size="small"
-                      label="Telephone"
+                      label="Balance"
                       InputLabelProps={{ shrink: true }}
-                      value={formik.values.telephone}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.telephone &&
-                        Boolean(formik.errors.telephone)
-                      }
-                      helperText={
-                        formik.touched.telephone && formik.errors.telephone
-                      }
+                      InputProps={{readOnly: true,}}
+                      value={formik.values.balance}
                     />
                   </ThemeProvider>
                 </div>

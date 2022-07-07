@@ -603,30 +603,6 @@ function Createroom(props) {
                       </ThemeProvider>
                     )}
                   />
-
-                  <br />
-
-                  <Typography sx={{ mb: 3 }}>
-                    Not listed above? please add it below.
-                  </Typography>
-                  <ThemeProvider theme={textfieldTheme}>
-                    <TextField
-                      fullWidth
-                      placeholder=""
-                      id="morefacilities"
-                      size="small"
-                      label="Extra facilities"
-                      InputLabelProps={{ shrink: true }}
-                      value={formik.values.morefacilities}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.morefacilities &&
-                        Boolean(formik.errors.morefacilities)
-                      }
-                      helperText="please seperate each facility with a comma. i.e Pool, Bar"
-                    />
-                  </ThemeProvider>
                 </div>
               </div>
             </div>

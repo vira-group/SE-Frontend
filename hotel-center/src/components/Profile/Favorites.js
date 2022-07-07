@@ -15,10 +15,24 @@ import { listClasses } from "@mui/material";
 
 export default function Favorites2() {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [favoritehotels, setFavoritehotels] = useState(null);
 
   useEffect(() => {
-    console.log(isFavorite);
-  }, [isFavorite]);
+    // console.log(isFavorite);
+    axios
+      .get(makeURL(references.url_addfavoritehotel), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((response) => {
+        console.log("this is favorite hotel response: ", response.data);
+        setFavoritehotels(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="container favorites">
@@ -28,16 +42,18 @@ export default function Favorites2() {
         </div>
         <div className="col-lg-9">
           <div class="row row-cols-1 row-cols-md-3 g-4">
-            {/* {listClasses.map((item) => {
-              <SingleFavoriteCard
-                img={item.img}
-                title={item.title}
-                description={item.description}
-                isFavorite={item.isFavorite}
-                id={item.id}
-              />;
-            })} */}
-            <SingleFavoriteCard
+            {favoritehotels
+              ? favoritehotels.map((item) => (
+                  <SingleFavoriteCard
+                    img={item.hotel_info.header}
+                    title={item.hotel_info.name}
+                    description={item.hotel_info.description.slice(0, 250)}
+                    isFavorite={item.hotel_info.is_favorite}
+                    id={item.hotel_info.id}
+                  />
+                ))
+              : null}
+            {/* <SingleFavoriteCard
               img={image1}
               title="The landmark london"
               description="In the heart of London's fashionable Marylebone, this deluxe
@@ -70,7 +86,7 @@ export default function Favorites2() {
               Amsterdam offers warm-coloured rooms and free WiFi. The
               famous Rembrandt Square is right around the corner."
               isFavorite={true}
-            />
+            /> */}
             {/* <div class="col">
               <div class="card h-100">
                 <img src={image1} class="card-img-top" alt="..." />

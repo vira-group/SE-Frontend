@@ -91,6 +91,9 @@ function Edithotel(props) {
   const [checkout, setCheckout] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useState(null);
+
 
   let tempcheckin = checkin; // value from your state
   let tempcheckout = checkout; // value from your state
@@ -140,6 +143,7 @@ function Edithotel(props) {
     setOpen(false);
     setOpen1(false);
   };
+
 
   // const handletypeChange = (event, newValue) => {
   //   setType(newValue);
@@ -405,7 +409,7 @@ function Edithotel(props) {
                     }}
                   />
                   <button
-                    className="btn edit-hotel"
+                    className="btn m-2 edit-hotel"
                     onClick={handleUploadClick}
                   >
                     {loading ? (
@@ -633,7 +637,7 @@ function Edithotel(props) {
                 <div className="col-lg-2">
                   <label
                     for="exampleFormControlInput2"
-                    className="ms-2 mt-1 form-label"
+                    className="ms-2 mt-2 form-label"
                     title="e6"
                   >
                     Time Range
@@ -641,8 +645,8 @@ function Edithotel(props) {
                 </div>
                 <div className="col-lg-9">
                   <div className="row">
-                    <div className=" mt-1 col-lg-6">
-                      <div className="mb-md-3 col-lg-12 checkin-inp">
+                    <div className="mb-2 mt-2 col-lg-6">
+                      <div className="col-lg-12 checkin-inp">
                         <ThemeProvider theme={textfieldTheme}>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <TimePicker
@@ -666,7 +670,7 @@ function Edithotel(props) {
                         </ThemeProvider>
                       </div>
                     </div>
-                    <div className="mt-1 col-lg-6">
+                    <div className="mb-2 mt-2 col-lg-6">
                       <div className="col-lg-12 checkout-inp">
                         <ThemeProvider theme={textfieldTheme}>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>

@@ -16,6 +16,7 @@ export default function Credit() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [balance, setBalance] = useState(0);
 
   const handleChangeAmountOfMoney = (event) => {
     if (!isNaN(event.target.value)) {
@@ -38,6 +39,21 @@ export default function Credit() {
     setOpen(false);
   };
 
+  useEffect(() => {
+      axios.get(makeURL(references.url_add_credit),{
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((response) => {
+        console.log("res for get request: ", response.data);
+        setBalance(response.data.balance);
+      })
+      .catch((error) => {
+        console.log("error fro get request: ", error)
+      })
+  }, [])
+
   const handlePay = () => {
     console.log(amountOfMoney);
     setLoading(true);
@@ -56,6 +72,7 @@ export default function Credit() {
           setOpen(true);
           setLoading(false);
           console.log("response for credits: ", response.data);
+          setBalance(response.data.new_credit)
           setMessage("Account balance increased successfully.");
         })
         .catch((error) => {
@@ -171,7 +188,7 @@ export default function Credit() {
                     <p className="site-name">Hotel Center</p>
                     <div className="fw-bold d-flex card-content">
                       <p>Account balance:</p>
-                      <p>$10,000</p>
+                      <p>${balance}</p>
                     </div>
                   </div>
                 </div>
