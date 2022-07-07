@@ -1,5 +1,7 @@
 import React from "react";
-import { CircularProgressbar } from "react-circular-progressbar";
+import AnimatedProgressProvider from "./AnimatedProgressProvider";
+import { easeQuadInOut } from "d3-ease";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 export default function Widget(props) {
@@ -9,11 +11,26 @@ export default function Widget(props) {
         {props.icon}
         {title(props.type)}
       </span>
-      <CircularProgressbar
-        value={props.percent}
-        text={`${props.percent}%`}
-        strokeWidth={7}
-      />
+      <AnimatedProgressProvider
+        valueStart={0}
+        valueEnd={props.percent}
+        duration={1.6}
+        easingFunction={easeQuadInOut}
+      >
+        {(percent) => {
+          const roundedPercent = Math.round(percent);
+          return (
+            <CircularProgressbar
+              value={percent}
+              text={`${roundedPercent}%`}
+              strokeWidth={7}
+              /* This is important to include, because if you're fully managing the
+              animation yourself, you'll want to disable the CSS animation. */
+              styles={buildStyles({ pathTransition: "none" })}
+            />
+          );
+        }}
+      </AnimatedProgressProvider>
       <span className="description">
         {props.percent}% of {props.type}s are reserved
       </span>

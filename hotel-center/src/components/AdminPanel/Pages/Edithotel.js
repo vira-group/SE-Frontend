@@ -183,13 +183,9 @@ function Edithotel(props) {
         setFacilities(facilityarray || "");
         var temp1 = res.data.check_in_range.split(":");
         var temp2 = res.data.check_out_range.split(":");
-        setCheckin(
-          new Date(2022, 5, 29, parseInt(temp1[0]), parseInt(temp1[1])) || ""
-        );
+        setCheckin(new Date(2022, 5, 29, parseInt(temp1[0]), parseInt(temp1[1])) || "");
         setCheckout(
-          new Date(2022, 5, 29, parseInt(temp2[0]), parseInt(temp2[1])) ||
-            "" ||
-            ""
+          new Date(2022, 5, 29, parseInt(temp2[0]), parseInt(temp2[1])) || "" || ""
         );
       })
       .catch((error) => {
@@ -329,23 +325,16 @@ function Edithotel(props) {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar
-        toggled={toggled}
-        handleToggleSidebar={handleToggleSidebar}
-        id={hotelId}
-      />
+      <Sidebar toggled={toggled} handleToggleSidebar={handleToggleSidebar} id={hotelId} />
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
-          <a href="/" className="navbar-brand logo d-md-none">
-            <img src={Logo} alt="Hotel Center" />
-            <span className="fw-bold logo-text-font">Hotel Center</span>
-          </a>
-          <div
-            className="btn-toggle d-md-none"
-            onClick={() => handleToggleSidebar(true)}
-          >
+          <div className="btn-toggle d-md-none" onClick={() => handleToggleSidebar(true)}>
             <MenuIcon fontSize="large" />
           </div>
+          <a href="/" className="navbar-brand logo d-md-none">
+            <span className="fw-bold logo-text-font">Hotel Center</span>
+            <img src={Logo} alt="Hotel Center" />
+          </a>
         </div>
         <div className="container py-5 px-lg-5">
           <h2 className="mb-4 fw-bold d-flex">
@@ -481,12 +470,8 @@ function Edithotel(props) {
                       value={formik.values.address}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.address && Boolean(formik.errors.address)
-                      }
-                      helperText={
-                        formik.touched.address && formik.errors.address
-                      }
+                      error={formik.touched.address && Boolean(formik.errors.address)}
+                      helperText={formik.touched.address && formik.errors.address}
                     />
                   </ThemeProvider>
                 </div>
@@ -582,13 +567,8 @@ function Edithotel(props) {
                           value={formik.values.country}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          error={
-                            formik.touched.country &&
-                            Boolean(formik.errors.country)
-                          }
-                          helperText={
-                            formik.touched.country && formik.errors.country
-                          }
+                          error={formik.touched.country && Boolean(formik.errors.country)}
+                          helperText={formik.touched.country && formik.errors.country}
                         />
                       </ThemeProvider>
                     </div>
@@ -618,9 +598,7 @@ function Edithotel(props) {
                           value={formik.values.city}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          error={
-                            formik.touched.city && Boolean(formik.errors.city)
-                          }
+                          error={formik.touched.city && Boolean(formik.errors.city)}
                           helperText={formik.touched.city && formik.errors.city}
                         />
                       </ThemeProvider>
@@ -726,9 +704,7 @@ function Edithotel(props) {
                       value={formik.values.phone}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.phone && Boolean(formik.errors.phone)
-                      }
+                      error={formik.touched.phone && Boolean(formik.errors.phone)}
                       helperText={formik.touched.phone && formik.errors.phone}
                     />
                   </ThemeProvider>
@@ -762,9 +738,7 @@ function Edithotel(props) {
                       value={formik.values.email}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.email && Boolean(formik.errors.email)
-                      }
+                      error={formik.touched.email && Boolean(formik.errors.email)}
                       helperText={formik.touched.email && formik.errors.email}
                     />
                   </ThemeProvider>
@@ -800,8 +774,7 @@ function Edithotel(props) {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       error={
-                        formik.touched.description &&
-                        Boolean(formik.errors.description)
+                        formik.touched.description && Boolean(formik.errors.description)
                       }
                       helperText={`${formik.values.description.length}/${CHARACTER_LIMIT}`}
                     />
@@ -836,12 +809,7 @@ function Edithotel(props) {
                     filterSelectedOptions
                     renderInput={(params) => (
                       <ThemeProvider theme={textfieldTheme}>
-                        <TextField
-                          fullWidth
-                          required
-                          {...params}
-                          label="Facilities"
-                        />
+                        <TextField fullWidth required {...params} label="Facilities" />
                       </ThemeProvider>
                     )}
                   />
@@ -877,9 +845,7 @@ function Edithotel(props) {
             >
               <Alert
                 onClose={handleClose}
-                severity={
-                  message === "Please fill in the blanks." ? "error" : "success"
-                }
+                severity={message === "Please fill in the blanks." ? "error" : "success"}
                 sx={{ width: "100%" }}
               >
                 {message}

@@ -38,6 +38,7 @@ import "./css/Hotelpage2.css";
 import "./css/Edithotel.css";
 import "./css/Edithotel.css";
 import "./css/Chat.css";
+import "./css/NewAndTopHotels.css";
 
 function App() {
   return (

@@ -1,25 +1,20 @@
-import * as React from "react";
-import { Grid, Box, Button, Container } from "@mui/material";
-import Helmet from "react-helmet";
-import Rating from "@mui/material/Rating";
-import { useState, useEffect } from "react";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import "../../../css/Hotelcard.css";
-import axios from "axios";
-import references from "../../../assets/References.json";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import React from "react";
+import { useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import StarIcon from "@mui/icons-material/Star";
+import axios from "axios";
+import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import references from "../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-export default function Newhotelcard(props) {
-  const [value2, setValue2] = useState(null);
+export default function SingleTopHotelCard(props) {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
-  const [hotelid, setHotelid] = useState(null);
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
 
+  // handle request to backend when click on heart button
   const handleClick = () => {
     setIsFavorite(!isFavorite);
     // request to backend
@@ -50,10 +45,6 @@ export default function Newhotelcard(props) {
       });
   };
 
-  const handleRedirect = () => {
-    window.location = "http://localhost:3000/" + "hotelpage/" + props.id;
-  };
-
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -67,38 +58,23 @@ export default function Newhotelcard(props) {
   };
 
   return (
-    <div class="col mt-5">
-      <div class="card h-100">
+    <div class="col">
+      <div class="card h-100 shadow">
         <img src={props.image} class="card-img-top" alt="..." />
         <div class="card-body">
-          <h5 class="card-title">
-            <a className="link hotel-links" href={"/hotelpage/" + props.id}>
-              {props.name}
-            </a>
-          </h5>
-          <Box
-            sx={{
-              width: 50,
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "5px",
-              marginLeft: "2px",
-            }}
-          >
-            <Rating name="read-only" value={props.rate} readOnly />
-          </Box>
-          <a href="">{props.address}</a>
-          <p class="card-text">{props.description.slice(0, 250) + " ..."}</p>
+          <div className="mb-2 d-flex">
+            <StarIcon className="rate-icon-style me-1" />
+            <span>{props.score}</span>
+          </div>
+          <h5 class="card-title">{props.name}</h5>
+          <p class="card-text text-muted">
+            {props.country}/{props.city}
+          </p>
         </div>
         <div className="card-footer">
-          <button
-            type="button"
-            className="btn btn-primary view-hotel-button"
-            onClick={handleRedirect}
-          >
+          <button type="button" className="btn btn-primary view-hotel-button">
             View details
           </button>
-
           <button className="btn favorite-btn-style" onClick={handleClick}>
             {isFavorite ? (
               <FavoriteIcon className="favorite-icon-style" />

@@ -175,28 +175,20 @@ export default function RoomsStatus() {
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar
-        toggled={toggled}
-        handleToggleSidebar={handleToggleSidebar}
-        id={hotelId}
-      />
+      <Sidebar toggled={toggled} handleToggleSidebar={handleToggleSidebar} id={hotelId} />
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
-          <a href="/" className="navbar-brand logo d-md-none">
-            <img src={Logo} alt="Hotel Center" />
-            <span className="fw-bold logo-text-font">Hotel Center</span>
-          </a>
-          <div
-            className="btn-toggle d-md-none"
-            onClick={() => handleToggleSidebar(true)}
-          >
+          <div className="btn-toggle d-md-none" onClick={() => handleToggleSidebar(true)}>
             <MenuIcon fontSize="large" />
           </div>
+          <a href="/" className="navbar-brand logo d-md-none">
+            <span className="fw-bold logo-text-font">Hotel Center</span>
+            <img src={Logo} alt="Hotel Center" />
+          </a>
         </div>
         <div className="container py-5 px-lg-5">
           <h2 className="mb-4 fw-bold d-flex">
@@ -278,17 +270,12 @@ export default function RoomsStatus() {
                       <StyledTableCell>Room Nr.</StyledTableCell>
                       <StyledTableCell align="center">Type</StyledTableCell>
                       <StyledTableCell align="center">Status</StyledTableCell>
-                      <StyledTableCell align="center">
-                        Description
-                      </StyledTableCell>
+                      <StyledTableCell align="center">Description</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {filteredRows
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row) => (
                         <TableRow
                           key={row.roomNumber}
@@ -305,16 +292,10 @@ export default function RoomsStatus() {
                           <TableCell align="center">
                             <Chip
                               label={title(row.roomStatus)}
-                              color={
-                                row.roomStatus === "available"
-                                  ? "success"
-                                  : "error"
-                              }
+                              color={row.roomStatus === "available" ? "success" : "error"}
                             />
                           </TableCell>
-                          <TableCell align="center">
-                            {row.roomDescription}
-                          </TableCell>
+                          <TableCell align="center">{row.roomDescription}</TableCell>
                         </TableRow>
                       ))}
                     {emptyRows > 0 && (

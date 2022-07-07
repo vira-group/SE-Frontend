@@ -114,7 +114,8 @@ export default function Homepagecontent(props) {
   // }, []);
 
   return (
-    <div className="container">
+    <div className="container mt-5">
+      <h3 className="mb-4 fw-bold">All Hotels</h3>
       <div className="row">
         <div className="col-lg-3">
           <div>
@@ -136,192 +137,192 @@ export default function Homepagecontent(props) {
                   </div>
                 </div>
               </div>
-              <div className="accordion-item mt-2">
-                <h2 className="accordion-header" id="headingTwo">
-                  <button
-                    className="accordion-button filter-acc collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
-                  >
-                    Facilities
-                  </button>
-                </h2>
-                <div className="">
-                  <hr className="mb-0 mt-0 hr-text"></hr>
-                </div>
-                <div
-                  id="collapseTwo"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingTwo"
-                  data-bs-parent="#accordionExample"
+            </div>
+            <div className="accordion-item mt-2">
+              <h2 className="accordion-header" id="headingTwo">
+                <button
+                  className="accordion-button filter-acc collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
                 >
-                  <div className="accordion-body">
-                    <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf1}
-                            onClick={() => setHf1(!hf1)}
-                          />
-                        }
-                        label="Parking"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf2}
-                            onClick={() => setHf2(!hf2)}
-                          />
-                        }
-                        label="Room service"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf3}
-                            onClick={() => setHf3(!hf3)}
-                          />
-                        }
-                        label="Restaurant"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf4}
-                            onClick={() => setHf4(!hf4)}
-                          />
-                        }
-                        label="Sofa"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf5}
-                            onClick={() => setHf5(!hf5)}
-                          />
-                        }
-                        label="Bathroom"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf6}
-                            onClick={() => setHf6(!hf6)}
-                          />
-                        }
-                        label="Taxi service"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf7}
-                            onClick={() => setHf7(!hf7)}
-                          />
-                        }
-                        label="WiFi"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf8}
-                            onClick={() => setHf8(!hf8)}
-                          />
-                        }
-                        label="Bar"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf9}
-                            onClick={() => setHf9(!hf9)}
-                          />
-                        }
-                        label="Telephone"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            classes={{
-                              root: c.root,
-                              checked: c.checked,
-                            }}
-                            checked={hf10}
-                            onClick={() => setHf10(!hf10)}
-                          />
-                        }
-                        label="Television"
-                      />
-                    </FormGroup>
-                  </div>
+                  Facilities
+                </button>
+              </h2>
+              <div className="">
+                <hr className="mb-0 mt-0 hr-text"></hr>
+              </div>
+              <div
+                id="collapseTwo"
+                className="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample"
+              >
+                <div className="accordion-body">
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf1}
+                          onClick={() => setHf1(!hf1)}
+                        />
+                      }
+                      label="Parking"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf2}
+                          onClick={() => setHf2(!hf2)}
+                        />
+                      }
+                      label="Room service"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf3}
+                          onClick={() => setHf3(!hf3)}
+                        />
+                      }
+                      label="Restaurant"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf4}
+                          onClick={() => setHf4(!hf4)}
+                        />
+                      }
+                      label="Sofa"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf5}
+                          onClick={() => setHf5(!hf5)}
+                        />
+                      }
+                      label="Bathroom"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf6}
+                          onClick={() => setHf6(!hf6)}
+                        />
+                      }
+                      label="Taxi service"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf7}
+                          onClick={() => setHf7(!hf7)}
+                        />
+                      }
+                      label="WiFi"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf8}
+                          onClick={() => setHf8(!hf8)}
+                        />
+                      }
+                      label="Bar"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf9}
+                          onClick={() => setHf9(!hf9)}
+                        />
+                      }
+                      label="Telephone"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          classes={{
+                            root: c.root,
+                            checked: c.checked,
+                          }}
+                          checked={hf10}
+                          onClick={() => setHf10(!hf10)}
+                        />
+                      }
+                      label="Television"
+                    />
+                  </FormGroup>
                 </div>
               </div>
-              <button
-                className="btn btn-primary hotel-room w-100 mt-1"
-                onClick={handleSearchclick}
-              >
-                Search
-              </button>
-              <div className="">
-                {filterIson == true && (
-                  <Typography sx={{ textAlign: "center" }}>
-                    <Button
-                      style={{
-                        color: "black",
-                        textTransform: "unset",
-                        marginTop: "15px",
-                      }}
+            </div>
+            <button
+              className="btn btn-primary hotel-room w-100 mt-1"
+              onClick={handleSearchclick}
+            >
+              Search
+            </button>
+            <div className="">
+              {filterIson == true && (
+                <Typography sx={{ textAlign: "center" }}>
+                  <Button
+                    style={{
+                      color: "black",
+                      textTransform: "unset",
+                      marginTop: "15px",
+                    }}
+                  >
+                    <Link
+                      underline="hover"
+                      sx={{ cursor: "pointer" }}
+                      color="inherit"
+                      onClick={removeFilters}
                     >
-                      <Link
-                        underline="hover"
-                        sx={{ cursor: "pointer" }}
-                        color="inherit"
-                        onClick={removeFilters}
-                      >
-                        Remove all filters
-                      </Link>
-                    </Button>
-                  </Typography>
-                )}
-              </div>
+                      Remove all filters
+                    </Link>
+                  </Button>
+                </Typography>
+              )}
             </div>
           </div>
         </div>
