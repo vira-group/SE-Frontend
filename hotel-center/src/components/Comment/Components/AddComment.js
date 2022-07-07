@@ -19,7 +19,7 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
 			id: Math.floor(Math.random() * 100) + 5,
 			content: replyingToUser + comment,
 			createdAt: new Date(),
-			score: 0,
+			score:  ratingValue ,
 			username: 'juliusomo',
 			currentUser: true,
 			replies: []

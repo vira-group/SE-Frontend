@@ -21,7 +21,7 @@ import user from '@testing-library/user-event';
 import Createroom from '../src/components/AdminPanel/Pages/Createroom';
 import Edithotel from '../src/components/AdminPanel/Pages/Edithotel';
 import CreateHotel from './components/CreateHotel/HotelInfo4';
-import Reservation from "../src/components/Reservation" ;
+import Reservation from '../src/components/Reservation/reservation';
 
 describe('Create hotel', () => {
 	it('snapshot test', () => {

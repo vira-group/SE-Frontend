@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Components/Styles/App.scss';
 import Comment from './Components/Comment';
 import AddComment from './Components/AddComment';
-import references from "../../assets/References.json";
+import references from '../../assets/References.json';
 import axios from 'axios';
 // import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import { makeURL } from '../../Utils/common';
-
 
 const Feedback = (props) => {
 	const [ comments, updateComments ] = useState([]);
@@ -22,35 +21,93 @@ const Feedback = (props) => {
 
 	useEffect(() => {
 		// const queryString = window.location.toString();
-		const hotelid = props.id
-		
+		const hotelid = props.id;
+		//get al hotel
 		axios
-		.get(makeURL(references.url_address + '/'  + hotelid + '/' + 'comments/'), {
-			// headers: {
-			// 	Authorization: cookies.get('Authorization')
-			// }
-		})
-		.then((response) => {
-			console.log('hotel comments', response.data);
-			updateComments(response.data);
-			updateComments1(response.data.slice(0,10));
-			updateComments2(response.data.slice(11,49));
+			.get(
+				makeURL('/hotel/' + hotelid + '/' + 'comments/'),
+				{
+					// headers: {
+					// 	Authorization: cookies.get('Authorization')
+					// }
+				}
+			)
+			.then((response) => {
+				console.log('hotel comments', response.data);
+				updateComments(response.data);
+				console.log(comments, 'comments get all hotel');
+				updateComments1(response.data.slice(0, 10));
+				updateComments2(response.data.slice(11, 49));
 
+				console.log(comments, 'commsetes');
+			})
+			.catch((error) => {
+				console.log(error, 'comment error');
+			});
 
-			console.log(comments ,"commsetes") ;
-		})
-		.catch((error) => {
-			console.log(error, 'comment error');
-		
-		});
+		// //send comment
+		// axios
+		// 	.post(
+		// 		makeURL('/hotel/' + hotelid + '/' + 'comments/'),
+		// 		{
+		// 			rate : ,
+		// 			text :
+		// 		},
+		// 		{
+		// 			headers: {
+		// 				Authorization: cookies.get('Authorization')
+		// 			}
+		// 		}
+		// 	)
+		// 	.then((response) => {
+		// 		console.log(response, 'commnet sent');
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error, 'comment add error');
+		// 	});
 
-		
+		// //update
+		// axios
+		// 	.put(
+		// 		makeURL('/hotel/' + hotelid + '/' + 'comments/' + comment_id),
+		// 		{
+		// 			rate : ,
+		// 			text :
+		// 		},
+		// 		{
+		// 			headers: {
+		// 				Authorization: cookies.get('Authorization')
+		// 			}
+		// 		}
+		// 	)
+		// 	.then((response) => {
+		// 		console.log(response, 'commnet changed');
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error, 'comment change error');
+		// 	});
+
+		// 	//delete
+
+		// axios
+		// .delete(
+		// 	makeURL('/hotel/' + hotelid + '/' + 'comments/' + comment_id),
+
+		// 	{
+		// 		headers: {
+		// 			Authorization: cookies.get('Authorization')
+		// 		}
+		// 	}
+		// )
+		// .then((response) => {
+		// 	console.log(response, 'commnet changed');
+		// })
+		// .catch((error) => {
+		// 	console.log(error, 'comment change error');
+		// });
 	}, []);
 
-
-
 	useEffect(() => {
-	
 		localStorage.getItem('comments') !== null
 			? updateComments(JSON.parse(localStorage.getItem('comments')))
 			: getData();
@@ -149,27 +206,26 @@ const Feedback = (props) => {
 	};
 
 	return (
-
-<main className="Feedback">
-				{' '}
-				<div className="col-lg-8">
-					<div className="row">
-						<div className="col">
-							<div className="mb-3 row">
-								<div className="col">
-									{comments.map((comment) => (
-										<Comment
-											key={comment.id}
-											commentData={comment}
-											updateScore={updateScore}
-											updateReplies={updateReplies}
-											editComment={editComment}
-											commentDelete={commentDelete}
-											setDeleteModalState={setDeleteModalState}
-										/>
-									))}
-									<AddComment buttonValue={'send'} addComments={addComments} />
-									{/* {f1 ? (
+		<main className="Feedback">
+			{' '}
+			<div className="col-lg-8">
+				<div className="row">
+					<div className="col">
+						<div className="mb-3 row">
+							<div className="col">
+								{comments.map((comment) => (
+									<Comment
+										key={comment.id}
+										commentData={comment}
+										updateScore={updateScore}
+										updateReplies={updateReplies}
+										editComment={editComment}
+										commentDelete={commentDelete}
+										setDeleteModalState={setDeleteModalState}
+									/>
+								))}
+								<AddComment buttonValue={'send'} addComments={addComments} />
+								{/* {f1 ? (
 											f1.map((f) => (
 												<div className="mb-3 row">
 													<div className="col">{f.name}</div>
@@ -177,55 +233,55 @@ const Feedback = (props) => {
 												</div>
 											))
 										) : null} */}
-								</div>
 							</div>
 						</div>
 					</div>
-					<button
-						type="button"
-						className="mb-3 btn btn-secondary room-facilities"
-						data-bs-toggle="modal"
-						data-bs-target="#exampleModal1"
-					>
-						See all comment
-					</button>
-					<div
-						className="modal fade"
-						id="exampleModal1"
-						tabindex="-1"
-						aria-labelledby="AllFacilities"
-						aria-hidden="true"
-					>
-						<div className="modal-dialog modal-dialog-centered  modal-lg  modal-dialog-scrollable">
-							<div className="modal-content">
-								<div className="modal-header">
-									<h5 className="modal-title" id="AllFacilities">
-										comment of the hotel
-									</h5>
-									<button
-										type="button"
-										className="btn-close"
-										data-bs-dismiss="modal"
-										aria-label="Close"
-									/>
-								</div>
-								<div className="modal-body">
-									<div className="container">
-										{comments.map((comment) => (
-											<div>
-												<Comment
-													key={comment.id}
-													commentData={comment}
-													updateScore={updateScore}
-													updateReplies={updateReplies}
-													editComment={editComment}
-													commentDelete={commentDelete}
-													setDeleteModalState={setDeleteModalState}
-												/>
-												<hr className="mb-0 mt-0 hr-text" />
-											</div>
-										))}
-										{/* {facility ? (
+				</div>
+				<button
+					type="button"
+					className="mb-3 btn btn-secondary room-facilities"
+					data-bs-toggle="modal"
+					data-bs-target="#exampleModal1"
+				>
+					See all comment
+				</button>
+				<div
+					className="modal fade"
+					id="exampleModal1"
+					tabindex="-1"
+					aria-labelledby="AllFacilities"
+					aria-hidden="true"
+				>
+					<div className="modal-dialog modal-dialog-centered  modal-lg  modal-dialog-scrollable">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h5 className="modal-title" id="AllFacilities">
+									comment of the hotel
+								</h5>
+								<button
+									type="button"
+									className="btn-close"
+									data-bs-dismiss="modal"
+									aria-label="Close"
+								/>
+							</div>
+							<div className="modal-body">
+								<div className="container">
+									{comments.map((comment) => (
+										<div>
+											<Comment
+												key={comment.id}
+												commentData={comment}
+												updateScore={updateScore}
+												updateReplies={updateReplies}
+												editComment={editComment}
+												commentDelete={commentDelete}
+												setDeleteModalState={setDeleteModalState}
+											/>
+											<hr className="mb-0 mt-0 hr-text" />
+										</div>
+									))}
+									{/* {facility ? (
 												facility.map((f) => (
 													<div className="mb-3 row">
 														<div className="col">{f.name}</div>
@@ -236,15 +292,14 @@ const Feedback = (props) => {
 												))
 											) : null}
 						 */}
-									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<br />
+			</div>
+			<br />
 		</main>
-
 	);
 };
 
