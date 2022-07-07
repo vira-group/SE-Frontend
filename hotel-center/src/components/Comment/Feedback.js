@@ -5,19 +5,21 @@ import AddComment from './Components/AddComment';
 import references from '../../assets/References.json';
 import axios from 'axios';
 // import { cookies, makeURL, set_cookie } from '../../../Utils/common';
-import { makeURL } from '../../Utils/common';
+import { cookies, makeURL, set_cookie } from '../../Utils/common';
 
 const Feedback = (props) => {
 	const [ comments, updateComments ] = useState([]);
 	const [ comments1, updateComments1 ] = useState([]);
 	const [ comments2, updateComments2 ] = useState([]);
 	const [ deleteModalState, setDeleteModalState ] = useState(false);
+	const [ c, setc ] = useState();
+	const [ c1, setc1 ] = useState();
 
-	const getData = async () => {
-		const res = await fetch('./data/data.json');
-		const data = await res.json();
-		updateComments(data.comments);
-	};
+	// const getData = async () => {
+	// 	const res = await fetch('./data/data.json');
+	// 	const data = await res.json();
+	// 	updateComments(data.comments);
+	// };
 
 	useEffect(() => {
 		// const queryString = window.location.toString();
@@ -34,10 +36,14 @@ const Feedback = (props) => {
 			)
 			.then((response) => {
 				console.log('hotel comments', response.data);
-				updateComments(response.data);
+				// console.log('hotel comments', response.data);
+				// console.log('hotel comments', response.data);
+				// console.log('hotel comments', response.data);
+				setc(response.data[0].text);
+				// console.log(comments, "comment in the update")
 				console.log(comments, 'comments get all hotel');
-				updateComments1(response.data.slice(0, 10));
-				updateComments2(response.data.slice(11, 49));
+				// updateComments1(response.data.slice(0, 10).text);
+				// updateComments2(response.data.slice(11, 49).text);
 
 				console.log(comments, 'commsetes');
 			})
@@ -45,13 +51,37 @@ const Feedback = (props) => {
 				console.log(error, 'comment error');
 			});
 
-		// //send comment
+		//get my comments
+		axios
+			.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'), {
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			})
+			.then((response) => {
+				console.log('my hotel comments', response.data);
+				// console.log('hotel comments', response.data);
+				// console.log('hotel comments', response.data);
+				// console.log('hotel comments', response.data);
+				setc1(response.data[0].text);
+				// console.log(comments, "comment in the update")
+				console.log(comments, 'my comments ');
+				// updateComments1(response.data.slice(0, 10).text);
+				// updateComments2(response.data.slice(11, 49).text);
+
+				// console.log(comments, 'commsetes');
+			})
+			.catch((error) => {
+				console.log(error, 'comment error');
+			});
+
+		//send comment
 		// axios
 		// 	.post(
 		// 		makeURL('/hotel/' + hotelid + '/' + 'comments/'),
 		// 		{
-		// 			rate : ,
-		// 			text :
+		// 			rate :3 ,
+		// 			text :"ouuuii"
 		// 		},
 		// 		{
 		// 			headers: {
@@ -60,68 +90,69 @@ const Feedback = (props) => {
 		// 		}
 		// 	)
 		// 	.then((response) => {
-		// 		console.log(response, 'commnet sent');
+		// 		console.log(response, 'posted');
 		// 	})
 		// 	.catch((error) => {
-		// 		console.log(error, 'comment add error');
+		// 		console.log(error, 'post error');
 		// 	});
 
-		// //update
-		// axios
-		// 	.put(
-		// 		makeURL('/hotel/' + hotelid + '/' + 'comments/' + comment_id),
-		// 		{
-		// 			rate : ,
-		// 			text :
-		// 		},
-		// 		{
-		// 			headers: {
-		// 				Authorization: cookies.get('Authorization')
-		// 			}
-		// 		}
-		// 	)
-		// 	.then((response) => {
-		// 		console.log(response, 'commnet changed');
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error, 'comment change error');
-		// 	});
+		//update
+		axios
+			.put(
+
+				makeURL("/hotel/1/comments/2/"),
+				{
+					rate:1,
+					text: "dsffffd"
+					// rate : 2,
+					// text :"opjdsfohidfifadufheuihfuiewhfiuefhuierfhuerifhueirhfeui"
+				},
+				{
+					headers: {
+						Authorization: cookies.get('Authorization')
+					}
+				}
+			)
+			.then((response) => {
+				console.log(response, 'commnet changed');
+			})
+			.catch((error) => {
+				console.log(error, 'comment change error');
+			});
 
 		// 	//delete
 
 		// axios
-		// .delete(
-		// 	makeURL('/hotel/' + hotelid + '/' + 'comments/' + comment_id),
-
-		// 	{
+		// 	.delete(makeURL('/hotel/' + hotelid + '/' + 'comments/17/'), {
 		// 		headers: {
 		// 			Authorization: cookies.get('Authorization')
 		// 		}
-		// 	}
-		// )
-		// .then((response) => {
-		// 	console.log(response, 'commnet changed');
-		// })
-		// .catch((error) => {
-		// 	console.log(error, 'comment change error');
-		// });
+		// 	})
+		// 	.then((response) => {
+		// 		console.log(response, 'commnet delted');
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error, 'comment delete error');
+		// 	});
 	}, []);
+	console.log(c, 'setc');
+	console.log(c1, 'setc111111');
 
-	useEffect(() => {
-		localStorage.getItem('comments') !== null
-			? updateComments(JSON.parse(localStorage.getItem('comments')))
-			: getData();
-	}, []);
+	// useEffect(() => {
+	// 	// localStorage.getItem('comments') !== null
+	// 	// 	? updateComments(JSON.parse(localStorage.getItem('comments')))
+	// 	// 	: getData();
+	// }, []);
 
-	useEffect(
-		() => {
-			localStorage.setItem('comments', JSON.stringify(comments));
-			deleteModalState
-				? document.body.classList.add('overflow--hidden')
-				: document.body.classList.remove('overflow--hidden');
-		},
-		[ comments, deleteModalState ]
-	);
+	// useEffect(
+	// 	() => {
+	// 		localStorage.setItem('comments', JSON.stringify(comments));
+	// 		deleteModalState
+	// 			? document.body.classList.add('overflow--hidden')
+	// 			: document.body.classList.remove('overflow--hidden');
+	// 	},
+	// 	[ comments, deleteModalState ]
+	// );
 
 	// update score
 	let updateScore = (score, id, type) => {
@@ -213,7 +244,10 @@ const Feedback = (props) => {
 					<div className="col">
 						<div className="mb-3 row">
 							<div className="col">
-								{comments.map((comment) => (
+								<div>{c}</div>
+								<div>{c1}</div>
+
+								{/* {comments.map((comment) => (
 									<Comment
 										key={comment.id}
 										commentData={comment}
@@ -223,7 +257,19 @@ const Feedback = (props) => {
 										commentDelete={commentDelete}
 										setDeleteModalState={setDeleteModalState}
 									/>
-								))}
+								))} */}
+
+								{/* {((c) => (
+									<Comment
+										key={1}
+										commentData={c}
+										updateScore={updateScore}
+										updateReplies={updateReplies}
+										editComment={editComment}
+										commentDelete={commentDelete}
+										setDeleteModalState={setDeleteModalState}
+									/>
+								))} */}
 								<AddComment buttonValue={'send'} addComments={addComments} />
 								{/* {f1 ? (
 											f1.map((f) => (
@@ -267,7 +313,7 @@ const Feedback = (props) => {
 							</div>
 							<div className="modal-body">
 								<div className="container">
-									{comments.map((comment) => (
+									{/* {comments.map((comment) => (
 										<div>
 											<Comment
 												key={comment.id}
@@ -280,7 +326,7 @@ const Feedback = (props) => {
 											/>
 											<hr className="mb-0 mt-0 hr-text" />
 										</div>
-									))}
+									))} */}
 									{/* {facility ? (
 												facility.map((f) => (
 													<div className="mb-3 row">
