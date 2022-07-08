@@ -21,10 +21,12 @@ import Statistics from "./components/AdminPanel/Pages/Statistics";
 import RoomsStatus from "./components/AdminPanel/Pages/RoomsStatus";
 import CreateHotel from "./components/CreateHotel/CreateHotel";
 import steps from "./components/CreateHotel/steps";
+import Messages from "./components/AdminPanel/Pages/Messages";
 import "./components/AdminPanel/style/adminpanel.scss";
 import "./components/AdminPanel/style/widget.scss";
 import "./components/AdminPanel/style/chart.scss";
 import "./components/AdminPanel/style/roomStatus.scss";
+import "./components/AdminPanel/style/chatBox.scss";
 import "./css/Navbar.css";
 import "./css/Homepage.css";
 import "./css/Verify.css";
@@ -84,6 +86,11 @@ function App() {
             exact
             path="/adminpanel/:id/roomsstatus"
             component={RoomsStatus}
+          />
+          <Route
+            exact
+            path="/adminpanel/:id/messages"
+            component={Messages}
           />
         </Switch>
       </BrowserRouter>
