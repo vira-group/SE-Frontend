@@ -46,6 +46,10 @@ const Feedback = (props) => {
 	// console.log(last);
 
 	useEffect(() => {
+
+		 {((localStorage.getItem('deleteAll')) === "") ? 	setc(localStorage.getItem('deleteAll')) :  setc("l") }
+	;
+	
 		const hotelid = props.id;
 		sethotelid(props.id);
 		//get al hotel
@@ -54,7 +58,7 @@ const Feedback = (props) => {
 			.then((response) => {
 				console.log('hotel comments', response.data);
 				setc(response.data);
-
+				// setCart([...cart, item]);
 				setc1(response.data.slice(0, 4));
 			})
 			.catch((error) => {
@@ -136,12 +140,7 @@ const Feedback = (props) => {
 	}, []);
 	console.log(writer, 'writer');
 
-	// for(a in c2) {
-	// 	console.log(
-
-	// 	(a.id  === comId) ?   "yes"  : "no");
-
-	// }
+	
 
 	useEffect(() => {
 		// localStorage.getItem('comments') !== null
@@ -187,6 +186,20 @@ const Feedback = (props) => {
 			.catch((error) => {
 				console.log(error, 'post error');
 			});
+
+
+			// axios
+			// .get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
+			// .then((response) => {
+			// 	console.log('hotel comments', response.data);
+			// 	setc(response.data);
+
+			// 	setc1(response.data.slice(0, 4));
+			// })
+			// .catch((error) => {
+			// 	console.log(error, 'comment error');
+			// });
+
 	};
 
 	// add replies
@@ -204,14 +217,12 @@ const Feedback = (props) => {
 	let editComment = (content, id, type) => {
 		let updatedComments = [ ...comments ];
 
-		if (type === 'comment') {
 			updatedComments.forEach((data) => {
 				if (data.id === id) {
 					data.content = content;
 				}
 			});
-		}
-
+		
 		updateComments(updatedComments);
 	};
 
@@ -246,8 +257,8 @@ const Feedback = (props) => {
 													last={last}
 													avatar={avatar}
 													hotelid={hotelid}
-													comId={e.comId}
-													// editComment={editComment}
+													comId={e.id}
+													editComment={editComment}
 													commentDelete={commentDelete}
 													setDeleteModalState={setDeleteModalState}
 													writer={true}
@@ -262,8 +273,8 @@ const Feedback = (props) => {
 													last={last}
 													avatar={avatar}
 													hotelid={hotelid}
-													comId={e.comId}
-													// editComment={editComment}
+													comId={e.id}
+													editComment={editComment}
 													commentDelete={commentDelete}
 													setDeleteModalState={setDeleteModalState}
 													writer={false}
@@ -306,24 +317,7 @@ const Feedback = (props) => {
 							</div>
 							<div className="modal-body">
 								<div className="container">
-									{Array.isArray(c) ? (
-										c.map((e) => (
-											<Comment
-												key={e.id}
-												commentData={e.text}
-												rate={e.rate}
-												time={e.created_at.split('T')[1].split('.')[0]}
-												first={first}
-												last={last}
-												avatar={avatar}
-												hotelid={hotelid}
-												comId={comId}
-												// editComment={editComment}
-												// commentDelete={commentDelete}
-												// setDeleteModalState={setDeleteModalState}
-											/>
-										))
-									) : null};
+					
 								</div>
 							</div>
 						</div>

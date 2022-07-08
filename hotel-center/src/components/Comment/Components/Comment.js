@@ -6,6 +6,9 @@ import DeleteModal from './DeleteModal';
 import CommentHeader from './CommentHeader';
 import CommentFooter from './CommentFooter';
 import { commentPostedTime } from '../utils';
+import axios from 'axios';
+import { cookies, makeURL, set_cookie } from '../../../Utils/common';
+import references from '../../../assets/References.json';
 
 const Comment = ({
 	commentData,
@@ -16,19 +19,41 @@ const Comment = ({
 	avatar,
 	hotelid,
 	comId,
-	// editComment,
+	editComment,
 	commentDelete,
 	setDeleteModalState,
 	writer
 }) => {
-	// const [editing, setEditing] = useState(false);
-	// const [content, setContent] = useState(commentData);
+	const [editing, setEditing] = useState(false);
+	const [content, setContent] = useState(commentData);
 	const [ deleting, setDeleting ] = useState(false);
 
-	// const updateComment = () => {
+	const updateComment = () => {
+
+		axios
+			.put(
+
+				makeURL("/hotel/1/comments/2/"),
+				{
+					rate:1,
+					text: "dsffffd"
+				},
+				{
+					headers: {
+						Authorization: cookies.get('Authorization')
+					}
+				}
+			)
+			.then((response) => {
+				console.log(response, 'commnet changed');
+			})
+			.catch((error) => {
+				console.log(error, 'comment change error');
+			});
+
 	//   editComment(content, commentData.id, "comment");
-	//   setEditing(false);
-	// };
+	  setEditing(false);
+	};
 
 	const deleteComment = (id, type) => {
 		const finalType = type !== undefined ? type : 'comment';
@@ -50,14 +75,14 @@ const Comment = ({
 						avatar={avatar}
 						setDeleting={setDeleting}
 						setDeleteModalState={setDeleteModalState}
-						// setEditing={setEditing}
+						setEditing={setEditing}
 						writer={writer}
 					/>
 
-					<div className="comment-content">{commentData}</div>
+					{/* <div className="comment-content">{commentData}</div> */}
 
-					{/* {!editing ? (
-            <div className="comment-content">{commentData.content}</div>
+					{!editing ? (
+            <div className="comment-content">{commentData}</div>
           ) : (
             <textarea
               className="content-edit-box"
@@ -71,7 +96,9 @@ const Comment = ({
             <button className="update-btn" onClick={updateComment}>
               update
             </button>
-          )} */}
+          )}
+		
+		
 				</div>
 				<CommentFooter
 					commentData={commentData}

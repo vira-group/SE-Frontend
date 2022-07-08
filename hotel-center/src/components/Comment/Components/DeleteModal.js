@@ -26,6 +26,25 @@ const DeleteModal = ({ hotelid, comId, setDeleting, deleteComment, setDeleteModa
 			.catch((error) => {
 				console.log(error, 'comment delete error');
 			});
+			axios
+			.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
+			.then((response) => {
+				console.log('hotel comments', response.data);
+				// setc(response.data);
+				// setCart([...cart, item]);
+				localStorage.setItem( 'deleteAll', JSON.stringify(response.data));
+
+				localStorage.setItem( 'delete', JSON.stringify(response.data.slice(0, 4)));
+				
+				// setc1(response.data.slice(0, 4));
+			})
+			.catch((error) => {
+				console.log(error, 'comment error');
+			});
+
+	
+			// window.location.reload(true);
+
 		}
 		deleteComment();
 		setDeleteModalState(false);

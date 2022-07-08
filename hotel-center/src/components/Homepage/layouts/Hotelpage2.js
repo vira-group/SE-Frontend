@@ -112,6 +112,7 @@ export default function Hotelpage(props) {
 	localStorage.setItem('i2', JSON.stringify(checkoutDate));
 	console.log(checkoutDate ? checkoutDate : 'no');
 	const handlesearch = () => {
+	
 		axios
 			.get(makeURL(references.url_hotel_search), {
 				headers: {
@@ -131,6 +132,7 @@ export default function Hotelpage(props) {
 				console.log(error);
 			});
 	};
+
 
 	const handleChangeNumber = (actionType, guestType) => {
 		actionType === 'dec'
