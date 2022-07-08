@@ -3,6 +3,8 @@ import './Styles/AddComment.scss';
 import { Rating } from 'react-simple-star-rating';
 import references from '../../../assets/References.json';
 
+
+
 const AddComment = ({ buttonValue, addComments , avatar}) => {
 
 	const [ comment, setComment ] = useState('');

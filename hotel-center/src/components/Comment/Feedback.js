@@ -317,7 +317,44 @@ const Feedback = (props) => {
 							</div>
 							<div className="modal-body">
 								<div className="container">
-					
+								{Array.isArray(c) ? (
+									c.map(
+										(e) =>
+											e.writer === Comwriter ? (
+												<Comment
+													key={e.id}
+													commentData={e.text}
+													rate={e.rate}
+													time={e.created_at.split('T')[1].split('.')[0]}
+													first={first}
+													last={last}
+													avatar={avatar}
+													hotelid={hotelid}
+													comId={e.id}
+													editComment={editComment}
+													commentDelete={commentDelete}
+													setDeleteModalState={setDeleteModalState}
+													writer={true}
+												/>
+											) : (
+												<Comment
+													key={e.id}
+													commentData={e.text}
+													rate={e.rate}
+													time={e.created_at.split('T')[1].split('.')[0]}
+													first={first}
+													last={last}
+													avatar={avatar}
+													hotelid={hotelid}
+													comId={e.id}
+													editComment={editComment}
+													commentDelete={commentDelete}
+													setDeleteModalState={setDeleteModalState}
+													writer={false}
+												/>
+											)
+									)
+								) : null};					
 								</div>
 							</div>
 						</div>

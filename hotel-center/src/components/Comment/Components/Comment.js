@@ -10,6 +10,12 @@ import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import references from '../../../assets/References.json';
 
+
+import { Rating } from 'react-simple-star-rating';
+
+	
+
+
 const Comment = ({
 	commentData,
 	rate,
@@ -27,16 +33,19 @@ const Comment = ({
 	const [editing, setEditing] = useState(false);
 	const [content, setContent] = useState(commentData);
 	const [ deleting, setDeleting ] = useState(false);
+	const [ ratingValue, setRatingValue ] = useState(0);
+	const handleRating = (rate) => {
+		setRatingValue(rate);
+	};
 
 	const updateComment = () => {
 
 		axios
-			.put(
-
-				makeURL("/hotel/1/comments/2/"),
-				{
-					rate:1,
-					text: "dsffffd"
+			.put
+				(makeURL('/hotel/' + hotelid + '/' + 'comments/' + comId  +"/" ), {
+		
+					rate: (ratingValue/20),
+					text: content
 				},
 				{
 					headers: {
@@ -84,6 +93,10 @@ const Comment = ({
 					{!editing ? (
             <div className="comment-content">{commentData}</div>
           ) : (
+			<div>
+			<Rating onClick={handleRating} ratingValue={ratingValue} size={20} />
+
+
             <textarea
               className="content-edit-box"
               value={content}
@@ -91,6 +104,7 @@ const Comment = ({
                 setContent(e.target.value);
               }}
             />
+			</div>
           )}
           {editing && (
             <button className="update-btn" onClick={updateComment}>
