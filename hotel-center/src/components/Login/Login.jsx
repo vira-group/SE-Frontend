@@ -13,15 +13,9 @@ import pic from './s4.png';
 import ico from './icon.png';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
-// import { login_connection } from '../../Utils/connection';
-
-// import references from '../assets/References.json';
 import references from '../../assets/References.json';
-// import { cookies, makeURL } from './common';
 import { cookies, makeURL } from '../../Utils/common';
 import axios from 'axios';
-// import { get_token, get_user, set_user_session, remove_user_session, set_cookie } from './common';
 import { set_cookie } from '../../Utils/common';
 
 const theme = createTheme();
@@ -49,7 +43,6 @@ class login extends React.Component {
 			return;
 		}
 		this.setState({ open: false });
-		// setOpen(false);
 	};
 
 	handleChange(e) {
@@ -63,14 +56,9 @@ class login extends React.Component {
 	submituserlogin(e) {
 		e.preventDefault();
 		if (true) {
-			// const is_logged_in = login_connection(this.state.fields['email'], this.state.fields['password']);
-
 			if (cookies.get('Authorization') != undefined) {
-				// this.state.message = 'Already logged in';
 				this.setState({ message: 'Already logged in' });
 				this.setState({ open: true });
-
-				// window.alert('Already logged in');
 			} else {
 				axios
 					.post(makeURL(references.url_login), {
@@ -80,8 +68,6 @@ class login extends React.Component {
 					.then((response) => {
 						this.setState({ open: true });
 						this.setState({ message: 'login successfully' });
-						// setMessage('Your hotel was submitted successfully!');
-
 						set_cookie(response.data.auth_token);
 						window.location.replace('/');
 					})
@@ -89,9 +75,6 @@ class login extends React.Component {
 						if (error.response.status == 400) {
 							this.setState({ open: true });
 							this.setState({ message: 'wrong email or password' });
-
-							// this.state.message = 'wrong email or password';
-							// window.alert('wrong email or password');
 						}
 					});
 			}
@@ -197,7 +180,6 @@ class login extends React.Component {
 					<Snackbar
 						open={this.state.open}
 						autoHideDuration={2000}
-
 						onClose={() => this.setState({ open: false })}
 						anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 					>

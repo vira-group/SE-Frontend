@@ -10,7 +10,6 @@ const CommentHeader = ({
 	first,
 	last,
 	avatar,
-	setReplying,
 	setDeleting,
 	setDeleteModalState,
 	setEditing
@@ -43,7 +42,6 @@ const CommentHeader = ({
 
 			<CommentBtn
 				commentData={commentData}
-				setReplying={setReplying}
 				setDeleting={setDeleting}
 				setDeleteModalState={setDeleteModalState}
 				setEditing={setEditing}

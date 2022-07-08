@@ -52,7 +52,7 @@ const Feedback = (props) => {
 				console.log('hotel comments', response.data);
 				setc(response.data);
 
-				setc1(response.data.slice(0, 10));
+				setc1(response.data.slice(0, 4));
 			})
 			.catch((error) => {
 				console.log(error, 'comment error');
@@ -218,11 +218,9 @@ const Feedback = (props) => {
 											avatar={avatar}
 											hotelid={hotelid}
 											comId={comId}
-											// updateScore={updateScore}
-											// updateReplies={updateReplies}
 											// editComment={editComment}
-											// commentDelete={commentDelete}
-											// setDeleteModalState={setDeleteModalState}
+											commentDelete={commentDelete}
+											setDeleteModalState={setDeleteModalState}
 										/>
 									))
 								) : null};
@@ -273,8 +271,6 @@ const Feedback = (props) => {
 											avatar={avatar}
 											hotelid={hotelid}
 											comId={comId}
-											// updateScore={updateScore}
-											// updateReplies={updateReplies}
 											// editComment={editComment}
 											// commentDelete={commentDelete}
 											// setDeleteModalState={setDeleteModalState}

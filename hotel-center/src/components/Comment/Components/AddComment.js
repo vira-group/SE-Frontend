@@ -2,8 +2,8 @@ import { useState } from 'react';
 import './Styles/AddComment.scss';
 import { Rating } from 'react-simple-star-rating';
 
-const AddComment = ({ buttonValue, addComments, replyingTo }) => {
-	const replyingToUser = replyingTo ? `@${replyingTo}, ` : '';
+const AddComment = ({ buttonValue, addComments}) => {
+
 	const [ comment, setComment ] = useState('');
 	const [ ratingValue, setRatingValue ] = useState(0);
 
@@ -17,9 +17,9 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
 		
 		const newComment = {
 			id: Math.floor(Math.random() * 100) + 5,
-			content: replyingToUser + comment,
+			content:  comment,
 			createdAt: new Date(),
-			score:  ratingValue ,
+			rate:  ratingValue ,
 			username: 'juliusomo',
 			currentUser: true,
 			replies: []
@@ -38,9 +38,9 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
 			<textarea
 				className="comment-input"
 				placeholder="Add a comment"
-				value={replyingToUser + comment}
+				value={ comment}
 				onChange={(e) => {
-					setComment(e.target.value.replace(replyingTo ? `@${replyingTo}, ` : '', ''));
+					setComment(e.target.value.replace('', ''));
 				}}
 			/>
 			<div className="send-btn-container">
