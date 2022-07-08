@@ -1,6 +1,8 @@
 import { ReactComponent as IconReply } from "../Assets/images/icon-reply.svg";
 import { ReactComponent as IconDelete } from "../Assets/images/icon-delete.svg";
-import { ReactComponent as IconEdit } from "../Assets/images/icon-edit.svg";
+import { ReactComponent as IconEdit } from "../Assets/images/icon-edit.svg";import axios from 'axios';
+import { cookies, makeURL, set_cookie } from '../../../Utils/common';
+
 
 const CommentBtn = ({commentData, setReplying, setDeleting, setDeleteModalState, setEditing}) => {
   // adding reply

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Feedback from './../../Comment/Feedback';
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { GoldenTextField } from "../../../theme/GoldenTextField";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { GoldenTextField } from '../../../theme/GoldenTextField';
 import Popover from '@mui/material/Popover';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -53,7 +53,6 @@ import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import references from '../../../assets/References.json';
 import Roomcard from './Roomcard';
 import ResponsiveDatePickers from '../../HotelPage/ResponsiveDatePickers';
-
 
 const labels = {
 	0.5: 'Useless',
@@ -126,7 +125,7 @@ export default function Hotelpage(props) {
 			})
 			.then((response) => {
 				console.log('after_search', response.data);
-				setRooms(response.data)
+				setRooms(response.data);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -149,11 +148,9 @@ export default function Hotelpage(props) {
 	const id = open ? 'popover' : undefined;
 
 	useEffect(() => {
-		
-
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
-			setid(hotelid);
+		setid(hotelid);
 		axios
 			.get(makeURL(references.url_one_hotel + hotelid + '/'), {
 				headers: {
@@ -201,147 +198,161 @@ export default function Hotelpage(props) {
 			<div className="container">
 				<div className="row mt-5">
 					<div className="col-lg-4">
-						
-		<div className="card  card1 " title="AccordionSummery">
-			<div className="card-body" style={{ position: 'sticky', top: '11vh' }} title="card-body">
-				<div className="col col-md-12 align-items-center" title="align-items-center">
-					<div className="d-flex justify-content-center" title="justifycontentcenter">
-						<div className="row">
-							<div className="col-6">
-								<LocalizationProvider dateAdapter={AdapterDateFns} title="L">
-									<DatePicker
-										title="DatePicker"
-										disablePast
-										format="DD/MM/YYYY"
-										maxDate={checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null}
-										label="Check in"
-										value={checkinDate}
-										style={{ borderRadius: '5px' }}
-										onChange={(newValue) => {
-											setCheckinDate(newValue);
-											// localStorage.setItem('i1', JSON.stringify(checkinDate));
+						<div className="card  card1 " title="AccordionSummery">
+							<div className="card-body" style={{ position: 'sticky', top: '11vh' }} title="card-body">
+								<div className="col col-md-12 align-items-center" title="align-items-center">
+									<div className="d-flex justify-content-center" title="justifycontentcenter">
+										<div className="row">
+											<div className="col-6">
+												<LocalizationProvider dateAdapter={AdapterDateFns} title="L">
+													<DatePicker
+														title="DatePicker"
+														disablePast
+														format="DD/MM/YYYY"
+														maxDate={
+															checkoutDate ? (
+																new Date(checkoutDate.getTime() - oneDay)
+															) : null
+														}
+														label="Check in"
+														value={checkinDate}
+														style={{ borderRadius: '5px' }}
+														onChange={(newValue) => {
+															setCheckinDate(newValue);
+															// localStorage.setItem('i1', JSON.stringify(checkinDate));
+														}}
+														renderInput={(params) => (
+															<GoldenTextField
+																{...params}
+																variant="outlined"
+																title="GoldenTextField"
+															/>
+														)}
+													/>
+												</LocalizationProvider>
+											</div>
+											<div className="col-6">
+												<LocalizationProvider dateAdapter={AdapterDateFns}>
+													<DatePicker
+														disablePast
+														minDate={
+															checkinDate ? (
+																new Date(checkinDate.getTime() + oneDay)
+															) : null
+														}
+														label="Check out"
+														value={checkoutDate}
+														onChange={(newValue) => {
+															setCheckoutDate(newValue);
+															// localStorage.setItem('i2', JSON.stringify(checkoutDate));
+														}}
+														renderInput={(params) => (
+															<GoldenTextField {...params} variant="outlined" />
+														)}
+													/>
+												</LocalizationProvider>
+											</div>
+										</div>
+									</div>
+									<br />
+
+									<div className="d-flex justify-content-center">
+										<div className="row col-12">
+											<GoldenTextField
+												aria-describedby={id}
+												variant="outlined"
+												onClick={handleClick}
+												label="Number of guests"
+												value={
+													numberOfAdults + ' adults' + ' - ' + numberOfChildren + ' children'
+												}
+												placeholder="0 adults - 0 children"
+											/>
+										</div>
+									</div>
+
+									<Popover
+										title="Popover"
+										id={id}
+										open={open}
+										anchorEl={anchor}
+										onClose={handleClose}
+										anchorOrigin={{
+											vertical: 'bottom',
+											horizontal: 'right'
 										}}
-										renderInput={(params) => (
-											<GoldenTextField {...params} variant="outlined" title="GoldenTextField" />
-										)}
-									/>
-								</LocalizationProvider>
-							</div>
-							<div className="col-6">
-								<LocalizationProvider dateAdapter={AdapterDateFns}>
-									<DatePicker
-										disablePast
-										minDate={checkinDate ? new Date(checkinDate.getTime() + oneDay) : null}
-
-										label="Check out"
-										value={checkoutDate}
-										onChange={(newValue) => {
-											setCheckoutDate(newValue);
-											// localStorage.setItem('i2', JSON.stringify(checkoutDate));
+										transformOrigin={{
+											vertical: 'top',
+											horizontal: 'right'
 										}}
-										renderInput={(params) => <GoldenTextField {...params} variant="outlined" />}
-									/>
-								</LocalizationProvider>
+									>
+										<div className="p-3 number-of-guests-form" title="number-of-guests-form">
+											<div className="mb-3 d-flex align-items-center">
+												<p className="mb-0 me-auto" title="r">
+													{' '}
+													Adults
+												</p>
+												<button
+													title="button"
+													type="button"
+													className="btn btn-primary decrease-button"
+													onClick={() => handleChangeNumber('dec', 'adults')}
+													disabled={numberOfAdults <= 1}
+												>
+													<span>
+														<RemoveIcon />
+													</span>
+												</button>
+												<p className="mb-0 px-3">{numberOfAdults}</p>
+												<button
+													type="button"
+													className="btn btn-primary increase-button"
+													onClick={() => handleChangeNumber('inc', 'adults')}
+												>
+													<span>
+														<AddIcon titel="AddIcon" />
+													</span>
+												</button>
+											</div>
+											<div className="d-flex  align-items-center">
+												<p className="mb-0 me-auto">Children</p>
+												<button
+													type="button"
+													className="btn btn-primary decrease-button"
+													onClick={() => handleChangeNumber('dec', 'children')}
+													disabled={numberOfChildren <= 0}
+												>
+													<span>
+														<RemoveIcon />
+													</span>
+												</button>
+												<p className="mb-0 px-3">{numberOfChildren}</p>
+												<button
+													type="button"
+													className="btn btn-primary increase-button"
+													onClick={() => handleChangeNumber('inc', 'children')}
+												>
+													<span>
+														<AddIcon />
+													</span>
+												</button>
+											</div>
+										</div>
+									</Popover>
+
+									<br />
+
+									<div className="d-flex justify-content-center">
+										<div className="row w-100">
+											<button className="btn btn-dark" title="btn-dark" onClick={handlesearch}>
+												{' '}
+												check availability
+											</button>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<br />
-
-					<div className="d-flex justify-content-center">
-						<div className="row col-12">
-							<GoldenTextField
-								aria-describedby={id}
-								variant="outlined"
-								onClick={handleClick}
-								label="Number of guests"
-								value={numberOfAdults + ' adults' + ' - ' + numberOfChildren + ' children'}
-								placeholder="0 adults - 0 children"
-							/>
-						</div>
-					</div>
-
-					<Popover
-						title="Popover"
-						id={id}
-						open={open}
-						anchorEl={anchor}
-						onClose={handleClose}
-						anchorOrigin={{
-							vertical: 'bottom',
-							horizontal: 'right'
-						}}
-						transformOrigin={{
-							vertical: 'top',
-							horizontal: 'right'
-						}}
-					>
-						<div className="p-3 number-of-guests-form" title="number-of-guests-form">
-							<div className="mb-3 d-flex align-items-center">
-								<p className="mb-0 me-auto" title="r">
-									{' '}
-									Adults
-								</p>
-								<button
-									title="button"
-									type="button"
-									className="btn btn-primary decrease-button"
-									onClick={() => handleChangeNumber('dec', 'adults')}
-									disabled={numberOfAdults <= 1}
-								>
-									<span>
-										<RemoveIcon />
-									</span>
-								</button>
-								<p className="mb-0 px-3">{numberOfAdults}</p>
-								<button
-									type="button"
-									className="btn btn-primary increase-button"
-									onClick={() => handleChangeNumber('inc', 'adults')}
-								>
-									<span>
-										<AddIcon titel="AddIcon" />
-									</span>
-								</button>
-							</div>
-							<div className="d-flex  align-items-center">
-								<p className="mb-0 me-auto">Children</p>
-								<button
-									type="button"
-									className="btn btn-primary decrease-button"
-									onClick={() => handleChangeNumber('dec', 'children')}
-									disabled={numberOfChildren <= 0}
-								>
-									<span>
-										<RemoveIcon />
-									</span>
-								</button>
-								<p className="mb-0 px-3">{numberOfChildren}</p>
-								<button
-									type="button"
-									className="btn btn-primary increase-button"
-									onClick={() => handleChangeNumber('inc', 'children')}
-								>
-									<span>
-										<AddIcon />
-									</span>
-								</button>
-							</div>
-						</div>
-					</Popover>
-
-					<br />
-
-					<div className="d-flex justify-content-center">
-						<div className="row w-100">
-							<button className="btn btn-dark" title="btn-dark" onClick={handlesearch}>
-								{' '}
-								check availability
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 					</div>
 
 					<div className="col-lg-8">
@@ -497,7 +508,7 @@ export default function Hotelpage(props) {
 							</Box>
 						</div>
 
-						<Feedback id ={ com_id}  />
+						<Feedback id={com_id} />
 					</div>
 				</div>
 			</div>

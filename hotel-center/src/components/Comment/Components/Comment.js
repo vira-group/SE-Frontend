@@ -1,75 +1,75 @@
-import { useEffect, useState } from "react";
-import "./Styles/Comment.scss";
-import AddComment from "./AddComment";
-// import ReplyContainer from "./ReplyContainer";
-import DeleteModal from "./DeleteModal";
-import CommentHeader from "./CommentHeader";
-import CommentFooter from "./CommentFooter";
+import { useEffect, useState } from 'react';
 
-import { commentPostedTime } from "../utils";
+import './Styles/Comment.scss';
+
+import AddComment from './AddComment';
+import ReplyContainer from './ReplyContainer';
+import DeleteModal from './DeleteModal';
+import CommentVotes from './CommentVotes';
+import CommentHeader from './CommentHeader';
+import CommentFooter from './CommentFooter';
+
+import { commentPostedTime } from '../utils';
 
 const Comment = ({
-  commentData,
-  updateScore,
-  updateReplies,
-  editComment,
-  commentDelete,
-  setDeleteModalState,
+	commentData,
+	rate,
+	time,
+	first,
+	last,
+	avatar,
+  hotelid,
+  comId
+	// updateScore,
+	// updateReplies,
+	// editComment,
+	// commentDelete,
+	// setDeleteModalState,
 }) => {
-  // const [replying, setReplying] = useState(false);
-  const [time, setTime] = useState("");
-  const [vote, setVoted] = useState(false);
-  const [score, setScore] = useState(commentData.score);
-  const [editing, setEditing] = useState(false);
-  const [content, setContent] = useState(commentData.content);
-  const [deleting, setDeleting] = useState(false);
+	// const [replying, setReplying] = useState(false);
+	// const [time, setTime] = useState("");
+	// const [vote, setVoted] = useState(false);
+	// const [score, setScore] = useState(commentData.score);
+	// const [editing, setEditing] = useState(false);
+	// const [content, setContent] = useState(commentData);
+	// const [content, setContent] = useState(commentData);
+	// const [deleting, setDeleting] = useState(false);
 
-  // get time from comment posted
-  const createdAt = new Date(commentData.createdAt);
-  const today = new Date();
-  const differenceInTime = today.getTime() - createdAt.getTime();
+	// get time from comment posted
 
-  useEffect(() => {
-    setTime(commentPostedTime(differenceInTime));
-    localStorage.setItem("voteState", vote);
-  }, [differenceInTime, vote]);
+	// const updateComment = () => {
+	//   editComment(content, commentData.id, "comment");
+	//   setEditing(false);
+	// };
 
-  // const addReply = (newReply) => {
-  //   const replies = [...commentData.replies, newReply];
-  //   updateReplies(replies, commentData.id);
-  //   setReplying(false);
-  // };
+	// const deleteComment = (id, type) => {
+	//   const finalType = type !== undefined ? type : "comment";
+	//   const finalId = id !== undefined ? id : commentData.id;
+	//   commentDelete(finalId, finalType, commentData.id);
+	//   setDeleting(false);
+	// };
 
-  const updateComment = () => {
-    editComment(content, commentData.id, "comment");
-    setEditing(false);
-  };
+	return (
+		<div className={`comment-container ${''}`}>
+			<div className="comment">
+				<div className="comment--body">
+					<CommentHeader
+						commentData={commentData}
+						rate={rate}
+						time={time}
+						first={first}
+						last={last}
+						avatar={avatar}
 
-  const deleteComment = (id, type) => {
-    const finalType = type !== undefined ? type : "comment";
-    const finalId = id !== undefined ? id : commentData.id;
-    commentDelete(finalId, finalType, commentData.id);
-    setDeleting(false);
-  };
+						// setReplying={setReplying}
+						// setDeleting={setDeleting}
+						// setDeleteModalState={setDeleteModalState}
+						// setEditing={setEditing}
+					/>
 
-  return (
-    <div
-      className={`comment-container ${
-        commentData.replies[0] !== undefined ? "reply-container-gap" : ""
-      }`}
-    >
-      <div className="comment">
-      
-        <div className="comment--body">
-          <CommentHeader
-            commentData={commentData}
-            // setReplying={setReplying}
-            setDeleting={setDeleting}
-            setDeleteModalState={setDeleteModalState}
-            setEditing={setEditing}
-            time={time}
-          />
-          {!editing ? (
+					<div className="comment-content">{commentData}</div>
+
+					{/* {!editing ? (
             <div className="comment-content">{commentData.content}</div>
           ) : (
             <textarea
@@ -81,45 +81,42 @@ const Comment = ({
             />
           )}
           {editing && (
-
-     
-
-            <button 
-            
-            className="btn btn-primary hotel-roomc"
-     
-            
-            // className="update-btn"
-            
-             onClick={updateComment}>
+            <button className="update-btn" onClick={updateComment}>
               update
             </button>
-          )}
-        </div>
-        <CommentFooter
-          // vote={vote}
-          // setVoted={setVoted}
-          // score={score}
-          // setScore={setScore}
-          // updateScore={updateScore}
-          commentData={commentData}
-          // setReplying={setReplying}
-          setDeleting={setDeleting}
-          setDeleteModalState={setDeleteModalState}
-          setEditing={setEditing}
-        />{" "}
-      </div>
+          )} */}
+				</div>
+				<CommentFooter
+					// setVoted={setVoted}
 
+					// setScore={setScore}
+					// updateScore={updateScore}
+					commentData={commentData}
+					time={time}
+					// setReplying={setReplying}
+					// setDeleting={setDeleting}
+					// setDeleteModalState={setDeleteModalState}
+					// setEditing={setEditing}
+				/>{' '}
+			</div>
 
-      {deleting && (
+			
+      {/* {deleting && ( */}
+    
+    
         <DeleteModal
-          setDeleting={setDeleting}
-          deleteComment={deleteComment}
-          setDeleteModalState={setDeleteModalState}
+    		hotelid={hotelid}
+										comId={comId}
+    
+          // setDeleting={setDeleting}
+          // deleteComment={deleteComment}
+          // setDeleteModalState={setDeleteModalState}
         />
-      )}
-    </div>
-  );
+    
+    
+      {/* )} */}
+		</div>
+	);
 };
 
 export default Comment;
