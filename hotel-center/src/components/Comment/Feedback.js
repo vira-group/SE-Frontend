@@ -160,6 +160,30 @@ const Feedback = (props) => {
 	let addComments = (newComment) => {
 		let updatedComments = [ ...comments, newComment ];
 		updateComments(updatedComments);
+
+
+		
+		//send comment
+		// axios
+		// 	.post(
+		// 		makeURL('/hotel/' + hotelid + '/' + 'comments/'),
+		// 		{
+		// 			rate :3 ,
+		// 			text :"ouuuii"
+		// 		},
+		// 		{
+		// 			headers: {
+		// 				Authorization: cookies.get('Authorization')
+		// 			}
+		// 		}
+		// 	)
+		// 	.then((response) => {
+		// 		console.log(response, 'posted');
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error, 'post error');
+		// 	});
+		
 	};
 
 	// add replies
