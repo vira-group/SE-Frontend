@@ -38,6 +38,7 @@ const Comment = ({
 		setRatingValue(rate);
 	};
 
+	console.log(avatar);
 	const updateComment = () => {
 
 		axios

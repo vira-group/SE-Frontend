@@ -30,7 +30,7 @@ const CommentBtn = ({ commentData, setDeleting, setDeleteModalState, setEditing,
 
 			{writer ? (
 				<button
-					className={`edit-btn ${commentData.currentUser ? '' : 'display--none'}`}
+					className={`edit-btn ${writer ? '' : 'display--none'}`}
 					onClick={showEditComment}
 				>
 					<IconEdit /> Edit

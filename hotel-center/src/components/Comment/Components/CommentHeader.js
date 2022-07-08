@@ -18,12 +18,12 @@ const CommentHeader = ({
 }) => {
 	return (
 		<div className="comment--header">
-        <img   className={`profile-pic`} src={references.base_address+ avatar}></img>
+        <img   className={`profile-pic`} src={avatar}></img>
     
 			<div className="username">{first}   </div>
       
 			{/* <div className="username">{last}</div> */}
-			{commentData.currentUser ? <div className="you-tag">you</div> : ''}
+			{writer ? <div className="you-tag">you</div> : ''}
 
 			<div className="comment-posted-time">{`at :${time} `}</div>
 
