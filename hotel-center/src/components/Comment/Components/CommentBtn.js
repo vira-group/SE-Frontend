@@ -3,7 +3,7 @@ import { ReactComponent as IconEdit } from "../Assets/images/icon-edit.svg";impo
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 
 
-const CommentBtn = ({commentData,  setDeleting, setDeleteModalState, setEditing}) => {
+const CommentBtn = ({commentData,  setDeleting, setDeleteModalState, setEditing, writer}) => {
 
   
   let counter = false;
@@ -27,12 +27,19 @@ const CommentBtn = ({commentData,  setDeleting, setDeleteModalState, setEditing}
     <div className="comment--btn">
       <button
         className={`delete-btn ${
-          commentData.currentUser ? "" : "display--none"
+          writer ? "" : "display--none"
         }`}
         onClick={showDeleteModal}
       >
         <IconDelete /> Delete
       </button>
+
+
+
+
+
+
+
       <button
         className={`edit-btn ${commentData.currentUser ? "" : "display--none"}`}
         onClick={showEditComment}

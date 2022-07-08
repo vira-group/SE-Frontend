@@ -12,11 +12,14 @@ const Feedback = (props) => {
 
 	const [ c, setc ] = useState(null);
 	const [ c1, setc1 ] = useState(null);
+	const [ c2, setc2 ] = useState(null);
 	const [ first, setFirst ] = useState('');
 	const [ last, setlast ] = useState('');
 	const [ avatar, setAvatar ] = useState(null);
 	const [ hotelid, sethotelid ] = useState(null);
-	const [ comId, setComid ] = useState(null);
+	const [ comId, setcomId ] = useState(null);
+	const [ writer, setWriter ] = useState(false);
+	const [ Comwriter, setComWriter ] = useState(null);
 
 	// const getData = async () => {
 	// 	const res = await fetch('./data/data.json');
@@ -39,8 +42,8 @@ const Feedback = (props) => {
 			});
 	}, []);
 
-	console.log(first);
-	console.log(last);
+	// console.log(first);
+	// console.log(last);
 
 	useEffect(() => {
 		const hotelid = props.id;
@@ -58,29 +61,20 @@ const Feedback = (props) => {
 				console.log(error, 'comment error');
 			});
 
-		// //get my comments
-		// axios
-		// 	.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'), {
-		// 		headers: {
-		// 			Authorization: cookies.get('Authorization')
-		// 		}
-		// 	})
-		// 	.then((response) => {
-		// 		console.log('my hotel comments', response.data);
-		// 		// console.log('hotel comments', response.data);
-		// 		// console.log('hotel comments', response.data);
-		// 		// console.log('hotel comments', response.data);
-		// 		setc1(response.data[0].text);
-		// 		// console.log(comments, "comment in the update")
-		// 		console.log(comments, 'my comments ');
-		// 		// updateComments1(response.data.slice(0, 10).text);
-		// 		// updateComments2(response.data.slice(11, 49).text);
-
-		// 		// console.log(comments, 'commsetes');
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error, 'comment error');
-		// 	});
+		//get my comments
+		axios
+			.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'), {
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			})
+			.then((response) => {
+				console.log('my hotel comments', response.data);
+				setComWriter(response.data[0].writer);
+			})
+			.catch((error) => {
+				console.log(error, 'comment error');
+			});
 
 		//send comment
 		// axios
@@ -140,6 +134,15 @@ const Feedback = (props) => {
 		// 		console.log(error, 'comment delete error');
 		// 	});
 	}, []);
+	console.log(writer, 'writer');
+
+	// for(a in c2) {
+	// 	console.log(
+
+	// 	(a.id  === comId) ?   "yes"  : "no");
+
+	// }
+
 	useEffect(() => {
 		// localStorage.getItem('comments') !== null
 		// 	? updateComments(JSON.parse(localStorage.getItem('comments')))
@@ -157,33 +160,33 @@ const Feedback = (props) => {
 	);
 
 	// add comments
-	let addComments = (newComment) => {
+	let addComments = (newComment, text, rate) => {
 		let updatedComments = [ ...comments, newComment ];
 		updateComments(updatedComments);
+		// send comment
 
+		console.log(rate);
+		console.log(text);
 
-		
-		//send comment
-		// axios
-		// 	.post(
-		// 		makeURL('/hotel/' + hotelid + '/' + 'comments/'),
-		// 		{
-		// 			rate :3 ,
-		// 			text :"ouuuii"
-		// 		},
-		// 		{
-		// 			headers: {
-		// 				Authorization: cookies.get('Authorization')
-		// 			}
-		// 		}
-		// 	)
-		// 	.then((response) => {
-		// 		console.log(response, 'posted');
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error, 'post error');
-		// 	});
-		
+		axios
+			.post(
+				makeURL('/hotel/' + hotelid + '/' + 'comments/'),
+				{
+					rate: rate / 20,
+					text: text
+				},
+				{
+					headers: {
+						Authorization: cookies.get('Authorization')
+					}
+				}
+			)
+			.then((response) => {
+				console.log(response, 'posted');
+			})
+			.catch((error) => {
+				console.log(error, 'post error');
+			});
 	};
 
 	// add replies
@@ -231,24 +234,44 @@ const Feedback = (props) => {
 						<div className="mb-3 row">
 							<div className="col">
 								{Array.isArray(c1) ? (
-									c1.map((e) => (
-										<Comment
-											key={e.id}
-											commentData={e.text}
-											rate={e.rate}
-											time={e.created_at.split('T')[1].split('.')[0]}
-											first={first}
-											last={last}
-											avatar={avatar}
-											hotelid={hotelid}
-											comId={comId}
-											// editComment={editComment}
-											commentDelete={commentDelete}
-											setDeleteModalState={setDeleteModalState}
-										/>
-									))
+									c1.map(
+										(e) =>
+											e.writer === Comwriter ? (
+												<Comment
+													key={e.id}
+													commentData={e.text}
+													rate={e.rate}
+													time={e.created_at.split('T')[1].split('.')[0]}
+													first={first}
+													last={last}
+													avatar={avatar}
+													hotelid={hotelid}
+													comId={e.comId}
+													// editComment={editComment}
+													commentDelete={commentDelete}
+													setDeleteModalState={setDeleteModalState}
+													writer={true}
+												/>
+											) : (
+												<Comment
+													key={e.id}
+													commentData={e.text}
+													rate={e.rate}
+													time={e.created_at.split('T')[1].split('.')[0]}
+													first={first}
+													last={last}
+													avatar={avatar}
+													hotelid={hotelid}
+													comId={e.comId}
+													// editComment={editComment}
+													commentDelete={commentDelete}
+													setDeleteModalState={setDeleteModalState}
+													writer={false}
+												/>
+											)
+									)
 								) : null};
-								<AddComment buttonValue={'send'} addComments={addComments} />
+								<AddComment buttonValue={'send'} addComments={addComments} avatar={avatar} />
 							</div>
 						</div>
 					</div>
@@ -283,24 +306,24 @@ const Feedback = (props) => {
 							</div>
 							<div className="modal-body">
 								<div className="container">
-								{Array.isArray(c) ? (
-									c.map((e) => (
-										<Comment
-											key={e.id}
-											commentData={e.text}
-											rate={e.rate}
-											time={e.created_at.split('T')[1].split('.')[0]}
-											first={first}
-											last={last}
-											avatar={avatar}
-											hotelid={hotelid}
-											comId={comId}
-											// editComment={editComment}
-											// commentDelete={commentDelete}
-											// setDeleteModalState={setDeleteModalState}
-										/>
-									))
-								) : null};
+									{Array.isArray(c) ? (
+										c.map((e) => (
+											<Comment
+												key={e.id}
+												commentData={e.text}
+												rate={e.rate}
+												time={e.created_at.split('T')[1].split('.')[0]}
+												first={first}
+												last={last}
+												avatar={avatar}
+												hotelid={hotelid}
+												comId={comId}
+												// editComment={editComment}
+												// commentDelete={commentDelete}
+												// setDeleteModalState={setDeleteModalState}
+											/>
+										))
+									) : null};
 								</div>
 							</div>
 						</div>

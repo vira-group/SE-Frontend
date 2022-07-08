@@ -1,6 +1,7 @@
 import './Styles/DeleteModal.scss';
 import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
+import { commentPostedTime } from '../utils';
 
 const DeleteModal = ({ hotelid, comId, setDeleting, deleteComment, setDeleteModalState }) => {
 	const cancelDelete = () => {
@@ -9,6 +10,10 @@ const DeleteModal = ({ hotelid, comId, setDeleting, deleteComment, setDeleteModa
 	};
 
 	const deleteBtnClick = () => {
+
+		if(comId !== null)
+		{
+
 		axios
 			.delete(makeURL('/hotel/' + hotelid + '/' + 'comments/' + comId  +"/" ), {
 				headers: {
@@ -21,7 +26,7 @@ const DeleteModal = ({ hotelid, comId, setDeleting, deleteComment, setDeleteModa
 			.catch((error) => {
 				console.log(error, 'comment delete error');
 			});
-
+		}
 		deleteComment();
 		setDeleteModalState(false);
 	};

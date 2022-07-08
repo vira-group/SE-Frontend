@@ -2,6 +2,7 @@ import CommentBtn from './CommentBtn';
 import '../../../css/Hotelpage2.css';
 import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
+import references from '../../../assets/References.json';
 
 const CommentHeader = ({
 	commentData,
@@ -12,15 +13,16 @@ const CommentHeader = ({
 	avatar,
 	setDeleting,
 	setDeleteModalState,
-	setEditing
+	setEditing,
+	writer
 }) => {
 	return (
 		<div className="comment--header">
-        <img   className={`profile-pic`} src={"http://127.0.0.1:8000"+ avatar}></img>
+        <img   className={`profile-pic`} src={references.base_address+ avatar}></img>
     
 			<div className="username">{first}   </div>
       
-			<div className="username">{last}</div>
+			{/* <div className="username">{last}</div> */}
 			{commentData.currentUser ? <div className="you-tag">you</div> : ''}
 
 			<div className="comment-posted-time">{`at :${time} `}</div>
@@ -45,6 +47,7 @@ const CommentHeader = ({
 				setDeleting={setDeleting}
 				setDeleteModalState={setDeleteModalState}
 				setEditing={setEditing}
+				writer = {writer}
 			/>
 		</div>
 	);

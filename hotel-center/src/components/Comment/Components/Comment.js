@@ -18,7 +18,8 @@ const Comment = ({
 	comId,
 	// editComment,
 	commentDelete,
-	setDeleteModalState
+	setDeleteModalState,
+	writer
 }) => {
 	// const [editing, setEditing] = useState(false);
 	// const [content, setContent] = useState(commentData);
@@ -50,6 +51,7 @@ const Comment = ({
 						setDeleting={setDeleting}
 						setDeleteModalState={setDeleteModalState}
 						// setEditing={setEditing}
+						writer={writer}
 					/>
 
 					<div className="comment-content">{commentData}</div>
