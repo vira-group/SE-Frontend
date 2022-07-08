@@ -31,6 +31,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import "../../../css/Hotelpage2.css";
+import "../../../css/Chat.css";
 import { srLatn } from "date-fns/locale";
 import Image1 from "../../../statics/img/room1.jpg";
 import Image2 from "../../../statics/img/room2.jpg";
@@ -44,6 +45,7 @@ import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 import references from "../../../assets/References.json";
 import Roomcard from "./Roomcard";
 import ResponsiveDatePickers from "../../HotelPage/ResponsiveDatePickers";
+import Messages from "./Chatwithhotel";
 
 const labels = {
   0.5: "Useless",
@@ -424,6 +426,50 @@ export default function Hotelpage() {
                   <div class="bar-3"></div>
                 </div>
               </div> */}
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        className="chat-button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal1"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          className="bi bi-chat-left-text"
+          viewBox="0 0 16 16"
+        >
+          <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+          <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+        </svg>
+      </button>
+      <div
+        className="modal fade"
+        id="exampleModal1"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+            {/* <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Messages
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div> */}
+            <div className="modal-body p-0">
+              <Messages />
             </div>
           </div>
         </div>

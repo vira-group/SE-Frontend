@@ -20,7 +20,7 @@ export default function Newhotelcard(props) {
           <div className="row">
             <div className="col-md">
               <img
-                src={"http://127.0.0.1:8000" + props.image}
+                src={props.image}
                 className="card-img-top hotel-card-img"
               ></img>
             </div>
