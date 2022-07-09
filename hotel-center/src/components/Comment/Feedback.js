@@ -8,6 +8,7 @@ import references from '../../assets/References.json';
 
 const Feedback = (props) => {
 	const [ comments, updateComments ] = useState([]);
+	const [ newCom, setNewCom ] = useState([]);
 	const [ deleteModalState, setDeleteModalState ] = useState(false);
 
 	const [ c, setc ] = useState(null);
@@ -51,7 +52,8 @@ const Feedback = (props) => {
 			.then((response) => {
 				console.log('hotel comments', response.data);
 				setc(response.data);
-				setc1(response.data.slice(0, 4));
+
+				setc1(response.data.slice(response.data.length - 5, response.data.length - 1));
 			})
 			.catch((error) => {
 				console.log(error, 'comment error');
@@ -79,7 +81,7 @@ const Feedback = (props) => {
 				}
 			})
 			.then((res) => {
-				console.log('response of profile: ', res.data);
+				// console.log('response of profile: ', res.data);
 				setAvatar(res.data.avatar);
 			});
 
@@ -141,7 +143,7 @@ const Feedback = (props) => {
 		// 		console.log(error, 'comment delete error');
 		// 	});
 	}, []);
-	console.log(writer, 'writer');
+	// console.log(writer, 'writer');
 
 	useEffect(() => {
 		// localStorage.getItem('comments') !== null
@@ -165,9 +167,9 @@ const Feedback = (props) => {
 		updateComments(updatedComments);
 		// send comment
 
-		console.log(rate);
-		console.log(text);
-
+		// console.log(rate);
+		// console.log(text);
+		let a = null;
 		axios
 			.post(
 				makeURL('/hotel/' + hotelid + '/' + 'comments/'),
@@ -182,16 +184,23 @@ const Feedback = (props) => {
 				}
 			)
 			.then((response) => {
-				console.log(response, 'posted');
-				setc(response.data);
-				setc1(response.data.slice(0, 4));
-		
+				console.log(response.data, 'posted');
+				a = response.data;
+				// setNewCom(a) ;
+				// setStudents([...students, studentObject]);
+				// c.splice(0, 0, a);
+				// c.push(a);
+				setc([ ...c, a ]);
+
+				setc1([ ...c1, a ]);
 			})
 			.catch((error) => {
 				console.log(error, 'post error');
 			});
 
-			// axios
+		// console.log(newCom , "ffff");
+		// console.log(a , "ffff2");
+		// axios
 		// 	.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
 		// 	.then((response) => {
 		// 		console.log('hotel comments', response.data);
@@ -266,6 +275,11 @@ const Feedback = (props) => {
 										(e) =>
 											e.writer === Comwriter ? (
 												<Comment
+													setc1={setc1}
+													setc={setc}
+													
+													c={c}
+													c1={c1}
 													key={e.id}
 													commentData={e.text}
 													rate={e.rate}
@@ -283,6 +297,11 @@ const Feedback = (props) => {
 												/>
 											) : (
 												<Comment
+													setc1={setc1}
+													setc={setc}
+													
+													c={c}
+													c1={c1}
 													key={e.id}
 													commentData={e.text}
 													rate={e.rate}
@@ -341,6 +360,11 @@ const Feedback = (props) => {
 											(e) =>
 												e.writer === Comwriter ? (
 													<Comment
+														setc1={setc1}
+														setc={setc}
+														
+														c={c}
+														c1={c1}
 														key={e.id}
 														commentData={e.text}
 														rate={e.rate}
@@ -357,6 +381,10 @@ const Feedback = (props) => {
 													/>
 												) : (
 													<Comment
+														setc1={setc1}
+														setc={setc}
+														c={c}
+														c1={c1}
 														key={e.id}
 														commentData={e.text}
 														rate={e.rate}

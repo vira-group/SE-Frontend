@@ -13,6 +13,10 @@ import references from '../../../assets/References.json';
 import { Rating } from 'react-simple-star-rating';
 
 const Comment = ({
+	setc,
+	setc1 ,
+	c,
+	c1,
 	commentData,
 	rate,
 	time,
@@ -34,7 +38,7 @@ const Comment = ({
 		setRatingValue(rate);
 	};
 
-	console.log(avatar);
+	// console.log(avatar);
 	const updateComment = () => {
 		axios
 			.put(
@@ -51,6 +55,23 @@ const Comment = ({
 			)
 			.then((response) => {
 				console.log(response, 'commnet changed');
+
+				// setc1(c1.filter((e) => e.id !== comId));
+
+				const index = c1.findIndex(object => {
+					return object.id === comId;
+				  });
+				  
+				  if (index !== -1) {
+					c1[index].text = content;
+					c1[index].rate = ratingValue;
+
+				  }
+
+				  
+
+
+
 			})
 			.catch((error) => {
 				console.log(error, 'comment change error');
@@ -123,6 +144,11 @@ const Comment = ({
 
 			{deleting && (
 				<DeleteModal
+														setc={setc}
+
+				setc1 = {setc1}
+				c={c}
+												c1={c1}
 					hotelid={hotelid}
 					comId={comId}
 					setDeleting={setDeleting}

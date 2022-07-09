@@ -2,49 +2,32 @@ import './Styles/DeleteModal.scss';
 import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import { commentPostedTime } from '../utils';
+import React, { useState, useEffect } from 'react';
 
-const DeleteModal = ({ hotelid, comId, setDeleting, deleteComment, setDeleteModalState }) => {
+const DeleteModal = ({ c, c1,setc , setc1, hotelid, comId, setDeleting, deleteComment, setDeleteModalState }) => {
 	const cancelDelete = () => {
 		setDeleting(false);
 		setDeleteModalState(false);
 	};
 
 	const deleteBtnClick = () => {
-
-		if(comId !== null)
-		{
-
-		axios
-			.delete(makeURL('/hotel/' + hotelid + '/' + 'comments/' + comId  +"/" ), {
-				headers: {
-					Authorization: cookies.get('Authorization')
-				}
-			})
-			.then((response) => {
-				console.log(response, 'commnet delted');
-			})
-			.catch((error) => {
-				console.log(error, 'comment delete error');
-			});
+		if (comId !== null) {
 			axios
-			.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
-			.then((response) => {
-				console.log('hotel comments', response.data);
-				// setc(response.data);
-				// setCart([...cart, item]);
-				localStorage.setItem( 'deleteAll', JSON.stringify(response.data));
+				.delete(makeURL('/hotel/' + hotelid + '/' + 'comments/' + comId + '/'), {
+					headers: {
+						Authorization: cookies.get('Authorization')
+					}
+				})
+				.then((response) => {
+					console.log(response, 'commnet delted');
+					setc1(c1.filter((e) => e.id !== comId));
+					setc(c.filter((e) => e.id !== comId));
 
-				localStorage.setItem( 'delete', JSON.stringify(response.data.slice(0, 4)));
-				
-				// setc1(response.data.slice(0, 4));
-			})
-			.catch((error) => {
-				console.log(error, 'comment error');
-			});
-
-	
+				})
+				.catch((error) => {
+					console.log(error, 'comment delete error');
+				});
 			// window.location.reload(true);
-
 		}
 		deleteComment();
 		setDeleteModalState(false);
