@@ -18,7 +18,7 @@ export default function NewHotels(props) {
     })
     .then((response) => {
       console.log("this response is for new hotels: ", response.data);
-      setNewhotels(response.data.slice(0.4));
+      setNewhotels(response.data.slice(0,4));
     })
     .catch((error) => {
       console.log("this is the error for new hotels request: ", error);

@@ -34,6 +34,7 @@ import { cookies, makeURL, set_cookie } from "../../../Utils/common";
 import references from "../../../assets/References.json";
 import Roomcard from "./Roomcard";
 import ResponsiveDatePickers from "../../HotelPage/ResponsiveDatePickers";
+import { te } from "date-fns/locale";
 
 const labels = {
   0.5: "Useless",
@@ -76,7 +77,8 @@ export default function Hotelpage() {
   useEffect(() => {
     // console.log(cookies.get("Authorization"));
     const queryString = window.location.toString();
-    const hotelid = queryString.slice(-1);
+    var temp = queryString.split("/");
+    const hotelid = temp[temp.length - 1];
     axios
       .get(makeURL(references.url_one_hotel + hotelid + "/"), {
         headers: {
@@ -99,7 +101,9 @@ export default function Hotelpage() {
 
   useEffect(() => {
     const queryString = window.location.toString();
-    const hotelid = queryString.slice(-1);
+    var temp = queryString.split("/");
+    const hotelid = temp[temp.length - 1];
+    console.log("query string: ", hotelid);
 
     setRooms(JSON.parse(localStorage.getItem("rooms")));
 

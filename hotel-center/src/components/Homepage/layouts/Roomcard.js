@@ -236,7 +236,7 @@ export default function Roomcard(props) {
                   <div className="col">
                     <div className="row">
                       {props.roomfacilities
-                        ? props.roomfacilities.slice(0, 10).map((rf1) => (
+                        ? props.roomfacilities.slice(0, 15).map((rf1) => (
                             <span className="ms-2">
                               <small>
                                 <svg
@@ -259,7 +259,7 @@ export default function Roomcard(props) {
                   <div className="col">
                     <div className="row">
                       {props.roomfacilities
-                        ? props.roomfacilities.slice(10).map((rf2) => (
+                        ? props.roomfacilities.slice(15).map((rf2) => (
                             <span className="ms-2">
                               <small>
                                 <svg
