@@ -22,19 +22,19 @@ const Feedback = (props) => {
 	const [ Comwriter, setComWriter ] = useState(null);
 	// const [ date1, setDate ] = useState("22:44:55");
 
-// console.log(date1 , "date1");
-// const [hour, min, sec] = date1.split(':');
-// hour = parseInt(hour) ;
-// min = parseInt(min);
-// sec = parseInt(sec);
+	// console.log(date1 , "date1");
+	// const [hour, min, sec] = date1.split(':');
+	// hour = parseInt(hour) ;
+	// min = parseInt(min);
+	// sec = parseInt(sec);
 
-// // const date = (hour + 4) + ":" +  (min+34) +  ":" +  sec;
+	// // const date = (hour + 4) + ":" +  (min+34) +  ":" +  sec;
 
-// const getData = async () => {
-// 	const res = await fetch('./data/data.json');
-// 	const data = await res.json();
-// 	updateComments(data.comments);
-// };
+	// const getData = async () => {
+	// 	const res = await fetch('./data/data.json');
+	// 	const data = await res.json();
+	// 	updateComments(data.comments);
+	// };
 
 	// console.log(first);
 	// console.log(last);
@@ -55,7 +55,7 @@ const Feedback = (props) => {
 
 				// setDate((response.data)[0].created_at.split('T')[1].split('.')[0]);
 				setc1(response.data.slice(0, 4));
-				console.log( "http://localhost:8000/media/"+ (response.data)[0].user_info.avatar, "AAAAAAAAAAa");
+				console.log('http://localhost:8000/media/' + response.data[0].user_info.avatar, 'AAAAAAAAAAa');
 			})
 			.catch((error) => {
 				console.log(error, 'comment error');
@@ -76,18 +76,16 @@ const Feedback = (props) => {
 				console.log(error, 'comment error');
 			});
 
-
-				axios
-					.get(makeURL(references.url_edit_profile), {
-						headers: {
-							Authorization: cookies.get('Authorization')
-						}
-					})
-					.then((res) => {
-						console.log('response of profile: ', res.data);
-						setAvatar(res.data.avatar);
-					});
-	
+		axios
+			.get(makeURL(references.url_edit_profile), {
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			})
+			.then((res) => {
+				console.log('response of profile: ', res.data);
+				setAvatar(res.data.avatar);
+			});
 
 		//send comment
 		// axios
@@ -193,20 +191,22 @@ const Feedback = (props) => {
 			.catch((error) => {
 				console.log(error, 'post error');
 			});
-			axios
-			.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
-			.then((response) => {
-				console.log('hotel comments', response.data);
-				setc(response.data);
-				// setCart([...cart, item]);
 
-				// setDate((response.data)[0].created_at.split('T')[1].split('.')[0]);
-				setc1(response.data.slice(0, 4));
-				console.log( "http://localhost:8000/media/"+ (response.data)[0].user_info.avatar, "AAAAAAAAAAa");
-			})
-			.catch((error) => {
-				console.log(error, 'comment error');
-			});
+			window.location.reload(false);
+			// axios
+		// 	.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
+		// 	.then((response) => {
+		// 		console.log('hotel comments', response.data);
+		// 		setc(response.data);
+		// 		// setCart([...cart, item]);
+
+		// 		// setDate((response.data)[0].created_at.split('T')[1].split('.')[0]);
+		// 		setc1(response.data.slice(0, 4));
+		// 		console.log('http://localhost:8000/media/' + response.data[0].user_info.avatar, 'BBBBBa');
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error, 'comment error');
+		// 	});
 
 		// axios
 		// .get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
@@ -266,13 +266,9 @@ const Feedback = (props) => {
 								{Array.isArray(c1) ? (
 									c1.map(
 										(e) =>
-
-
 											e.writer === Comwriter ? (
 												<Comment
 													key={e.id}
-
-													
 													commentData={e.text}
 													rate={e.rate}
 													time={e.created_at.split('T')[1].split('.')[0]}
@@ -281,8 +277,7 @@ const Feedback = (props) => {
 													// avatar={references.url_address + e.user_info.avatar}
 													hotelid={hotelid}
 													comId={e.id}
-													avatar={"http://localhost:8000/media/"+ e.user_info.avatar}
-													
+													avatar={'http://localhost:8000/media/' + e.user_info.avatar}
 													editComment={editComment}
 													commentDelete={commentDelete}
 													setDeleteModalState={setDeleteModalState}
@@ -297,8 +292,7 @@ const Feedback = (props) => {
 													first={first}
 													last={last}
 													// avatar={avatar}
-													avatar={"http://localhost:8000/media/"+ e.user_info.avatar}
-
+													avatar={'http://localhost:8000/media/' + e.user_info.avatar}
 													hotelid={hotelid}
 													comId={e.id}
 													editComment={editComment}
@@ -309,9 +303,7 @@ const Feedback = (props) => {
 											)
 									)
 								) : null};
-								<AddComment buttonValue={'send'} addComments={addComments} 
-																						avatar={avatar}
- />
+								<AddComment buttonValue={'send'} addComments={addComments} avatar={avatar} />
 							</div>
 						</div>
 					</div>
@@ -355,11 +347,9 @@ const Feedback = (props) => {
 														commentData={e.text}
 														rate={e.rate}
 														time={e.created_at.split('T')[1].split('.')[0]}
-
-
 														first={e.user_info.firstName}
 														last={last}
-														avatar={"http://localhost:8000/media/"+ e.user_info.avatar}
+														avatar={'http://localhost:8000/media/' + e.user_info.avatar}
 														hotelid={hotelid}
 														comId={e.id}
 														editComment={editComment}
@@ -372,8 +362,7 @@ const Feedback = (props) => {
 														key={e.id}
 														commentData={e.text}
 														rate={e.rate}
-														avatar={"http://localhost:8000/media/"+ e.user_info.avatar}
-
+														avatar={'http://localhost:8000/media/' + e.user_info.avatar}
 														time={e.created_at.split('T')[1].split('.')[0]}
 														first={first}
 														last={last}

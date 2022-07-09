@@ -10,11 +10,7 @@ import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import references from '../../../assets/References.json';
 
-
 import { Rating } from 'react-simple-star-rating';
-
-	
-
 
 const Comment = ({
 	commentData,
@@ -30,8 +26,8 @@ const Comment = ({
 	setDeleteModalState,
 	writer
 }) => {
-	const [editing, setEditing] = useState(false);
-	const [content, setContent] = useState(commentData);
+	const [ editing, setEditing ] = useState(false);
+	const [ content, setContent ] = useState(commentData);
 	const [ deleting, setDeleting ] = useState(false);
 	const [ ratingValue, setRatingValue ] = useState(0);
 	const handleRating = (rate) => {
@@ -40,12 +36,11 @@ const Comment = ({
 
 	console.log(avatar);
 	const updateComment = () => {
-
 		axios
-			.put
-				(makeURL('/hotel/' + hotelid + '/' + 'comments/' + comId  +"/" ), {
-		
-					rate: (ratingValue/20),
+			.put(
+				makeURL('/hotel/' + hotelid + '/' + 'comments/' + comId + '/'),
+				{
+					rate: ratingValue / 20,
 					text: content
 				},
 				{
@@ -61,8 +56,8 @@ const Comment = ({
 				console.log(error, 'comment change error');
 			});
 
-	//   editComment(content, commentData.id, "comment");
-	  setEditing(false);
+		//   editComment(content, commentData.id, "comment");
+		setEditing(false);
 	};
 
 	const deleteComment = (id, type) => {
@@ -92,28 +87,30 @@ const Comment = ({
 					{/* <div className="comment-content">{commentData}</div> */}
 
 					{!editing ? (
-            <div className="comment-content">{commentData}</div>
-          ) : (
-			<div>
-			<Rating onClick={handleRating} ratingValue={ratingValue} size={20} />
-
-
-            <textarea
-              className="content-edit-box"
-              value={content}
-              onChange={(e) => {
-                setContent(e.target.value);
-              }}
-            />
-			</div>
-          )}
-          {editing && (
-            <button className="update-btn" onClick={updateComment}>
-              update
-            </button>
-          )}
-		
-		
+						<div className="comment-content">{commentData}</div>
+					) : (
+						<div>
+							<div className="col">
+								<div className="row">
+									<Rating onClick={handleRating} ratingValue={ratingValue} size={20} />
+								</div>
+								<div className="row">
+									<textarea
+										className="content-edit-box"
+										value={content}
+										onChange={(e) => {
+											setContent(e.target.value);
+										}}
+									/>
+								</div>
+							</div>
+						</div>
+					)}
+					{editing && (
+						<button className="update-btn" onClick={updateComment}>
+							update
+						</button>
+					)}
 				</div>
 				<CommentFooter
 					commentData={commentData}
@@ -128,7 +125,6 @@ const Comment = ({
 				<DeleteModal
 					hotelid={hotelid}
 					comId={comId}
-
 					setDeleting={setDeleting}
 					deleteComment={deleteComment}
 					setDeleteModalState={setDeleteModalState}

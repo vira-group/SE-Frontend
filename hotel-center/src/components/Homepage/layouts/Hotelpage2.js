@@ -85,6 +85,7 @@ export default function Hotelpage(props) {
 
 	// const { hotelid } = useParams();
 	const [ hotel, setHotel ] = useState(null);
+	const [ rank, setRank ] = useState(null);
 	const [ facility, setFacility ] = useState(null);
 	const [ roomimg, setRoomimg ] = useState(null);
 	const [ f1, setf1 ] = useState(null);
@@ -167,6 +168,7 @@ export default function Hotelpage(props) {
 				setf2(response.data.facilities.slice(4, 8));
 				setCheckin(response.data.check_in_range);
 				setCheckout(response.data.check_out_range);
+				setRank(response.data.)
 			})
 			.catch((error) => {
 				console.log(error);
@@ -501,7 +503,7 @@ export default function Hotelpage(props) {
 							>
 								<Rating
 									name="text-feedback"
-									value={value}
+									value={3}
 									readOnly
 									precision={0.5}
 									emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
