@@ -32,7 +32,7 @@ const AddComment = ({ buttonValue, addComments , avatar}) => {
 	return (
 		<div className="add-comment">
 			<div>
-				<img   className={`profile-pic`} src={avatar}></img>
+				<img   className={`profile-pic`} src={references.base_address+ avatar}></img>
     
 			</div>
 			<Rating onClick={handleRating} ratingValue={ratingValue} size={20} />

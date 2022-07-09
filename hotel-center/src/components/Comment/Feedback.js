@@ -63,7 +63,7 @@ const Feedback = (props) => {
 
 		//get my comments
 		axios
-			.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'), {
+			.get(makeURL('/hotel/' + hotelid + '/' + 'mycomment/'), {
 				headers: {
 					Authorization: cookies.get('Authorization')
 				}
@@ -75,6 +75,19 @@ const Feedback = (props) => {
 			.catch((error) => {
 				console.log(error, 'comment error');
 			});
+
+
+				axios
+					.get(makeURL(references.url_edit_profile), {
+						headers: {
+							Authorization: cookies.get('Authorization')
+						}
+					})
+					.then((res) => {
+						console.log('response of profile: ', res.data);
+						setAvatar(res.data.avatar);
+					});
+	
 
 		//send comment
 		// axios
@@ -180,6 +193,20 @@ const Feedback = (props) => {
 			.catch((error) => {
 				console.log(error, 'post error');
 			});
+			axios
+			.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
+			.then((response) => {
+				console.log('hotel comments', response.data);
+				setc(response.data);
+				// setCart([...cart, item]);
+
+				// setDate((response.data)[0].created_at.split('T')[1].split('.')[0]);
+				setc1(response.data.slice(0, 4));
+				console.log( "http://localhost:8000/media/"+ (response.data)[0].user_info.avatar, "AAAAAAAAAAa");
+			})
+			.catch((error) => {
+				console.log(error, 'comment error');
+			});
 
 		// axios
 		// .get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
@@ -283,7 +310,7 @@ const Feedback = (props) => {
 									)
 								) : null};
 								<AddComment buttonValue={'send'} addComments={addComments} 
-																						avatar={"http://localhost:8000/media/"+ e.user_info.avatar}
+																						avatar={avatar}
  />
 							</div>
 						</div>
