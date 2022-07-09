@@ -17,11 +17,13 @@ export default function Sidebar() {
           <ModeEditOutlinedIcon className="icon-style" />
           <p className="mb-0">Edit Profile</p>
         </Link>
+        
         <hr className="mb-2" />
         <Link to="/myhotels" class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2">
           <BedIcon className="icon-style" />
           <p className="mb-0">My Hotels</p>
         </Link>
+
         <hr className="mb-2" />
         <Link to="#" class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2">
           <CardTravelIcon className="icon-style" />
@@ -36,6 +38,7 @@ export default function Sidebar() {
           <p className="mb-0">Favorites</p>
         </Link>
         <hr className="mb-2" />
+
         <Link
           to="/profile/IncreaseCredit"
           class="nav-link link-dark sidebar-items d-lg-flex"
@@ -43,6 +46,8 @@ export default function Sidebar() {
           <AddCardIcon className="icon-style" />
           <p className="mb-0">Wallet</p>
         </Link>
+
+
       </div>
     </div>
   );

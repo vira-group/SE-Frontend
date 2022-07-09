@@ -14,6 +14,7 @@ import Profile from './components/Profile/Editprofile';
 import IncreaseCredit from './components/Profile/IncreaseCredit';
 import Favorites from './components/Profile/Favorites';
 import Myhotels from './components/Profile/Myhotels';
+import ReservedRooms from './components/Profile/ReservedRooms';
 import reservation from './components/Reservation/reservation';
 import Edithotel from './components/AdminPanel/Pages/Edithotel';
 import Createroom from './components/AdminPanel/Pages/Createroom';
@@ -50,6 +51,7 @@ function App() {
 					<Route exact path="/profile/IncreaseCredit" component={IncreaseCredit} />
 					<Route exact path="/profile/favorites" component={Favorites} />
 					<Route exact path="/myhotels" component={Myhotels} />
+					<Route exact path="/reservedrooms" component={ReservedRooms} />
 					<Route exact path="/hotelpage/:datein/:dateout/:num/:handle" component={hotelPage} />
 					<Route exact path="/verify-email" component={Verify} />
 					<Route exact path="/" component={Homepage} />
