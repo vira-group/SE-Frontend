@@ -51,11 +51,7 @@ const Feedback = (props) => {
 			.then((response) => {
 				console.log('hotel comments', response.data);
 				setc(response.data);
-				// setCart([...cart, item]);
-
-				// setDate((response.data)[0].created_at.split('T')[1].split('.')[0]);
 				setc1(response.data.slice(0, 4));
-				console.log('http://localhost:8000/media/' + response.data[0].user_info.avatar, 'AAAAAAAAAAa');
 			})
 			.catch((error) => {
 				console.log(error, 'comment error');
@@ -187,12 +183,14 @@ const Feedback = (props) => {
 			)
 			.then((response) => {
 				console.log(response, 'posted');
+				setc(response.data);
+				setc1(response.data.slice(0, 4));
+		
 			})
 			.catch((error) => {
 				console.log(error, 'post error');
 			});
 
-			window.location.reload(false);
 			// axios
 		// 	.get(makeURL('/hotel/' + hotelid + '/' + 'comments/'))
 		// 	.then((response) => {
