@@ -68,7 +68,7 @@ export default function Roomcard(props) {
 
 		// console.log("button clicked", s);
 
-		window.location.href = 'http://localhost:3000/reserve/' + props.getin+
+		window.location.href = 'http://localhost:3000/reserve/' + props.getin +
 		'/' +
 			props.getout +
 			'/' +

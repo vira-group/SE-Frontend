@@ -8,6 +8,8 @@ import axios from 'axios';
 // import Popup from './Popup.jsx';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import moment from 'moment';
+// let formattedDate = moment(date).format('YYYY-MM-DD');
 
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
@@ -35,7 +37,10 @@ class Reservation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			person : 0,
+			person: 0,
+			getin: null,
+			getout: null,
+
 			err: '',
 			start_day: '2022-05-18',
 			end_day: '2022-05-23',
@@ -45,7 +50,7 @@ class Reservation extends React.Component {
 			city: '',
 			num_passenger: '10',
 
-		 	room: 1,
+			room: 1,
 			emailtxt: '',
 			message: '',
 			fields: {},
@@ -75,13 +80,16 @@ class Reservation extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 	calculatePrice() {
-		let s = this.state.start_day.split('-');
-		let e = this.state.end_day.split('-');
-		let payment = (parseInt(e[2]) - parseInt(s[2]) + 1) * parseInt(this.state.price_per_day);
-		return payment;
+		let s = (this.state.getin.split('-'))[2];
+		console.log(s, 'pay');
+
+		let e = (this.state.getout.split('-'))[2];
+		console.log(e, 'pay');
+
+		let payment =( (parseInt(e) - parseInt(s) + 1) * parseInt(this.state.price_per_day));
+		this.setState({ get_price: payment });
 	}
 
- 
 	onSubmit(e) {
 		e.preventDefault();
 
@@ -95,8 +103,8 @@ class Reservation extends React.Component {
 
 			console.log(
 				one_room_reserve(
-					JSON.parse(localStorage.getItem('i1')).split('T')[0],
-					JSON.parse(localStorage.getItem('i2')).split('T')[0],
+					this.state.getin ,
+					this.state.getout,
 					this.state.fields['firstname'],
 					this.state.fields['lastname'],
 					this.state.room,
@@ -110,54 +118,43 @@ class Reservation extends React.Component {
 		}
 	}
 
-
-
-
-
-
-
 	async componentDidMount() {
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
-		
-		
+
 		var splitted = window.location.toString().split('/');
-	
+
 		await this.setState({ room: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.room);
-		console.log(this.state.room , "roo");
+		console.log(this.state.room, 'roo');
 
 		await this.setState({ city: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.city);
-		console.log(this.state.city , "city");
-	
-	
+		console.log(this.state.city, 'city');
+
 		await this.setState({ name: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.name);
-		console.log(this.state.name , "nam");
-
-
+		console.log(this.state.name, 'nam');
 
 		await this.setState({ price_per_day: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.price_per_day);
 
 		await this.setState({ person: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.person);
-		console.log(this.state.person , "per");
-	
+		console.log(this.state.person, 'per');
+
+		await this.setState({ getout: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.getout);
+		this.setState({ getout: moment(this.state.getout).format('YYYY-MM-DD') });
+		console.log(this.state.getout, 'getout');
+		
 
 		await this.setState({ getin: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.getin);
-		console.log(this.state.getin , "get");
-		
-		await this.setState({ getout: decodeURIComponent(splitted.pop()) });
-		decodeURIComponent(this.state.getout);
-		console.log(this.state.getout , "get");
-	
+		this.setState({ getin: moment(this.state.getin).format('YYYY-MM-DD') });
+		console.log(this.state.getin, 'getin');
+
+		this.calculatePrice();
 		// console.log(decodeURIComponent(splitted.pop()), "per");
-
-
-
-
 
 		document.getElementById('pic1').src = JSON.parse(localStorage.getItem('items'))[0].image
 			? 'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[0].image
@@ -176,16 +173,16 @@ class Reservation extends React.Component {
 			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[2].image;
 		document.getElementById('pic8').src =
 			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[3].image;
-		document.getElementById('dateout').innerHTML = JSON.parse(localStorage.getItem('i2')).split('T')[0];
-		document.getElementById('datein').innerHTML = JSON.parse(localStorage.getItem('i1')).split('T')[0];
-		document.getElementById('person').innerHTML =
-			(parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) -
-				parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) +
-				1) *
-				parseInt(this.state.price_per_day) +
-			'$';
-	}
 
+		// 	document.getElementById('dateout').innerHTML = JSON.parse(localStorage.getItem('i2')).split('T')[0];
+		// document.getElementById('datein').innerHTML = JSON.parse(localStorage.getItem('i1')).split('T')[0];
+		// document.getElementById('person').innerHTML =
+		// 	(parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) -
+		// 		parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) +
+		// 		1) *
+		// 		parseInt(this.state.price_per_day) +
+		// 	'$';
+	}
 
 	formValChange = (e) => {
 		let fields = this.state.fields;
@@ -223,7 +220,7 @@ class Reservation extends React.Component {
 				error.phone.p2 = value.length < 11 ? '*Too short for a phone number' : '';
 
 				error.phone.p3 = !value ? '*Password field must not be empty' : '';
- 
+
 				break;
 
 			case 'nationalcode':
@@ -248,14 +245,10 @@ class Reservation extends React.Component {
 	};
 
 	render() {
-	
-		this.state.get_price = this.calculatePrice();
-		console.log(this.state.phone);
+		// this.state.get_price = this.calculatePrice();
+		// this.calculatePrice();
 		return (
 			<div>
-				{/* <div /> */}
-				{/* <div><Popup  data={this.state}></Popup> </div> */}
-
 				<div className="containter m-5">
 					<div className="row justify-content-center">
 						<div
@@ -341,18 +334,10 @@ class Reservation extends React.Component {
 							</button>
 						</div>
 
-
-
-
-
 						<div className="col-12 col-lg-4">
 							<div className="card-containter ">
 								<div className="card-body">
 									<div class="shadow p-3 mb-5 bg-body rounded">
-
-
-
-									
 										<div className="row   m-3">
 											<div className="col" style={{ display: 'flex', alignItems: 'left' }}>
 												<div
@@ -382,8 +367,7 @@ class Reservation extends React.Component {
 																color: 'grey'
 															}}
 														>
-															{/* <small id="datein" /> */}
-
+															{this.state.getin}
 														</span>
 													</div>
 												</div>
@@ -417,7 +401,8 @@ class Reservation extends React.Component {
 																color: 'grey'
 															}}
 														>
-															<small id="dateout" />
+															{/* <small id="dateout" /> */}
+															{this.state.getout}
 														</span>
 													</div>
 												</div>
@@ -443,13 +428,11 @@ class Reservation extends React.Component {
 											<div className="col col-sm-8 " style={{ fontWeight: 'bold' }}>
 												<span className="ms-2"> Number of passengers : </span>
 											</div>
-											
-											
-											<div   style={{  color: 'grey' }}>
+
+											<div style={{ color: 'grey' }}>
 												{/* {JSON.parse(localStorage.getItem('i3'))} */}
-											{this.state.person}
+												{this.state.person}
 											</div>
-										
 										</div>
 
 										<div className="">
@@ -482,7 +465,9 @@ class Reservation extends React.Component {
 											>
 												<span className="ms-2">Payment details : </span>
 											</div>
-											<div style={{ justifyContent: 'end', color: 'grey' }} id="person" />
+											{/* {this.state.price_per_day} */}
+											{this.state.get_price}$
+											{/* <div style={{ justifyContent: 'end', color: 'grey' }} id="person" /> */}
 										</div>
 									</div>
 								</div>
@@ -665,7 +650,7 @@ class Reservation extends React.Component {
 										</div>
 									</div>
 									<div class="col-md-4 ">
-											<PhoneInput
+										<PhoneInput
 											country={'us'}
 											id="phone"
 											label="phone"
@@ -675,29 +660,6 @@ class Reservation extends React.Component {
 											value={this.state['phone']}
 											onChange={(phone) => this.setState({ phone })}
 										/>
-
-										{/* 										
-										<div className="mt-3 ">
-											{this.state.error.phone.p1.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p1}
-													<br />
-												</p>
-											)}
-
-											{this.state.error.phone.p3.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p3}
-													<br />
-												</p>
-											)}
-											{this.state.error.phone.p2.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p2}
-													<br />
-												</p>
-											)}
-										</div> */}
 									</div>
 									<div className="">
 										<hr className="hr-text" />

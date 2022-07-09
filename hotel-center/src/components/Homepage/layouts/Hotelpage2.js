@@ -78,9 +78,7 @@ export default function Hotelpage(props) {
 	const [ numberOfAdults, setNumberOfAdults ] = React.useState(1);
 	const [ numberOfChildren, setNumberOfChildren ] = React.useState(0);
 
-	const [ person, setperson] = useState(null);
-	const [ getin, setgetin] = useState(null);
-	const [ getout, setgetout] = useState(null);
+	const [ person, setperson] = useState(1);
 
 
 	const handleClick = (event) => {
@@ -91,8 +89,10 @@ export default function Hotelpage(props) {
 	};
 
 
+	console.log(checkinDate,"aya in");
 	
-
+	console.log(checkoutDate,"aya in");
+	
 	const handlesearch = () => {
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
@@ -226,6 +226,7 @@ export default function Hotelpage(props) {
 														style={{ borderRadius: '5px' }}
 														onChange={(newValue) => {
 															setCheckinDate(newValue);
+
 															// localStorage.setItem('i1', JSON.stringify(checkinDate));
 														}}
 														renderInput={(params) => (
@@ -241,21 +242,34 @@ export default function Hotelpage(props) {
 											<div className="col-6">
 												<LocalizationProvider dateAdapter={AdapterDateFns}>
 													<DatePicker
+														title="DatePicker"
 														disablePast
+														format="DD/MM/YYYY"
 														minDate={
 															checkinDate ? (
 																new Date(checkinDate.getTime() + oneDay)
 															) : null
 														}
+													
+													
 														label="Check out"
 														value={checkoutDate}
+														style={{ borderRadius: '5px' }}
+													
 														onChange={(newValue) => {
 															setCheckoutDate(newValue);
-															// localStorage.setItem('i2', JSON.stringify(checkoutDate));
+															console.log(checkoutDate,"aya out");
+															// localStorage.setItem('i1', JSON.stringify(checkinDate));
 														}}
 														renderInput={(params) => (
-															<GoldenTextField {...params} variant="outlined" />
+															<GoldenTextField
+																{...params}
+																variant="outlined"
+																title="GoldenTextField"
+															/>
 														)}
+													
+													
 													/>
 												</LocalizationProvider>
 											</div>
@@ -450,7 +464,7 @@ export default function Hotelpage(props) {
 						{rooms ? (
 							rooms.map((r) => (
 								<Roomcard
-getid={checkinDate}
+getin={checkinDate}
 getout={checkoutDate}
 								person = {person}
 									name={r.hotel_info.name}
