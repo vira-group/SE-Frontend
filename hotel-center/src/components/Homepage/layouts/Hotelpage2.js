@@ -362,6 +362,12 @@ export default function Hotelpage(props) {
 						</div>
 					</div>
 
+
+
+
+
+
+
 					<div className="col-lg-8">
 						<div className="row">
 							<h3 className="mb-3 mt-3">Facilities of the hotel</h3>
@@ -444,7 +450,8 @@ export default function Hotelpage(props) {
 						{rooms ? (
 							rooms.map((r) => (
 								<Roomcard
-
+getid={checkinDate}
+getout={checkoutDate}
 								person = {person}
 									name={r.hotel_info.name}
 									city={r.hotel_info.city}

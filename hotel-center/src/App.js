@@ -62,7 +62,7 @@ function App() {
 					<Route exact path="/feedback" component={Feedback} />
 
 					<Route exact path="/auth/activate/:handle/:handle1" component={account_activation} />
-					<Route exact path="/reserve/:price_per_day/:name/:city/:id" component={reservation} />
+					<Route exact path="/reserve/:getin/:getout/:person/:price_per_day/:name/:city/:id" component={reservation} />
 					<Route exact path="/adminpanel/:id/statistics" component={Statistics} />
 					<Route exact path="/adminpanel/:id/createrooom" component={Createroom} />
 					<Route exact path="/adminpanel/:id/edithotel" component={Edithotel} />

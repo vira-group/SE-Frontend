@@ -45,9 +45,7 @@ class Reservation extends React.Component {
 			city: '',
 			num_passenger: '10',
 
-			ischeck1: false,
-			ischeck2: false,
-			room: 1,
+		 	room: 1,
 			emailtxt: '',
 			message: '',
 			fields: {},
@@ -83,15 +81,7 @@ class Reservation extends React.Component {
 		return payment;
 	}
 
-	handlecheck1() {
-		this.setState({ ischeck1: true });
-		console.log('check1');
-	}
-
-	handlecheck2() {
-		this.setState({ ischeck2: true });
-		console.log('check2');
-	}
+ 
 	onSubmit(e) {
 		e.preventDefault();
 
@@ -131,18 +121,39 @@ class Reservation extends React.Component {
 		
 		
 		var splitted = window.location.toString().split('/');
+	
 		await this.setState({ room: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.room);
+		console.log(this.state.room , "roo");
 
 		await this.setState({ city: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.city);
+		console.log(this.state.city , "city");
+	
+	
 		await this.setState({ name: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.name);
+		console.log(this.state.name , "nam");
+
+
+
 		await this.setState({ price_per_day: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.price_per_day);
 
 		await this.setState({ person: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.person);
+		console.log(this.state.person , "per");
+	
 
+		await this.setState({ getin: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.getin);
+		console.log(this.state.getin , "get");
+		
+		await this.setState({ getout: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.getout);
+		console.log(this.state.getout , "get");
+	
+		// console.log(decodeURIComponent(splitted.pop()), "per");
 
 
 
@@ -237,7 +248,7 @@ class Reservation extends React.Component {
 	};
 
 	render() {
-		console.log(this.state.ischeck1);
+	
 		this.state.get_price = this.calculatePrice();
 		console.log(this.state.phone);
 		return (
@@ -435,7 +446,8 @@ class Reservation extends React.Component {
 											
 											
 											<div   style={{  color: 'grey' }}>
-												{JSON.parse(localStorage.getItem('i3'))}
+												{/* {JSON.parse(localStorage.getItem('i3'))} */}
+											{this.state.person}
 											</div>
 										
 										</div>
@@ -694,7 +706,6 @@ class Reservation extends React.Component {
 										<input
 											class="form-check-input form-control-huge checkbox-black"
 											type="checkbox"
-											value={this.state.ischeck1}
 											id="flexCheckDefault"
 										/>
 										<label
@@ -744,7 +755,6 @@ class Reservation extends React.Component {
 											class="btn btn-dark btn-lg"
 											data-bs-toggle="modal"
 											data-bs-target="#exampleModal"
-											// disabled={!(this.state.ischeck1 && this.state.ischeck2)}
 										>
 											Reserve
 										</button>
