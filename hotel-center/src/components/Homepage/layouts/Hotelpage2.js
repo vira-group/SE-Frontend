@@ -168,13 +168,13 @@ export default function Hotelpage(props) {
 				setf2(response.data.facilities.slice(4, 8));
 				setCheckin(response.data.check_in_range);
 				setCheckout(response.data.check_out_range);
-				setRank(response.data.)
+				setRank(response.data.rate) ;
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}, []);
-
+console.log(rank , "gg");
 	useEffect(() => {
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
@@ -503,7 +503,7 @@ export default function Hotelpage(props) {
 							>
 								<Rating
 									name="text-feedback"
-									value={3}
+									value={rank}
 									readOnly
 									precision={0.5}
 									emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
