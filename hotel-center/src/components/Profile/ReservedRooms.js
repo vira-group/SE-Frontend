@@ -12,32 +12,7 @@ import { setISODay } from 'date-fns';
 import CancelReserve  from './CancelReserve';
 export default function ReservedRooms(props) {
 	const [ hotel, setHotel ] = useState(null);
-	const [ room, setroom ] = useState(null);
-	const [ start, setstart ] = useState(null);
-	const [ end, setend ] = useState(null);
-	const [ id, setid ] = useState('');
-	const handleClick = () => {
-		console.log('hotel id: ', id);
-		axios
-			.post(
-				makeURL('/hotel/cancelreserve/'),
-				{
-					reserve: id
-				},
-				{
-					headers: {
-						Authorization: cookies.get('Authorization')
-					}
-				}
-			)
-			.then((response) => {
-				console.log(response.data, 'canceled');
-				setHotel(hotel.filter((e) => e.id !== id));
-			})
-			.catch((error) => {
-				console.log(error, 'cancel error');
-			});
-	};
+	
 
 	useEffect(() => {
 		axios
@@ -62,17 +37,24 @@ export default function ReservedRooms(props) {
 					<Sidebar />
 				</div>
 				<div className="col-lg-9">
-					<div class="row row-cols-1 row-cols-md-3 g-4">
+					{/* <div class="row row-cols-1 row-cols-md-3 g-4"> */}
 						{hotel ? (
 							hotel.map((h) => (
 							
                             <CancelReserve 
-                            id = {h.id}>
+                            id = {h.id}
+							start = {h.start_day}
+							end ={h.end_day}
+							room = {h.room}
+							hotel={hotel}
+							setHotel={setHotel}
+							
+							>
 
                             </CancelReserve>
                             ))
 						) : null}
-					</div>
+					{/* </div> */}
 				</div>
 			</div>
 		</div>

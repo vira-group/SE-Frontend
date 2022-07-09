@@ -8,11 +8,6 @@ import axios from 'axios';
 // import Popup from './Popup.jsx';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import './reserve.css';
-import { Box, CircularProgress, Container, Autocomplete } from '@mui/material';
-
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
@@ -35,20 +30,12 @@ const formvalid2 = ({ error, ...rest }) => {
 
 	return isValid;
 };
-const Alert = React.forwardRef(function Alert(props, ref) {
-	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 class Reservation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			err: '',
-
-			message: '',
-			open: '',
-			loading: false,
-
 			start_day: '2022-05-18',
 			end_day: '2022-05-23',
 			price_per_day: '1',
@@ -56,13 +43,14 @@ class Reservation extends React.Component {
 			name: '',
 			city: '',
 			num_passenger: '10',
-			get_price: 1,
 
 			ischeck1: false,
 			ischeck2: false,
 			room: 1,
 			emailtxt: '',
+			message: '',
 			fields: {},
+			get_price: 1,
 			error: {
 				firstname: {
 					u1: '',
@@ -94,14 +82,6 @@ class Reservation extends React.Component {
 		return payment;
 	}
 
-	handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return;
-		}
-
-		this.setState({ open: false });
-	};
-
 	handlecheck1() {
 		this.setState({ ischeck1: true });
 		console.log('check1');
@@ -121,98 +101,43 @@ class Reservation extends React.Component {
 			fields['phone'] = '';
 			fields['nationalcode'] = '';
 			this.setState({ fields: fields });
-			this.setState({ open: true });
-			this.setState({ message: 'Please fill in the blanks.' });
 
-			console.log(cookies.get('Authorization'));
-			axios
-				.post(
-					makeURL(references.url_reserveroom),
-					{
-						// start_day: JSON.parse(localStorage.getItem('i1')).split('T')[0],
-
-						// end_day: JSON.parse(localStorage.getItem('i2')).split('T')[0],
-
-						// firstname: this.state.fields['firstname'],
-
-						// lastname: this.state.fields['lastname'],
-
-						// room: this.state.room,
-
-						// price_per_day: this.state.price_per_day,
-
-						// national_code: this.state.fields['nationalcode'],
-
-						// phone_number: this.state.fields['phone']
-
-						start_day: '2022-06-18',
-
-						end_day: '2022-06-20',
-
-						firstname: this.state.fields['firstname'],
-
-						lastname: this.state.fields['lastname'],
-
-						room: this.state.room,
-
-						price_per_day: 1,
-
-						national_code: this.state.fields['nationalcode'],
-
-						phone_number: this.state.fields['phone']
-					},
-					{
-						headers: {
-							Authorization: cookies.get('Authorization')
-						}
-					}
+			console.log(
+				one_room_reserve(
+					JSON.parse(localStorage.getItem('i1')).split('T')[0],
+					JSON.parse(localStorage.getItem('i2')).split('T')[0],
+					this.state.fields['firstname'],
+					this.state.fields['lastname'],
+					this.state.room,
+					this.state.price_per_day,
+					this.state.fields['nationalcode'],
+					this.state.fields['phone']
 				)
-				.then((response) => {
-					console.log(response);
-					console.log(response.data);
+			);
 
-					this.setState({ message: 'Your room is reserved successfully' });
-					// window.alert('everything right');
-				})
-				.catch((error) => {
-					if (error.response.status == 400) {
-						this.setState({ message: 'Please enter valid data.' });
-
-						// window.alert('Please enter valid data.');
-					}
-					if (error.response.status == 406) {
-						this.setState({ message: 'Your wallet balance is not enough.' });
-
-						// window.alert('Your wallet balance is not enough.');
-					}
-					if (error.response.status == 403) {
-						this.setState({ message: 'This room is reserved before.' });
-
-						// window.alert('This room is reserved before.');
-					}
-					console.log(error);
-				});
+			// console.log("ddddddssdsd" , is_sent) ;
 		}
 	}
 
+
+
+
+
+
+
 	async componentDidMount() {
-		console.log('dd');
-		console.log(JSON.parse(localStorage.getItem('i2')).split('T')[0], 'dateeeee');
-
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
+		
+		
 		var splitted = window.location.toString().split('/');
-
 		await this.setState({ room: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.room);
 
 		await this.setState({ city: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.city);
-
 		await this.setState({ name: decodeURIComponent(splitted.pop()) });
-
 		await this.setState({ price_per_day: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.price_per_day);
-		console.log(this.state.price_per_day, 'pr');
 
 		document.getElementById('pic1').src = JSON.parse(localStorage.getItem('items'))[0].image
 			? 'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[0].image
@@ -233,8 +158,6 @@ class Reservation extends React.Component {
 			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[3].image;
 		document.getElementById('dateout').innerHTML = JSON.parse(localStorage.getItem('i2')).split('T')[0];
 		document.getElementById('datein').innerHTML = JSON.parse(localStorage.getItem('i1')).split('T')[0];
-		console.log(JSON.parse(localStorage.getItem('i2')).split('T')[0], 'dateeeee');
-		console.log(<small id="dateout" />);
 		document.getElementById('person').innerHTML =
 			(parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) -
 				parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) +
@@ -242,6 +165,7 @@ class Reservation extends React.Component {
 				parseInt(this.state.price_per_day) +
 			'$';
 	}
+
 
 	formValChange = (e) => {
 		let fields = this.state.fields;
@@ -279,7 +203,7 @@ class Reservation extends React.Component {
 				error.phone.p2 = value.length < 11 ? '*Too short for a phone number' : '';
 
 				error.phone.p3 = !value ? '*Password field must not be empty' : '';
-
+ 
 				break;
 
 			case 'nationalcode':
@@ -304,10 +228,14 @@ class Reservation extends React.Component {
 	};
 
 	render() {
+		console.log(this.state.ischeck1);
 		this.state.get_price = this.calculatePrice();
-
+		console.log(this.state.phone);
 		return (
 			<div>
+				{/* <div /> */}
+				{/* <div><Popup  data={this.state}></Popup> </div> */}
+
 				<div className="containter m-5">
 					<div className="row justify-content-center">
 						<div
@@ -393,10 +321,18 @@ class Reservation extends React.Component {
 							</button>
 						</div>
 
+
+
+
+
 						<div className="col-12 col-lg-4">
 							<div className="card-containter ">
 								<div className="card-body">
 									<div class="shadow p-3 mb-5 bg-body rounded">
+
+
+
+									
 										<div className="row   m-3">
 											<div className="col" style={{ display: 'flex', alignItems: 'left' }}>
 												<div
@@ -426,8 +362,8 @@ class Reservation extends React.Component {
 																color: 'grey'
 															}}
 														>
-															<small id="datein" />
-															date1
+															{/* <small id="datein" /> */}
+
 														</span>
 													</div>
 												</div>
@@ -461,7 +397,6 @@ class Reservation extends React.Component {
 																color: 'grey'
 															}}
 														>
-															date2
 															<small id="dateout" />
 														</span>
 													</div>
@@ -488,10 +423,12 @@ class Reservation extends React.Component {
 											<div className="col col-sm-8 " style={{ fontWeight: 'bold' }}>
 												<span className="ms-2"> Number of passengers : </span>
 											</div>
-
-											<div style={{ color: 'grey' }}>
+											
+											
+											<div   style={{  color: 'grey' }}>
 												{JSON.parse(localStorage.getItem('i3'))}
 											</div>
+										
 										</div>
 
 										<div className="">
@@ -530,7 +467,6 @@ class Reservation extends React.Component {
 								</div>
 							</div>
 						</div>
-
 						<div className="col-12 col-md-8 ">
 							<div className="container d-none d-md-block">
 								<br />
@@ -708,7 +644,7 @@ class Reservation extends React.Component {
 										</div>
 									</div>
 									<div class="col-md-4 ">
-										<PhoneInput
+											<PhoneInput
 											country={'us'}
 											id="phone"
 											label="phone"
@@ -761,6 +697,7 @@ class Reservation extends React.Component {
 										</label>
 										<br />
 										<lable className="col-12" class="form-check-label" for="flexCheckDefault">
+											{' '}
 											<p>
 												If your arrival time at the hotel is after 8 pm we assumes no
 												responsibility for the cancellation.
@@ -800,11 +737,7 @@ class Reservation extends React.Component {
 											data-bs-target="#exampleModal"
 											// disabled={!(this.state.ischeck1 && this.state.ischeck2)}
 										>
-											{this.state.loading ? (
-												<CircularProgress style={{ color: '#fff' }} size="1.5rem" />
-											) : (
-												'Reserve'
-											)}
+											Reserve
 										</button>
 									</div>
 									<div
@@ -827,7 +760,6 @@ class Reservation extends React.Component {
 														aria-label="Close"
 													/>
 												</div>
-
 												<div class="modal-body">
 													If confirmed, the room will be reserved for you and the cost will be
 													deducted from your account.
@@ -835,19 +767,19 @@ class Reservation extends React.Component {
 												<br />
 												<br />
 												<br />
-												<div class="modal-footer" style={{ color: '#000000' }}>
+												<div class="modal-footer" style={{ color: '#cd9a2d' }}>
 													<button
 														type="button"
 														class="btn btn-outline-dark"
 														data-bs-dismiss="modal"
+														style={{ color: '#cd9a2d' }}
 													>
 														Close
 													</button>
-
 													<button
 														onClick={this.handleSubmit}
 														type="submit"
-														className="btn btn-primary hotel-room"
+														class="btn btn-dark"
 														style={{ backgroundColor: '#cd9a2d' }}
 													>
 														Confirm
@@ -860,28 +792,6 @@ class Reservation extends React.Component {
 							</div>
 						</div>
 					</div>
-					<Snackbar
-						open={this.state.open}
-						autoHideDuration={2000}
-						onClose={() => this.setState({ open: false })}
-						anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-					>
-						<Alert
-							onClose={() => this.setState({ open: false })}
-							severity={
-								this.state.message === 'This room is reserved before.' ||
-								'Your wallet balance is not enough.' ||
-								'Please enter valid data.' ? (
-									'error'
-								) : (
-									'success'
-								)
-							}
-							sx={{ width: '100%' }}
-						>
-							{this.state.message}
-						</Alert>
-					</Snackbar>{' '}
 				</div>
 			</div>
 		);
