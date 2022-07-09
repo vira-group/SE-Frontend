@@ -32,7 +32,12 @@ export default function Verify() {
               style={{ fontWeight: 'bold', fontSize: '23px', fontFamily: 'serif', marginTop:"1rem" }} >You can create your hotel now.</Typography>
 						</Grid>
 						<div className="verify-img">
-							<img src={image1} className="responsive-img" width="400" height="400" />
+							{/* <img src={image1} className="responsive-img" width="400" height="400" /> */}
+							<img src={image1} className="responsive-img  d-none d-sm-block" width="300" height="300" />
+							<img src={image1} className="responsive-img d-sm-none" width="200" height="200" />
+
+
+
 						</div>
 						{/* </Grid> */}
 						<Grid item style={{ textAlign: 'center', padding: '10px' }} xs={12}>

@@ -28,7 +28,8 @@ export default function Verify() {
 				>
 					<Grid container style={{ padding: '10px', justifyContent: 'center' }}>
 						<Grid item style={{ textAlign: 'center', padding: '10px' }} xs={12}>
-							<Typography variant="h5">Thanks for signing up in our website!</Typography>
+							<Typography variant="h5">		Please complete your profile information to continue.
+									</Typography>
 						</Grid>
 						{/* <Grid item xs={12} style={{justifyContent:'center'}}> */}
 						<div className="verify-img">
@@ -40,8 +41,8 @@ export default function Verify() {
 						{/* </Grid> */}
 						<Grid item style={{ textAlign: 'center', padding: '10px' }} xs={12}>
 							<Typography variant="h7">
-								We're happy you're here!Please check your inboxes and verify your email.
-							</Typography>
+							We're happy you're here!Thank you for choosing Center Hotel.
+ 												</Typography>
 						</Grid>
 					</Grid>
 				</Box>

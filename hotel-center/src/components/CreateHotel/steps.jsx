@@ -113,27 +113,47 @@ export default class steps extends Component {
 												/>
 											</div>
 										</div>
-	<br></br>
-	<br></br>
-  									<div className="row">
+										<br />
+										<br />
+										<div className="row">
 											<br />
 											<br />
 											<div className="row">
-
-                      {/* d-sm-none
+												{/* d-sm-none
 										 d-none d-sm-block
                       */}
-                      <div className="col-1 col-lg-1" />
+												<div className="col-1 col-lg-1 d-none d-md-block" />
+										
+												<div className="col-4 col-lg-8 d-md-none" />
+												<div className="col-5 col-lg-8 d-none d-md-block" />
 
-												<div className="col-5 col-lg-8 d-sm-none" />
-												<div className="col-1 col-lg-8 d-none d-sm-block" />
+												<div
+													className="col-2 col-lg-1 float-right  d-md-none"
+													style={{ marginRight: '30px' }}
+												>
+													{this.state.btn2}
+												</div>
+												<div
+													className="col-2 col-lg-1 float-right d-none d-md-block"
+													style={{ marginRight: '20px' }}
+												>
+													{this.state.btn2}
+												</div>
 
-												<div className="col-2 col-lg-1 float-right  d-sm-none"  style={{marginRight : "45px"}}>{this.state.btn2}</div>
-												<div className="col-2 col-lg-1 float-right d-none d-sm-block"  style={{marginRight : "0px"}}>{this.state.btn2}</div>
+												<div
+													className="col-2 col-lg-1  zero d-md-none"
+													style={{ marginRight: '1px' }}
+												>
+													{this.state.btn}
+												</div>
+												<div
+													className="col-2 col-lg-1  zero d-none d-md-block"
+													style={{ marginRight: '10px' }}
+												>
+													{this.state.btn}
+												</div>
 
-					
-          							<div className="col-2 col-lg-1  zero d-sm-none" style={{marginRight : "1px"}}>{this.state.btn}</div>
-          							<div className="col-2 col-lg-1  zero d-none d-sm-block" style={{marginRight : "0px"}}>{this.state.btn}</div>
+												<div className="col-1 col-lg-1 d-md-none" />
 											</div>
 										</div>
 										<div className="row">{this.state.page}</div>
