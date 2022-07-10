@@ -5,9 +5,15 @@ import { one_room_reserve, room_image } from '../../Utils/connection';
 import references from '../../assets/References.json';
 import { cookies, makeURL } from '../../Utils/common';
 import axios from 'axios';
-import Popup from './Popup.jsx';
+// import Popup from './Popup.jsx';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import moment from 'moment';
+// let formattedDate = moment(date).format('YYYY-MM-DD');
+import { Box, CircularProgress, Container, Autocomplete } from '@mui/material';
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const formvalid2 = ({ error, ...rest }) => {
 	let isValid = false;
@@ -30,11 +36,25 @@ const formvalid2 = ({ error, ...rest }) => {
 
 	return isValid;
 };
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 class Reservation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			message: '',
+			open: '',
+			loading: false,
+
+			person: 0,
+			getin: null,
+			getout: null,
+			im1: null,
+			im2: null,
+			im3: null,
+			im4: null,
+			im5: null,
 			err: '',
 			start_day: '2022-05-18',
 			end_day: '2022-05-23',
@@ -44,8 +64,6 @@ class Reservation extends React.Component {
 			city: '',
 			num_passenger: '10',
 
-			ischeck1: false,
-			ischeck2: false,
 			room: 1,
 			emailtxt: '',
 			message: '',
@@ -75,24 +93,29 @@ class Reservation extends React.Component {
 		this.formValChange = this.formValChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
+
+	handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		this.setState({ open: false });
+	};
+
 	calculatePrice() {
-		let s = this.state.start_day.split('-');
-		let e = this.state.end_day.split('-');
-		let payment = (parseInt(e[2]) - parseInt(s[2]) + 1) * parseInt(this.state.price_per_day);
-		return payment;
+		let s = this.state.getin.split('-')[2];
+		console.log(s, 'pay');
+
+		let e = this.state.getout.split('-')[2];
+		console.log(e, 'pay');
+
+		let payment = (parseInt(e) - parseInt(s) + 1) * parseInt(this.state.price_per_day);
+		this.setState({ get_price: payment });
 	}
 
-	handlecheck1() {
-		this.setState({ ischeck1: true });
-		console.log('check1');
-	}
-
-	handlecheck2() {
-		this.setState({ ischeck2: true });
-		console.log('check2');
-	}
 	onSubmit(e) {
 		e.preventDefault();
+		this.setState({ loading: true });
 
 		if (formvalid2(this.state)) {
 			let fields = {};
@@ -102,68 +125,131 @@ class Reservation extends React.Component {
 			fields['nationalcode'] = '';
 			this.setState({ fields: fields });
 
-			console.log(
-				one_room_reserve(
-					JSON.parse(localStorage.getItem('i1')).split('T')[0],
-					JSON.parse(localStorage.getItem('i2')).split('T')[0],
-					this.state.fields['firstname'],
-					this.state.fields['lastname'],
-					this.state.room,
-					this.state.price_per_day,
-					this.state.fields['nationalcode'],
-					this.state.fields['phone']
+			axios
+				.post(
+					makeURL(references.url_reserveroom),
+					{
+						start_day: this.state.getin,
+						end_day: this.state.getout,
+						firstname: this.state.fields['firstname'],
+						lastname: this.state.fields['lastname'],
+						room: this.state.room,
+						price_per_day: this.state.price_per_day,
+						national_code: this.state.fields['nationalcode'],
+						phone_number: this.state.fields['phone']
+					},
+					{
+						headers: {
+							Authorization: cookies.get('Authorization')
+						}
+					}
 				)
-			);
+				.then((response) => {
+					console.log('roop:', response.data);
+					this.setState({ open: true });
+					this.setState({ loading: false });
+					this.setState({ message: 'Your room is reserved successfully' });
+				})
+				.catch((error) => {
+					if (error.response.status == 400) {
+						// window.alert("sss1")
+						this.setState({ open: true });
+						this.setState({ loading: false });
 
-			// console.log("ddddddssdsd" , is_sent) ;
+						this.setState({ message: 'Please enter valid data.' });
+					}
+					if (error.response.status == 406) {
+						// window.alert("ss2")
+						this.setState({ open: true });
+						this.setState({ loading: false });
+
+						this.setState({ message: 'Your wallet balance is not enough.' });
+					}
+					if (error.response.status == 403) {
+						this.setState({ open: true });
+						this.setState({ loading: false });
+
+						// window.alert("ss3")
+
+						this.setState({ message: 'This room is reserved before.' });
+					}
+					console.log(error);
+				});
+
+			// console.log(
+			// 	one_room_reserve(
+			// 		this.state.getin,
+			// 		this.state.getout,
+			// 		this.state.fields['firstname'],
+			// 		this.state.fields['lastname'],
+			// 		this.state.room,
+			// 		this.state.price_per_day,
+			// 		this.state.fields['nationalcode'],
+			// 		this.state.fields['phone']
+			// 	)
+			// );
 		}
 	}
 
-
-
-
-
-
-
 	async componentDidMount() {
 		this.setState({ images: JSON.parse(localStorage.getItem('items')) });
+
 		var splitted = window.location.toString().split('/');
+
 		await this.setState({ room: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.room);
+		console.log(this.state.room, 'roo');
 
 		await this.setState({ city: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.city);
+		console.log(this.state.city, 'city');
+
 		await this.setState({ name: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.name);
+		console.log(this.state.name, 'nam');
+
 		await this.setState({ price_per_day: decodeURIComponent(splitted.pop()) });
-		decodeURIComponent(this.state.price_pe0r_day);
+		decodeURIComponent(this.state.price_per_day);
 
-		document.getElementById('pic1').src = JSON.parse(localStorage.getItem('items'))[0].image
-			? 'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[0].image
-			: 'data:image/jpeg;base64,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';
-		document.getElementById('pic2').src =
-			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[1].image;
-		document.getElementById('pic3').src =
-			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[2].image;
-		document.getElementById('pic4').src =
-			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[3].image;
-		document.getElementById('pic5').src =
-			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[0].image;
-		document.getElementById('pic6').src =
-			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[1].image;
-		document.getElementById('pic7').src =
-			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[2].image;
-		document.getElementById('pic8').src =
-			'http://127.0.0.1:8000' + JSON.parse(localStorage.getItem('items'))[3].image;
-		document.getElementById('dateout').innerHTML = JSON.parse(localStorage.getItem('i2')).split('T')[0];
-		document.getElementById('datein').innerHTML = JSON.parse(localStorage.getItem('i1')).split('T')[0];
-		document.getElementById('person').innerHTML =
-			(parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) -
-				parseInt(JSON.parse(localStorage.getItem('i1')).split('T')[0][2]) +
-				1) *
-				parseInt(this.state.price_per_day) +
-			'$';
+		await this.setState({ person: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.person);
+		console.log(this.state.person, 'per');
+
+		await this.setState({ getout: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.getout);
+		this.setState({ getout: moment(this.state.getout).format('YYYY-MM-DD') });
+		console.log(this.state.getout, 'getout');
+
+		await this.setState({ getin: decodeURIComponent(splitted.pop()) });
+		decodeURIComponent(this.state.getin);
+		this.setState({ getin: moment(this.state.getin).format('YYYY-MM-DD') });
+		console.log(this.state.getin, 'getin');
+
+		this.calculatePrice();
+
+		axios
+			.get(
+				makeURL('/hotel/room/' + this.state.room + '/images/'),
+				{
+					// headers: {
+					// 	Authorization: cookies.get('Authorization')
+					// }
+				}
+			)
+			.then((response) => {
+				console.log('rooms immmmg:', response.data);
+				this.setState({ images: response.data });
+
+				this.setState({ im1: 'http://127.0.0.1:8000' + this.state.images[0].image });
+				this.setState({ im2: 'http://127.0.0.1:8000' + this.state.images[1].image });
+				this.setState({ im3: 'http://127.0.0.1:8000' + this.state.images[2].image });
+				this.setState({ im4: 'http://127.0.0.1:8000' + this.state.images[3].image });
+				this.setState({ im5: 'http://127.0.0.1:8000' + this.state.images[4].image });
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}
-
 
 	formValChange = (e) => {
 		let fields = this.state.fields;
@@ -201,7 +287,7 @@ class Reservation extends React.Component {
 				error.phone.p2 = value.length < 11 ? '*Too short for a phone number' : '';
 
 				error.phone.p3 = !value ? '*Password field must not be empty' : '';
- 
+
 				break;
 
 			case 'nationalcode':
@@ -226,14 +312,10 @@ class Reservation extends React.Component {
 	};
 
 	render() {
-		console.log(this.state.ischeck1);
-		this.state.get_price = this.calculatePrice();
-		console.log(this.state.phone);
+		// this.state.get_price = this.calculatePrice();
+		// this.calculatePrice();
 		return (
 			<div>
-				{/* <div /> */}
-				{/* <div><Popup  data={this.state}></Popup> </div> */}
-
 				<div className="containter m-5">
 					<div className="row justify-content-center">
 						<div
@@ -266,7 +348,7 @@ class Reservation extends React.Component {
 							<div className="carousel-inner">
 								<div className="carousel-item active">
 									<img
-										id="pic1"
+										src={this.state.im1}
 										style={{ borderRadius: '50px' }}
 										className="d-block w-100"
 										alt="..."
@@ -274,7 +356,7 @@ class Reservation extends React.Component {
 								</div>
 								<div className="carousel-item">
 									<img
-										id="pic2"
+										src={this.state.im2}
 										style={{ borderRadius: '50px' }}
 										className="d-block w-100"
 										alt="..."
@@ -282,7 +364,7 @@ class Reservation extends React.Component {
 								</div>
 								<div className="carousel-item">
 									<img
-										id="pic3"
+										src={this.state.im3}
 										style={{ borderRadius: '50px' }}
 										className="d-block w-100"
 										alt="..."
@@ -291,7 +373,7 @@ class Reservation extends React.Component {
 
 								<div className="carousel-item">
 									<img
-										id="pic4"
+										src={this.state.im4}
 										style={{ borderRadius: '50px' }}
 										className="d-block w-100"
 										alt="..."
@@ -319,18 +401,10 @@ class Reservation extends React.Component {
 							</button>
 						</div>
 
-
-
-
-
 						<div className="col-12 col-lg-4">
 							<div className="card-containter ">
 								<div className="card-body">
 									<div class="shadow p-3 mb-5 bg-body rounded">
-
-
-
-									
 										<div className="row   m-3">
 											<div className="col" style={{ display: 'flex', alignItems: 'left' }}>
 												<div
@@ -360,7 +434,7 @@ class Reservation extends React.Component {
 																color: 'grey'
 															}}
 														>
-															<small id="datein" />
+															{this.state.getin}
 														</span>
 													</div>
 												</div>
@@ -394,7 +468,8 @@ class Reservation extends React.Component {
 																color: 'grey'
 															}}
 														>
-															<small id="dateout" />
+															{/* <small id="dateout" /> */}
+															{this.state.getout}
 														</span>
 													</div>
 												</div>
@@ -420,12 +495,11 @@ class Reservation extends React.Component {
 											<div className="col col-sm-8 " style={{ fontWeight: 'bold' }}>
 												<span className="ms-2"> Number of passengers : </span>
 											</div>
-											
-											
-											<div   style={{  color: 'grey' }}>
-												{JSON.parse(localStorage.getItem('i3'))}
+
+											<div className="col col-sm-4" style={{ color: 'grey', marginLeft: '1px' }}>
+												{/* {JSON.parse(localStorage.getItem('i3'))} */}
+												{this.state.person}
 											</div>
-										
 										</div>
 
 										<div className="">
@@ -449,7 +523,6 @@ class Reservation extends React.Component {
 											>
 												<path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z" />
 											</svg>
-
 											<div
 												className="col col-sm-8 "
 												style={{
@@ -458,7 +531,9 @@ class Reservation extends React.Component {
 											>
 												<span className="ms-2">Payment details : </span>
 											</div>
-											<div style={{ justifyContent: 'end', color: 'grey' }} id="person" />
+											<div className="col col-sm-4">{this.state.get_price}$</div>
+											{/* {this.state.price_per_day} */}
+											{/* <div style={{ justifyContent: 'end', color: 'grey' }} id="person" /> */}
 										</div>
 									</div>
 								</div>
@@ -487,7 +562,7 @@ class Reservation extends React.Component {
 									<Carousel show={4}>
 										<div className="m-2">
 											<img
-												id="pic5"
+												src={this.state.im1}
 												className="img-fluid"
 												alt="..."
 												style={{ borderRadius: '20px' }}
@@ -495,7 +570,7 @@ class Reservation extends React.Component {
 										</div>
 										<div className="m-2">
 											<img
-												id="pic6"
+												src={this.state.im2}
 												className="img-fluid"
 												alt="..."
 												style={{ borderRadius: '20px' }}
@@ -503,7 +578,7 @@ class Reservation extends React.Component {
 										</div>
 										<div className=" m-2">
 											<img
-												id="pic7"
+												src={this.state.im3}
 												className="img-fluid"
 												alt="..."
 												style={{ borderRadius: '20px' }}
@@ -512,7 +587,7 @@ class Reservation extends React.Component {
 
 										<div className=" m-2">
 											<img
-												id="pic8"
+												src={this.state.im4}
 												className="img-fluid"
 												alt="..."
 												style={{ borderRadius: '20px' }}
@@ -641,7 +716,7 @@ class Reservation extends React.Component {
 										</div>
 									</div>
 									<div class="col-md-4 ">
-											<PhoneInput
+										<PhoneInput
 											country={'us'}
 											id="phone"
 											label="phone"
@@ -651,29 +726,6 @@ class Reservation extends React.Component {
 											value={this.state['phone']}
 											onChange={(phone) => this.setState({ phone })}
 										/>
-
-										{/* 										
-										<div className="mt-3 ">
-											{this.state.error.phone.p1.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p1}
-													<br />
-												</p>
-											)}
-
-											{this.state.error.phone.p3.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p3}
-													<br />
-												</p>
-											)}
-											{this.state.error.phone.p2.length > 0 && (
-												<p className="err">
-													{this.state.error.phone.p2}
-													<br />
-												</p>
-											)}
-										</div> */}
 									</div>
 									<div className="">
 										<hr className="hr-text" />
@@ -682,7 +734,6 @@ class Reservation extends React.Component {
 										<input
 											class="form-check-input form-control-huge checkbox-black"
 											type="checkbox"
-											value={this.state.ischeck1}
 											id="flexCheckDefault"
 										/>
 										<label
@@ -732,11 +783,32 @@ class Reservation extends React.Component {
 											class="btn btn-dark btn-lg"
 											data-bs-toggle="modal"
 											data-bs-target="#exampleModal"
-											// disabled={!(this.state.ischeck1 && this.state.ischeck2)}
 										>
 											Reserve
 										</button>
 									</div>
+									<Snackbar
+										open={this.state.open}
+										autoHideDuration={2000}
+										onClose={() => this.setState({ open: false })}
+										anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+									>
+										<Alert
+											onClose={() => this.setState({ open: false })}
+											severity={
+												this.state.message === 'This room is reserved before.' ||
+												'Your wallet balance is not enough.' ||
+												'Please enter valid data.' ? (
+													'error'
+												) : (
+													'success'
+												)
+											}
+											sx={{ width: '20%' }}
+										>
+											{this.state.message}
+										</Alert>
+									</Snackbar>{' '}
 									<div
 										class="modal fade"
 										id="exampleModal"

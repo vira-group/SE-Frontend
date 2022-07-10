@@ -42,11 +42,17 @@ export const Sign_up_connection = async (email, password) => {
 };
 
 export const login_connection = async (email, password) => {
-	// console.log(password, email)
+	localStorage.setItem('login_message', JSON.stringify('Already logged in'));
+
 	let message = '';
 	if (cookies.get('Authorization') != undefined) {
+		localStorage.setItem('login_message', JSON.stringify('Already logged in'));
+
 		message = 'Already logged in';
+
 		window.alert('Already logged in');
+
+		return message;
 	} else {
 		await axios
 			.post(makeURL(references.url_login), {
@@ -58,18 +64,24 @@ export const login_connection = async (email, password) => {
 				set_cookie(response.data.auth_token);
 				// console.log(response);
 				message = true;
+				console.log(message, 'f1');
+
 				window.location.replace('/');
 			})
 			.catch((error) => {
 				if (error.response.status == 400) {
+					localStorage.setItem('login_message', JSON.stringify('Already logged in'));
+
+					message = 'wrong email or password';
+					console.log(message, 'f2');
 					window.alert('wrong email or password');
 				}
 				// console.log(error);
-				message = false;
 			});
-	}
+		console.log(message, 'f3');
 
-	return message;
+		return message;
+	}
 };
 
 export const me = async () => {
@@ -95,30 +107,30 @@ export const me = async () => {
 };
 
 export const logout = async () => {
-  let message = "";
-  // console.log(cookies.get('Authorization'));
-  await axios
-    .post(
-      makeURL(references.url_logout),
-      {},
-      {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      }
-    )
-    .then((response) => {
-      // console.log(response);
-      cookies.remove("Authorization");
-      message = true;
-    })
-    .then(() => {
-      window.location.href = "http://localhost:3000/";
-    })
-    .catch((error) => {
-      // console.log(error);
-      message = false;
-    });
+	let message = '';
+	// console.log(cookies.get('Authorization'));
+	await axios
+		.post(
+			makeURL(references.url_logout),
+			{},
+			{
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			}
+		)
+		.then((response) => {
+			// console.log(response);
+			cookies.remove('Authorization');
+			message = true;
+		})
+		.then(() => {
+			window.location.href = 'http://localhost:3000/';
+		})
+		.catch((error) => {
+			// console.log(error);
+			message = false;
+		});
 
 	return message;
 };
@@ -204,37 +216,37 @@ export const one_room_reserve = async (
 	national_code,
 	phone_number
 ) => {
-  let message = "";
-  console.log(cookies.get("Authorization"));
-  await axios
-    .post(
-      makeURL(references.url_reserveroom),
-      {
-        start_day: start_day,
-        end_day: end_day,
-        firstname: firstname,
-        lastname: lastname,
-        room: room,
-        price_per_day: price_per_day,
-        national_code: national_code,
-        phone_number: phone_number,
-      },
-      {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      }
-    )
-    .then((response) => {
-      console.log(response);
-      console.log("everything right");
-      message = response.data;
-      window.alert("everything right");
-    })
-    .catch((error) => {
-      if (error.response.status == 400) {
-        window.alert("Please enter valid data.");
-      }
+	let message = '';
+	console.log(cookies.get('Authorization'));
+	await axios
+		.post(
+			makeURL(references.url_reserveroom),
+			{
+				start_day: start_day,
+				end_day: end_day,
+				firstname: firstname,
+				lastname: lastname,
+				room: room,
+				price_per_day: price_per_day,
+				national_code: national_code,
+				phone_number: phone_number
+			},
+			{
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			}
+		)
+		.then((response) => {
+			console.log(response);
+			console.log('everything right');
+			message = response.data;
+			window.alert('everything right');
+		})
+		.catch((error) => {
+			if (error.response.status == 400) {
+				window.alert('Please enter valid data.');
+			}
 
 			if (error.response.status == 406) {
 				window.alert('Your wallet balance is not enough.');

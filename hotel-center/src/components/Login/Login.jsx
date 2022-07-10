@@ -1,11 +1,5 @@
-// import { Route } from 'react-router-dom';
-// import { CenterFocusStrong, Home, Router } from '@mui/icons-material';
-// import { useHistory } from 'react-router-dom';
-// import { Redirect } from 'react-router-dom';
 import * as React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -17,11 +11,17 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css';
 import pic from './s4.png';
 import ico from './icon.png';
-
-import { login_connection } from '../../Utils/connection';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import references from '../../assets/References.json';
+import { cookies, makeURL } from '../../Utils/common';
+import axios from 'axios';
+import { set_cookie } from '../../Utils/common';
 
 const theme = createTheme();
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 class login extends React.Component {
 	constructor() {
 		super();
@@ -29,12 +29,21 @@ class login extends React.Component {
 			fields: { email: '', password: '' },
 			errors: {},
 			logerror: '',
-			history: ''
+			history: '',
+			message: '',
+			open: ''
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.submituserlogin = this.submituserlogin.bind(this);
 	}
+
+	handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+		this.setState({ open: false });
+	};
 
 	handleChange(e) {
 		let fields = this.state.fields;
@@ -47,54 +56,39 @@ class login extends React.Component {
 	submituserlogin(e) {
 		e.preventDefault();
 		if (true) {
-			// let fields = {};
-
-			// fields['email'] = '';
-			// fields['password'] = '';
-			// this.setState({ fields: fields });
-			// alert('Form submitted');
-			const is_logged_in = login_connection(this.state.fields['email'], this.state.fields['password']);
-			if (is_logged_in) {
-				
+			if (cookies.get('Authorization') != undefined) {
+				this.setState({ message: 'Already logged in' });
+				this.setState({ open: true });
+			} else {
+				axios
+					.post(makeURL(references.url_login), {
+						email: this.state.fields['email'],
+						password: this.state.fields['password']
+					})
+					.then((response) => {
+						this.setState({ open: true });
+						this.setState({ message: 'login successfully' });
+						set_cookie(response.data.auth_token);
+						window.location.replace('/');
+					})
+					.catch((error) => {
+						if (error.response.status == 400) {
+							this.setState({ open: true });
+							this.setState({ message: 'wrong email or password' });
+						}
+					});
 			}
-			/*
-			if(is_logged_in === "Already logged in")
-			{
-				window.alert("Already logged in"); 
-			}
-			*/
 		}
 	}
 
 	componentDidMount() {
 		console.log(this.props.history);
 	}
-
 	handleSubmit = (e) => {
-		let loggedin = false;
 		e.preventDefault();
 		var formData = new FormData();
-
 		formData.append('email', this.state.fields['email']);
 		formData.append('password', this.state.fields['password']);
-		/*
-		axios
-			.post('', formData)
-			.then((response) => {
-				localStorage.setItem('token', response.data.token);
-				loggedin = true;
-				console.log('axios response');
-				if (loggedin) {
-					this.props.history.push('/');
-					window.location.reload();
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-				let error = <h5>Invalid email or password!</h5>;
-				this.setState({ logerror: error });
-			});
-*/
 	};
 
 	render() {
@@ -183,6 +177,26 @@ class login extends React.Component {
 							</Grid>
 						</Box>
 					</Box>
+					<Snackbar
+						open={this.state.open}
+						autoHideDuration={2000}
+						onClose={() => this.setState({ open: false })}
+						anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+					>
+						<Alert
+							onClose={() => this.setState({ open: false })}
+							severity={
+								this.state.message === ('wrong email or password' || 'Already logged in') ? (
+									'error'
+								) : (
+									'success'
+								)
+							}
+							sx={{ width: '100%' }}
+						>
+							{this.state.message}
+						</Alert>
+					</Snackbar>{' '}
 				</Container>
 			</ThemeProvider>
 		);

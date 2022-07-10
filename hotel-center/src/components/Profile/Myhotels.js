@@ -1,107 +1,107 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
-import references from "../../assets/References.json";
-import { Box, CircularProgress } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
-import "../../css/Profile.css";
-import Myhotelscard from "./Myhotelscard";
-import image2 from "../../statics/img/pics/london2.jpg";
-import image3 from "../../statics/img/pics/london3.jpg";
-import image4 from "../../statics/img/pics/Amsterdom1.jpg";
-import image5 from "../../statics/img/pics/Amsterdom2.jpg";
-import MyhotelsCard from "./Myhotelscard";
-import Sidebar from "./Sidebar";
-import AddIcon from "@mui/icons-material/Add";
-import image1 from "../../statics/img/pics/add_files.svg";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { cookies, makeURL, set_cookie } from '../../Utils/common';
+import references from '../../assets/References.json';
+import { Box, CircularProgress } from '@mui/material';
+import { useHistory, useParams } from 'react-router-dom';
+import '../../css/Profile.css';
+import Myhotelscard from './Myhotelscard';
+import image2 from '../../statics/img/pics/london2.jpg';
+import image3 from '../../statics/img/pics/london3.jpg';
+import image4 from '../../statics/img/pics/Amsterdom1.jpg';
+import image5 from '../../statics/img/pics/Amsterdom2.jpg';
+import MyhotelsCard from './Myhotelscard';
+import Sidebar from './Sidebar';
+import AddIcon from '@mui/icons-material/Add';
+import image1 from '../../statics/img/pics/add_files.svg';
 
 export default function Myhotels(props) {
-  const [hotel, setHotel] = useState(null);
+	const [ hotel, setHotel ] = useState(null);
 
-  const header = {
-    header: {
-      Authorization: cookies,
-    },
-  };
+	const header = {
+		header: {
+			Authorization: cookies
+		}
+	};
 
-  useEffect(() => {
-    axios
-      .get(makeURL(references.url_myhotels), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((response) => {
-        console.log("my hotels response: ", response.data.owners);
-        setHotel(response.data.owners);
-      })
-      .catch((error) => {
-        console.log("error: ", error);
-      });
-  }, []);
+	useEffect(() => {
+		axios
+			.get(makeURL(references.url_myhotels), {
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			})
+			.then((response) => {
+				console.log('my hotels response: ', response.data.owners);
+				setHotel(response.data.owners);
+			})
+			.catch((error) => {
+				console.log('error: ', error);
+			});
+	}, []);
 
-  const handleClick = () => {
-    window.location.href = "http://localhost:3000/createHotel/steps";
-  };
-  // useEffect(() => {
-  //   // console.log(cookies.get("Authorization"));
-  //   axios
-  //     .get(makeURL(references.url_allhotels), {
-  //       headers: {
-  //         Authorization: cookies.get("Authorization"),
-  //       },
-  //     })
-  //     .then((response) => {
-  //       setHotel(response.data);
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
+	const handleClick = () => {
+		window.location.href = 'http://localhost:3000/createHotel';
+	};
+	// useEffect(() => {
+	//   // console.log(cookies.get("Authorization"));
+	//   axios
+	//     .get(makeURL(references.url_allhotels), {
+	//       headers: {
+	//         Authorization: cookies.get("Authorization"),
+	//       },
+	//     })
+	//     .then((response) => {
+	//       setHotel(response.data);
+	//       console.log(response.data);
+	//     })
+	//     .catch((error) => {
+	//       console.log(error);
+	//     });
 
-  //   // console.log(")))))))))) ");
-  // }, []);
+	//   // console.log(")))))))))) ");
+	// }, []);
 
-  return (
-    <div className="container">
-      <div className="row pt-5">
-        <div className="col-lg-3">
-          <Sidebar />
-        </div>
-        <div className="col-lg-9">
-          <div class="row row-cols-1 row-cols-md-3 g-4">
-            {hotel
-              ? hotel.map((h) => (
-                  <MyhotelsCard
-                    img={references.base_address + h.header}
-                    title={h.name}
-                    description={h.description.slice(0, 250) + " ..."}
-                    id={h.id}
-                  />
-                ))
-              : null}
+	return (
+		<div className="container">
+			<div className="row pt-5">
+				<div className="col-lg-3">
+					<Sidebar />
+				</div>
+				<div className="col-lg-9">
+					<div class="row row-cols-1 row-cols-md-3 g-4">
+						{hotel ? (
+							hotel.map((h) => (
+								<MyhotelsCard
+									img={references.base_address + h.header}
+									title={h.name}
+									description={h.description.slice(0, 250) + ' ...'}
+									id={h.id}
+								/>
+							))
+						) : null}
 
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "5px",
-                backgroundColor: "white",
-              }}
-            >
-              <div className="container" style={{ textAlign: "center" }}>
-                <img
-                  className="add-hotel-img"
-                  style={{ height: "100px", cursor: "pointer" }}
-                  src={image1}
-                  onClick={handleClick}
-                />
-              </div>
-            </Box>
+						<Box
+							sx={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								borderRadius: '5px',
+								backgroundColor: 'white'
+							}}
+						>
+							<div className="container" style={{ textAlign: 'center' }}>
+								<img
+									className="add-hotel-img"
+									style={{ height: '100px', cursor: 'pointer' }}
+									src={image1}
+									onClick={handleClick}
+								/>
+							</div>
+						</Box>
 
-            {/* <MyhotelsCard
+						{/* <MyhotelsCard
               img={image2}
               title="The Montague Gardens"
               description="Overlooking private, secluded gardens, this 4-star luxury
@@ -123,9 +123,9 @@ export default function Myhotels(props) {
               Amsterdam offers warm-coloured rooms and free WiFi. The
               famous Rembrandt Square is right around the corner."
             /> */}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }

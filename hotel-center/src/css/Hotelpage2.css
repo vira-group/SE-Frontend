@@ -20,7 +20,7 @@
 }
 
 .hotel-room.btn-primary,
-.hotel-room.btn-primary:active {
+.hotel-room.btn-primary:active { 
   background-color: #cd9a2d !important;
   border-color: #cd9a2d !important;
   outline: none;

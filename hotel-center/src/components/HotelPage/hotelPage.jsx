@@ -14,7 +14,7 @@ class Hotelpage extends React.Component {
 		image2: null,
 		image3: null,
 		image4: null,
-		id: 1,
+		id: 0,
 		name: 'Nobu',
 		header: null,
 		city: 'Tehran',
@@ -25,10 +25,13 @@ class Hotelpage extends React.Component {
 		start_date: '2022-04-20',
 		alldate: []
 	};
+
 	async componentDidMount() {
 		var splitted = window.location.toString().split('/');
+
 		await this.setState({ id: decodeURIComponent(splitted.pop()) });
 		decodeURIComponent(this.state.id);
+
 		one_hotel_connection(this.state.id).then((res) => {
 			this.setState({ city: res.city });
 			this.setState({ name: res.name });
@@ -40,6 +43,8 @@ class Hotelpage extends React.Component {
 			this.setState({ start_date: res.start_date });
 		});
 
+		// console.log(this.state.id, 'hotelpagesend');
+
 		one_hotel_image(this.state.id).then((res) => {
 			this.setState({ image1: res[0].image });
 			this.setState({ image2: res[1].image });
@@ -49,6 +54,7 @@ class Hotelpage extends React.Component {
 	}
 
 	render() {
+		// console.log(this.state.id ,"iddddd");
 		return (
 			<div className="div">
 				<div className="div">
@@ -83,11 +89,11 @@ class Hotelpage extends React.Component {
 
 							<div className="row">
 								<div className="col-6">
-									<div className="row">
-										<div className="col-12 gy-3">
+									<div className="row ">
+										<div className="col-12 gy-3 ">
 											<img
 												src={this.state.header}
-												className="img-fluid"
+												className="img-fluid imggh"
 												alt="..."
 												style={{ borderRadius: '5px' }}
 											/>
@@ -99,7 +105,7 @@ class Hotelpage extends React.Component {
 										<div className="col-6 gy-3">
 											<img
 												src={this.state.image1}
-												className="img-fluid"
+												className="img-fluid imgg"
 												alt="..."
 												style={{ borderRadius: '5px' }}
 											/>
@@ -107,7 +113,7 @@ class Hotelpage extends React.Component {
 										<div className="col-6 gy-3">
 											<img
 												src={this.state.image2}
-												className="img-fluid"
+												className="img-fluid imgg"
 												alt="..."
 												style={{ borderRadius: '5px' }}
 											/>
@@ -116,7 +122,7 @@ class Hotelpage extends React.Component {
 										<div className="col-6 gy-3">
 											<img
 												src={this.state.image3}
-												className="img-fluid"
+												className="img-fluid imgg"
 												alt="..."
 												style={{ borderRadius: '5px' }}
 											/>
@@ -125,7 +131,7 @@ class Hotelpage extends React.Component {
 											<img
 												// src={pic4}
 												src={this.state.image4}
-												className="img-fluid"
+												className="img-fluid imgg"
 												alt="..."
 												style={{ borderRadius: '5px' }}
 											/>
@@ -202,7 +208,7 @@ class Hotelpage extends React.Component {
 						</div>
 					</div>
 
-					<Hotelpage2 />
+					<Hotelpage2 id={this.state.id} />
 				</div>
 			</div>
 		);

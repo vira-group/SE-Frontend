@@ -1,25 +1,372 @@
 // import renderer from "react-test-renderer";
-import Sign_up from "../src/components/Sign_up/sign_up";
-import Footer from "./components/Homepage/layouts/Footer";
-import Filter from "./components/Homepage/layouts/Filter";
-import ResponsiveDatePickers from "../src/components/HotelPage/ResponsiveDatePickers";
+import Sign_up from '../src/components/Sign_up/sign_up';
+import Footer from './components/Homepage/layouts/Footer';
+import Filter from './components/Homepage/layouts/Filter';
+import ResponsiveDatePickers from '../src/components/HotelPage/ResponsiveDatePickers';
 // import * as React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
-import ReactDOM from "react-dom";
-import React from "react";
-import renderer from "react-test-renderer";
-import SimpleAccordion from "../src/components/HotelPage/accordion";
-import SearchForm from "../src/components/Homepage/layouts/SearchForm";
-import EditProfile from "../src/components/Profile/Editprofile";
-import IncreaseCredit from "../src/components/Profile/IncreaseCredit";
-import Sidebar from "../src/components/Profile/Sidebar";
-import Favorites from "../src/components/Profile/Favorites";
-import RoomStatus from "../src/components/AdminPanel/Pages/RoomsStatus";
-import userEvent from "@testing-library/user-event";
-import user from "@testing-library/user-event";
-import Createroom from "../src/components/AdminPanel/Pages/Createroom";
-import Edithotel from "../src/components/AdminPanel/Pages/Edithotel";
+import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import SimpleAccordion from '../src/components/HotelPage/accordion';
+import SearchForm from '../src/components/Homepage/layouts/SearchForm';
+import EditProfile from '../src/components/Profile/Editprofile';
+import IncreaseCredit from '../src/components/Profile/IncreaseCredit';
+import Sidebar from '../src/components/Profile/Sidebar';
+import Favorites from '../src/components/Profile/Favorites';
+import RoomStatus from '../src/components/AdminPanel/Pages/RoomsStatus';
+import userEvent from '@testing-library/user-event';
+import user from '@testing-library/user-event';
+import Createroom from '../src/components/AdminPanel/Pages/Createroom';
+import Edithotel from '../src/components/AdminPanel/Pages/Edithotel';
+import CreateHotel from './components/CreateHotel/HotelInfo4';
+// import Reservation from '../src/components/Reservation/reservation';
+
+describe('Create hotel', () => {
+	it('snapshot test', () => {
+		<BrowserRouter>
+			const component = renderer.create(
+			<CreateHotel />
+			); let tree = component.toJSON(); expect(tree).toMatchSnapshot();
+		</BrowserRouter>;
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+	});
+
+	it('renders without crashing', () => {
+		<BrowserRouter>
+			const div = document.createElement("div"); ReactDOM.render(
+			<CreateHotel />, div); ReactDOM.unmountComponentAtNode(div);
+		</BrowserRouter>;
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.queryAllByRole('heading');
+		expect(AdminElements.length).toBe(1);
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.queryAllByRole('button');
+		expect(AdminElements.length).toBe(4);
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f1');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f2');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f3');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f4');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f5');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f6');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f7');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f8');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f9');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('f10');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a1');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a2');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a3');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a4');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a5');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a6');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a7');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a8');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a9');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a10');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a11');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a12');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a13');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a14');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a15');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a16');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a17');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a18');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a19');
+		expect(AdminElements).toBeInTheDocument();
+	});
+
+	it('should render the correct content', async () => {
+		render(
+			<BrowserRouter>
+				<CreateHotel />
+			</BrowserRouter>
+		);
+		const AdminElements = screen.getByTitle('a20');
+		expect(AdminElements).toBeInTheDocument();
+	});
+});
 
 describe("Edit hotel", () => {
   it("snapshot test", () => {
@@ -500,10 +847,6 @@ describe("Edit profile", () => {
     expect(ProfileElement.value).toBe("Female");
   });
 
-  // it("onSubmit is called when all fields pass validation", () => {
-  //   const firstName = screen.getByRole("textbox", { name: /First name/i });
-  //   user.type(firstName, "Bruno");
-  // });
 });
 
 const mockedIncreaseCredit = jest.fn();
@@ -1070,12 +1413,6 @@ it("should fetch and render input element", async () => {
   expect(followerDivElement).not.toBeInTheDocument();
 });
 
-// it("should render same text ", () => {
-//   render(<SimpleAccordion />);
-//   const h1Element = screen.getByTitle(/accordion/i);
-//   expect(h1Element).toBeInTheDocument();
-// });
-
 const Mockq = () => {
   return (
     <BrowserRouter>
@@ -1171,23 +1508,6 @@ describe("Responsive date picker", () => {
     expect(h1Element).toBeInTheDocument();
   });
 });
-// it("shodduld ", async () => {
-//   render(<Mockq />);
-
-//   const ollowerDivElement = await screen.findByRole("button");
-//   expect(ollowerDivElement).toBeInTheDocument();
-// });
-
-// it("should fetch and render input element", async () => {
-//   render(
-//     <BrowserRouter>
-//       <SimpleAccordion />
-//     </BrowserRouter>
-//   );
-
-//   const followerDivElement = await screen.findByTestId("test");
-//   expect(followerDivElement).toBeInTheDocument();
-// });
 
 describe("SignUp", () => {
   it("snapshot test", () => {

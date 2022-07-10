@@ -1,78 +1,78 @@
-import * as React from "react";
-import { TextField, Grid, Typography } from "@mui/material";
-import Logo from "../../../statics/logo/logo2.png";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
-import references from "../../../assets/References.json";
-import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import moment from "moment";
-import { makeStyles } from "@mui/styles";
-import PreviewMultipleImages from "./PreviewMultipleImages";
-import Sidebar from "../layout/Sidebar";
-import EditIcon from "@mui/icons-material/Edit";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import * as React from 'react';
+import { TextField, Grid, Typography } from '@mui/material';
+import Logo from '../../../statics/logo/logo2.png';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { cookies, makeURL, set_cookie } from '../../../Utils/common';
+import references from '../../../assets/References.json';
+import { Box, CircularProgress, Container, Autocomplete } from '@mui/material';
+import { useHistory, useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import moment from 'moment';
+import { makeStyles } from '@mui/styles';
+import PreviewMultipleImages from './PreviewMultipleImages';
+import Sidebar from '../layout/Sidebar';
+import EditIcon from '@mui/icons-material/Edit';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const textfieldTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#cd9a2b",
-      dark: "#cd9a2b",
-      light: "#d7ae55",
-      contrastText: "#fff",
-    },
-  },
+	palette: {
+		primary: {
+			main: '#cd9a2b',
+			dark: '#cd9a2b',
+			light: '#d7ae55',
+			contrastText: '#fff'
+		}
+	}
 });
 
 const facilitieslist = [
-  "Taxi service",
-  "Sofa",
-  "Bathroom",
-  "Telephone",
-  "WiFi",
-  "Room service",
-  "Television",
-  "Gym",
-  "Restaurant",
-  "Bar",
+	'Taxi service',
+	'Sofa',
+	'Bathroom',
+	'Telephone',
+	'WiFi',
+	'Room service',
+	'Television',
+	'Gym',
+	'Restaurant',
+	'Bar'
 ];
 
 const validationSchema = yup.object({
-  name: yup
-    .string()
-    .max(30, "Must be 15 characters or less")
-    .min(2, "Must be at least 2 characters")
-    .required("Required!"),
-  address: yup
-    .string()
-    .max(200, "Must be 200 characters or less")
-    .min(7, "Must be at least 7 characters")
-    .required("Required!"),
-  email: yup.string().email("Invalid email address").required("Required"),
-  phone: yup.number().required("Required!"),
-  description: yup.string().max(1000, "Can't be more than 500 characters."),
-  country: yup
-    .string()
-    .max(20, "Must be 20 characters or less")
-    .min(2, "Must be at least 2 characters")
-    .required("Required!"),
-  city: yup
-    .string()
-    .max(20, "Must be 20 characters or less")
-    .min(2, "Must be at least 2 characters")
-    .required("Required!"),
+	name: yup
+		.string()
+		.max(30, 'Must be 15 characters or less')
+		.min(2, 'Must be at least 2 characters')
+		.required('Required!'),
+	address: yup
+		.string()
+		.max(200, 'Must be 200 characters or less')
+		.min(7, 'Must be at least 7 characters')
+		.required('Required!'),
+	email: yup.string().email('Invalid email address').required('Required'),
+	phone: yup.number().required('Required!'),
+	description: yup.string().max(1000, "Can't be more than 500 characters."),
+	country: yup
+		.string()
+		.max(20, 'Must be 20 characters or less')
+		.min(2, 'Must be at least 2 characters')
+		.required('Required!'),
+	city: yup
+		.string()
+		.max(20, 'Must be 20 characters or less')
+		.min(2, 'Must be at least 2 characters')
+		.required('Required!')
 });
 
 function Edithotel(props) {
@@ -95,50 +95,50 @@ function Edithotel(props) {
   const [cities, setCities] = useState(null);
 
 
-  let tempcheckin = checkin; // value from your state
-  let tempcheckout = checkout; // value from your state
-  let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
-  let formattedcheckoutDate = moment(tempcheckout).format("hh:mm");
+	let tempcheckin = checkin; // value from your state
+	let tempcheckout = checkout; // value from your state
+	let formattedcheckinDate = moment(tempcheckin).format('hh:mm');
+	let formattedcheckoutDate = moment(tempcheckout).format('hh:mm');
 
-  const styles = makeStyles(() => ({
-    root: {
-      "&$checked": {
-        color: "#cd9a2d",
-      },
-    },
-    checked: {},
-  }));
-  const c = styles();
+	const styles = makeStyles(() => ({
+		root: {
+			'&$checked': {
+				color: '#cd9a2d'
+			}
+		},
+		checked: {}
+	}));
+	const c = styles();
 
-  useEffect(() => {
-    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
-  }, []);
+	useEffect(() => {
+		setHotelId(parseInt(window.location.pathname.split('/')[2], 10));
+	}, []);
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      address: "",
-      email: "",
-      phone: "",
-      description: "",
-      country: "",
-      city: "",
-    },
-    validationSchema: validationSchema,
-  });
+	const formik = useFormik({
+		initialValues: {
+			name: '',
+			address: '',
+			email: '',
+			phone: '',
+			description: '',
+			country: '',
+			city: ''
+		},
+		validationSchema: validationSchema
+	});
 
-  const handleToggleSidebar = (value) => {
-    setToggled(value);
-  };
+	const handleToggleSidebar = (value) => {
+		setToggled(value);
+	};
 
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+	const Alert = React.forwardRef(function Alert(props, ref) {
+		return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+	});
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
 
     setOpen(false);
     setOpen1(false);
@@ -149,13 +149,16 @@ function Edithotel(props) {
   //   setType(newValue);
   // };
 
-  useEffect(() => {
-    if (selectedImage) {
-      setImageUrl(URL.createObjectURL(selectedImage));
-    }
-  }, [selectedImage]);
+	useEffect(
+		() => {
+			if (selectedImage) {
+				setImageUrl(URL.createObjectURL(selectedImage));
+			}
+		},
+		[ selectedImage ]
+	);
 
-  let hotelid = window.location.pathname.split("/")[2];
+	let hotelid = window.location.pathname.split('/')[2];
 
   useEffect(() => {
     let facilityarray = [];
@@ -193,56 +196,56 @@ function Edithotel(props) {
       });
   }, []);
 
-  const handleClick = () => {
-    let filled =
-      !Boolean(formik.errors.name) &&
-      !Boolean(formik.errors.address) &&
-      !Boolean(formik.errors.description) &&
-      !Boolean(formik.errors.phone) &&
-      !Boolean(formik.errors.country) &&
-      !Boolean(formik.errors.city) &&
-      // facilities.length != 0 &&
-      formattedcheckinDate != "Invalid time" &&
-      formattedcheckoutDate != "Invalid time";
-    console.log("filled: ", filled);
-    console.log(
-      "informations validation: ",
-      !Boolean(formik.errors.name),
-      "\n",
-      !Boolean(formik.errors.address),
-      "\n",
-      !Boolean(formik.errors.description),
-      "\n",
-      !Boolean(formik.errors.phone),
-      "\n",
-      facilities.length,
-      "\n",
-      formattedcheckinDate,
-      "\n",
-      formattedcheckoutDate,
-      "\n",
-      !Boolean(formik.errors.name) &&
-        !Boolean(formik.errors.address) &&
-        !Boolean(formik.errors.description) &&
-        !Boolean(formik.errors.phone) &&
-        // facilities.length != 0 &&
-        formattedcheckinDate != " Invalid date" &&
-        formattedcheckoutDate != " Invalid date"
-    );
-    console.log("checkin time: ", formattedcheckinDate);
-    console.log("checkout time: ", formattedcheckoutDate);
+	const handleClick = () => {
+		let filled =
+			!Boolean(formik.errors.name) &&
+			!Boolean(formik.errors.address) &&
+			!Boolean(formik.errors.description) &&
+			!Boolean(formik.errors.phone) &&
+			!Boolean(formik.errors.country) &&
+			!Boolean(formik.errors.city) &&
+			// facilities.length != 0 &&
+			formattedcheckinDate != 'Invalid time' &&
+			formattedcheckoutDate != 'Invalid time';
+		console.log('filled: ', filled);
+		console.log(
+			'informations validation: ',
+			!Boolean(formik.errors.name),
+			'\n',
+			!Boolean(formik.errors.address),
+			'\n',
+			!Boolean(formik.errors.description),
+			'\n',
+			!Boolean(formik.errors.phone),
+			'\n',
+			facilities.length,
+			'\n',
+			formattedcheckinDate,
+			'\n',
+			formattedcheckoutDate,
+			'\n',
+			!Boolean(formik.errors.name) &&
+				!Boolean(formik.errors.address) &&
+				!Boolean(formik.errors.description) &&
+				!Boolean(formik.errors.phone) &&
+				// facilities.length != 0 &&
+				formattedcheckinDate != ' Invalid date' &&
+				formattedcheckoutDate != ' Invalid date'
+		);
+		console.log('checkin time: ', formattedcheckinDate);
+		console.log('checkout time: ', formattedcheckoutDate);
 
-    if (!filled) {
-      setOpen(true);
-      setMessage("Please fill in the blanks.");
-    }
+		if (!filled) {
+			setOpen(true);
+			setMessage('Please fill in the blanks.');
+		}
 
-    var facilitiesListForBack = [];
-    for (var i = 0; i < facilities.length; i++) {
-      let temp = { name: facilities[i] };
-      facilitiesListForBack.push(temp);
-    }
-    console.log("facilities list: ", facilitiesListForBack);
+		var facilitiesListForBack = [];
+		for (var i = 0; i < facilities.length; i++) {
+			let temp = { name: facilities[i] };
+			facilitiesListForBack.push(temp);
+		}
+		console.log('facilities list: ', facilitiesListForBack);
 
     if (filled) {
       setLoading(true);
@@ -374,7 +377,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row mt-3">
@@ -444,7 +447,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -478,9 +481,9 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
-            {/* <div className="mb-3 col-12">
+						{/* <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-2 col-md-3">
                   <label
@@ -608,7 +611,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -678,7 +681,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -712,7 +715,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -746,7 +749,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -783,7 +786,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -817,25 +820,25 @@ function Edithotel(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+						<hr class="dashed" />
 
-            <div className="mb-3 col-12">
-              <PreviewMultipleImages />
-            </div>
+						<div className="mb-3 col-12">
+							<PreviewMultipleImages />
+						</div>
 
-            <div className="row mt-2 d-fit-content">
-              <div className="col-lg-4 col-md-2"></div>
-              <div className="col-lg-4 col-md-2"></div>
-              <div className="col-lg-4 col-md-8 edit-hotel mb-3">
-                <button className="btn edit-hotel" onClick={handleClick}>
-                  {loading ? (
-                    <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
-                  ) : (
-                    "Edit Hotel"
-                  )}
-                </button>
-              </div>
-            </div>
+						<div className="row mt-2 d-fit-content">
+							<div className="col-lg-4 col-md-2" />
+							<div className="col-lg-4 col-md-2" />
+							<div className="col-lg-4 col-md-8 edit-hotel mb-3">
+								<button className="btn edit-hotel" onClick={handleClick}>
+									{loading ? (
+										<CircularProgress style={{ color: '#fff' }} size="1.5rem" />
+									) : (
+										'Edit Hotel'
+									)}
+								</button>
+							</div>
+						</div>
 
             <Snackbar
               open={open}
@@ -857,5 +860,5 @@ function Edithotel(props) {
     </div>
   );
 }
-
+ 
 export default Edithotel;

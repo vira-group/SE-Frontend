@@ -21,6 +21,8 @@ import Statistics from "./components/AdminPanel/Pages/Statistics";
 import RoomsStatus from "./components/AdminPanel/Pages/RoomsStatus";
 import CreateHotel from "./components/CreateHotel/CreateHotel";
 import steps from "./components/CreateHotel/steps";
+import ReservedRooms from './components/Profile/ReservedRooms';
+import Feedback from './components/Comment/Feedback';
 import "./components/AdminPanel/style/adminpanel.scss";
 import "./components/AdminPanel/style/widget.scss";
 import "./components/AdminPanel/style/chart.scss";
@@ -41,57 +43,37 @@ import "./css/Chat.css";
 import "./css/NewAndTopHotels.css";
 
 function App() {
-  return (
-    <div className="App h-100">
-      <Navbar />
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/hotelcard" component={Hotelcard} />
-          <Route exact path="/profile" component={Profile} />
-          <Route
-            exact
-            path="/profile/IncreaseCredit"
-            component={IncreaseCredit}
-          />
-          <Route exact path="/profile/favorites" component={Favorites} />
-          <Route exact path="/myhotels" component={Myhotels} />
-          <Route exact path="/hotelpage/:handle" component={hotelPage} />
-          <Route exact path="/verify-email" component={Verify} />
-          <Route exact path="/" component={Homepage} />
-          <Route exact path="/sign-up" component={Sign_up} />
-          <Route exact path="/login" component={login} />
-          <Route exact path="/createHotel/steps" component={steps} />
-          <Route
-            exact
-            path="/auth/activate/:handle/:handle1"
-            component={account_activation}
-          />
-          <Route
-            exact
-            path="/reserve/:price_per_day/:name/:city/:id"
-            component={reservation}
-          />
-          <Route
-            exact
-            path="/adminpanel/:id/statistics"
-            component={Statistics}
-          />
-          <Route
-            exact
-            path="/adminpanel/:id/createrooom"
-            component={Createroom}
-          />
-          <Route exact path="/adminpanel/:id/edithotel" component={Edithotel} />
-          <Route
-            exact
-            path="/adminpanel/:id/roomsstatus"
-            component={RoomsStatus}
-          />
-        </Switch>
-      </BrowserRouter>
-      <Footer />
-    </div>
-  );
+	return (
+		<div className="App h-100">
+			<Navbar />
+			<BrowserRouter>
+				<Switch>
+					<Route exact path="/hotelcard" component={Hotelcard} />
+					<Route exact path="/profile" component={Profile} />
+					<Route exact path="/profile/IncreaseCredit" component={IncreaseCredit} />
+					<Route exact path="/profile/favorites" component={Favorites} />
+					<Route exact path="/myhotels" component={Myhotels} />
+					<Route exact path="/profile/reservedrooms" component={ReservedRooms} />
+					<Route exact path="/hotelpage/:handle" component={hotelPage} />
+					<Route exact path="/verify-email" component={Verify} />
+					<Route exact path="/" component={Homepage} />
+					<Route exact path="/sign-up" component={Sign_up} />
+					<Route exact path="/login" component={login} />
+					<Route exact path="/createHotel/steps" component={steps} />
+					<Route exact path="/createHotel" component={CreateHotel} />
+					<Route exact path="/feedback" component={Feedback} />
+
+					<Route exact path="/auth/activate/:handle/:handle1" component={account_activation} />
+					<Route exact path="/reserve/:getin/:getout/:person/:price_per_day/:name/:city/:id" component={reservation} />
+					<Route exact path="/adminpanel/:id/statistics" component={Statistics} />
+					<Route exact path="/adminpanel/:id/createrooom" component={Createroom} />
+					<Route exact path="/adminpanel/:id/edithotel" component={Edithotel} />
+					<Route exact path="/adminpanel/:id/roomsstatus" component={RoomsStatus} />
+				</Switch>
+			</BrowserRouter>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;

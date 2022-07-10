@@ -3,6 +3,7 @@ import pic from '../../statics/img/Hotel_Booking.gif';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import RoomServiceIcon from '@mui/icons-material/RoomService';
 import PaidIcon from '@mui/icons-material/Paid';
+import PhoneInput from 'react-phone-input-2';
 
 class CreateHotel extends Component {
 	constructor(props) {
@@ -25,13 +26,13 @@ class CreateHotel extends Component {
 						</div>
 						<div className="col-lg-6 offset-lg-1 col-md-7 text-md-start text-center">
 							<div className="mx-md-0 mx-auto">
-								<h2 className="mb-md-5 mb-4" 	style={{ fontWeight :'bolder', fontSize: '29px', fontFamily: 'serif' }}>Why Hotel Center</h2>
+								<h2 className="mb-md-5 mb-4" 	style={{ fontWeight :'bolder', fontSize: '29px' }}>Why Hotel Center</h2>
 								<div className="d-md-flex align-items-start d-block mb-4 pb-2">
 									<HandshakeIcon   style={{color : "#c99015"}} />{' '}
 									<div className="ps-md-2">
 										<h3
 											className="h6 mb-2"
-											style={{ fontWeight: 'bold', fontSize: '22px', fontFamily: 'serif' }}
+											style={{ fontWeight: 'bold', fontSize: '22px' }}
 										>
 											Customer credibility and trust
 										</h3>
@@ -43,7 +44,7 @@ class CreateHotel extends Component {
 									<div className="ps-md-2">
 										<h3
 											className="h6 mb-2"
-											style={{ fontWeight: 'bold', fontSize: '22px', fontFamily: 'serif' }}
+											style={{ fontWeight: 'bold', fontSize: '22px' }}
 										>
 											Hotel reputation
 										</h3>
@@ -57,7 +58,7 @@ class CreateHotel extends Component {
 									<div className="ps-md-2">
 										<h3
 											className="h6 mb-2"
-											style={{ fontWeight: 'bold', fontSize: '22px', fontFamily: 'serif' }}
+											style={{ fontWeight: 'bold', fontSize: '22px' }}
 										>
 											Profit and save time
 										</h3>

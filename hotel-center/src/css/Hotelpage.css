@@ -1,3 +1,25 @@
+.imggh
+{transition: transform .2s; 
+}
+.imggh:hover
+{ 
+  transform: scale(1.1);
+}
+
+
+.imgg
+{transition: transform .2s; 
+   opacity: 0.4;  
+
+}
+.imgg:hover
+{ 
+  opacity: 1;  
+
+  transform: scale(1.1);
+}
+
+
 .btn-secondary,
 .btn-secondary:active,
 .btn-secondary:focus {
@@ -17,13 +39,6 @@
 .span-row-20{grid-row: span 20 /   auto;}
 
 
-
-
-/* .style
-{
-  width: 190px ;
-  background-color: blue;
-} */
 .btn-primary.btn
 {
   color: beige;

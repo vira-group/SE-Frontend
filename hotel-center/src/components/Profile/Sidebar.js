@@ -4,6 +4,7 @@ import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import BedIcon from "@mui/icons-material/Bed";
 import CardTravelIcon from "@mui/icons-material/CardTravel";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import AddCardIcon from "@mui/icons-material/AddCard";
 
 export default function Sidebar() {
@@ -17,6 +18,7 @@ export default function Sidebar() {
           <ModeEditOutlinedIcon className="icon-style" />
           <p className="mb-0">Edit Profile</p>
         </Link>
+        
         <hr className="mb-2" />
         <Link
           to="/myhotels"
@@ -25,6 +27,7 @@ export default function Sidebar() {
           <BedIcon className="icon-style" />
           <p className="mb-0">My Hotels</p>
         </Link>
+
         <hr className="mb-2" />
         {/* <Link to="#" class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2">
           <CardTravelIcon className="icon-style" />
@@ -39,6 +42,7 @@ export default function Sidebar() {
           <p className="mb-0">Favorites</p>
         </Link>
         <hr className="mb-2" />
+
         <Link
           to="/profile/IncreaseCredit"
           class="nav-link link-dark sidebar-items d-lg-flex"
@@ -46,6 +50,18 @@ export default function Sidebar() {
           <AddCardIcon className="icon-style" />
           <p className="mb-0">Wallet</p>
         </Link>
+
+        <hr className="mb-2" />
+
+        <Link
+          to="/profile/reservedrooms"
+          class="nav-link link-dark sidebar-items d-lg-flex"
+        >
+          <BookmarkBorderIcon className="icon-style" />
+          <p className="mb-0">Reservations</p>
+        </Link>
+
+
       </div>
     </div>
   );

@@ -57,6 +57,10 @@ export default function SingleTopHotelCard(props) {
     setOpen(false);
   };
 
+  const handleRedirect = () => {
+    window.location = "http://localhost:3000/" + "hotelpage/" + props.id;
+  };
+
   return (
     <div class="col">
       <div class="card h-100 shadow">
@@ -72,7 +76,7 @@ export default function SingleTopHotelCard(props) {
           </p>
         </div>
         <div className="card-footer">
-          <button type="button" className="btn btn-primary view-hotel-button">
+          <button type="button" className="btn btn-primary view-hotel-button" onClick={handleRedirect}>
             View details
           </button>
           <button className="btn favorite-btn-style" onClick={handleClick}>
