@@ -3,7 +3,7 @@ import './Styles/AddComment.scss';
 import { Rating } from 'react-simple-star-rating';
 import references from '../../../assets/References.json';
 
-
+import im from  "../../../statics/img/pics/avatar.jpg";
 
 const AddComment = ({ buttonValue, addComments , avatar}) => {
 
@@ -32,8 +32,12 @@ const AddComment = ({ buttonValue, addComments , avatar}) => {
 	return (
 		<div className="add-comment">
 			<div>
+{
+				(avatar !== null)? 
 				<img   className={`profile-pic`} src={references.base_address+ avatar}></img>
-    
+:
+				<img   className={`profile-pic`} src={im}></img>
+}   
 			</div>
 			<Rating onClick={handleRating} ratingValue={ratingValue} size={20} />
 			<textarea

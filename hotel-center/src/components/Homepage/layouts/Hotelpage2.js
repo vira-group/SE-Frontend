@@ -8,10 +8,7 @@ import Popover from '@mui/material/Popover';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-import {
-	Box,
-	CircularProgress
-} from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import Helmet from 'react-helmet';
 import Rating from '@mui/material/Rating';
 import LocalTaxiRoundedIcon from '@mui/icons-material/LocalTaxiRounded';
@@ -78,8 +75,7 @@ export default function Hotelpage(props) {
 	const [ numberOfAdults, setNumberOfAdults ] = React.useState(1);
 	const [ numberOfChildren, setNumberOfChildren ] = React.useState(0);
 
-	const [ person, setperson] = useState(1);
-
+	const [ person, setperson ] = useState(1);
 
 	const handleClick = (event) => {
 		setAnchor(event.currentTarget);
@@ -88,11 +84,10 @@ export default function Hotelpage(props) {
 		setAnchor(null);
 	};
 
+	// console.log(checkinDate, 'aya in');
 
-	console.log(checkinDate,"aya in");
-	
-	console.log(checkoutDate,"aya in");
-	
+	// console.log(checkoutDate, 'aya in');
+
 	const handlesearch = () => {
 		const queryString = window.location.toString();
 		const hotelid = queryString.slice(-1);
@@ -100,20 +95,23 @@ export default function Hotelpage(props) {
 		setRooms(JSON.parse(localStorage.getItem('rooms')));
 
 		axios
-			.get(makeURL(references.url_hotelrooms + hotelid + '/'), {
+			.get(makeURL('/hotel/' + hotelid + '/search/'), {
 				headers: {
 					Authorization: cookies.get('Authorization')
+				},
+				params: {
+					size: numberOfAdults + numberOfChildren,
+					check_in: '2021-07-19',
+					check_out: '2023-07-25'
 				}
 			})
 			.then((response) => {
-				console.log('rooms response:', response.data);
+				console.log('rooms response: handle serach', response.data);
 				setRooms(response.data);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-	
-
 
 		// axios
 		// 	.get(makeURL(references.url_hotel_search), {
@@ -134,7 +132,6 @@ export default function Hotelpage(props) {
 		// 		console.log(error);
 		// 	});
 	};
-
 
 	const handleChangeNumber = (actionType, guestType) => {
 		actionType === 'dec'
@@ -169,35 +166,38 @@ export default function Hotelpage(props) {
 				setf2(response.data.facilities.slice(4, 8));
 				setCheckin(response.data.check_in_range);
 				setCheckout(response.data.check_out_range);
-				setRank(response.data.rate) ;
+				setRank(response.data.rate);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}, []);
-	
 
-	// useEffect(() => {
-	// 	const queryString = window.location.toString();
-	// 	const hotelid = queryString.slice(-1);
+	useEffect(() => {
+		const queryString = window.location.toString();
+		const hotelid = queryString.slice(-1);
 
-	// 	setRooms(JSON.parse(localStorage.getItem('rooms')));
+		setRooms(JSON.parse(localStorage.getItem('rooms')));
 
-	// 	axios
-	// 		.get(makeURL(references.url_hotelrooms + hotelid + '/'), {
-	// 			headers: {
-	// 				Authorization: cookies.get('Authorization')
-	// 			}
-	// 		})
-	// 		.then((response) => {
-	// 			console.log('rooms response:', response.data);
-	// 			setRooms(response.data);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-	// }, []);
-
+		axios
+			.get(makeURL(references.url_hotelrooms + hotelid + '/'), {
+				headers: {
+					Authorization: cookies.get('Authorization')
+				},
+				params: {
+					size: numberOfAdults + numberOfChildren,
+					check_in: '2021-07-19',
+					check_out: '2023-07-25'
+				}
+			})
+			.then((response) => {
+				console.log('rooms response:use eefect', response.data);
+				setRooms(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
 
 	return hotel ? (
 		<div>
@@ -250,15 +250,12 @@ export default function Hotelpage(props) {
 																new Date(checkinDate.getTime() + oneDay)
 															) : null
 														}
-													
-													
 														label="Check out"
 														value={checkoutDate}
 														style={{ borderRadius: '5px' }}
-													
 														onChange={(newValue) => {
 															setCheckoutDate(newValue);
-															console.log(checkoutDate,"aya out");
+															// console.log(checkoutDate, 'aya out');
 															// localStorage.setItem('i1', JSON.stringify(checkinDate));
 														}}
 														renderInput={(params) => (
@@ -268,8 +265,6 @@ export default function Hotelpage(props) {
 																title="GoldenTextField"
 															/>
 														)}
-													
-													
 													/>
 												</LocalizationProvider>
 											</div>
@@ -376,12 +371,6 @@ export default function Hotelpage(props) {
 						</div>
 					</div>
 
-
-
-
-
-
-
 					<div className="col-lg-8">
 						<div className="row">
 							<h3 className="mb-3 mt-3">Facilities of the hotel</h3>
@@ -464,9 +453,9 @@ export default function Hotelpage(props) {
 						{rooms ? (
 							rooms.map((r) => (
 								<Roomcard
-getin={checkinDate}
-getout={checkoutDate}
-								person = {person}
+									getin={checkinDate}
+									getout={checkoutDate}
+									person={person}
 									name={r.hotel_info.name}
 									city={r.hotel_info.city}
 									id={r.id}
