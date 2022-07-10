@@ -3,7 +3,7 @@ import '../../../css/Hotelpage2.css';
 import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import references from '../../../assets/References.json';
-
+// import Avatar from "@mui/material/Avatar";
 const CommentHeader = ({
 	commentData,
 	rate,

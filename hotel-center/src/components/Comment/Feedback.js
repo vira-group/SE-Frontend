@@ -5,6 +5,7 @@ import AddComment from './Components/AddComment';
 import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../Utils/common';
 import references from '../../assets/References.json';
+// import im from  '../../../statics/img/pics/avatar.jpg';
 
 const Feedback = (props) => {
 	const [ comments, updateComments ] = useState([]);
@@ -319,7 +320,7 @@ const Feedback = (props) => {
 												/>
 											)
 									)
-								) : null};
+								) : null}
 								<AddComment buttonValue={'send'} addComments={addComments} avatar={avatar} />
 							</div>
 						</div>
