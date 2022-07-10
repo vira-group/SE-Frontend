@@ -84,82 +84,126 @@ export default function Hotelpage() {
     setAnchor(null);
   };
 
-  useEffect(() => {
-    // console.log(cookies.get("Authorization"));
-    const queryString = window.location.toString();
-    var temp = queryString.split("/");
-    const hotelid = temp[temp.length - 1];
-    setid(hotelid);
-    axios
-      .get(makeURL(references.url_one_hotel + hotelid + "/"), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((response) => {
-        console.log("this request is for hotel facilities:", response.data);
-        setHotel(response.data);
-        setFacility(response.data.facilities);
-        setf1(response.data.facilities.slice(0, 4));
-        setf2(response.data.facilities.slice(4, 8));
-        setCheckin(response.data.check_in_range);
-        setCheckout(response.data.check_out_range);
-        setRank(response.data.rate);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
-  useEffect(() => {
-    const queryString = window.location.toString();
-    var temp = queryString.split("/");
-    const hotelid = temp[temp.length - 1];
-    console.log("query string: ", hotelid);
 
-    setRooms(JSON.parse(localStorage.getItem("rooms")));
 
-    axios
-      .get(makeURL(references.url_hotelrooms + hotelid + "/"), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((response) => {
-        console.log("rooms response:", response.data);
-        setRooms(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
-  // fatime connection
 
-  console.log(checkinDate, "aya in");
 
-  console.log(checkoutDate, "aya in");
 
-  const handlesearch = () => {
-    const queryString = window.location.toString();
-    const hotelid = queryString.slice(-1);
 
-    setRooms(JSON.parse(localStorage.getItem("rooms")));
 
-    axios
-      .get(makeURL(references.url_hotelrooms + hotelid + "/"), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((response) => {
-        console.log("rooms response:", response.data);
-        setRooms(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+
+
+
+
+
+
+
+
+
+	const handlesearch = () => {
+		const queryString = window.location.toString();
+		const hotelid = queryString.slice(-1);
+
+		setRooms(JSON.parse(localStorage.getItem('rooms')));
+
+		axios
+			.get(makeURL('/hotel/' + hotelid + '/search/'), {
+				headers: {
+					Authorization: cookies.get('Authorization')
+				},
+				params: {
+					size: numberOfAdults + numberOfChildren,
+					check_in: '2021-07-19',
+					check_out: '2023-07-25'
+				}
+			})
+			.then((response) => {
+				console.log('rooms response: handle serach', response.data);
+				setRooms(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+
+		// axios
+		// 	.get(makeURL(references.url_hotel_search), {
+		// 		headers: {
+		// 			Authorization: cookies.get('Authorization')
+		// 		},
+		// 		params: {
+		// 			size: numberOfAdults + numberOfChildren,
+		// 			check_in: '2022-07-19',
+		// 			check_out: '2022-07-25'
+		// 		}
+		// 	})
+		// 	.then((response) => {
+		// 		console.log('after_search', response.data);
+		// 		setRooms(response.data);
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error);
+		// 	});
+	};
+
+
+	// const open = Boolean(anchor);
+	// const id = open ? 'popover' : undefined;
+
+	useEffect(() => {
+		const queryString = window.location.toString();
+		const hotelid = queryString.slice(-1);
+		setid(hotelid);
+		axios
+			.get(makeURL(references.url_one_hotel + hotelid + '/'), {
+				headers: {
+					Authorization: cookies.get('Authorization')
+				}
+			})
+			.then((response) => {
+				console.log('this request is for hotel facilities:', response.data);
+				setHotel(response.data);
+				setFacility(response.data.facilities);
+				setf1(response.data.facilities.slice(0, 4));
+				setf2(response.data.facilities.slice(4, 8));
+				setCheckin(response.data.check_in_range);
+				setCheckout(response.data.check_out_range);
+				setRank(response.data.rate);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
+
+	useEffect(() => {
+		const queryString = window.location.toString();
+		const hotelid = queryString.slice(-1);
+
+		setRooms(JSON.parse(localStorage.getItem('rooms')));
+
+		axios
+			.get(makeURL(references.url_hotelrooms + hotelid + '/'), {
+				headers: {
+					Authorization: cookies.get('Authorization')
+				},
+				params: {
+					size: numberOfAdults + numberOfChildren,
+					check_in: '2021-07-19',
+					check_out: '2023-07-25'
+				}
+			})
+			.then((response) => {
+				console.log('rooms response:use eefect', response.data);
+				setRooms(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
+
+
+
 
   const handleChangeNumber = (actionType, guestType) => {
     actionType === "dec"
@@ -511,7 +555,7 @@ export default function Hotelpage() {
               >
                 <Rating
                   name="text-feedback"
-                  value={value}
+                  value={rank}
                   readOnly
                   precision={0.5}
                   emptyIcon={
