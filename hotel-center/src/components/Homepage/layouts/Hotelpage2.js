@@ -1,18 +1,6 @@
 import * as React from "react";
-import {
-  Avatar,
-  Link,
-  Grid,
-  Box,
-  Button,
-  Typography,
-  Container,
-  Divider,
-  TextField,
-  CircularProgress,
-} from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import Helmet from "react-helmet";
-import PropTypes from "prop-types";
 import Rating from "@mui/material/Rating";
 import LocalTaxiRoundedIcon from "@mui/icons-material/LocalTaxiRounded";
 import ChairRoundedIcon from "@mui/icons-material/ChairRounded";
@@ -23,29 +11,18 @@ import RoomServiceRoundedIcon from "@mui/icons-material/RoomServiceRounded";
 import TvRoundedIcon from "@mui/icons-material/TvRounded";
 import FitnessCenterRoundedIcon from "@mui/icons-material/FitnessCenterRounded";
 import RestaurantMenuRoundedIcon from "@mui/icons-material/RestaurantMenuRounded";
-import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
-import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import BedroomChildRoundedIcon from "@mui/icons-material/BedroomChildRounded";
 import AlarmIcon from "@mui/icons-material/Alarm";
-import CheckIcon from "@mui/icons-material/Check";
 import { useState, useEffect } from "react";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import "../../../css/Hotelpage2.css";
 import "../../../css/Chat.css";
-import { srLatn } from "date-fns/locale";
-import Image1 from "../../../statics/img/room1.jpg";
-import Image2 from "../../../statics/img/room2.jpg";
-import Image3 from "../../../statics/img/room3.jpg";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import StarIcon from "@mui/icons-material/Star";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import { cookies, makeURL } from "../../../Utils/common";
 import references from "../../../assets/References.json";
 import Roomcard from "./Roomcard";
 import ResponsiveDatePickers from "../../HotelPage/ResponsiveDatePickers";
-import Messages from "./Chatwithhotel";
+import Chatboxuser from "./Chatboxuser";
 
 const labels = {
   0.5: "Useless",
@@ -75,7 +52,9 @@ const Icons = {
 
 export default function Hotelpage() {
   const value = 3.5;
-  // const { hotelid } = useParams();
+  const [cookie, setCookie] = useState(undefined);
+  const [user, setUser] = useState(null);
+  const [roomNumber, setRoomNumber] = useState(null);
   const [hotel, setHotel] = useState(null);
   const [facility, setFacility] = useState(null);
   const [roomimg, setRoomimg] = useState(null);
@@ -86,13 +65,14 @@ export default function Hotelpage() {
   const [checkout, setCheckout] = useState("");
 
   useEffect(() => {
-    // console.log(cookies.get("Authorization"));
+    let tmpCookie = cookies.get("Authorization");
+    setCookie(tmpCookie);
     const queryString = window.location.toString();
     const hotelid = queryString.slice(-1);
     axios
       .get(makeURL(references.url_one_hotel + hotelid + "/"), {
         headers: {
-          Authorization: cookies.get("Authorization"),
+          Authorization: tmpCookie,
         },
       })
       .then((response) => {
@@ -107,6 +87,23 @@ export default function Hotelpage() {
       .catch((error) => {
         console.log(error);
       });
+
+    if (tmpCookie !== undefined) {
+      axios
+        .get(makeURL(references.url_chatwithhotel + hotelid + "/"), {
+          headers: {
+            Authorization: tmpCookie,
+          },
+        })
+        .then((response) => {
+          console.log("this request is for hotel facilities:", response.data);
+          setRoomNumber(response.data.roomname);
+          setUser(response.data.user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
 
   useEffect(() => {
@@ -417,63 +414,56 @@ export default function Hotelpage() {
                   </div>
                 </div>
               </div>
-
-              {/* <div col-3>
-                <p>something</p>
-                <p>something else</p>
-                <p>another thing</p>
-                <div class="bar-container">
-                  <div class="bar-3"></div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
       </div>
-      <button
-        type="button"
-        className="chat-button"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal1"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="25"
-          fill="currentColor"
-          className="bi bi-chat-left-text"
-          viewBox="0 0 16 16"
+      {cookie !== undefined ? (
+        <button
+          type="button"
+          className="chat-button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal1"
         >
-          <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-          <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-        </svg>
-      </button>
-      <div
-        className="modal fade"
-        id="exampleModal1"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
-            {/* <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Messages
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div> */}
-            <div className="modal-body p-0">
-              <Messages />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            className="bi bi-chat-left-text"
+            viewBox="0 0 16 16"
+          >
+            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+          </svg>
+        </button>
+      ) : null}
+      {cookie !== undefined ? (
+        <div
+          className="modal fade"
+          id="exampleModal1"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div
+              className="modal-content"
+              style={{ borderRadius: "10px", border: "none" }}
+            >
+              <div className="modal-body p-0">
+                {user ? (
+                  <Chatboxuser
+                    user={user}
+                    roomNumber={roomNumber}
+                    hotel={hotel}
+                  />
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   ) : (
     <Box
