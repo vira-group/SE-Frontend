@@ -256,6 +256,7 @@ function Profile(props) {
               </div>
               <div className="col-lg-8 d-flex align-items-center">
                 <input
+                  data-testid="no1"
                   type="file"
                   name="myImage"
                   accept="image/*"
@@ -574,7 +575,7 @@ function Profile(props) {
                       size="small"
                       label="Balance"
                       InputLabelProps={{ shrink: true }}
-                      InputProps={{readOnly: true,}}
+                      InputProps={{ readOnly: true }}
                       value={formik.values.balance}
                     />
                   </ThemeProvider>

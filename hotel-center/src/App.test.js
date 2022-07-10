@@ -62,7 +62,7 @@ describe("Edit hotel", () => {
       </BrowserRouter>
     );
     const AdminElements = screen.queryAllByRole("button");
-    expect(AdminElements.length).toBe(9);
+    expect(AdminElements.length).toBe(10);
   });
 
   it("should render the correct content", async () => {
@@ -391,35 +391,35 @@ describe("Favorites", () => {
   });
 });
 
-describe("IncreaseCredit", () => {
-  it("snapshot test", () => {
-    <BrowserRouter>
-      const component = renderer.create(
-      <IncreaseCredit />
-      ); let tree = component.toJSON(); expect(tree).toMatchSnapshot();
-    </BrowserRouter>;
-  });
+// describe("IncreaseCredit", () => {
+//   it("snapshot test", () => {
+//     <BrowserRouter>
+//       const component = renderer.create(
+//       <IncreaseCredit />
+//       ); let tree = component.toJSON(); expect(tree).toMatchSnapshot();
+//     </BrowserRouter>;
+//   });
 
-  it("should render the correct content", async () => {
-    render(
-      <BrowserRouter>
-        <IncreaseCredit />
-      </BrowserRouter>
-    );
-    const CreditElements = screen.queryAllByRole("button");
-    expect(CreditElements.length).toBe(4);
-  });
+//   it("should render the correct content", async () => {
+//     render(
+//       <BrowserRouter>
+//         <IncreaseCredit />
+//       </BrowserRouter>
+//     );
+//     const CreditElements = screen.queryAllByRole("button");
+//     expect(CreditElements.length).toBe(4);
+//   });
 
-  it("should render the correct content", async () => {
-    render(
-      <BrowserRouter>
-        <IncreaseCredit />
-      </BrowserRouter>
-    );
-    const CreditElements = screen.queryAllByRole("heading");
-    expect(CreditElements.length).toBe(2);
-  });
-});
+//   it("should render the correct content", async () => {
+//     render(
+//       <BrowserRouter>
+//         <IncreaseCredit />
+//       </BrowserRouter>
+//     );
+//     const CreditElements = screen.queryAllByRole("heading");
+//     expect(CreditElements.length).toBe(2);
+//   });
+// });
 
 describe("Edit profile", () => {
   it("should render the correct content", async () => {
@@ -441,6 +441,20 @@ describe("Edit profile", () => {
 const mockedProfile = jest.fn();
 
 describe("Edit profile", () => {
+  //   test("should call setSelectedImage", () => {
+  //     const setSelectedImageSpy = jest.fn();
+
+  //     const { getByTestId } = render(
+  //       <BrowserRouter>
+  //         <EditProfile setSelectedImage={setSelectedImageSpy} />
+  //       </BrowserRouter>
+  //     );
+
+  //     fireEvent.change(getByTestId("no1"));
+
+  //     expect(setSelectedImageSpy).toHaveBeenCalled();
+  //   });
+
   it("snapshot test", () => {
     <BrowserRouter>
       const component = renderer.create(
@@ -495,6 +509,62 @@ describe("Edit profile", () => {
 const mockedIncreaseCredit = jest.fn();
 
 describe("Increase credit", () => {
+  it("should render correct amount of money", async () => {
+    render(
+      <BrowserRouter>
+        <IncreaseCredit
+          amountOfMoney={null}
+          setAmountOfMoney={mockedIncreaseCredit}
+        />
+      </BrowserRouter>
+    );
+    const CreditElement = screen.getByLabelText(/Amount of money/i);
+    fireEvent.select(CreditElement, { target: { value: "200000" } });
+    expect(CreditElement.value).toBe("200000");
+  });
+
+  test("should call setAmountOfMoney", () => {
+    const setAmountOfMoneySpy = jest.fn();
+
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <IncreaseCredit setAmountOfMoney={setAmountOfMoneySpy} />
+      </BrowserRouter>
+    );
+
+    //fireEvent.click(getByTestId("no1"));
+    fireEvent.submit(getByTestId("no1"));
+    expect(setAmountOfMoneySpy).toHaveBeenCalled();
+  });
+
+  // test("should call setAmountOfMoney", () => {
+  //   const setAmountOfMoneySpy = jest.fn();
+
+  //   const { getByTestId } = render(
+  //     <BrowserRouter>
+  //       <IncreaseCredit setAmountOfMoney={setAmountOfMoneySpy} />
+  //     </BrowserRouter>
+  //   );
+
+  //   fireEvent.click(getByTestId("no2"));
+
+  //   expect(setAmountOfMoneySpy).toHaveBeenCalled();
+  // });
+
+  // test("should call setAmountOfMoney", () => {
+  //   const setAmountOfMoneySpy = jest.fn();
+
+  //   const { getByTestId } = render(
+  //     <BrowserRouter>
+  //       <IncreaseCredit setAmountOfMoney={setAmountOfMoneySpy} />
+  //     </BrowserRouter>
+  //   );
+
+  //   fireEvent.click(getByTestId("no3"));
+
+  //   expect(setAmountOfMoneySpy).toHaveBeenCalled();
+  // });
+
   it("snapshot test", () => {
     <BrowserRouter>
       const component = renderer.create(
@@ -530,6 +600,20 @@ describe("Increase credit", () => {
     const CreditElement = screen.getByLabelText(/Amount of money/i);
     fireEvent.select(CreditElement, { target: { value: "300" } });
     expect(CreditElement.value).toBe("300");
+  });
+
+  it("should render correct amount of money", async () => {
+    render(
+      <BrowserRouter>
+        <IncreaseCredit
+          amountOfMoney={null}
+          setAmountOfMoney={mockedIncreaseCredit}
+        />
+      </BrowserRouter>
+    );
+    const CreditElement = screen.getByLabelText(/Amount of money/i);
+    fireEvent.select(CreditElement, { target: { value: "10000" } });
+    expect(CreditElement.value).toBe("10000");
   });
 
   it("should render the correct content", async () => {
@@ -611,6 +695,36 @@ describe("Increase credit", () => {
       </BrowserRouter>
     );
     const CreditElements = screen.getByText(/Account balance:/i);
+    expect(CreditElements).toBeInTheDocument();
+  });
+
+  it("should render the correct content", async () => {
+    render(
+      <BrowserRouter>
+        <IncreaseCredit />
+      </BrowserRouter>
+    );
+    const CreditElements = screen.getByText("$100");
+    expect(CreditElements).toBeInTheDocument();
+  });
+
+  it("should render the correct content", async () => {
+    render(
+      <BrowserRouter>
+        <IncreaseCredit />
+      </BrowserRouter>
+    );
+    const CreditElements = screen.getByText("$200");
+    expect(CreditElements).toBeInTheDocument();
+  });
+
+  it("should render the correct content", async () => {
+    render(
+      <BrowserRouter>
+        <IncreaseCredit />
+      </BrowserRouter>
+    );
+    const CreditElements = screen.getByText("$500");
     expect(CreditElements).toBeInTheDocument();
   });
 });

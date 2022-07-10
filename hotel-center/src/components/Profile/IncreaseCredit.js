@@ -40,7 +40,8 @@ export default function Credit() {
   };
 
   useEffect(() => {
-      axios.get(makeURL(references.url_add_credit),{
+    axios
+      .get(makeURL(references.url_add_credit), {
         headers: {
           Authorization: cookies.get("Authorization"),
         },
@@ -50,9 +51,9 @@ export default function Credit() {
         setBalance(response.data.balance);
       })
       .catch((error) => {
-        console.log("error fro get request: ", error)
-      })
-  }, [])
+        console.log("error fro get request: ", error);
+      });
+  }, []);
 
   const handlePay = () => {
     console.log(amountOfMoney);
@@ -72,7 +73,7 @@ export default function Credit() {
           setOpen(true);
           setLoading(false);
           console.log("response for credits: ", response.data);
-          setBalance(response.data.new_credit)
+          setBalance(response.data.new_credit);
           setMessage("Account balance increased successfully.");
         })
         .catch((error) => {
@@ -101,6 +102,7 @@ export default function Credit() {
                     <button
                       type="button"
                       className="btn w-100 money-option-button"
+                      data-testid="no1"
                       onClick={() => {
                         setAmountOfMoney(100);
                       }}
@@ -112,6 +114,7 @@ export default function Credit() {
                     <button
                       type="button"
                       className="btn w-100 money-option-button"
+                      data-testid="no2"
                       onClick={() => {
                         setAmountOfMoney(200);
                       }}
@@ -123,6 +126,7 @@ export default function Credit() {
                     <button
                       type="button"
                       className="btn w-100 money-option-button"
+                      data-testid="no3"
                       onClick={() => {
                         setAmountOfMoney(500);
                       }}
