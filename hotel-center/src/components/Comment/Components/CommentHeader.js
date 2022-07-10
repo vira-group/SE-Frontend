@@ -23,10 +23,10 @@ const CommentHeader = ({
 		<div className="comment--header">
         {/* <img   className={`profile-pic`} src={avatar}></img> */}
         {/* <img   className={`profile-pic`} src={im}></img> */}
-		{avatar}
+		{/* {avatar} */}
 		{
 				(avatar !== null)? 
-				<img   className={`profile-pic`} src={references.base_address + avatar}></img>
+				<img   className={`profile-pic`} src={avatar}></img>
 :
 				<img   className={`profile-pic`} src={im}></img>
 }   

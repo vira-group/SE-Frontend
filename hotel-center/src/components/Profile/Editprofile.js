@@ -21,6 +21,7 @@ import Sidebar from "./Sidebar";
 import image1 from "../../statics/img/pics/avatar.jpg";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import PhoneInput from "react-phone-input-2";
 
 const textFieldTheme = createTheme({
   palette: {
@@ -49,7 +50,10 @@ const validationSchema = yup.object({
     .max(10, "Must be less than 10 digits")
     .required("Required!"),
   email: yup.string().email("Invalid email address").required("Required"),
-  phone: yup.number().required("Required!"),
+  phone: yup
+    .number()
+    .required("Required!")
+    .max(15, "Must be less than 15 digits"),
   aboutme: yup.string().max(250, "Can't be more than 250 characters."),
   telephone: yup.number(),
   gender: yup.string().required("Required!"),
@@ -60,6 +64,7 @@ const validationSchema = yup.object({
 function Profile(props) {
   const CHARACTER_LIMIT = 250;
   const [message, setMessage] = useState("");
+  const [phone2, setphone2] = useState(null);
   const [open, setOpen] = useState(false);
   const [message1, setMessage1] = useState("");
   const [open1, setOpen1] = useState(false);
@@ -135,7 +140,6 @@ function Profile(props) {
       !Boolean(formik.errors.lastname) &&
       !Boolean(formik.errors.nationalcode) &&
       !Boolean(formik.errors.email) &&
-      !Boolean(formik.errors.phone) &&
       genValue.length != 0 &&
       formattedDate != "Invalid date";
     console.log("filled:", filled);
@@ -156,7 +160,7 @@ function Profile(props) {
             lastName: formik.values.lastname,
             birthday: formattedDate,
             gender: genValue,
-            phone_number: formik.values.phone,
+            phone_number: phone2,
             national_code: formik.values.nationalcode,
             description: formik.values.aboutme,
           },
@@ -498,22 +502,36 @@ function Profile(props) {
                 </div>
                 <div className="col-lg-8">
                   <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      required
-                      fullWidth
-                      placeholder="09912141869"
+                    <PhoneInput
+                      country={"us"}
+                      size="large"
                       id="phone"
-                      size="small"
                       label="Phone number"
-                      InputLabelProps={{ shrink: true }}
-                      value={formik.values.phone}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.phone && Boolean(formik.errors.phone)
-                      }
-                      helperText={formik.touched.phone && formik.errors.phone}
+                      name="phone"
+                      fullWidth
+                      required
+                      value={phone2}
+                      onChange={(val) => {
+                        setphone2(val);
+                        console.log("pho", val);
+                      }}
                     />
+                    {/* // <TextField
+                    //   required
+                    //   fullWidth
+                    //   placeholder="09912141869"
+                    //   id="phone"
+                    //   size="small"
+                    //   label="Phone number"
+                    //   InputLabelProps={{ shrink: true }}
+                    //   value={formik.values.phone}
+                    //   onChange={formik.handleChange}
+                    //   onBlur={formik.handleBlur}
+                    //   error={
+                    //     formik.touched.phone && Boolean(formik.errors.phone)
+                    //   }
+                    //   helperText={formik.touched.phone && formik.errors.phone}
+                    // /> */}
                   </ThemeProvider>
                 </div>
               </div>

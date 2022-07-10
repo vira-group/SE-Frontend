@@ -139,7 +139,7 @@ export default function Roomcard(props) {
 									aria-expanded="false"
 									// onClick={handleRuleclick}
 								>
-									<small>Booking cancellation rules</small>
+									<small>Booking cancellation</small>
 								</button>
 							</h2>
 							<div
@@ -150,7 +150,7 @@ export default function Roomcard(props) {
 							>
 								<div className="accordion-body cancelation-rules">
 									<RemoveCircleOutlineIcon fontSize="small" />
-									<span className="ms-1">It is not possible to cancel the reservation.</span>
+									<span className="ms-1">Please go to profile for more information.</span>
 								</div>
 							</div>
 						</div>

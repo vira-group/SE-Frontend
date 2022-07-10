@@ -48,10 +48,6 @@ class SimpleAccordion extends React.Component {
 					<AccordionDetails title="AccordionDetails">
 						<Typography data-testid="test" />
 						{sec}
-						<a title="href" data-testid="a" href="">
-							{' '}
-							{this.state.phone_numbers}
-						</a>
 					</AccordionDetails>
 				</Accordion>
 			</div>

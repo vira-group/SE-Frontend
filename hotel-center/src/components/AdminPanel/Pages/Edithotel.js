@@ -1,78 +1,79 @@
-import * as React from 'react';
-import { TextField, Grid, Typography } from '@mui/material';
-import Logo from '../../../statics/logo/logo2.png';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { cookies, makeURL, set_cookie } from '../../../Utils/common';
-import references from '../../../assets/References.json';
-import { Box, CircularProgress, Container, Autocomplete } from '@mui/material';
-import { useHistory, useParams } from 'react-router-dom';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import moment from 'moment';
-import { makeStyles } from '@mui/styles';
-import PreviewMultipleImages from './PreviewMultipleImages';
-import Sidebar from '../layout/Sidebar';
-import EditIcon from '@mui/icons-material/Edit';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import * as React from "react";
+import { TextField, Grid, Typography } from "@mui/material";
+import Logo from "../../../statics/logo/logo2.png";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import references from "../../../assets/References.json";
+import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
+import { useHistory, useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import moment from "moment";
+import { makeStyles } from "@mui/styles";
+import PreviewMultipleImages from "./PreviewMultipleImages";
+import Sidebar from "../layout/Sidebar";
+import EditIcon from "@mui/icons-material/Edit";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import PhoneInput from "react-phone-input-2";
 
 const textfieldTheme = createTheme({
-	palette: {
-		primary: {
-			main: '#cd9a2b',
-			dark: '#cd9a2b',
-			light: '#d7ae55',
-			contrastText: '#fff'
-		}
-	}
+  palette: {
+    primary: {
+      main: "#cd9a2b",
+      dark: "#cd9a2b",
+      light: "#d7ae55",
+      contrastText: "#fff",
+    },
+  },
 });
 
 const facilitieslist = [
-	'Taxi service',
-	'Sofa',
-	'Bathroom',
-	'Telephone',
-	'WiFi',
-	'Room service',
-	'Television',
-	'Gym',
-	'Restaurant',
-	'Bar'
+  "Taxi service",
+  "Sofa",
+  "Bathroom",
+  "Telephone",
+  "WiFi",
+  "Room service",
+  "Television",
+  "Gym",
+  "Restaurant",
+  "Bar",
 ];
 
 const validationSchema = yup.object({
-	name: yup
-		.string()
-		.max(30, 'Must be 15 characters or less')
-		.min(2, 'Must be at least 2 characters')
-		.required('Required!'),
-	address: yup
-		.string()
-		.max(200, 'Must be 200 characters or less')
-		.min(7, 'Must be at least 7 characters')
-		.required('Required!'),
-	email: yup.string().email('Invalid email address').required('Required'),
-	phone: yup.number().required('Required!'),
-	description: yup.string().max(1000, "Can't be more than 500 characters."),
-	country: yup
-		.string()
-		.max(20, 'Must be 20 characters or less')
-		.min(2, 'Must be at least 2 characters')
-		.required('Required!'),
-	city: yup
-		.string()
-		.max(20, 'Must be 20 characters or less')
-		.min(2, 'Must be at least 2 characters')
-		.required('Required!')
+  name: yup
+    .string()
+    .max(30, "Must be 15 characters or less")
+    .min(2, "Must be at least 2 characters")
+    .required("Required!"),
+  address: yup
+    .string()
+    .max(200, "Must be 200 characters or less")
+    .min(7, "Must be at least 7 characters")
+    .required("Required!"),
+  email: yup.string().email("Invalid email address").required("Required"),
+  phone: yup.number().required("Required!").max(15,"Must be less than 15 digits."),
+  description: yup.string().max(1000, "Can't be more than 500 characters."),
+  country: yup
+    .string()
+    .max(20, "Must be 20 characters or less")
+    .min(2, "Must be at least 2 characters")
+    .required("Required!"),
+  city: yup
+    .string()
+    .max(20, "Must be 20 characters or less")
+    .min(2, "Must be at least 2 characters")
+    .required("Required!"),
 });
 
 function Edithotel(props) {
@@ -83,6 +84,7 @@ function Edithotel(props) {
   const [loading, setLoading] = useState(false);
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
+  const [phone2, setphone2] = useState(null);
   const CHARACTER_LIMIT = 1000;
   // const [type, setType] = useState(null);
   const [value, setValue] = useState(null);
@@ -94,71 +96,66 @@ function Edithotel(props) {
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState(null);
 
+  let tempcheckin = checkin; // value from your state
+  let tempcheckout = checkout; // value from your state
+  let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
+  let formattedcheckoutDate = moment(tempcheckout).format("hh:mm");
 
-	let tempcheckin = checkin; // value from your state
-	let tempcheckout = checkout; // value from your state
-	let formattedcheckinDate = moment(tempcheckin).format('hh:mm');
-	let formattedcheckoutDate = moment(tempcheckout).format('hh:mm');
+  const styles = makeStyles(() => ({
+    root: {
+      "&$checked": {
+        color: "#cd9a2d",
+      },
+    },
+    checked: {},
+  }));
+  const c = styles();
 
-	const styles = makeStyles(() => ({
-		root: {
-			'&$checked': {
-				color: '#cd9a2d'
-			}
-		},
-		checked: {}
-	}));
-	const c = styles();
+  useEffect(() => {
+    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
+  }, []);
 
-	useEffect(() => {
-		setHotelId(parseInt(window.location.pathname.split('/')[2], 10));
-	}, []);
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      address: "",
+      email: "",
+      phone: "",
+      description: "",
+      country: "",
+      city: "",
+    },
+    validationSchema: validationSchema,
+  });
 
-	const formik = useFormik({
-		initialValues: {
-			name: '',
-			address: '',
-			email: '',
-			phone: '',
-			description: '',
-			country: '',
-			city: ''
-		},
-		validationSchema: validationSchema
-	});
+  const handleToggleSidebar = (value) => {
+    setToggled(value);
+  };
 
-	const handleToggleSidebar = (value) => {
-		setToggled(value);
-	};
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
-	const Alert = React.forwardRef(function Alert(props, ref) {
-		return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-	});
-
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return;
-		}
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
     setOpen(false);
     setOpen1(false);
   };
 
-
   // const handletypeChange = (event, newValue) => {
   //   setType(newValue);
   // };
 
-	useEffect(
-		() => {
-			if (selectedImage) {
-				setImageUrl(URL.createObjectURL(selectedImage));
-			}
-		},
-		[ selectedImage ]
-	);
+  useEffect(() => {
+    if (selectedImage) {
+      setImageUrl(URL.createObjectURL(selectedImage));
+    }
+  }, [selectedImage]);
 
-	let hotelid = window.location.pathname.split('/')[2];
+  let hotelid = window.location.pathname.split("/")[2];
 
   useEffect(() => {
     let facilityarray = [];
@@ -186,9 +183,13 @@ function Edithotel(props) {
         setFacilities(facilityarray || "");
         var temp1 = res.data.check_in_range.split(":");
         var temp2 = res.data.check_out_range.split(":");
-        setCheckin(new Date(2022, 5, 29, parseInt(temp1[0]), parseInt(temp1[1])) || "");
+        setCheckin(
+          new Date(2022, 5, 29, parseInt(temp1[0]), parseInt(temp1[1])) || ""
+        );
         setCheckout(
-          new Date(2022, 5, 29, parseInt(temp2[0]), parseInt(temp2[1])) || "" || ""
+          new Date(2022, 5, 29, parseInt(temp2[0]), parseInt(temp2[1])) ||
+            "" ||
+            ""
         );
       })
       .catch((error) => {
@@ -196,56 +197,55 @@ function Edithotel(props) {
       });
   }, []);
 
-	const handleClick = () => {
-		let filled =
-			!Boolean(formik.errors.name) &&
-			!Boolean(formik.errors.address) &&
-			!Boolean(formik.errors.description) &&
-			!Boolean(formik.errors.phone) &&
-			!Boolean(formik.errors.country) &&
-			!Boolean(formik.errors.city) &&
-			// facilities.length != 0 &&
-			formattedcheckinDate != 'Invalid time' &&
-			formattedcheckoutDate != 'Invalid time';
-		console.log('filled: ', filled);
-		console.log(
-			'informations validation: ',
-			!Boolean(formik.errors.name),
-			'\n',
-			!Boolean(formik.errors.address),
-			'\n',
-			!Boolean(formik.errors.description),
-			'\n',
-			!Boolean(formik.errors.phone),
-			'\n',
-			facilities.length,
-			'\n',
-			formattedcheckinDate,
-			'\n',
-			formattedcheckoutDate,
-			'\n',
-			!Boolean(formik.errors.name) &&
-				!Boolean(formik.errors.address) &&
-				!Boolean(formik.errors.description) &&
-				!Boolean(formik.errors.phone) &&
-				// facilities.length != 0 &&
-				formattedcheckinDate != ' Invalid date' &&
-				formattedcheckoutDate != ' Invalid date'
-		);
-		console.log('checkin time: ', formattedcheckinDate);
-		console.log('checkout time: ', formattedcheckoutDate);
+  const handleClick = () => {
+    let filled =
+      !Boolean(formik.errors.name) &&
+      !Boolean(formik.errors.address) &&
+      !Boolean(formik.errors.description) &&
+      !Boolean(formik.errors.country) &&
+      !Boolean(formik.errors.city) &&
+      // facilities.length != 0 &&
+      formattedcheckinDate != "Invalid time" &&
+      formattedcheckoutDate != "Invalid time";
+    console.log("filled: ", filled);
+    console.log(
+      "informations validation: ",
+      !Boolean(formik.errors.name),
+      "\n",
+      !Boolean(formik.errors.address),
+      "\n",
+      !Boolean(formik.errors.description),
+      "\n",
+      !Boolean(formik.errors.phone),
+      "\n",
+      facilities.length,
+      "\n",
+      formattedcheckinDate,
+      "\n",
+      formattedcheckoutDate,
+      "\n",
+      !Boolean(formik.errors.name) &&
+        !Boolean(formik.errors.address) &&
+        !Boolean(formik.errors.description) &&
+        !Boolean(formik.errors.phone) &&
+        // facilities.length != 0 &&
+        formattedcheckinDate != " Invalid date" &&
+        formattedcheckoutDate != " Invalid date"
+    );
+    console.log("checkin time: ", formattedcheckinDate);
+    console.log("checkout time: ", formattedcheckoutDate);
 
-		if (!filled) {
-			setOpen(true);
-			setMessage('Please fill in the blanks.');
-		}
+    if (!filled) {
+      setOpen(true);
+      setMessage("Please fill in the blanks.");
+    }
 
-		var facilitiesListForBack = [];
-		for (var i = 0; i < facilities.length; i++) {
-			let temp = { name: facilities[i] };
-			facilitiesListForBack.push(temp);
-		}
-		console.log('facilities list: ', facilitiesListForBack);
+    var facilitiesListForBack = [];
+    for (var i = 0; i < facilities.length; i++) {
+      let temp = { name: facilities[i] };
+      facilitiesListForBack.push(temp);
+    }
+    console.log("facilities list: ", facilitiesListForBack);
 
     if (filled) {
       setLoading(true);
@@ -258,7 +258,7 @@ function Edithotel(props) {
             address: formik.values.address,
             description: formik.values.description,
             facilities: facilitiesListForBack,
-            phone_number: formik.values.phone,
+            phone_number: phone2,
             country: formik.values.country,
             city: formik.values.city,
             check_in_range: formattedcheckinDate,
@@ -328,10 +328,17 @@ function Edithotel(props) {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar toggled={toggled} handleToggleSidebar={handleToggleSidebar} id={hotelId} />
+      <Sidebar
+        toggled={toggled}
+        handleToggleSidebar={handleToggleSidebar}
+        id={hotelId}
+      />
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
-          <div className="btn-toggle d-md-none" onClick={() => handleToggleSidebar(true)}>
+          <div
+            className="btn-toggle d-md-none"
+            onClick={() => handleToggleSidebar(true)}
+          >
             <MenuIcon fontSize="large" />
           </div>
           <a href="/" className="navbar-brand logo d-md-none">
@@ -377,7 +384,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row mt-3">
@@ -447,7 +454,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -473,17 +480,21 @@ function Edithotel(props) {
                       value={formik.values.address}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      error={formik.touched.address && Boolean(formik.errors.address)}
-                      helperText={formik.touched.address && formik.errors.address}
+                      error={
+                        formik.touched.address && Boolean(formik.errors.address)
+                      }
+                      helperText={
+                        formik.touched.address && formik.errors.address
+                      }
                     />
                   </ThemeProvider>
                 </div>
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
-						{/* <div className="mb-3 col-12">
+            {/* <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-2 col-md-3">
                   <label
@@ -570,8 +581,13 @@ function Edithotel(props) {
                           value={formik.values.country}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          error={formik.touched.country && Boolean(formik.errors.country)}
-                          helperText={formik.touched.country && formik.errors.country}
+                          error={
+                            formik.touched.country &&
+                            Boolean(formik.errors.country)
+                          }
+                          helperText={
+                            formik.touched.country && formik.errors.country
+                          }
                         />
                       </ThemeProvider>
                     </div>
@@ -601,7 +617,9 @@ function Edithotel(props) {
                           value={formik.values.city}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          error={formik.touched.city && Boolean(formik.errors.city)}
+                          error={
+                            formik.touched.city && Boolean(formik.errors.city)
+                          }
                           helperText={formik.touched.city && formik.errors.city}
                         />
                       </ThemeProvider>
@@ -611,7 +629,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -681,7 +699,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -696,7 +714,21 @@ function Edithotel(props) {
                 </div>
                 <div className="col-lg-9">
                   <ThemeProvider theme={textfieldTheme}>
-                    <TextField
+                  <PhoneInput
+                      country={"us"}
+                      size="large"
+                      id="phone"
+                      label="Phone number"
+                      name="phone"
+                      fullWidth
+                      required
+                      value={phone2}
+                      onChange={(val) => {
+                        setphone2(val);
+                        console.log("pho", val);
+                      }}
+                    />
+                    {/* <TextField
                       required
                       fullWidth
                       placeholder="09912141869"
@@ -707,15 +739,17 @@ function Edithotel(props) {
                       value={formik.values.phone}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      error={formik.touched.phone && Boolean(formik.errors.phone)}
+                      error={
+                        formik.touched.phone && Boolean(formik.errors.phone)
+                      }
                       helperText={formik.touched.phone && formik.errors.phone}
-                    />
+                    /> */}
                   </ThemeProvider>
                 </div>
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -741,7 +775,9 @@ function Edithotel(props) {
                       value={formik.values.email}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      error={formik.touched.email && Boolean(formik.errors.email)}
+                      error={
+                        formik.touched.email && Boolean(formik.errors.email)
+                      }
                       helperText={formik.touched.email && formik.errors.email}
                     />
                   </ThemeProvider>
@@ -749,7 +785,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -777,7 +813,8 @@ function Edithotel(props) {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       error={
-                        formik.touched.description && Boolean(formik.errors.description)
+                        formik.touched.description &&
+                        Boolean(formik.errors.description)
                       }
                       helperText={`${formik.values.description.length}/${CHARACTER_LIMIT}`}
                     />
@@ -786,7 +823,7 @@ function Edithotel(props) {
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
             <div className="mb-3 col-12">
               <div className="row">
@@ -812,7 +849,12 @@ function Edithotel(props) {
                     filterSelectedOptions
                     renderInput={(params) => (
                       <ThemeProvider theme={textfieldTheme}>
-                        <TextField fullWidth required {...params} label="Facilities" />
+                        <TextField
+                          fullWidth
+                          required
+                          {...params}
+                          label="Facilities"
+                        />
                       </ThemeProvider>
                     )}
                   />
@@ -820,25 +862,28 @@ function Edithotel(props) {
               </div>
             </div>
 
-						<hr class="dashed" />
+            <hr class="dashed" />
 
-						<div className="mb-3 col-12">
-							<PreviewMultipleImages />
-						</div>
+            <div className="mb-3 col-12">
+              <Typography sx={{ mb: 3 }}>
+                Please upload other photos of hotel here.
+              </Typography>
+              <PreviewMultipleImages />
+            </div>
 
-						<div className="row mt-2 d-fit-content">
-							<div className="col-lg-4 col-md-2" />
-							<div className="col-lg-4 col-md-2" />
-							<div className="col-lg-4 col-md-8 edit-hotel mb-3">
-								<button className="btn edit-hotel" onClick={handleClick}>
-									{loading ? (
-										<CircularProgress style={{ color: '#fff' }} size="1.5rem" />
-									) : (
-										'Edit Hotel'
-									)}
-								</button>
-							</div>
-						</div>
+            <div className="row mt-2 d-fit-content">
+              <div className="col-lg-4 col-md-2" />
+              <div className="col-lg-4 col-md-2" />
+              <div className="col-lg-4 col-md-8 edit-hotel mb-3">
+                <button className="btn edit-hotel" onClick={handleClick}>
+                  {loading ? (
+                    <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
+                  ) : (
+                    "Edit Hotel"
+                  )}
+                </button>
+              </div>
+            </div>
 
             <Snackbar
               open={open}
@@ -848,7 +893,9 @@ function Edithotel(props) {
             >
               <Alert
                 onClose={handleClose}
-                severity={message === "Please fill in the blanks." ? "error" : "success"}
+                severity={
+                  message === "Please fill in the blanks." ? "error" : "success"
+                }
                 sx={{ width: "100%" }}
               >
                 {message}
@@ -860,5 +907,5 @@ function Edithotel(props) {
     </div>
   );
 }
- 
+
 export default Edithotel;

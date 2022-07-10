@@ -28,13 +28,13 @@ const datePickerTheme = createTheme({
 });
 
 const Cities = [
-  { id: "0", city: "Tehran", country: "Iran" },
-  { id: "1", city: "Karaj", country: "Iran" },
-  { id: "2", city: "Shiraz", country: "Iran" },
-  { id: "3", city: "Toronto", country: "Canada" },
-  { id: "4", city: "London", country: "England" },
-  { id: "5", city: "Paris", country: "France" },
-  { id: "6", city: "Alberta", country: "Canada" },
+  { id: "0", city: "London", country: "United Kingdom" },
+  { id: "1", city: "Paris", country: "France" },
+  { id: "2", city: "Toronto", country: "Canada" },
+  { id: "3", city: "Alberta", country: "Canada" },
+  { id: "4", city: "Yport", country: "France" },
+  { id: "5", city: "Tehran", country: "Iran" },
+  { id: "6", city: "Amsterdam", country: "Netherlands" },
 ];
 
 const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
@@ -67,8 +67,15 @@ function SearchForm(props) {
   };
 
   const handleSearch = () => {
-    var url = makeURL(references.url_allhotels) + destination.city + "&check_in=" + formattedcheckinDate 
-    + "&check_out=" + formattedcheckoutDate + "&size=" + numberOfPeople;
+    var url =
+      makeURL(references.url_allhotels) +
+      destination.city +
+      "&check_in=" +
+      formattedcheckinDate +
+      "&check_out=" +
+      formattedcheckoutDate +
+      "&size=" +
+      numberOfPeople;
     axios
       .get(url, {
         headers: {
@@ -77,9 +84,9 @@ function SearchForm(props) {
       })
       .then((response) => {
         props.setHotels(response.data);
-        console.log('checkin date: ', formattedcheckinDate);
-        console.log('checkout date: ', formattedcheckoutDate);
-        console.log('number of people: ', numberOfPeople)
+        console.log("checkin date: ", formattedcheckinDate);
+        console.log("checkout date: ", formattedcheckoutDate);
+        console.log("number of people: ", numberOfPeople);
       })
       .catch((error) => {
         console.log(error);

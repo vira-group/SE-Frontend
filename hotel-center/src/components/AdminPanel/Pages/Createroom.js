@@ -303,10 +303,17 @@ function Createroom(props) {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar toggled={toggled} handleToggleSidebar={handleToggleSidebar} id={hotelId} />
+      <Sidebar
+        toggled={toggled}
+        handleToggleSidebar={handleToggleSidebar}
+        id={hotelId}
+      />
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
-          <div className="btn-toggle d-md-none" onClick={() => handleToggleSidebar(true)}>
+          <div
+            className="btn-toggle d-md-none"
+            onClick={() => handleToggleSidebar(true)}
+          >
             <MenuIcon fontSize="large" />
           </div>
           <a href="/" className="navbar-brand logo d-md-none">
@@ -437,7 +444,9 @@ function Createroom(props) {
                           value={formik.values.view}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          error={formik.touched.view && Boolean(formik.errors.view)}
+                          error={
+                            formik.touched.view && Boolean(formik.errors.view)
+                          }
                           helperText={formik.touched.view && formik.errors.view}
                         />
                       </ThemeProvider>
@@ -469,7 +478,9 @@ function Createroom(props) {
                           value={formik.values.size}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          error={formik.touched.size && Boolean(formik.errors.size)}
+                          error={
+                            formik.touched.size && Boolean(formik.errors.size)
+                          }
                           helperText={formik.touched.size && formik.errors.size}
                         />
                       </ThemeProvider>
@@ -507,8 +518,12 @@ function Createroom(props) {
                           value={formik.values.price}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          error={formik.touched.price && Boolean(formik.errors.price)}
-                          helperText={formik.touched.price && formik.errors.price}
+                          error={
+                            formik.touched.price && Boolean(formik.errors.price)
+                          }
+                          helperText={
+                            formik.touched.price && formik.errors.price
+                          }
                         />
                       </ThemeProvider>
                     </div>
@@ -539,8 +554,13 @@ function Createroom(props) {
                           value={formik.values.sleeps}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          error={formik.touched.sleeps && Boolean(formik.errors.sleeps)}
-                          helperText={formik.touched.sleeps && formik.errors.sleeps}
+                          error={
+                            formik.touched.sleeps &&
+                            Boolean(formik.errors.sleeps)
+                          }
+                          helperText={
+                            formik.touched.sleeps && formik.errors.sleeps
+                          }
                         />
                       </ThemeProvider>
                     </div>
@@ -574,7 +594,12 @@ function Createroom(props) {
                     filterSelectedOptions
                     renderInput={(params) => (
                       <ThemeProvider theme={textfieldTheme}>
-                        <TextField fullWidth required {...params} label="Facilities" />
+                        <TextField
+                          fullWidth
+                          required
+                          {...params}
+                          label="Facilities"
+                        />
                       </ThemeProvider>
                     )}
                   />
@@ -605,7 +630,9 @@ function Createroom(props) {
               <Alert
                 onClose={handleClose}
                 severity={
-                  msg1 === "Something went wrong.Please try again." ? "error" : "success"
+                  msg1 === "Something went wrong.Please try again."
+                    ? "error"
+                    : "success"
                 }
                 sx={{ width: "100%" }}
               >
@@ -618,8 +645,8 @@ function Createroom(props) {
             <div className="mb-3 col-md-12">
               <div className="row mt-3">
                 <Typography sx={{ mb: 3 }}>
-                  Please first create your room and then add the numbers of rooms you have
-                  below.
+                  Please first create your room and then add the numbers of
+                  rooms you have below.
                 </Typography>
                 <div className="col-lg-2">
                   <label
@@ -643,7 +670,9 @@ function Createroom(props) {
                       value={formik.values.number}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      error={formik.touched.number && Boolean(formik.errors.number)}
+                      error={
+                        formik.touched.number && Boolean(formik.errors.number)
+                      }
                       helperText={
                         "Please seperate each room number with a comma. i,e 101,102"
                       }
@@ -656,7 +685,10 @@ function Createroom(props) {
               <div className="col-lg-4 col-md-2"></div>
               <div className="col-lg-4 col-md-2"></div>
               <div className="col-lg-4 col-md-8 edit-hotel mb-3">
-                <button className="btn edit-hotel" onClick={handleRoomSpaceClick}>
+                <button
+                  className="btn edit-hotel"
+                  onClick={handleRoomSpaceClick}
+                >
                   {loading ? (
                     <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
                   ) : (
@@ -675,7 +707,9 @@ function Createroom(props) {
               <Alert
                 onClose={handleClose}
                 severity={
-                  msg2 === "An error occurred.Please try again." ? "error" : "success"
+                  msg2 === "An error occurred.Please try again."
+                    ? "error"
+                    : "success"
                 }
                 sx={{ width: "100%" }}
               >
@@ -691,7 +725,9 @@ function Createroom(props) {
             >
               <Alert
                 onClose={handleClose}
-                severity={message === "Please fill in the blanks." ? "error" : "success"}
+                severity={
+                  message === "Please fill in the blanks." ? "error" : "success"
+                }
                 sx={{ width: "100%" }}
               >
                 {message}
@@ -701,6 +737,9 @@ function Createroom(props) {
             <hr class="dashed"></hr>
 
             <div className="mb-3 col-12">
+              <Typography sx={{ mb: 3 }}>
+                Please upload room photos here.
+              </Typography>
               <PreviewMultipleImages roomid={roomid} />
             </div>
           </div>
