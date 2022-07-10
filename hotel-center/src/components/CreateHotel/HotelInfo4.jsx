@@ -108,7 +108,6 @@ function CreateHotel(props) {
   }));
   const c = styles();
 
-  let hotelid = window.location.pathname.split("/")[2];
   // useEffect(() => {
   //   setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
   // }, []);
@@ -140,7 +139,7 @@ function CreateHotel(props) {
     }
 
     setOpen(false);
-		setOpen1(false);
+    setOpen1(false);
   }; // const handletypeChange = (event, newValue) => {
   //   setType(newValue);
   // };
@@ -216,10 +215,11 @@ function CreateHotel(props) {
           }
         )
         .then((res) => {
-          console.log(res.data, "responseeeeeeeee");
+          console.log("responseeeeeeeee", res.data.id);
           setOpen(true);
           setLoading(false);
           setMessage("Your hotel was submitted successfully!");
+          setHotelId(res.data.id);
         })
         .catch((err) => {
           console.log(err);
@@ -246,7 +246,7 @@ function CreateHotel(props) {
           makeURL(
             references.url_onehotelImage +
               "/" +
-              hotelid +
+              hotelId +
               "/images/?is_header=true"
           ),
           form_data,
@@ -315,75 +315,6 @@ function CreateHotel(props) {
               </div>
             </div>
             <hr class="dashed" title="a11" />
-            <div className="mb-3 col-12" title="a12">
-              <div className="row mt-3" title="a13">
-                <div className="col-lg-3" title="a14">
-                  <label
-                    for="exampleFormControlInput2"
-                    className="ms-2 mt-1 form-label"
-                    title="f2"
-                  >
-                    Header Picture
-                  </label>
-                </div>
-                <div className="col-lg-9" title="a16">
-                  <input
-                    title="a15"
-                    type="file"
-                    name="myImage"
-                    accept="image/*"
-                    onChange={(event) => {
-                      console.log(event.target.files[0]);
-                      setSelectedImage(event.target.files[0]);
-                    }}
-                  />
-                  <button
-                    className="btn m-2 edit-hotel"
-                    onClick={handleUploadClick}
-                  >
-                    {loading ? (
-                      <CircularProgress
-                        style={{ color: "#fff" }}
-                        size="1.5rem"
-                      />
-                    ) : (
-                      "Upload"
-                    )}
-                  </button>
-                  <Snackbar
-                    open={open1}
-                    autoHideDuration={4000}
-                    onClose={handleClose}
-                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                  >
-                    <Alert
-                      onClose={handleClose}
-                      severity={
-                        message1 === "Your image uploaded successfully!"
-                          ? "success"
-                          : "error"
-                      }
-                      sx={{ width: "100%" }}
-                    >
-                      {message1}
-                    </Alert>
-                  </Snackbar>
-                  {imageUrl && selectedImage && (
-                    <Box mt={2} textAlign="left">
-                      <div>Image Preview:</div>
-                      <img
-                        className="company-logo"
-                        src={imageUrl}
-                        alt={selectedImage.name}
-                        height="82px !important"
-                        width="150px !important"
-                      />
-                    </Box>
-                  )}
-                </div>
-              </div>
-            </div>
-            <hr class="dashed" />
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
@@ -716,6 +647,75 @@ function CreateHotel(props) {
                     "Create Hotel"
                   )}{" "}
                 </button>
+              </div>
+            </div>
+            <hr class="dashed" />
+            <div className="mb-3 col-12" title="a12">
+              <div className="row mt-3" title="a13">
+                <div className="col-lg-3" title="a14">
+                  <label
+                    for="exampleFormControlInput2"
+                    className="ms-2 mt-1 form-label"
+                    title="f2"
+                  >
+                    Header Picture
+                  </label>
+                </div>
+                <div className="col-lg-9" title="a16">
+                  <input
+                    title="a15"
+                    type="file"
+                    name="myImage"
+                    accept="image/*"
+                    onChange={(event) => {
+                      console.log(event.target.files[0]);
+                      setSelectedImage(event.target.files[0]);
+                    }}
+                  />
+                  <button
+                    className="btn m-2 edit-hotel"
+                    onClick={handleUploadClick}
+                  >
+                    {loading ? (
+                      <CircularProgress
+                        style={{ color: "#fff" }}
+                        size="1.5rem"
+                      />
+                    ) : (
+                      "Upload"
+                    )}
+                  </button>
+                  <Snackbar
+                    open={open1}
+                    autoHideDuration={4000}
+                    onClose={handleClose}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity={
+                        message1 === "Your image uploaded successfully!"
+                          ? "success"
+                          : "error"
+                      }
+                      sx={{ width: "100%" }}
+                    >
+                      {message1}
+                    </Alert>
+                  </Snackbar>
+                  {imageUrl && selectedImage && (
+                    <Box mt={2} textAlign="left">
+                      <div>Image Preview:</div>
+                      <img
+                        className="company-logo"
+                        src={imageUrl}
+                        alt={selectedImage.name}
+                        height="82px !important"
+                        width="150px !important"
+                      />
+                    </Box>
+                  )}
+                </div>
               </div>
             </div>
             <hr class="dashed" />
