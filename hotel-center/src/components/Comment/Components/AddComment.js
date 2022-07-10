@@ -1,56 +1,62 @@
-import { useState } from "react";
-import "./Styles/AddComment.scss";
-import { Rating } from "react-simple-star-rating";
-import references from "../../../assets/References.json";
+import { useState } from 'react';
+import './Styles/AddComment.scss';
+import { Rating } from 'react-simple-star-rating';
+import references from '../../../assets/References.json';
 
-const AddComment = ({ buttonValue, addComments, avatar }) => {
-  const [comment, setComment] = useState("");
-  const [text, setText] = useState("");
-  const [ratingValue, setRatingValue] = useState(0);
+import im from  "../../../statics/img/pics/avatar.jpg";
 
-  const handleRating = (rate) => {
-    setRatingValue(rate);
-  };
+const AddComment = ({ buttonValue, addComments , avatar}) => {
 
-  const clickHandler = () => {
-    if (comment === "" || comment === " ") return;
+	const [ comment, setComment ] = useState('');
+	const [ text, setText ] = useState('');
+	const [ ratingValue, setRatingValue ] = useState(0);
+	
+	const handleRating = (rate) => {
+		setRatingValue(rate);
+	};
 
-    const newComment = {
-      content: comment,
-      rate: ratingValue,
-      currentUser: true,
-    };
+	const clickHandler = () => {
+		if (comment === '' || comment === ' ') return;
 
-    addComments(newComment, comment, ratingValue);
-    setComment("");
-  };
+		
+		const newComment = {
+			content:  comment,
+			rate:  ratingValue ,
+			currentUser: true,
+		};
 
-  return (
-    <div className="add-comment">
-      <div>
-        <img
-          className={`profile-pic`}
-          src={references.base_address + avatar}
-        ></img>
-      </div>
-      <Rating onClick={handleRating} ratingValue={ratingValue} size={20} />
-      <textarea
-        className="comment-input"
-        placeholder="Add a comment"
-        value={comment}
-        onChange={(e) => {
-          setComment(e.target.value);
-        }}
-      />
-      <div className="send-btn-container">
-        {/* <div className="profile-pic" /> */}
+		addComments(newComment, comment,ratingValue);
+		setComment('');
+	};
 
-        <button className="btn btn-primary hotel-roomc" onClick={clickHandler}>
-          {buttonValue}
-        </button>
-      </div>
-    </div>
-  );
+	return (
+		<div className="add-comment">
+			<div>
+{
+				(avatar !== null)? 
+				<img   className={`profile-pic`} src={references.base_address+ avatar}></img>
+:
+				<img   className={`profile-pic`} src={im}></img>
+}   
+			</div>
+			<Rating onClick={handleRating} ratingValue={ratingValue} size={20} />
+			<textarea
+				className="comment-input"
+				placeholder="Add a comment"
+				value={comment}
+				onChange={(e) => {
+					setComment(e.target.value);
+				}}
+			/>
+			<div className="send-btn-container">
+				{/* <div className="profile-pic" /> */}
+
+				<button className="btn btn-primary hotel-roomc" onClick={clickHandler}>
+					{buttonValue}
+				</button>
+			</div>
+		</div>
+	);
 };
 
 export default AddComment;

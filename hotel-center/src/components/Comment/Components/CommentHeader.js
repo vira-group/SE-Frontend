@@ -3,7 +3,10 @@ import '../../../css/Hotelpage2.css';
 import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import references from '../../../assets/References.json';
-// import Avatar from "@mui/material/Avatar";
+import Avatar from "@mui/material/Avatar";
+import im from  "../../../statics/img/pics/avatar.jpg";
+// import image1 from "../../statics/img/pics/avatar.jpg";
+
 const CommentHeader = ({
 	commentData,
 	rate,
@@ -18,8 +21,15 @@ const CommentHeader = ({
 }) => {
 	return (
 		<div className="comment--header">
-        <img   className={`profile-pic`} src={avatar}></img>
-    
+        {/* <img   className={`profile-pic`} src={avatar}></img> */}
+        {/* <img   className={`profile-pic`} src={im}></img> */}
+		{avatar}
+		{
+				(avatar !== null)? 
+				<img   className={`profile-pic`} src={references.base_address + avatar}></img>
+:
+				<img   className={`profile-pic`} src={im}></img>
+}   
 			<div className="username">{first}   </div>
       
 			{/* <div className="username">{last}</div> */}

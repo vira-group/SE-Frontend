@@ -66,7 +66,6 @@ class Reservation extends React.Component {
 
 			room: 1,
 			emailtxt: '',
-			message: '',
 			fields: {},
 			get_price: 1,
 			error: {
@@ -836,19 +835,21 @@ class Reservation extends React.Component {
 												<br />
 												<br />
 												<br />
-												<div class="modal-footer" style={{ color: '#cd9a2d' }}>
+
+												<div class="modal-footer" style={{ color: '#000000' }}>
 													<button
 														type="button"
 														class="btn btn-outline-dark"
 														data-bs-dismiss="modal"
-														style={{ color: '#cd9a2d' }}
 													>
 														Close
 													</button>
+
 													<button
 														onClick={this.handleSubmit}
 														type="submit"
-														class="btn btn-dark"
+														// class="btn btn-dark"
+														className="btn btn-primary hotel-room"
 														style={{ backgroundColor: '#cd9a2d' }}
 													>
 														Confirm

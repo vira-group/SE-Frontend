@@ -57,6 +57,7 @@ const Comment = ({
 				console.log(response, 'commnet changed');
 
 				// setc1(c1.filter((e) => e.id !== comId));
+				// setc(c.filter((e) => e.id !== comId));
 
 				const index = c1.findIndex(object => {
 					return object.id === comId;

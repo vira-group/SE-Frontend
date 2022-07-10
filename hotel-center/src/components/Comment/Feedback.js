@@ -290,7 +290,7 @@ const Feedback = (props) => {
 													// avatar={references.url_address + e.user_info.avatar}
 													hotelid={hotelid}
 													comId={e.id}
-													avatar={'http://localhost:8000/media/' + e.user_info.avatar}
+													avatar={  e.user_info.avatar}
 													editComment={editComment}
 													commentDelete={commentDelete}
 													setDeleteModalState={setDeleteModalState}
@@ -310,7 +310,7 @@ const Feedback = (props) => {
 													first={first}
 													last={last}
 													// avatar={avatar}
-													avatar={'http://localhost:8000/media/' + e.user_info.avatar}
+													avatar={  e.user_info.avatar}
 													hotelid={hotelid}
 													comId={e.id}
 													editComment={editComment}
@@ -345,7 +345,7 @@ const Feedback = (props) => {
 						<div className="modal-content">
 							<div className="modal-header">
 								<h5 className="modal-title" id="AllFacilities">
-									comment of the hotel
+									Hotel Comments
 								</h5>
 								<button
 									type="button"
@@ -372,7 +372,7 @@ const Feedback = (props) => {
 														time={e.created_at.split('T')[1].split('.')[0]}
 														first={e.user_info.firstName}
 														last={last}
-														avatar={'http://localhost:8000/media/' + e.user_info.avatar}
+														avatar={  e.user_info.avatar}
 														hotelid={hotelid}
 														comId={e.id}
 														editComment={editComment}
@@ -389,7 +389,7 @@ const Feedback = (props) => {
 														key={e.id}
 														commentData={e.text}
 														rate={e.rate}
-														avatar={'http://localhost:8000/media/' + e.user_info.avatar}
+														avatar={ e.user_info.avatar}
 														time={e.created_at.split('T')[1].split('.')[0]}
 														first={first}
 														last={last}
@@ -403,7 +403,7 @@ const Feedback = (props) => {
 													/>
 												)
 										)
-									) : null};
+									) : null}
 								</div>
 							</div>
 						</div>
