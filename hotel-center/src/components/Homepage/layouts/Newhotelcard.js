@@ -24,7 +24,7 @@ export default function Newhotelcard(props) {
 						<div className="col-md-6">
 							<div className="col star d-lg-flex">
 								<h5 className="card-title">
-									<a className="link hotel-links" href={'/hotelpage/datein/dateout/num/' + props.id  }>
+									<a className="link hotel-links" href={'/hotelpage/' + props.id  }>
 										{props.name}
 									</a>
 								</h5>
