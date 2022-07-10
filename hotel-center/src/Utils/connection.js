@@ -1,44 +1,50 @@
-import references from '../assets/References.json';
-import { cookies, makeURL } from './common';
-import axios from 'axios';
-import { get_token, get_user, set_user_session, remove_user_session, set_cookie } from './common';
+import references from "../assets/References.json";
+import { cookies, makeURL } from "./common";
+import axios from "axios";
+import {
+  get_token,
+  get_user,
+  set_user_session,
+  remove_user_session,
+  set_cookie,
+} from "./common";
 
 export const AccountActivation = async (uid1, token1) => {
-	let message = '';
-	await axios
-		.post(makeURL(references.url_AccountActivation), {
-			uid: uid1,
-			token: token1
-		})
-		.then((response) => {
-			// console.log(response);
-			message = true;
-		})
-		.catch((error) => {
-			// console.log(error);
-			message = false;
-		});
-	return message;
+  let message = "";
+  await axios
+    .post(makeURL(references.url_AccountActivation), {
+      uid: uid1,
+      token: token1,
+    })
+    .then((response) => {
+      // console.log(response);
+      message = true;
+    })
+    .catch((error) => {
+      // console.log(error);
+      message = false;
+    });
+  return message;
 };
 
 export const Sign_up_connection = async (email, password) => {
-	let message = '';
-	await axios
-		.post(makeURL(references.url_Sign_up), {
-			email: email,
-			password: password,
-			re_password: password
-		})
-		.then((response) => {
-			// console.log(response);
-			message = true;
-			window.location.replace('/verify-email');
-		})
-		.catch((error) => {
-			// console.log(error);
-			message = false;
-		});
-	return message;
+  let message = "";
+  await axios
+    .post(makeURL(references.url_Sign_up), {
+      email: email,
+      password: password,
+      re_password: password,
+    })
+    .then((response) => {
+      // console.log(response);
+      message = true;
+      window.location.replace("/verify-email");
+    })
+    .catch((error) => {
+      // console.log(error);
+      message = false;
+    });
+  return message;
 };
 
 export const login_connection = async (email, password) => {
@@ -85,25 +91,25 @@ export const login_connection = async (email, password) => {
 };
 
 export const me = async () => {
-	let message;
-	// console.log(cookies.get('Authorization'));
-	await axios
-		.get(makeURL(references.url_me), {
-			headers: {
-				Authorization: cookies.get('Authorization')
-			}
-		})
-		.then((response) => {
-			// console.log(response);
-			message = true;
-		})
-		.catch((error) => {
-			// console.log(error);
-			message = false;
-		});
+  let message;
+  // console.log(cookies.get('Authorization'));
+  await axios
+    .get(makeURL(references.url_me), {
+      headers: {
+        Authorization: cookies.get("Authorization"),
+      },
+    })
+    .then((response) => {
+      // console.log(response);
+      message = true;
+    })
+    .catch((error) => {
+      // console.log(error);
+      message = false;
+    });
 
-	// console.log(")))))))))) "+ message)
-	return message;
+  // console.log(")))))))))) "+ message)
+  return message;
 };
 
 export const logout = async () => {
@@ -132,89 +138,89 @@ export const logout = async () => {
 			message = false;
 		});
 
-	return message;
+  return message;
 };
 
 export const one_hotel_connection = async (id) => {
-	let message = '';
-	await axios
-		.get(
-			makeURL(references.url_onehotel + '/' + id + '/'),
-			{},
-			{
-				headers: {
-					Authorization: cookies.get('Authorization')
-				}
-			}
-		)
-		.then((response) => {
-			// console.log(response);
-			message = response.data;
-		})
-		.catch((error) => {
-			// console.log(error);
-			message = false;
-		});
+  let message = "";
+  await axios
+    .get(
+      makeURL(references.url_onehotel + "/" + id + "/"),
+      {},
+      {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      }
+    )
+    .then((response) => {
+      // console.log(response);
+      message = response.data;
+    })
+    .catch((error) => {
+      // console.log(error);
+      message = false;
+    });
 
-	return message;
+  return message;
 };
 
 export const one_hotel_image = async (id) => {
-	let message = '';
-	await axios
-		.get(
-			makeURL(references.url_onehotelImage + '/' + id + '/' + 'images/'),
-			{},
-			{
-				headers: {
-					Authorization: cookies.get('Authorization')
-				}
-			}
-		)
-		.then((response) => {
-			// console.log(response);
-			message = response.data;
-		})
-		.catch((error) => {
-			// console.log(error);
-			message = false;
-		});
+  let message = "";
+  await axios
+    .get(
+      makeURL(references.url_onehotelImage + "/" + id + "/" + "images/"),
+      {},
+      {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      }
+    )
+    .then((response) => {
+      // console.log(response);
+      message = response.data;
+    })
+    .catch((error) => {
+      // console.log(error);
+      message = false;
+    });
 
-	return message;
+  return message;
 };
 
 export const room_image = async (id) => {
-	let mes = '';
-	axios
-		.get(makeURL(references.url_hotelrooms + id + '/' + 'images/'), {
-			headers: {
-				Authorization: cookies.get('Authorization')
-			}
-		})
-		.then((response) => {
-			console.log('room reserve img:', response.data);
-			mes = response.data;
-			console.log('new messss', mes);
-			return mes;
-		})
-		.catch((error) => {
-			console.log(error);
-			mes = false;
-		});
-	console.log('ffff');
-	console.log(mes);
-	return mes;
+  let mes = "";
+  axios
+    .get(makeURL(references.url_hotelrooms + id + "/" + "images/"), {
+      headers: {
+        Authorization: cookies.get("Authorization"),
+      },
+    })
+    .then((response) => {
+      console.log("room reserve img:", response.data);
+      mes = response.data;
+      console.log("new messss", mes);
+      return mes;
+    })
+    .catch((error) => {
+      console.log(error);
+      mes = false;
+    });
+  console.log("ffff");
+  console.log(mes);
+  return mes;
 };
 
 export const one_room_reserve = async (
-	start_day,
-	end_day,
-	firstname,
-	lastname,
-	room,
-	price_per_day,
-	national_code,
-	phone_number
+  start_day,
+  end_day,
+  firstname,
+  lastname,
+  room,
+  price_per_day,
+  national_code,
+  phone_number
 ) => {
 	let message = '';
 	console.log(cookies.get('Authorization'));
@@ -248,76 +254,89 @@ export const one_room_reserve = async (
 				window.alert('Please enter valid data.');
 			}
 
-			if (error.response.status == 406) {
-				window.alert('Your wallet balance is not enough.');
-			}
-			if (error.response.status == 403) {
-				window.alert('This room is reserved before.');
-			}
-			console.log(error);
-			message = false;
-		});
+      if (error.response.status == 406) {
+        window.alert("Your wallet balance is not enough.");
+      }
+      if (error.response.status == 403) {
+        window.alert("This room is reserved before.");
+      }
+      console.log(error);
+      message = false;
+    });
 
-	return message;
+  return message;
 };
 
-export const hotel_search = async (hotel_id, size, formattedCheckInDate, formattedCheckOutDate) => {
-	let mes = '';
-	axios
-		.get(makeURL(references.url_hotel_search), {
-			headers: {
-				Authorization: cookies.get('Authorization')
-			},
-			params: {
-				size: size,
-				check_in: formattedCheckInDate,
-				check_out: formattedCheckOutDate
-			}
-		})
-		.then((response) => {
-			console.log('after_search', response.data);
-			console.log(formattedCheckInDate, formattedCheckOutDate);
-			mes = response.data;
-		})
-		.catch((error) => {
-			console.log(error);
-			mes = false;
-		});
+export const hotel_search = async (
+  hotel_id,
+  size,
+  formattedCheckInDate,
+  formattedCheckOutDate
+) => {
+  let mes = "";
+  axios
+    .get(makeURL(references.url_hotel_search), {
+      headers: {
+        Authorization: cookies.get("Authorization"),
+      },
+      params: {
+        size: size,
+        check_in: formattedCheckInDate,
+        check_out: formattedCheckOutDate,
+      },
+    })
+    .then((response) => {
+      console.log("after_search", response.data);
+      console.log(formattedCheckInDate, formattedCheckOutDate);
+      mes = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      mes = false;
+    });
 
-	return mes;
+  return mes;
 };
 
-export const create_hotel = async (name, city, state, address, description, phone_numbers, facilities) => {
-	let message = '';
-	let err = '';
-	console.log(cookies.get('Authorization'));
-	await axios
-		.post(
-			makeURL(references.url_addhotel),
-			{
-				name: name,
-				city: city,
-				state: state,
-				address: address,
-				description: description,
-				phone_numbers: phone_numbers,
-				facilities: facilities
-			},
-			{
-				headers: {
-					Authorization: cookies.get('Authorization')
-				}
-			}
-		)
-		.then((response) => {
-			console.log(response);
-			console.log('everything right');
-			message = response.data;
-		})
-		.catch((error) => {
-			console.log(error);
-			message = false;
-		});
+export const create_hotel = async (
+  name,
+  city,
+  state,
+  address,
+  description,
+  phone_numbers,
+  facilities
+) => {
+  let message = "";
+  let err = "";
+  console.log(cookies.get("Authorization"));
+  await axios
+    .post(
+      makeURL(references.url_addhotel),
+      {
+        name: name,
+        city: city,
+        state: state,
+        address: address,
+        description: description,
+        phone_numbers: phone_numbers,
+        facilities: facilities,
+      },
+      {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      }
+    )
+    .then((response) => {
+      console.log(response);
+      console.log("everything right");
+      message = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      message = false;
+    });
 
-	return message;
+  return message;
 };

@@ -1,24 +1,28 @@
 .chat-button {
-  background-color: white;
+  background-color: #333333;
   border: none;
   color: white;
-  padding: 20px 20px;
+  width: 55px;
+  height: 55px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 8px;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  border-radius: 50%;
+  position: fixed;
+  right: 19px;
+  bottom: 18px;
+  z-index: 500;
 }
 
-.chat-button:hover{
+.chat-button:hover {
   background-color: #e0e0e0;
 }
 
-.chat-box{
+.chat-box {
   text-align: end;
 }
 
-.bi-chat-left-text{
+.bi-chat-left-text {
   color: #cd9a2d;
 }

@@ -17,6 +17,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import EditIcon from "@mui/icons-material/Edit";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
+import ChatIcon from "@mui/icons-material/Chat";
 
 export default function Sidebar(props) {
   const handleLogout = () => {
@@ -56,6 +57,11 @@ export default function Sidebar(props) {
           <MenuItem icon={<EditIcon />}>
             <Link to={`/adminpanel/${props.id}/edithotel`}>
               <p className="mb-0">Edit hotel</p>
+            </Link>
+          </MenuItem>
+          <MenuItem icon={<ChatIcon />}>
+            <Link to={`/adminpanel/${props.id}/messages`}>
+              <p className="mb-0">Messages</p>
             </Link>
           </MenuItem>
           <MenuItem

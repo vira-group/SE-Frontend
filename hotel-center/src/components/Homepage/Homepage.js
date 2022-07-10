@@ -96,6 +96,7 @@ export default function Homepage() {
       .then((response) => {
         console.log("this is the homepage response: ", response.data)
         setHotels(response.data);
+        console.log("this response is for homepage: ",response.data)
       })
       .catch((error) => {
         console.log(error);

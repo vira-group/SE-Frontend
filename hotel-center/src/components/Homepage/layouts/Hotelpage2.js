@@ -14,10 +14,11 @@ import RestaurantMenuRoundedIcon from "@mui/icons-material/RestaurantMenuRounded
 import AlarmIcon from "@mui/icons-material/Alarm";
 import { useState, useEffect } from "react";
 import "../../../css/Hotelpage2.css";
+import "../../../css/Chat.css";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import { cookies, makeURL } from "../../../Utils/common";
 import references from "../../../assets/References.json";
 import Roomcard from "./Roomcard";
 import Feedback from "./../../Comment/Feedback";
@@ -28,6 +29,8 @@ import { GoldenTextField } from "../../../theme/GoldenTextField";
 import Popover from "@mui/material/Popover";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import ResponsiveDatePickers from "../../HotelPage/ResponsiveDatePickers";
+import Chatboxuser from "./Chatboxuser";
 
 const labels = {
   0.5: "Useless",
@@ -59,7 +62,9 @@ const oneDay = 24 * 60 * 60 * 1000;
 
 export default function Hotelpage() {
   const value = 3.5;
-
+  const [cookie, setCookie] = useState(undefined);
+  const [user, setUser] = useState(null);
+  const [roomNumber, setRoomNumber] = useState(null);
   const [hotel, setHotel] = useState(null);
   const [facility, setFacility] = useState(null);
   const [roomimg, setRoomimg] = useState(null);
@@ -83,6 +88,47 @@ export default function Hotelpage() {
   const handleClose = () => {
     setAnchor(null);
   };
+  useEffect(() => {
+    let tmpCookie = cookies.get("Authorization");
+    setCookie(tmpCookie);
+    const queryString = window.location.toString();
+    const hotelid = queryString.slice(-1);
+    axios
+      .get(makeURL(references.url_one_hotel + hotelid + "/"), {
+        headers: {
+          Authorization: tmpCookie,
+        },
+      })
+      .then((response) => {
+        console.log("this request is for hotel facilities:", response.data);
+        setHotel(response.data);
+        setFacility(response.data.facilities);
+        setf1(response.data.facilities.slice(0, 4));
+        setf2(response.data.facilities.slice(4, 8));
+        setCheckin(response.data.check_in_range);
+        setCheckout(response.data.check_out_range);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    if (tmpCookie !== undefined) {
+      axios
+        .get(makeURL(references.url_chatwithhotel + hotelid + "/"), {
+          headers: {
+            Authorization: tmpCookie,
+          },
+        })
+        .then((response) => {
+          console.log("this request is for hotel facilities:", response.data);
+          setRoomNumber(response.data.roomname);
+          setUser(response.data.user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
 
 
 
@@ -569,6 +615,52 @@ export default function Hotelpage() {
           </div>
         </div>
       </div>
+      {cookie !== undefined ? (
+        <button
+          type="button"
+          className="chat-button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal12"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            className="bi bi-chat-left-text"
+            viewBox="0 0 16 16"
+          >
+            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+          </svg>
+        </button>
+      ) : null}
+      {cookie !== undefined ? (
+        <div
+          className="modal fade"
+          id="exampleModal12"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div
+              className="modal-content"
+              style={{ borderRadius: "10px", border: "none" }}
+            >
+              <div className="modal-body p-0">
+                {user ? (
+                  <Chatboxuser
+                    user={user}
+                    roomNumber={roomNumber}
+                    hotel={hotel}
+                  />
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   ) : (
     <Box

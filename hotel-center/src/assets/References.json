@@ -23,5 +23,8 @@
   "url_addfavoritehotel": "/hotel/favorites/",
 
   "url_myhotels": "/hotel/myhotels/",
-  "url_admimpanel_mainpage": "/hotel/admin/panel/"
+  "url_admimpanel_mainpage": "/hotel/admin/panel/",
+
+  "url_chatwithhotel": "/chat/hotelcaht/",
+  "url_hotelchatlist" : "/chat/hotelcahtlist/"
 }
