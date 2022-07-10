@@ -44,7 +44,7 @@ export default function Verify() {
 							<Typography variant="h7"
               
               >
-								We're happy you're here!Thank you for choosing Center Hotel.
+								We're happy you're here!Thank you for choosing Hotel Center.
 							</Typography>
 						</Grid>
 					</Grid>
