@@ -10,7 +10,7 @@ import axios from 'axios';
 import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import references from '../../../assets/References.json';
 
-import { Rating } from 'react-simple-star-rating';
+import Rating from '@mui/material/Rating';
 
 const Comment = ({
 	setc,

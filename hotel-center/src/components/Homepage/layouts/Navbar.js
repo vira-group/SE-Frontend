@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Logo from "../../../statics/logo/logo2.png";
-import UseAnimations from "react-useanimations";
-import menu3 from "react-useanimations/lib/menu3";
+// import UseAnimations from "react-useanimations";
+// import menu3 from "react-useanimations/lib/menu3";
 import { me, logout } from "../../../Utils/connection";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
@@ -118,14 +118,14 @@ class Navbar extends Component {
             data-bs-toggle="collapse"
             data-bs-target="#navMenu"
           >
-            <UseAnimations
+            {/* <UseAnimations
               reverse={this.state.openMenu}
               onClick={this.handleOpenMenu}
               size={40}
               animation={menu3}
               speed={3}
               strokeColor="#cd9a2d"
-            />
+            /> */}
           </button>
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="ms-auto pt-3 pt-sm-0">

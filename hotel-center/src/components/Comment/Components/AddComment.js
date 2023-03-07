@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Styles/AddComment.scss";
-import { Rating } from "react-simple-star-rating";
+import Rating from '@mui/material/Rating';
 import references from "../../../assets/References.json";
 
 import im from "../../../statics/img/pics/avatar.jpg";
