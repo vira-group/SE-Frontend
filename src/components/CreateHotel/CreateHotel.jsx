@@ -3,7 +3,6 @@ import pic from '../../statics/img/Hotel_Booking.gif';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import RoomServiceIcon from '@mui/icons-material/RoomService';
 import PaidIcon from '@mui/icons-material/Paid';
-import PhoneInput from 'react-phone-input-2';
 
 class CreateHotel extends Component {
 	constructor(props) {

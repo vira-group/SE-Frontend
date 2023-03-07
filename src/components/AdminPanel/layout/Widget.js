@@ -1,8 +1,7 @@
 import React from "react";
 import AnimatedProgressProvider from "./AnimatedProgressProvider";
-import { easeQuadInOut } from "d3-ease";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+// import { easeQuadInOut } from "d3-ease";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Widget(props) {
   return (
@@ -15,18 +14,16 @@ export default function Widget(props) {
         valueStart={0}
         valueEnd={props.percent}
         duration={1.6}
-        easingFunction={easeQuadInOut}
+        // easingFunction={easeQuadInOut}
+        easingFunction={x => Math.pow(x, 2)}
       >
         {(percent) => {
           const roundedPercent = Math.round(percent);
           return (
-            <CircularProgressbar
+            <CircularProgress
               value={percent}
               text={`${roundedPercent}%`}
               strokeWidth={7}
-              /* This is important to include, because if you're fully managing the
-              animation yourself, you'll want to disable the CSS animation. */
-              styles={buildStyles({ pathTransition: "none" })}
             />
           );
         }}

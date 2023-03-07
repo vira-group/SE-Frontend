@@ -5,7 +5,6 @@ import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "../../css/Stepper.css";
 import Hotelinfo from "./Hotelinfo";
@@ -125,16 +124,8 @@ import Sidebar from "../Profile/Sidebar";
 const steps = ["Manager information", "Hotel information", "Hotel images"];
 
 export default function LinearStepper() {
-  const useStyles = makeStyles(() => ({
-    root: {
-      "& .Mui-active .MuiStepIcon-root ": { color: "#cd9a2d" },
-      "& .Mui-completed .MuiStepIcon-root": { color: "#cd9a2d" },
-      "& .Mui-disabled .MuiStepIcon-root": { color: "#cd9a2d" },
-    },
-  }));
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
-  const c = useStyles();
 
   const totalSteps = () => {
     return steps.length;

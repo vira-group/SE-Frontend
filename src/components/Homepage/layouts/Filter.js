@@ -11,18 +11,8 @@ import references from "../../../assets/References.json";
 import "../../../css/Hotelcard.css";
 import axios from "axios";
 import { cookies, makeURL, set_cookie } from "../../../Utils/common";
-import { makeStyles } from "@mui/styles";
    
 export default function Filter(props) {
-  const styles = makeStyles(() => ({
-    root: {
-      "&$checked": {
-        color: "black",
-      },
-    },
-    checked: {},
-  }));
-  const c = styles();
 
   const [value, setValue] = React.useState(1);
   const [state, setState] = useState(null);

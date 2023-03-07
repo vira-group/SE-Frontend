@@ -12,7 +12,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
-import { makeStyles } from "@mui/styles";
 import PreviewMultipleImages from "./PreviewMultipleImages";
 import PhoneInput from "react-phone-input-2";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
@@ -97,16 +96,6 @@ function CreateHotel(props) {
   let tempcheckout = checkout; // value from your state
   let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
   let formattedcheckoutDate = moment(tempcheckout).format("hh:mm");
-
-  const styles = makeStyles(() => ({
-    root: {
-      "&$checked": {
-        color: "#cd9a2d",
-      },
-    },
-    checked: {},
-  }));
-  const c = styles();
 
   // useEffect(() => {
   //   setHotelId(parseInt(window.location.pathname.split("/")[2], 10));

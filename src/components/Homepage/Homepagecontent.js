@@ -11,19 +11,9 @@ import Newhotelcard from "./layouts/Newhotelcard";
 import references from "../../assets/References.json";
 import { Box, CircularProgress } from "@mui/material";
 import { useHistory, useParams } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 
 export default function Homepagecontent(props) {
   const { hotelid } = useParams();
-  const styles = makeStyles(() => ({
-    root: {
-      "&$checked": {
-        color: "black",
-      },
-    },
-    checked: {},
-  }));
-  const c = styles();
 
   const [value, setValue] = React.useState(1);
   const [state, setState] = useState(null);
@@ -166,8 +156,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf1}
                           onClick={() => setHf1(!hf1)}
@@ -179,8 +173,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf2}
                           onClick={() => setHf2(!hf2)}
@@ -192,8 +190,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf3}
                           onClick={() => setHf3(!hf3)}
@@ -205,8 +207,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf4}
                           onClick={() => setHf4(!hf4)}
@@ -218,8 +224,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf5}
                           onClick={() => setHf5(!hf5)}
@@ -231,8 +241,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf6}
                           onClick={() => setHf6(!hf6)}
@@ -244,8 +258,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf7}
                           onClick={() => setHf7(!hf7)}
@@ -257,8 +275,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf8}
                           onClick={() => setHf8(!hf8)}
@@ -270,8 +292,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf9}
                           onClick={() => setHf9(!hf9)}
@@ -283,8 +309,12 @@ export default function Homepagecontent(props) {
                       control={
                         <Checkbox
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                           checked={hf10}
                           onClick={() => setHf10(!hf10)}

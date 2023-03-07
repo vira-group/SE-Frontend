@@ -14,7 +14,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import moment from "moment";
-import { makeStyles } from "@mui/styles";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -124,16 +123,6 @@ function Createroom(props) {
   useEffect(() => {
     setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
   }, []);
-
-  const styles = makeStyles(() => ({
-    root: {
-      "&$checked": {
-        color: "#cd9a2d",
-      },
-    },
-    checked: {},
-  }));
-  const c = styles();
 
   const formik = useFormik({
     initialValues: {
@@ -392,8 +381,12 @@ function Createroom(props) {
                       control={
                         <Radio
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                         />
                       }
@@ -404,8 +397,12 @@ function Createroom(props) {
                       control={
                         <Radio
                           classes={{
-                            root: c.root,
-                            checked: c.checked,
+                            root: {
+                              "&$checked": {
+                                color: "#cd9a2d",
+                              },
+                            },
+                            checked: {},
                           }}
                         />
                       }
