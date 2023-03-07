@@ -3,7 +3,6 @@ import { Grid, Box, Button, Container } from "@mui/material";
 import Helmet from "react-helmet";
 import Rating from "@mui/material/Rating";
 import { useState, useEffect } from "react";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import "../../../css/Hotelcard.css";
 import axios from "axios";
 import references from "../../../assets/References.json";
