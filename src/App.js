@@ -1,9 +1,9 @@
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Verify from "./verify";
 import { render } from "@testing-library/react";
 import Homepage from "./components/Homepage/Homepage";
 import account_activation from "../src/components/account_activation/account_activation";
-import login from "./components/Login/Login";
+import Login from "./components/Login/Login";
 import Sign_up from "./components/Sign_up/sign_up";
 import Hotelcard from "./components/Homepage/layouts/Newhotelcard";
 import hotelPage from "./components/HotelPage/hotelPage";
@@ -19,7 +19,7 @@ import Createroom from "./components/AdminPanel/Pages/Createroom";
 import Statistics from "./components/AdminPanel/Pages/Statistics";
 import RoomsStatus from "./components/AdminPanel/Pages/RoomsStatus";
 import CreateHotel from "./components/CreateHotel/CreateHotel";
-import steps from "./components/CreateHotel/steps";
+import Steps from "./components/CreateHotel/steps";
 import ReservedRooms from "./components/Profile/ReservedRooms";
 import Feedback from "./components/Comment/Feedback";
 import Messages from "./components/AdminPanel/Pages/Messages";
@@ -48,58 +48,58 @@ function App() {
     <div className="App h-100">
       <Navbar />
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/hotelcard" component={Hotelcard} />
-          <Route exact path="/profile" component={Profile} />
+        <Routes>
+          <Route exact path="/hotelcard" element={<Hotelcard/>} />
+          <Route exact path="/profile" element={<Profile/>} />
           <Route
             exact
             path="/profile/IncreaseCredit"
             component={IncreaseCredit}
           />
-          <Route exact path="/profile/favorites" component={Favorites} />
-          <Route exact path="/myhotels" component={Myhotels} />
+          <Route exact path="/profile/favorites" element={<Favorites/>} />
+          <Route exact path="/myhotels" element={<Myhotels/>} />
           <Route
             exact
             path="/profile/reservedrooms"
             component={ReservedRooms}
           />
-          <Route exact path="/hotelpage/:handle" component={hotelPage} />
-          <Route exact path="/verify-email" component={Verify} />
-          <Route exact path="/" component={Homepage} />
-          <Route exact path="/sign-up" component={Sign_up} />
-          <Route exact path="/login" component={login} />
-          <Route exact path="/createHotel/steps" component={steps} />
-          <Route exact path="/createHotel" component={CreateHotel} />
-          <Route exact path="/feedback" component={Feedback} />
+          <Route exact path="/hotelpage/:handle" element={<hotelPage/>} />
+          <Route exact path="/verify-email" element={<Verify/>} />
+          <Route exact path="/" element={<Homepage/>} />
+          <Route exact path="/sign-up" element={<Sign_up/>} />
+          <Route exact path="/login" element={<Login/>} />
+          <Route exact path="/createHotel/steps" element={<Steps/>} />
+          <Route exact path="/createHotel" element={<CreateHotel/>} />
+          <Route exact path="/feedback" element={<Feedback/>} />
 
           <Route
             exact
             path="/auth/activate/:handle/:handle1"
-            component={account_activation}
+            element={<account_activation/>}
           />
           <Route
             exact
             path="/reserve/:getin/:getout/:person/:price_per_day/:name/:city/:id"
-            component={reservation}
+            element={<reservation/>}
           />
           <Route
             exact
             path="/adminpanel/:id/statistics"
-            component={Statistics}
+            element={<Statistics/>}
           />
           <Route
             exact
             path="/adminpanel/:id/createrooom"
-            component={Createroom}
+            element={<Createroom/>}
           />
-          <Route exact path="/adminpanel/:id/edithotel" component={Edithotel} />
+          <Route exact path="/adminpanel/:id/edithotel" element={<Edithotel/>} />
           <Route
             exact
             path="/adminpanel/:id/roomsstatus"
-            component={RoomsStatus}
+            element={<RoomsStatus/>}
           />
-          <Route exact path="/adminpanel/:id/messages" component={Messages} />
-        </Switch>
+          <Route exact path="/adminpanel/:id/messages" element={<Messages/>} />
+        </Routes>
       </BrowserRouter>
       <Footer />
     </div>

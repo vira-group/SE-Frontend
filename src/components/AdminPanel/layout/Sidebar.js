@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  ProSidebar,
+  Sidebar,
   Menu,
   MenuItem,
   SubMenu,
@@ -19,25 +19,25 @@ import KingBedIcon from "@mui/icons-material/KingBed";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import ChatIcon from "@mui/icons-material/Chat";
 
-export default function Sidebar(props) {
+export default function MySidebar(props) {
   const handleLogout = () => {
     logout();
   };
 
   return (
-    <ProSidebar
+    <Sidebar
       toggled={props.toggled}
       breakPoint="md"
       onToggle={props.handleToggleSidebar}
       style={{ backgroundColor: "white !important" }}
     >
-      <SidebarHeader>
+      {/* <SidebarHeader> */}
         <a href="/" className="navbar-brand logo">
           <img src={Logo} alt="Hotel Center" />
           <span className="fw-bold logo-text-font">Hotel Center</span>
         </a>
-      </SidebarHeader>
-      <SidebarContent>
+      {/* </SidebarHeader> */}
+      {/* <SidebarContent> */}
         <Menu iconShape="circle">
           <MenuItem icon={<BubbleChartIcon />}>
             <Link to={`/adminpanel/${props.id}/statistics`}>
@@ -73,8 +73,9 @@ export default function Sidebar(props) {
             Logout
           </MenuItem>
         </Menu>
-      </SidebarContent>
-      <SidebarFooter
+      {/* </SidebarContent> */}
+      {/* <SidebarFooter */}
+      <div
         style={{
           textAlign: "center",
           paddingTop: "1rem",
@@ -83,7 +84,8 @@ export default function Sidebar(props) {
       >
         <CopyrightIcon />
         Vira Team
-      </SidebarFooter>
-    </ProSidebar>
+      </div>
+      {/* </SidebarFooter> */}
+    </Sidebar>
   );
 }

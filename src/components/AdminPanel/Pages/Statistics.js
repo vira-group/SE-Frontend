@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../layout/Sidebar";
+import MySidebar from "../layout/Sidebar";
 import Logo from "../../../statics/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import Widget from "../layout/Widget";
@@ -70,7 +70,7 @@ export default function Statistics() {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar toggled={toggled} handleToggleSidebar={handleToggleSidebar} id={hotelId} />
+      <MySidebar toggled={toggled} handleToggleSidebar={handleToggleSidebar} id={hotelId} />
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
           <div className="btn-toggle d-md-none" onClick={() => handleToggleSidebar(true)}>

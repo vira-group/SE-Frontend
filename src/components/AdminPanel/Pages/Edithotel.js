@@ -19,7 +19,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
 import PreviewMultipleImages from "./PreviewMultipleImages";
-import Sidebar from "../layout/Sidebar";
+import MySidebar from "../layout/Sidebar";
 import EditIcon from "@mui/icons-material/Edit";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -317,7 +317,7 @@ function Edithotel(props) {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar
+      <MySidebar
         toggled={toggled}
         handleToggleSidebar={handleToggleSidebar}
         id={hotelId}

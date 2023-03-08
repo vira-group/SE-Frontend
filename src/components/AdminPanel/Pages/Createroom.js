@@ -20,7 +20,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PreviewMultipleImages from "./PreviewMultipleImages";
-import Sidebar from "../layout/Sidebar";
+import MySidebar from "../layout/Sidebar";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import { fontSize } from "@mui/system";
 import Snackbar from "@mui/material/Snackbar";
@@ -292,7 +292,7 @@ function Createroom(props) {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar
+      <MySidebar
         toggled={toggled}
         handleToggleSidebar={handleToggleSidebar}
         id={hotelId}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../layout/Sidebar";
+import MySidebar from "../layout/Sidebar";
 import Logo from "../../../statics/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChatIcon from "@mui/icons-material/Chat";
@@ -39,7 +39,7 @@ export default function Messages() {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <Sidebar
+      <MySidebar
         toggled={toggled}
         handleToggleSidebar={handleToggleSidebar}
         id={hotelId}
