@@ -1,9 +1,6 @@
 import { useState } from "react";
 import "./Styles/AddComment.scss";
-import Rating from '@mui/material/Rating';
-import references from "../../../assets/References.json";
-
-import im from "../../../statics/img/pics/avatar.jpg";
+import Rating from "@mui/material/Rating";
 
 const AddComment = ({ buttonValue, addComments, avatar }) => {
   const [comment, setComment] = useState("");
@@ -38,7 +35,7 @@ const AddComment = ({ buttonValue, addComments, avatar }) => {
         ) : (
           <img className={`profile-pic`} src={im}></img>
         )} */}
-				<img className={`profile-pic`}></img>
+        <img className={`profile-pic`}></img>
       </div>
       <Rating onClick={handleRating} ratingValue={ratingValue} size={20} />
       <textarea

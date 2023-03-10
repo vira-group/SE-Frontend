@@ -3,15 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
-import image1 from "../../statics/img/pics/london1.jpg";
-import image2 from "../../statics/img/pics/london2.jpg";
-import image3 from "../../statics/img/pics/london3.jpg";
-import image4 from "../../statics/img/pics/Amsterdom1.jpg";
 import Sidebar from "./Sidebar";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import SingleFavoriteCard from "./SingleFavoriteCard";
-import { listClasses } from "@mui/material";
 
 export default function Favorites2() {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -41,7 +34,7 @@ export default function Favorites2() {
           <Sidebar />
         </div>
         <div className="col-lg-9">
-          <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div className="row row-cols-1 row-cols-md-3 g-4">
             {favoritehotels
               ? favoritehotels.map((item) => (
                   <SingleFavoriteCard

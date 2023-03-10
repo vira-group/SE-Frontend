@@ -5,7 +5,7 @@ import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
 import WhiteLogo from "../../statics/logo/white_logo_3.png";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";

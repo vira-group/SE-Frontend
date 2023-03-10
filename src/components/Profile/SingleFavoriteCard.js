@@ -5,7 +5,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import axios from "axios";
 import references from "../../assets/References.json";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import { cookies, makeURL } from "../../Utils/common";
 
 export default function SingleFavoriteCard(props) {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
@@ -55,12 +55,12 @@ export default function SingleFavoriteCard(props) {
   };
 
   return (
-    <div class="col">
-      <div class="card h-100">
-        <img src={props.img} class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{props.title}</h5>
-          <p class="card-text">{props.description}</p>
+    <div className="col">
+      <div className="card h-100">
+        <img src={props.img} className="card-img-top" alt="..." />
+        <div className="card-body">
+          <h5 className="card-title">{props.title}</h5>
+          <p className="card-text">{props.description}</p>
         </div>
         <div className="card-footer">
           <button type="button" className="btn btn-primary view-hotel-button">

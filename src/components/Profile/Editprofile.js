@@ -2,10 +2,9 @@ import * as React from "react";
 import { TextField, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
-import { Box, CircularProgress } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 import "../../css/Profile.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -136,10 +135,10 @@ function Profile(props) {
 
   const handleClick = () => {
     let filled =
-      !Boolean(formik.errors.firstname) &&
-      !Boolean(formik.errors.lastname) &&
-      !Boolean(formik.errors.nationalcode) &&
-      !Boolean(formik.errors.email) &&
+      !formik.errors.firstname &&
+      !formik.errors.lastname &&
+      !formik.errors.nationalcode &&
+      !formik.errors.email &&
       genValue.length != 0 &&
       formattedDate != "Invalid date";
     console.log("filled:", filled);
@@ -297,13 +296,13 @@ function Profile(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr className="dashed"></hr>
 
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
-                    for="exampleFormControlInput1"
+                    htmlFor="exampleFormControlInput1"
                     className="ms-2 mt-1 form-label"
                   >
                     Full Name
@@ -373,13 +372,13 @@ function Profile(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr className="dashed"></hr>
 
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
-                    for="exampleFormControlInput2"
+                    htmlFor="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
                   >
                     National Code
@@ -412,13 +411,13 @@ function Profile(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr className="dashed"></hr>
 
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
-                    for="exampleFormControlInput2"
+                    htmlFor="exampleFormControlInput2"
                     className="ms-2 mt-1 form-label"
                   >
                     Gender
@@ -454,12 +453,12 @@ function Profile(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr className="dashed"></hr>
 
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3 ms-2">
-                  <label for="date" className="col-1 col-form-label">
+                  <label htmlFor="date" className="col-1 col-form-label">
                     Birthday
                   </label>
                 </div>
@@ -488,13 +487,13 @@ function Profile(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr className="dashed"></hr>
 
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
-                    for="exampleFormControlInput3"
+                    htmlFor="exampleFormControlInput3"
                     className="ms-2 mt-1 form-label"
                   >
                     Phone Number
@@ -537,13 +536,13 @@ function Profile(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr className="dashed"></hr>
 
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
-                    for="exampleFormControlInput4"
+                    htmlFor="exampleFormControlInput4"
                     className="ms-2 mt-1 form-label"
                   >
                     Email Address
@@ -572,13 +571,13 @@ function Profile(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr className="dashed"></hr>
 
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
-                    for="exampleFormControlInput5"
+                    htmlFor="exampleFormControlInput5"
                     className="ms-2 mt-1 form-label"
                   >
                     Balance
@@ -601,13 +600,13 @@ function Profile(props) {
               </div>
             </div>
 
-            <hr class="dashed"></hr>
+            <hr className="dashed"></hr>
 
             <div className="mb-3 col-12">
               <div className="row">
                 <div className="col-lg-3">
                   <label
-                    for="exampleFormControlTextarea1"
+                    htmlFor="exampleFormControlTextarea1"
                     className="ms-2 form-label"
                   >
                     About Me

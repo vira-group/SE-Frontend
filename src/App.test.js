@@ -6,18 +6,13 @@ import ResponsiveDatePickers from "../src/components/HotelPage/ResponsiveDatePic
 // import * as React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import ReactDOM from "react-dom";
 import React from "react";
-import renderer from "react-test-renderer";
 import SimpleAccordion from "../src/components/HotelPage/accordion";
 import SearchForm from "../src/components/Homepage/layouts/SearchForm";
 import EditProfile from "../src/components/Profile/Editprofile";
 import IncreaseCredit from "../src/components/Profile/IncreaseCredit";
-import Sidebar from "../src/components/Profile/Sidebar";
 import Favorites from "../src/components/Profile/Favorites";
 import RoomStatus from "../src/components/AdminPanel/Pages/RoomsStatus";
-import userEvent from "@testing-library/user-event";
-import user from "@testing-library/user-event";
 import Createroom from "../src/components/AdminPanel/Pages/Createroom";
 import Edithotel from "../src/components/AdminPanel/Pages/Edithotel";
 import CreateHotel from "./components/CreateHotel/HotelInfo4";

@@ -1,5 +1,4 @@
 import React, { useState, Fragment, useEffect } from "react";
-import profileImage from "../../../statics/img/profile.png";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";

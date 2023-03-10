@@ -4,7 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -62,10 +62,10 @@ export default function SingleNewHotelCard(props) {
   };
 
   return (
-    <div class="col">
-      <div class="card h-100 shadow">
-        <img src={props.image} class="card-img-top" alt="..." />
-        <div class="card-body">
+    <div className="col">
+      <div className="card h-100 shadow">
+        <img src={props.image} className="card-img-top" alt="..." />
+        <div className="card-body">
           <div className="mb-2 d-flex justify-content-between">
             <div className="d-flex">
               <StarIcon className="rate-icon-style me-1" />
@@ -73,13 +73,17 @@ export default function SingleNewHotelCard(props) {
             </div>
             <span className="new-label">New</span>
           </div>
-          <h5 class="card-title">{props.name}</h5>
-          <p class="card-text text-muted">
+          <h5 className="card-title">{props.name}</h5>
+          <p className="card-text text-muted">
             {props.country}/{props.city}
           </p>
         </div>
         <div className="card-footer">
-          <button type="button" className="btn btn-primary view-hotel-button" onClick={handleRedirect}>
+          <button
+            type="button"
+            className="btn btn-primary view-hotel-button"
+            onClick={handleRedirect}
+          >
             View details
           </button>
           <button className="btn favorite-btn-style" onClick={handleClick}>

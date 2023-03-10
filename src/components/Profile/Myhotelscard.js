@@ -1,10 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
-import references from "../../assets/References.json";
-import { Box, CircularProgress } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
+import { useState } from "react";
 import "../../css/Profile.css";
 
 export default function Myhotelscard(props) {
@@ -18,12 +13,12 @@ export default function Myhotelscard(props) {
   };
 
   return (
-    <div class="col">
-      <div class="card h-100">
-        <img src={props.img} class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{props.title}</h5>
-          <p class="card-text">{props.description}</p>
+    <div className="col">
+      <div className="card h-100">
+        <img src={props.img} className="card-img-top" alt="..." />
+        <div className="card-body">
+          <h5 className="card-title">{props.title}</h5>
+          <p className="card-text">{props.description}</p>
         </div>
         <div className="card-footer myhotels">
           <button

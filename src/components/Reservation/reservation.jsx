@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import Carousel from "./carousel";
-import { one_room_reserve, room_image } from "../../Utils/connection";
 import references from "../../assets/References.json";
 import { cookies, makeURL } from "../../Utils/common";
 import axios from "axios";
@@ -10,7 +9,6 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import moment from "moment";
 // let formattedDate = moment(date).format('YYYY-MM-DD');
-import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
 
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -421,7 +419,7 @@ class Reservation extends React.Component {
             <div className="col-12 col-lg-4">
               <div className="card-containter ">
                 <div className="card-body">
-                  <div class="shadow p-3 mb-5 bg-body rounded">
+                  <div className="shadow p-3 mb-5 bg-body rounded">
                     <div className="row   m-3">
                       <div
                         className="col"
@@ -436,7 +434,7 @@ class Reservation extends React.Component {
                             width="16"
                             height="16"
                             fill="currentColor"
-                            class="bi bi-calendar-date-fill "
+                            className="bi bi-calendar-date-fill "
                             viewBox="0 0 16 16"
                             color="#cd9a2d"
                           >
@@ -467,7 +465,7 @@ class Reservation extends React.Component {
                             width="16"
                             height="16"
                             fill="currentColor"
-                            class="bi bi-calendar-date-fill "
+                            className="bi bi-calendar-date-fill "
                             viewBox="0 0 16 16"
                             color="#cd9a2d"
                           >
@@ -508,7 +506,7 @@ class Reservation extends React.Component {
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-person-fill"
+                        className="bi bi-person-fill"
                         viewBox="0 0 16 16"
                         color="#cd9a2d"
                       >
@@ -546,7 +544,7 @@ class Reservation extends React.Component {
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-wallet2"
+                        className="bi bi-wallet2"
                         viewBox="0 0 16 16"
                         color="#cd9a2d"
                       >
@@ -645,7 +643,7 @@ class Reservation extends React.Component {
                   onSubmit={this.onSubmit}
                   className="row g-3 needs-validation mx-3"
                 >
-                  <div class="col-md-4 ">
+                  <div className="col-md-4 ">
                     <input
                       required
                       fullWidth
@@ -680,7 +678,7 @@ class Reservation extends React.Component {
                       )}
                     </div>
                   </div>
-                  <div class="col-md-4 ">
+                  <div className="col-md-4 ">
                     <input
                       required
                       fullWidth
@@ -713,7 +711,7 @@ class Reservation extends React.Component {
                       )}
                     </div>
                   </div>
-                  <div class="col-md-4 ">
+                  <div className="col-md-4 ">
                     <input
                       required
                       fullWidth
@@ -747,7 +745,7 @@ class Reservation extends React.Component {
                       )}
                     </div>
                   </div>
-                  <div class="col-md-4 ">
+                  <div className="col-md-4 ">
                     <PhoneInput
                       country={"us"}
                       id="phone"
@@ -762,15 +760,15 @@ class Reservation extends React.Component {
                   <div className="">
                     <hr className="hr-text" />
                   </div>{" "}
-                  <div class="form-check  m-3 checkbox-black">
+                  <div className="form-check  m-3 checkbox-black">
                     <input
-                      class="form-check-input form-control-huge checkbox-black"
+                      className="form-check-input form-control-huge checkbox-black"
                       type="checkbox"
                       id="flexCheckDefault"
                     />
                     <label
-                      class="form-check-label"
-                      for="flexCheckDefault"
+                      className="form-check-label"
+                      htmlFor="flexCheckDefault"
                       style={{ fontWeight: "bold" }}
                     >
                       Late arrival :
@@ -778,8 +776,8 @@ class Reservation extends React.Component {
                     <br />
                     <lable
                       className="col-12"
-                      class="form-check-label"
-                      for="flexCheckDefault"
+                      className="form-check-label"
+                      htmlFor="flexCheckDefault"
                     >
                       {" "}
                       <p>
@@ -791,36 +789,39 @@ class Reservation extends React.Component {
                   <div className="">
                     <hr className="hr-text" />
                   </div>
-                  <div class="form-check  m-3">
+                  <div className="form-check  m-3">
                     <input
-                      class="form-check-input form-control-huge"
+                      className="form-check-input form-control-huge"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
                       onClick={this.handlecheck2}
                     />
                     <label
-                      class="form-check-label"
-                      for="flexCheckDefault"
+                      className="form-check-label"
+                      htmlFor="flexCheckDefault"
                       style={{ fontWeight: "bold" }}
                     >
                       Default checkbox
                     </label>
                     <br />
-                    <lable class="form-check-label" for="flexCheckDefault">
+                    <lable
+                      className="form-check-label"
+                      htmlFor="flexCheckDefault"
+                    >
                       I have read the site rules and the internal hotel rules
                       and I approve it.
                     </lable>
                   </div>
-                  <div class="gap-7 mx-auto m-3  " /> <br />
+                  <div className="gap-7 mx-auto m-3  " /> <br />
                   <div
-                    class="d-grid   col-5 ms-4"
+                    className="d-grid   col-5 ms-4"
                     style={{ display: "flex", alignItems: "left" }}
                   >
                     <button
                       type="button"
                       onClick={this.handleSubmit}
-                      class="btn btn-dark btn-lg"
+                      className="btn btn-dark btn-lg"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                     >
@@ -847,26 +848,26 @@ class Reservation extends React.Component {
                     </Alert>
                   </Snackbar>{" "}
                   <div
-                    class="modal fade"
+                    className="modal fade"
                     id="exampleModal"
-                    tabindex="-1"
+                    tabIndex="-1"
                     aria-labelledby="exampleModalLabel"
                     aria-hidden="true"
                   >
                     <div className="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title" id="exampleModalLabel">
                             Reserve
                           </h5>
                           <button
                             type="button"
-                            class="btn-close "
+                            className="btn-close "
                             data-bs-dismiss="modal"
                             aria-label="Close"
                           />
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                           If confirmed, the room will be reserved for you and
                           the cost will be deducted from your account.
                         </div>
@@ -874,10 +875,13 @@ class Reservation extends React.Component {
                         <br />
                         <br />
 
-                        <div class="modal-footer" style={{ color: "#000000" }}>
+                        <div
+                          className="modal-footer"
+                          style={{ color: "#000000" }}
+                        >
                           <button
                             type="button"
-                            class="btn btn-outline-dark"
+                            className="btn btn-outline-dark"
                             data-bs-dismiss="modal"
                           >
                             Close

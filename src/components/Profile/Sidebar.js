@@ -2,14 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import BedIcon from "@mui/icons-material/Bed";
-import CardTravelIcon from "@mui/icons-material/CardTravel";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import AddCardIcon from "@mui/icons-material/AddCard";
 
 export default function Sidebar() {
   return (
-    <div class="d-flex flex-column flex-shrink-0 p-3 profile-sidebar border mb-4 mb-lg-0">
+    <div className="d-flex flex-column flex-shrink-0 p-3 profile-sidebar border mb-4 mb-lg-0">
       <div className="row">
         <Link
           to="/profile"
@@ -18,7 +17,7 @@ export default function Sidebar() {
           <ModeEditOutlinedIcon className="icon-style" />
           <p className="mb-0">Edit Profile</p>
         </Link>
-        
+
         <hr className="mb-2" />
         <Link
           to="/myhotels"
@@ -60,8 +59,6 @@ export default function Sidebar() {
           <BookmarkBorderIcon className="icon-style" />
           <p className="mb-0">Reservations</p>
         </Link>
-
-
       </div>
     </div>
   );
