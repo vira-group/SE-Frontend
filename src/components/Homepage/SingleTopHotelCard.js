@@ -4,7 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -76,7 +76,11 @@ export default function SingleTopHotelCard(props) {
           </p>
         </div>
         <div className="card-footer">
-          <button type="button" className="btn btn-primary view-hotel-button" onClick={handleRedirect}>
+          <button
+            type="button"
+            className="btn btn-primary view-hotel-button"
+            onClick={handleRedirect}
+          >
             View details
           </button>
           <button className="btn favorite-btn-style" onClick={handleClick}>

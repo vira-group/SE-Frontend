@@ -1,21 +1,18 @@
 import * as React from "react";
-import { Grid, Box, Button, Container } from "@mui/material";
-import Helmet from "react-helmet";
+import { Box } from "@mui/material";
 import Rating from "@mui/material/Rating";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../../../css/Hotelcard.css";
 import axios from "axios";
 import references from "../../../assets/References.json";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import { cookies, makeURL } from "../../../Utils/common";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
 export default function Newhotelcard(props) {
-  const [value2, setValue2] = useState(null);
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
-  const [hotelid, setHotelid] = useState(null);
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
 

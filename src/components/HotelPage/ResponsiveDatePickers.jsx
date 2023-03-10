@@ -18,7 +18,6 @@ function ResponsiveDatePickers(props) {
   const [anchor, setAnchor] = React.useState(null);
   const [numberOfAdults, setNumberOfAdults] = React.useState(1);
   const [numberOfChildren, setNumberOfChildren] = React.useState(0);
-  const room_id = [];
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };

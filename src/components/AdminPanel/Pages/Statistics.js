@@ -70,10 +70,17 @@ export default function Statistics() {
 
   return (
     <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-      <MySidebar toggled={toggled} handleToggleSidebar={handleToggleSidebar} id={hotelId} />
+      <MySidebar
+        toggled={toggled}
+        handleToggleSidebar={handleToggleSidebar}
+        id={hotelId}
+      />
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
-          <div className="btn-toggle d-md-none" onClick={() => handleToggleSidebar(true)}>
+          <div
+            className="btn-toggle d-md-none"
+            onClick={() => handleToggleSidebar(true)}
+          >
             <MenuIcon fontSize="large" />
           </div>
           <a href="/" className="navbar-brand logo d-md-none">
@@ -106,7 +113,9 @@ export default function Statistics() {
                     ? parseInt(roomPercentage["doubleRoom"])
                     : widgetData["doubleRoom"]
                 }
-                icon={<EscalatorWarningIcon className="me-2" fontSize="medium" />}
+                icon={
+                  <EscalatorWarningIcon className="me-2" fontSize="medium" />
+                }
               />
             </div>
             <div className="col-12 col-sm-6 col-xl-3 mb-3">
@@ -134,7 +143,10 @@ export default function Statistics() {
           </div>
           <div className="d-flex row">
             <div className="col-12 col-xl-6 mb-3">
-              <Chart title="Total Reservations (Last 6 months)" data={totalRoomsData} />
+              <Chart
+                title="Total Reservations (Last 6 months)"
+                data={totalRoomsData}
+              />
             </div>
             <div className="col-12 col-xl-6 mb-3">
               <Chart title="Total Income (Last 6 months)" data={incomeData} />

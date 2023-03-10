@@ -1,10 +1,3 @@
-
 export default function Type() {
-
-  return (
-    <div>
-     
-     
-    </div>
-  );
+  return <div></div>;
 }

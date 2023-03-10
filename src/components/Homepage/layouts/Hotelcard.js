@@ -1,5 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
 import * as React from "react";
-import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import {
@@ -9,16 +9,13 @@ import {
   Box,
   Button,
   Typography,
-  ContainerAccordion,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Container,
   Divider,
-  TextField,
   CircularProgress,
 } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
 import Helmet from "react-helmet";
 import image1 from "../../../statics/img/pics/london1.jpg";
 import image2 from "../../../statics/img/pics/london2.jpg";
@@ -26,8 +23,7 @@ import image3 from "../../../statics/img/pics/london3.jpg";
 import image4 from "../../../statics/img/pics/Amsterdom1.jpg";
 import image5 from "../../../statics/img/pics/Amsterdom2.jpg";
 import Rating from "@mui/material/Rating";
-import { useState, useEffect } from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { useState } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -37,30 +33,11 @@ import { Hidden } from "@material-ui/core";
 import Backdrop from "@mui/material/Backdrop";
 // import './hotelcard.css';
 
-const facility = [
-  "Parking",
-  "Restaurant",
-  "Pets allowed",
-  "Room service",
-  "24-hour front desk",
-  "Fitness centre",
-  "Non-smoking rooms",
-  "Airport shuttle",
-  "Facilities for disabled guests",
-  "Family rooms",
-  "Spa and wellness centre",
-  "Free WiFi",
-  "Electric vehicle charging station",
-  "Swimming pool",
-];
-
 export default function Hotelcard() {
   // rating stars
-  const [value1, setValue1] = useState(5);
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [value2, setValue2] = useState(4);
-  const [value3, setValue3] = useState(4);
-  const [value4, setValue4] = useState(4);
-  const [value5, setValue5] = useState(4);
+
   // facilities checkbox
   const [v1, setVal1] = useState(false);
   const [v2, setVal2] = useState(false);
@@ -90,15 +67,14 @@ export default function Hotelcard() {
   const [r11, setRval11] = useState(false);
   const [r12, setRval12] = useState(false);
   //Accordion part
-  const [ccExpanded, setCcExpanded] = React.useState(true);
   const [rfacilityExpanded, setRfacilityExpanded] = React.useState(false);
   const [starsExpanded, setStarExpanded] = React.useState(false);
   const [facilityExpanded, setFacilityExpanded] = React.useState(false);
-  const [technologies, setTechnologies] = useState([]);
 
   // for checking search and filter start
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [filterStart, setFilterStart] = useState(false);
-  const [removeF, setRemoveF] = useState(false);
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [searchStart, setSearchStart] = useState(false);
 
   // cooperation need to be changed later
@@ -119,7 +95,6 @@ export default function Hotelcard() {
       },
     },
   });
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <div style={{ display: "flex", height: "100%" }}>

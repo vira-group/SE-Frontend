@@ -1,10 +1,7 @@
 import * as React from "react";
-import { useState } from "react";
 import "../../css/Profile.css";
 
 export default function Myhotelscard(props) {
-  const [isFavorite, setIsFavorite] = useState(props.isFavorite);
-
   const handleClick = () => {
     let hotelid = props.id;
     console.log("hotel id: ", hotelid);

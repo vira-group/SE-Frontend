@@ -1,10 +1,10 @@
 import * as React from "react";
-import { TextField, Grid, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
-import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
+import { Box, CircularProgress, Autocomplete } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -15,11 +15,7 @@ import moment from "moment";
 import PreviewMultipleImages from "./PreviewMultipleImages";
 import PhoneInput from "react-phone-input-2";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
-import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData,
-} from "react-country-region-selector";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 const textfieldTheme = createTheme({
@@ -72,17 +68,17 @@ const validationSchema = yup.object({
     .required("Required!"),
 });
 
-function CreateHotel(props) {
+function CreateHotel() {
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
   const [message1, setMessage1] = useState("");
   const [open1, setOpen1] = useState(false);
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
   const CHARACTER_LIMIT = 1000;
   // const [type, setType] = useState(null);
-  const [value, setValue] = useState(null);
   const [facilities, setFacilities] = useState([]);
   const [checkin, setCheckin] = useState(null);
   const [checkout, setCheckout] = useState(null);
@@ -114,10 +110,6 @@ function CreateHotel(props) {
     validationSchema: validationSchema,
   });
 
-  const handleToggleSidebar = (value) => {
-    setToggled(value);
-  };
-
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -141,20 +133,20 @@ function CreateHotel(props) {
 
   const handleClick = () => {
     let filled =
-      !Boolean(formik.errors.name) &&
-      !Boolean(formik.errors.address) &&
-      !Boolean(formik.errors.description) &&
+      !formik.errors.name &&
+      !formik.errors.address &&
+      !formik.errors.description &&
       // facilities.length != 0 &&
       formattedcheckinDate != "Invalid time" &&
       formattedcheckoutDate != "Invalid time";
     console.log("filled: ", filled);
     console.log(
       "informations validation: ",
-      !Boolean(formik.errors.name),
+      !formik.errors.name,
       "\n",
-      !Boolean(formik.errors.address),
+      !formik.errors.address,
       "\n",
-      !Boolean(formik.errors.description),
+      !formik.errors.description,
       "\n",
       facilities.length,
       "\n",
@@ -162,9 +154,9 @@ function CreateHotel(props) {
       "\n",
       formattedcheckoutDate,
       "\n",
-      !Boolean(formik.errors.name) &&
-        !Boolean(formik.errors.address) &&
-        !Boolean(formik.errors.description) &&
+      !formik.errors.name &&
+        !formik.errors.address &&
+        !formik.errors.description &&
         // facilities.length != 0 &&
         formattedcheckinDate != " Invalid date" &&
         formattedcheckoutDate != " Invalid date"

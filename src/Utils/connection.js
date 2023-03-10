@@ -10,11 +10,11 @@ export const AccountActivation = async (uid1, token1) => {
       uid: uid1,
       token: token1,
     })
-    .then((response) => {
+    .then(() => {
       // console.log(response);
       message = true;
     })
-    .catch((error) => {
+    .catch(() => {
       // console.log(error);
       message = false;
     });
@@ -29,12 +29,12 @@ export const Sign_up_connection = async (email, password) => {
       password: password,
       re_password: password,
     })
-    .then((response) => {
+    .then(() => {
       // console.log(response);
       message = true;
       window.location.replace("/verify-email");
     })
-    .catch((error) => {
+    .catch(() => {
       // console.log(error);
       message = false;
     });
@@ -96,11 +96,11 @@ export const me = async () => {
         Authorization: cookies.get("Authorization"),
       },
     })
-    .then((response) => {
+    .then(() => {
       // console.log(response);
       message = true;
     })
-    .catch((error) => {
+    .catch(() => {
       // console.log(error);
       message = false;
     });
@@ -122,7 +122,7 @@ export const logout = async () => {
         },
       }
     )
-    .then((response) => {
+    .then(() => {
       // console.log(response);
       cookies.remove("Authorization");
       message = true;
@@ -130,7 +130,7 @@ export const logout = async () => {
     .then(() => {
       window.location.href = "http://localhost:3000/";
     })
-    .catch((error) => {
+    .catch(() => {
       // console.log(error);
       message = false;
     });
@@ -154,7 +154,7 @@ export const one_hotel_connection = async (id) => {
       // console.log(response);
       message = response.data;
     })
-    .catch((error) => {
+    .catch(() => {
       // console.log(error);
       message = false;
     });
@@ -178,7 +178,7 @@ export const one_hotel_image = async (id) => {
       // console.log(response);
       message = response.data;
     })
-    .catch((error) => {
+    .catch(() => {
       // console.log(error);
       message = false;
     });
@@ -305,7 +305,6 @@ export const create_hotel = async (
   facilities
 ) => {
   let message = "";
-  let err = "";
   console.log(cookies.get("Authorization"));
   await axios
     .post(

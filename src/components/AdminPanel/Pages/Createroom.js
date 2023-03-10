@@ -1,19 +1,17 @@
 import * as React from "react";
-import { TextField, Grid, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import Logo from "../../../statics/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import { cookies, makeURL } from "../../../Utils/common";
 import references from "../../../assets/References.json";
-import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
+import { CircularProgress, Autocomplete } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import moment from "moment";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -22,7 +20,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PreviewMultipleImages from "./PreviewMultipleImages";
 import MySidebar from "../layout/Sidebar";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
-import { fontSize } from "@mui/system";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
@@ -98,7 +95,7 @@ const validationSchema = yup.object({
     .matches(/^[0-9a-zA-Z,]+$/, "Please enter your information correctly."),
 });
 
-function Createroom(props) {
+function Createroom() {
   const [msg1, setMsg1] = useState("");
   const [msg2, setMsg2] = useState("");
   const [message, setMessage] = useState("");
@@ -110,10 +107,7 @@ function Createroom(props) {
   const [hotelId, setHotelId] = useState(null);
   const [type, setType] = useState("");
   const [includebreakfast, setIncludebreakfast] = useState(null);
-  const [value, setValue] = useState(null);
   const [facilities, setFacilities] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
   const [roomid, setRoomid] = useState(null);
   const t1 = "singleRoom";
   const t2 = "doubleRoom";
@@ -174,10 +168,10 @@ function Createroom(props) {
     let option = "";
     includebreakfast === "Yes" ? (option = "Breakfast") : (option = "");
     let filled =
-      !Boolean(formik.errors.size) &&
-      !Boolean(formik.errors.view) &&
-      !Boolean(formik.errors.sleeps) &&
-      !Boolean(formik.errors.price) &&
+      !formik.errors.size &&
+      !formik.errors.view &&
+      !formik.errors.sleeps &&
+      !formik.errors.price &&
       type != "" &&
       includebreakfast != null;
     // && facilities.length != 0;

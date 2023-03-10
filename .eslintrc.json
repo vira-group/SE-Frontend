@@ -21,16 +21,17 @@
     ],
     "rules": {
         "react/no-unknown-property": "off",
+        "no-undef":"warn",
         "react/jsx-key" :"off",
-        "no-constant-condition" : "off",
+        "no-constant-condition" : "error",
         "react/no-direct-mutation-state":"off",
-        "no-extra-boolean-cast":"off",
+        "no-extra-boolean-cast":"error",
         "react/prop-types" : "off",
         "react/no-unescaped-entities":"warn",
-        "prettier/prettier" : "warn",
+        "prettier/prettier" : "error",
         "react/react-in-jsx-scope": "off",
-        "no-unused-vars": "warn", // or "@typescript-eslint/no-unused-vars": "off",
-		"unused-imports/no-unused-imports": "warn",
+        "no-unused-vars": "error", // or "@typescript-eslint/no-unused-vars": "off",
+		"unused-imports/no-unused-imports": "error",
 		"unused-imports/no-unused-vars": [
 			"warn",
 			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }

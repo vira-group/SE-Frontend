@@ -1,4 +1,3 @@
-
 import CommentBtn from "./CommentBtn";
 
 const CommentFooter = ({
@@ -9,7 +8,6 @@ const CommentFooter = ({
 }) => {
   return (
     <div className="comment--footer">
- 
       <CommentBtn
         commentData={commentData}
         setDeleting={setDeleting}

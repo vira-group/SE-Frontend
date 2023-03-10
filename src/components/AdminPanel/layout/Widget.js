@@ -1,7 +1,7 @@
 import React from "react";
 import AnimatedProgressProvider from "./AnimatedProgressProvider";
 // import { easeQuadInOut } from "d3-ease";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Widget(props) {
   return (
@@ -15,7 +15,7 @@ export default function Widget(props) {
         valueEnd={props.percent}
         duration={1.6}
         // easingFunction={easeQuadInOut}
-        easingFunction={x => Math.pow(x, 2)}
+        easingFunction={(x) => Math.pow(x, 2)}
       >
         {(percent) => {
           const roundedPercent = Math.round(percent);

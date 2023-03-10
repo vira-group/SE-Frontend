@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import { cookies, makeURL } from "../../Utils/common";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -10,13 +10,9 @@ import Rating from "@mui/material/Rating";
 import Newhotelcard from "./layouts/Newhotelcard";
 import references from "../../assets/References.json";
 import { Box, CircularProgress } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
 
 export default function Homepagecontent(props) {
-  const { hotelid } = useParams();
-
   const [value, setValue] = React.useState(1);
-  const [state, setState] = useState(null);
   const [filterIson, setFilterIsOn] = useState(false);
   const [filteredHotel, setFilteredhotel] = useState(null);
 
@@ -373,9 +369,7 @@ export default function Homepagecontent(props) {
                 ))}
               </div>
             ) : (
-              <div className="container">
-                test
-              </div>
+              <div className="container">test</div>
             )
           ) : props.hotels ? (
             <div className="row row-cols-1 row-cols-md-3 g-4">

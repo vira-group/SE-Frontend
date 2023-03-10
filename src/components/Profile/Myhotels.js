@@ -9,14 +9,8 @@ import MyhotelsCard from "./Myhotelscard";
 import Sidebar from "./Sidebar";
 import image1 from "../../statics/img/pics/add_files.svg";
 
-export default function Myhotels(props) {
+export default function Myhotels() {
   const [hotel, setHotel] = useState(null);
-
-  const header = {
-    header: {
-      Authorization: cookies,
-    },
-  };
 
   useEffect(() => {
     axios

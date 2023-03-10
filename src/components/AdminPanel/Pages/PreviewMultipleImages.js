@@ -1,15 +1,15 @@
 import axios from "axios";
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import { cookies, makeURL } from "../../../Utils/common";
 import references from "../../../assets/References.json";
-import ImagesGallery from "./ImagesGallery";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
 function PreviewMultipleImages(props) {
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState([]);
   const [images, setImages] = useState([]);
@@ -34,17 +34,7 @@ function PreviewMultipleImages(props) {
 
   function upload(e) {
     const url = window.location.pathname.split("/")[3];
-    const Alert = React.forwardRef(function Alert(props, ref) {
-      return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    });
 
-    const handleClose = (event, reason) => {
-      if (reason === "clickaway") {
-        return;
-      }
-
-      setOpen(false);
-    };
     // console.log(url);
     let hotelid = window.location.pathname.split("/")[2];
     e.preventDefault();

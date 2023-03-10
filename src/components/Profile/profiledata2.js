@@ -47,10 +47,11 @@ const validationSchema = yup.object({
   birthdate: yup.date().required("Required!"),
 });
 
-function Profile(props) {
+function Profile() {
   const CHARACTER_LIMIT = 250;
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [state, setState] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   let date = birthdate; // value from your state

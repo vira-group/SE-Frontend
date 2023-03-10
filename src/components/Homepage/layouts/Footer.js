@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Footer(props) {
+function Footer() {
   const [isAdminPanelPage, setIsAdminPanelPage] = useState(false);
 
   useEffect(() => {

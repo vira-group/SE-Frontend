@@ -83,8 +83,6 @@ const TopHotelsMock = [
 
 export default function Homepage() {
   const [hotels, setHotels] = useState(null);
-  const [newHotels, setNewHotels] = useState(null);
-  const [topHotels, setTopHotels] = useState(null);
 
   useEffect(() => {
     axios
@@ -94,9 +92,9 @@ export default function Homepage() {
         },
       })
       .then((response) => {
-        console.log("this is the homepage response: ", response.data)
+        console.log("this is the homepage response: ", response.data);
         setHotels(response.data);
-        console.log("this response is for homepage: ",response.data)
+        console.log("this response is for homepage: ", response.data);
       })
       .catch((error) => {
         console.log(error);

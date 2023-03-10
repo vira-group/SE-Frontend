@@ -5,7 +5,7 @@ import axios from "axios";
 import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 
-export default function TopHotels(props) {
+export default function TopHotels() {
   const [besthotels, setBesthotels] = useState(null);
 
   useEffect(() => {

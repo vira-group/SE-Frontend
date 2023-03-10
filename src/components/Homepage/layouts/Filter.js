@@ -1,22 +1,20 @@
+/* eslint-disable no-undef */
 import * as React from "react";
-import Helmet from "react-helmet";
 import Rating from "@mui/material/Rating";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Typography, Button, Link } from "@mui/material";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import references from "../../../assets/References.json";
 import "../../../css/Hotelcard.css";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
-   
-export default function Filter(props) {
+import { cookies, makeURL } from "../../../Utils/common";
 
+export default function Filter() {
   const [value, setValue] = React.useState(1);
-  const [state, setState] = useState(null);
   const [filterIson, setFilterIsOn] = useState(false);
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [filteredHotel, setFilteredhotel] = useState(null);
 
   // hotel facilities
@@ -86,8 +84,6 @@ export default function Filter(props) {
   return (
     <div>
       <div className="mt-5">
-        
-        
         <div className="card">
           <div className="card-body">
             <h7 className="card-title" title="stars">
@@ -105,7 +101,6 @@ export default function Filter(props) {
             </div>
           </div>
         </div>
-
 
         <div className="accordion-item mt-2">
           <h2 className="accordion-header" id="headingTwo">
@@ -283,7 +278,7 @@ export default function Filter(props) {
               >
                 <Link
                   underline="hover"
-                  sx={{ cursor: "pointer",  }}
+                  sx={{ cursor: "pointer" }}
                   color="inherit"
                   onClick={removeFilters}
                 >

@@ -250,7 +250,7 @@
         timedOut = false;
       }, self.timeoutInterval);
 
-      ws.onopen = function (event) {
+      ws.onopen = function () {
         clearTimeout(timeout);
         if (self.debug || ReconnectingWebSocket.debugAll) {
           console.debug("ReconnectingWebSocket", "onopen", self.url);
@@ -370,15 +370,15 @@
    * An event listener to be called when the WebSocket connection's readyState changes to OPEN;
    * this indicates that the connection is ready to send and receive data.
    */
-  ReconnectingWebSocket.prototype.onopen = function (event) {};
+  ReconnectingWebSocket.prototype.onopen = function () {};
   /** An event listener to be called when the WebSocket connection's readyState changes to CLOSED. */
-  ReconnectingWebSocket.prototype.onclose = function (event) {};
+  ReconnectingWebSocket.prototype.onclose = function () {};
   /** An event listener to be called when a connection begins being attempted. */
-  ReconnectingWebSocket.prototype.onconnecting = function (event) {};
+  ReconnectingWebSocket.prototype.onconnecting = function () {};
   /** An event listener to be called when a message is received from the server. */
-  ReconnectingWebSocket.prototype.onmessage = function (event) {};
+  ReconnectingWebSocket.prototype.onmessage = function () {};
   /** An event listener to be called when an error occurs. */
-  ReconnectingWebSocket.prototype.onerror = function (event) {};
+  ReconnectingWebSocket.prototype.onerror = function () {};
 
   /**
    * Whether all instances of ReconnectingWebSocket should log debug messages.

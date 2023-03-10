@@ -1,18 +1,14 @@
 import * as React from "react";
-import { TextField, Grid, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import Logo from "../../../statics/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import { cookies, makeURL } from "../../../Utils/common";
 import references from "../../../assets/References.json";
-import { Box, CircularProgress, Container, Autocomplete } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
+import { Box, CircularProgress, Autocomplete } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -61,7 +57,10 @@ const validationSchema = yup.object({
     .min(7, "Must be at least 7 characters")
     .required("Required!"),
   email: yup.string().email("Invalid email address").required("Required"),
-  phone: yup.number().required("Required!").max(15,"Must be less than 15 digits."),
+  phone: yup
+    .number()
+    .required("Required!")
+    .max(15, "Must be less than 15 digits."),
   description: yup.string().max(1000, "Can't be more than 500 characters."),
   country: yup
     .string()
@@ -75,7 +74,7 @@ const validationSchema = yup.object({
     .required("Required!"),
 });
 
-function Edithotel(props) {
+function Edithotel() {
   const [message, setMessage] = useState("");
   const [message1, setMessage1] = useState("");
   const [open1, setOpen1] = useState(false);
@@ -86,15 +85,13 @@ function Edithotel(props) {
   const [phone2, setphone2] = useState(null);
   const CHARACTER_LIMIT = 1000;
   // const [type, setType] = useState(null);
+  // eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
   const [value, setValue] = useState(null);
   const [facilities, setFacilities] = useState([]);
   const [checkin, setCheckin] = useState(null);
   const [checkout, setCheckout] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  const [countries, setCountries] = useState([]);
-  const [cities, setCities] = useState(null);
-
   let tempcheckin = checkin; // value from your state
   let tempcheckout = checkout; // value from your state
   let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
@@ -188,24 +185,24 @@ function Edithotel(props) {
 
   const handleClick = () => {
     let filled =
-      !Boolean(formik.errors.name) &&
-      !Boolean(formik.errors.address) &&
-      !Boolean(formik.errors.description) &&
-      !Boolean(formik.errors.country) &&
-      !Boolean(formik.errors.city) &&
+      !formik.errors.name &&
+      !formik.errors.address &&
+      !formik.errors.description &&
+      !formik.errors.country &&
+      !formik.errors.city &&
       // facilities.length != 0 &&
       formattedcheckinDate != "Invalid time" &&
       formattedcheckoutDate != "Invalid time";
     console.log("filled: ", filled);
     console.log(
       "informations validation: ",
-      !Boolean(formik.errors.name),
+      !formik.errors.name,
       "\n",
-      !Boolean(formik.errors.address),
+      !formik.errors.address,
       "\n",
-      !Boolean(formik.errors.description),
+      !formik.errors.description,
       "\n",
-      !Boolean(formik.errors.phone),
+      !formik.errors.phone,
       "\n",
       facilities.length,
       "\n",
@@ -213,10 +210,10 @@ function Edithotel(props) {
       "\n",
       formattedcheckoutDate,
       "\n",
-      !Boolean(formik.errors.name) &&
-        !Boolean(formik.errors.address) &&
-        !Boolean(formik.errors.description) &&
-        !Boolean(formik.errors.phone) &&
+      !formik.errors.name &&
+        !formik.errors.address &&
+        !formik.errors.description &&
+        !formik.errors.phone &&
         // facilities.length != 0 &&
         formattedcheckinDate != " Invalid date" &&
         formattedcheckoutDate != " Invalid date"
@@ -703,7 +700,7 @@ function Edithotel(props) {
                 </div>
                 <div className="col-lg-9">
                   <ThemeProvider theme={textfieldTheme}>
-                  <PhoneInput
+                    <PhoneInput
                       country={"us"}
                       size="large"
                       id="phone"

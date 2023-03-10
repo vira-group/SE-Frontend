@@ -1,11 +1,11 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 import { TextField, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../Utils/common";
+import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
-import { Box, CircularProgress } from "@mui/material";
-import { useHistory, useParams } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 import "../../css/Profile.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -59,7 +59,7 @@ const validationSchema = yup.object({
   birthdate: yup.date().required("Required!"),
 });
 
-function Profile(props) {
+function Profile() {
   const CHARACTER_LIMIT = 250;
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
@@ -68,6 +68,7 @@ function Profile(props) {
   const [loading, setLoading] = useState(false);
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const [state, setState] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [phone2, setphone2] = useState(null);
@@ -133,10 +134,10 @@ function Profile(props) {
 
   const handleClick = () => {
     let filled =
-      !Boolean(formik.errors.firstname) &&
-      !Boolean(formik.errors.lastname) &&
-      !Boolean(formik.errors.nationalcode) &&
-      !Boolean(formik.errors.email) &&
+      !formik.errors.firstname &&
+      !formik.errors.lastname &&
+      !formik.errors.nationalcode &&
+      !formik.errors.email &&
       genValue.length != 0 &&
       formattedDate != "Invalid date";
     console.log("filled:", filled);
@@ -148,7 +149,6 @@ function Profile(props) {
 
     if (filled) {
       setLoading(true);
-      let form_data = new FormData();
       axios
         .put(
           makeURL(references.url_edit_profile),

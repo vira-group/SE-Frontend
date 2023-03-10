@@ -5,7 +5,7 @@ import { cookies, makeURL } from "../../Utils/common";
 import "../../css/Profile.css";
 import Sidebar from "./Sidebar";
 import CancelReserve from "./CancelReserve";
-export default function ReservedRooms(props) {
+export default function ReservedRooms() {
   const [hotel, setHotel] = useState(null);
 
   useEffect(() => {

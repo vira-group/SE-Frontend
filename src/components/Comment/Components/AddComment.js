@@ -2,9 +2,9 @@ import { useState } from "react";
 import "./Styles/AddComment.scss";
 import Rating from "@mui/material/Rating";
 
-const AddComment = ({ buttonValue, addComments, avatar }) => {
+const AddComment = ({ buttonValue, addComments }) => {
   const [comment, setComment] = useState("");
-  const [text, setText] = useState("");
+  // const [text] = useState("");
   const [ratingValue, setRatingValue] = useState(0);
 
   const handleRating = (rate) => {

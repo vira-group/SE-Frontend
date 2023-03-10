@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // import renderer from "react-test-renderer";
 import Sign_up from "../src/components/Sign_up/sign_up";
 import Footer from "./components/Homepage/layouts/Footer";
@@ -1406,14 +1407,6 @@ it("should fetch and render input element", async () => {
   const followerDivElement = await screen.queryByText(/animals/i);
   expect(followerDivElement).not.toBeInTheDocument();
 });
-
-const Mockq = () => {
-  return (
-    <BrowserRouter>
-      <ResponsiveDatePickers />
-    </BrowserRouter>
-  );
-};
 
 describe("Accordion", () => {
   it("should fetch and render input element", async () => {

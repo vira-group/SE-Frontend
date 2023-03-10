@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Box, CircularProgress } from "@mui/material";
-import Helmet from "react-helmet";
 import Rating from "@mui/material/Rating";
 import LocalTaxiRoundedIcon from "@mui/icons-material/LocalTaxiRounded";
 import ChairRoundedIcon from "@mui/icons-material/ChairRounded";
@@ -29,7 +28,6 @@ import { GoldenTextField } from "../../../theme/GoldenTextField";
 import Popover from "@mui/material/Popover";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import ResponsiveDatePickers from "../../HotelPage/ResponsiveDatePickers";
 import Chatboxuser from "./Chatboxuser";
 
 const labels = {
@@ -67,7 +65,6 @@ export default function Hotelpage() {
   const [roomNumber, setRoomNumber] = useState(null);
   const [hotel, setHotel] = useState(null);
   const [facility, setFacility] = useState(null);
-  const [roomimg, setRoomimg] = useState(null);
   const [f1, setf1] = useState(null);
   const [f2, setf2] = useState(null);
   const [rooms, setRooms] = useState(null);
@@ -130,126 +127,104 @@ export default function Hotelpage() {
     }
   }, []);
 
+  const handlesearch = () => {
+    const queryString = window.location.toString();
+    const hotelid = queryString.slice(-1);
 
+    setRooms(JSON.parse(localStorage.getItem("rooms")));
 
+    axios
+      .get(makeURL("/hotel/" + hotelid + "/search/"), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+        params: {
+          size: numberOfAdults + numberOfChildren,
+          check_in: "2021-07-19",
+          check_out: "2023-07-25",
+        },
+      })
+      .then((response) => {
+        console.log("rooms response: handle serach", response.data);
+        setRooms(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
+    // axios
+    // 	.get(makeURL(references.url_hotel_search), {
+    // 		headers: {
+    // 			Authorization: cookies.get('Authorization')
+    // 		},
+    // 		params: {
+    // 			size: numberOfAdults + numberOfChildren,
+    // 			check_in: '2022-07-19',
+    // 			check_out: '2022-07-25'
+    // 		}
+    // 	})
+    // 	.then((response) => {
+    // 		console.log('after_search', response.data);
+    // 		setRooms(response.data);
+    // 	})
+    // 	.catch((error) => {
+    // 		console.log(error);
+    // 	});
+  };
 
+  // const open = Boolean(anchor);
+  // const id = open ? 'popover' : undefined;
 
+  useEffect(() => {
+    const queryString = window.location.toString();
+    const hotelid = queryString.slice(-1);
+    setid(hotelid);
+    axios
+      .get(makeURL(references.url_one_hotel + hotelid + "/"), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((response) => {
+        console.log("this request is for hotel facilities:", response.data);
+        setHotel(response.data);
+        setFacility(response.data.facilities);
+        setf1(response.data.facilities.slice(0, 4));
+        setf2(response.data.facilities.slice(4, 8));
+        setCheckin(response.data.check_in_range);
+        setCheckout(response.data.check_out_range);
+        setRank(response.data.rate);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
+  useEffect(() => {
+    const queryString = window.location.toString();
+    const hotelid = queryString.slice(-1);
 
+    setRooms(JSON.parse(localStorage.getItem("rooms")));
 
-
-
-
-
-
-
-
-
-
-
-	const handlesearch = () => {
-		const queryString = window.location.toString();
-		const hotelid = queryString.slice(-1);
-
-		setRooms(JSON.parse(localStorage.getItem('rooms')));
-
-		axios
-			.get(makeURL('/hotel/' + hotelid + '/search/'), {
-				headers: {
-					Authorization: cookies.get('Authorization')
-				},
-				params: {
-					size: numberOfAdults + numberOfChildren,
-					check_in: '2021-07-19',
-					check_out: '2023-07-25'
-				}
-			})
-			.then((response) => {
-				console.log('rooms response: handle serach', response.data);
-				setRooms(response.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-
-		// axios
-		// 	.get(makeURL(references.url_hotel_search), {
-		// 		headers: {
-		// 			Authorization: cookies.get('Authorization')
-		// 		},
-		// 		params: {
-		// 			size: numberOfAdults + numberOfChildren,
-		// 			check_in: '2022-07-19',
-		// 			check_out: '2022-07-25'
-		// 		}
-		// 	})
-		// 	.then((response) => {
-		// 		console.log('after_search', response.data);
-		// 		setRooms(response.data);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 	});
-	};
-
-
-	// const open = Boolean(anchor);
-	// const id = open ? 'popover' : undefined;
-
-	useEffect(() => {
-		const queryString = window.location.toString();
-		const hotelid = queryString.slice(-1);
-		setid(hotelid);
-		axios
-			.get(makeURL(references.url_one_hotel + hotelid + '/'), {
-				headers: {
-					Authorization: cookies.get('Authorization')
-				}
-			})
-			.then((response) => {
-				console.log('this request is for hotel facilities:', response.data);
-				setHotel(response.data);
-				setFacility(response.data.facilities);
-				setf1(response.data.facilities.slice(0, 4));
-				setf2(response.data.facilities.slice(4, 8));
-				setCheckin(response.data.check_in_range);
-				setCheckout(response.data.check_out_range);
-				setRank(response.data.rate);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
-
-	useEffect(() => {
-		const queryString = window.location.toString();
-		const hotelid = queryString.slice(-1);
-
-		setRooms(JSON.parse(localStorage.getItem('rooms')));
-
-		axios
-			.get(makeURL(references.url_hotelrooms + hotelid + '/'), {
-				headers: {
-					Authorization: cookies.get('Authorization')
-				},
-				params: {
-					size: numberOfAdults + numberOfChildren,
-					check_in: '2021-07-19',
-					check_out: '2023-07-25'
-				}
-			})
-			.then((response) => {
-				console.log('rooms response:use eefect', response.data);
-				setRooms(response.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
-
-
-
+    axios
+      .get(makeURL(references.url_hotelrooms + hotelid + "/"), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+        params: {
+          size: numberOfAdults + numberOfChildren,
+          check_in: "2021-07-19",
+          check_out: "2023-07-25",
+        },
+      })
+      .then((response) => {
+        console.log("rooms response:use eefect", response.data);
+        setRooms(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleChangeNumber = (actionType, guestType) => {
     actionType === "dec"

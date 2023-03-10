@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import * as React from "react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -55,6 +56,7 @@ class login extends React.Component {
 
   submituserlogin(e) {
     e.preventDefault();
+    // eslint-disable-next-line no-constant-condition
     if (true) {
       if (cookies.get("Authorization") != undefined) {
         this.setState({ message: "Already logged in" });

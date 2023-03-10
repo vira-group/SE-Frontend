@@ -5,7 +5,6 @@ import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "../../css/Stepper.css";
 import Hotelinfo from "./Hotelinfo";
 import Sidebar from "../Profile/Sidebar";
@@ -185,7 +184,7 @@ export default function LinearStepper() {
               </StepButton>
               {activeStep ? (
                 label === "Manager information" ? (
-                  <Sidebar/>
+                  <Sidebar />
                 ) : label === "Hotel information" ? (
                   <Hotelinfo />
                 ) : activeStep === "Hotel images" ? (

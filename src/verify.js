@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import * as React from "react";
 import { Grid, Box, Typography, Container } from "@mui/material";
 import Helmet from "react-helmet";

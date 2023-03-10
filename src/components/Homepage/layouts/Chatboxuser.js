@@ -1,10 +1,7 @@
-import React, { useState, Fragment, useEffect } from "react";
-import profileImage from "../../../statics/img/profile.png";
+import React, { Fragment, useEffect } from "react";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
-import CloseIcon from "@mui/icons-material/Close";
-import references from "../../../assets/References.json";
 import DefaultImage from "../../../statics/img/pics/avatar.jpg";
 import ReconnectingWebSocket from "./reconnecting-websocket";
 
@@ -18,7 +15,7 @@ export default function Chatboxuser(props) {
       "ws://" + "localhost:8000" + "/ws/chat/" + roomName + "/"
     );
 
-    chatSocket.onopen = function (e) {
+    chatSocket.onopen = function () {
       fetchMessages();
     };
 
@@ -33,7 +30,7 @@ export default function Chatboxuser(props) {
       }
     };
 
-    chatSocket.onclose = function (e) {
+    chatSocket.onclose = function () {
       console.error("Chat socket closed unexpectedly");
     };
 
@@ -44,7 +41,7 @@ export default function Chatboxuser(props) {
       }
     };
 
-    document.querySelector("#chat-message-submit").onclick = function (e) {
+    document.querySelector("#chat-message-submit").onclick = function () {
       var messageInputDom = document.getElementById("chat-message-input");
       var message = messageInputDom.value;
       chatSocket.send(

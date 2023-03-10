@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import Popover from "@mui/material/Popover";
@@ -13,7 +13,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import references from "../../../assets/References.json";
 import axios from "axios";
-import { cookies, makeURL, set_cookie } from "../../../Utils/common";
+import { cookies, makeURL } from "../../../Utils/common";
 import moment from "moment";
 
 const datePickerTheme = createTheme({

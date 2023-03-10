@@ -7,7 +7,6 @@ import Sidebar from "./Sidebar";
 import SingleFavoriteCard from "./SingleFavoriteCard";
 
 export default function Favorites2() {
-  const [isFavorite, setIsFavorite] = useState(false);
   const [favoritehotels, setFavoritehotels] = useState(null);
 
   useEffect(() => {

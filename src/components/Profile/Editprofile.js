@@ -60,7 +60,7 @@ const validationSchema = yup.object({
   balance: yup.number(),
 });
 
-function Profile(props) {
+function Profile() {
   const CHARACTER_LIMIT = 250;
   const [message, setMessage] = useState("");
   const [phone2, setphone2] = useState(null);
@@ -70,6 +70,7 @@ function Profile(props) {
   const [loading, setLoading] = useState(false);
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [state, setState] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   let date = birthdate; // value from your state
