@@ -1,11 +1,11 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 // import Verify from "../verify";
-// import Homepage from "../components/Homepage/Homepage";
+import Homepage from "../components/Homepage/Homepage";
 // import Login from "../components/Login/Login";
 // import Sign_up from "../components/Sign_up/sign_up";
 // import Hotelcard from "../components/Homepage/layouts/Newhotelcard";
-// import Navbar from "../components/Homepage/layouts/Navbar";
-// import Footer from "../components/Homepage/layouts/Footer";
+import Navbar from "../components/Homepage/layouts/Navbar";
+import Footer from "../components/Homepage/layouts/Footer";
 // import Profile from "../components/Profile/Editprofile";
 // import IncreaseCredit from "../components/Profile/IncreaseCredit";
 // import Favorites from "../components/Profile/Favorites";
@@ -23,7 +23,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <div className="App h-100">
-      {/* <Navbar /> */}
+      <Navbar />
       <BrowserRouter>
         <Routes>
           {/* <Route exact path="/hotelcard" element={<Hotelcard />} /> */}
@@ -42,8 +42,7 @@ function App() {
           /> */}
           {/* <Route exact path="/hotelpage/:handle" element={<hotelPage />} /> */}
           {/* <Route exact path="/verify-email" element={<Verify />} /> */}
-          {/* <Route exact path="/" element={<Homepage />} /> */}
-          <Route exact path="/" element={<div>Hi</div>} />
+          <Route exact path="/" element={<Homepage />} />
           {/* <Route exact path="/sign-up" element={<Sign_up />} /> */}
           {/* <Route exact path="/login" element={<Login />} /> */}
           {/* <Route exact path="/createHotel/steps" element={<Steps />} /> */}
@@ -82,7 +81,7 @@ function App() {
           {/* <Route exact path="/adminpanel/:id/messages" element={<Messages />} /> */}
         </Routes>
       </BrowserRouter>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
