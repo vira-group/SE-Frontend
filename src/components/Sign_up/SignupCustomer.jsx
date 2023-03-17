@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 // import Link from '@mui/material/Link';
@@ -163,25 +162,6 @@ function SignupCustomer() {
       >
         Sign Up
       </Button>
-
-      <Grid container justifyContent="flex-end">
-        <Grid item>
-          <Link
-            to="./login"
-            variant="body2"
-            className="lnk"
-            sx={{
-              color: "black",
-              marginRight: "10px",
-              marginTop: "50px",
-              mt: 2,
-              mb: 3,
-            }}
-          >
-            Already have an account? Sign in
-          </Link>
-        </Grid>
-      </Grid>
     </Box>
   );
 }
