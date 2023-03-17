@@ -4,11 +4,12 @@ import TextField from "@mui/material/TextField";
 // import Link from '@mui/material/Link';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import "./style.css";
 import { Sign_up_connection } from "../../Utils/connection";
 import { useFormik } from "formik";
 
-function SignupCustomer() {
+function SignupForm(props) {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -53,6 +54,10 @@ function SignupCustomer() {
       return errors;
     },
     onSubmit: function (values) {
+      props.dispatch({
+        type: "set_login_info",
+        value: values,
+      });
       const is_registered = Sign_up_connection(values.email, values.password);
 
       if (is_registered) {
@@ -145,25 +150,49 @@ function SignupCustomer() {
           )}
         </div>
       </Grid>
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        name="Sign Up"
-        style={{
-          mt: 2,
-          mb: 2,
-          backgroundColor: "black",
-          color: "white",
-          marginTop: "20px",
-          height: "43px",
-          marginBottom: "10px",
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 3,
+          my: 2,
+          width: "100%",
         }}
       >
-        Sign Up
-      </Button>
+        <Button
+          sx={{
+            height: "40px",
+            width: "45%",
+          }}
+          variant="outlined"
+          onClick={props.prevStep}
+        >
+          Back
+        </Button>
+        <Button
+          sx={{
+            height: "40px",
+            width: "45%",
+            ml: "auto",
+          }}
+          type="submit"
+          variant="contained"
+        >
+          Submit
+        </Button>
+      </Box>
+      <Link
+        to="./login"
+        variant="body2"
+        sx={{
+          color: "black",
+          mt: 2,
+        }}
+      >
+        Already have an account? Sign in
+      </Link>
     </Box>
   );
 }
 
-export default SignupCustomer;
+export default SignupForm;
