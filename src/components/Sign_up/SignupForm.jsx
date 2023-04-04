@@ -1,13 +1,12 @@
-import * as React from "react";
+// import * as React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-// import Link from '@mui/material/Link';
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import "./style.css";
 import { Sign_up_connection } from "../../Utils/connection";
 import { useFormik } from "formik";
+import Stack from "@mui/material/Stack";
 
 function SignupForm(props) {
   const formik = useFormik({
@@ -68,95 +67,77 @@ function SignupForm(props) {
 
   return (
     <Box
+      fullWidth
       component="form"
       noValidate
       onSubmit={formik.handleSubmit}
-      sx={{ mt: 2 }}
+      sx={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            className={
-              formik.errors.email ? "is-invalid form-control" : "form-control"
-            }
-            value={formik.values.email}
-            onChange={formik.handleChange}
-          />
-        </Grid>
-        <div>
-          {formik.errors.email && (
-            <p className="err">
-              {formik.errors.email}
-              <br />
-            </p>
-          )}
-        </div>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="new-password"
-            className={
-              formik.errors.password
-                ? "is-invalid form-control"
-                : "form-control"
-            }
-            value={formik.values.password}
-            onChange={formik.handleChange}
-          />
-        </Grid>
-        <div>
-          {formik.errors.password && (
-            <p className="err">
-              {formik.errors.password}
-              <br />
-            </p>
-          )}
-        </div>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            name="password_confirm"
-            label="Confirm Password"
-            type="password"
-            id="password_confirm"
-            autoComplete="new-password"
-            className={
-              formik.errors.password_confirm
-                ? "is-invalid form-control"
-                : "form-control"
-            }
-            value={formik.values.password_confirm}
-            onChange={formik.handleChange}
-          />
-        </Grid>
-        <div>
-          {formik.errors.password_confirm && (
-            <p className="err">
-              {formik.errors.password_confirm}
-              <br />
-            </p>
-          )}
-        </div>
-      </Grid>
+      <Stack spacing={1} fullWidth>
+        <TextField
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          className={
+            formik.errors.email ? "is-invalid form-control" : "form-control"
+          }
+          value={formik.values.email}
+          onChange={formik.handleChange}
+        />
+        <p className="err">
+          {formik.errors.email || " "}
+          <br />
+        </p>
+        <TextField
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="new-password"
+          className={
+            formik.errors.password ? "is-invalid form-control" : "form-control"
+          }
+          value={formik.values.password}
+          onChange={formik.handleChange}
+        />
+        <p className="err">
+          {formik.errors.password || " "}
+          <br />
+        </p>
+        <TextField
+          required
+          fullWidth
+          name="password_confirm"
+          label="Confirm Password"
+          type="password"
+          id="password_confirm"
+          autoComplete="new-password"
+          className={
+            formik.errors.password_confirm
+              ? "is-invalid form-control"
+              : "form-control"
+          }
+          value={formik.values.password_confirm}
+          onChange={formik.handleChange}
+        />
+        <p className="err">
+          {formik.errors.password_confirm || " "}
+          <br />
+        </p>
+      </Stack>
       <Box
+        fullWidth
         sx={{
           display: "flex",
           alignItems: "center",
           gap: 3,
-          my: 2,
-          width: "100%",
+          mt: "auto",
+          mb: 2,
         }}
       >
         <Button

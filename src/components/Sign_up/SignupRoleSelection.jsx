@@ -12,39 +12,49 @@ function SignupRoleSelection(props) {
   return (
     <Box
       sx={{
+        height: "100%",
         display: "flex",
         flexDirection: "column",
-        gap: 4,
       }}
     >
-      <Typography variant="h6">
-        How are you going to use Hotel Center?
-      </Typography>
-      <RadioGroup
-        value={props.role}
-        onChange={(event) =>
-          props.dispatch({
-            type: "set_role",
-            value: event.target.value,
-          })
-        }
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 4,
+        }}
       >
-        <FormControlLabel
-          value="customer"
-          control={<Radio />}
-          label={options["customer"]}
-        ></FormControlLabel>
-        <FormControlLabel
-          value="company"
-          control={<Radio />}
-          label={options["company"]}
-        ></FormControlLabel>
-      </RadioGroup>
+        <Typography variant="h6">
+          How are you going to use Hotel Center?
+        </Typography>
+        <RadioGroup
+          value={props.role}
+          onChange={(event) =>
+            props.dispatch({
+              type: "set_role",
+              value: event.target.value,
+            })
+          }
+        >
+          <FormControlLabel
+            value="customer"
+            control={<Radio />}
+            label={options["customer"]}
+          ></FormControlLabel>
+          <FormControlLabel
+            value="company"
+            control={<Radio />}
+            label={options["company"]}
+          ></FormControlLabel>
+        </RadioGroup>
+      </Box>
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
           gap: 3,
+          mt: "auto",
+          mb: 2,
           width: "100%",
         }}
       >

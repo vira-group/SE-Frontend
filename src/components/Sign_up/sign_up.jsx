@@ -11,6 +11,7 @@ import SignupForm from "./SignupForm";
 import { useState } from "react";
 import SignupRoleSelection from "./SignupRoleSelection";
 import { useReducer } from "react";
+import { Stack } from "@mui/material";
 
 function Signup() {
   function signupReducer(state, action) {
@@ -41,27 +42,29 @@ function Signup() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="md">
         <CssBaseline />
         <Box
+          spacing={8}
           sx={{
-            marginTop: 4,
+            mt: 4,
+            gap: 8,
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
+            height: "60vh",
           }}
         >
-          <Avatar
-            sx={{ m: 0.5, backgroundColor: "black", color: "white" }}
-            className="icon"
-          />
-
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-
-          <img className="imgs" src={pic} />
-          <Box>
+          <Stack alignItems="center">
+            <Avatar
+              sx={{ m: 0.5, backgroundColor: "black", color: "white" }}
+              className="icon"
+            />
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <img className="imgs" src={pic} />
+          </Stack>
+          <Box flexGrow={1} sx={{ height: "60%" }}>
             {activeStep === 0 && (
               <SignupRoleSelection
                 nextStep={handleNext}
@@ -70,7 +73,11 @@ function Signup() {
               />
             )}
             {activeStep === 1 && (
-              <SignupForm prevStep={handleBack} role={signupState.role} />
+              <SignupForm
+                prevStep={handleBack}
+                role={signupState.role}
+                dispatch={dispatch}
+              />
             )}
           </Box>
         </Box>
