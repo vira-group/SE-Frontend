@@ -12,6 +12,7 @@ function SignupForm(props) {
   const formik = useFormik({
     initialValues: {
       email: "",
+      phone_number: "",
       password: "",
       password_confirm: "",
     },
@@ -25,6 +26,10 @@ function SignupForm(props) {
         )
       ) {
         errors.email = "*Please enter a valid email.";
+      }
+
+      if (!values.phone_number) {
+        errors.phone_number = "*Phone number must not be empty!";
       }
 
       if (!values.password) {
@@ -57,7 +62,12 @@ function SignupForm(props) {
         type: "set_login_info",
         value: values,
       });
-      const is_registered = Sign_up_connection(values.email, values.password);
+      const is_registered = Sign_up_connection(
+        values.email,
+        values.phone_number,
+        props.role,
+        values.password
+      );
 
       if (is_registered) {
         window.location.replace("/verify-email");
@@ -89,6 +99,25 @@ function SignupForm(props) {
         />
         <p className="err">
           {formik.errors.email || " "}
+          <br />
+        </p>
+        <TextField
+          required
+          fullWidth
+          id="phone_number"
+          label="Phone Number"
+          name="phone_number"
+          autoComplete="phone"
+          className={
+            formik.errors.phone_number
+              ? "is-invalid form-control"
+              : "form-control"
+          }
+          value={formik.values.phone_number}
+          onChange={formik.handleChange}
+        />
+        <p className="err">
+          {formik.errors.phone_number || " "}
           <br />
         </p>
         <TextField
@@ -159,7 +188,7 @@ function SignupForm(props) {
           type="submit"
           variant="contained"
         >
-          Submit
+          Signup
         </Button>
       </Box>
       <Link

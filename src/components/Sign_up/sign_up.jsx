@@ -64,7 +64,7 @@ function Signup() {
             </Typography>
             <img className="imgs" src={pic} />
           </Stack>
-          <Box flexGrow={1} sx={{ height: "60%" }}>
+          <Box flexGrow={1} sx={{ height: "80%" }}>
             {activeStep === 0 && (
               <SignupRoleSelection
                 nextStep={handleNext}

@@ -7,7 +7,7 @@ import { Typography, Button, Link } from "@mui/material";
 function SignupRoleSelection(props) {
   const options = {
     customer: "I am planning to search, view and reserve hotels",
-    company: "I am planning to manage and advertise my hotels",
+    manager: "I am planning to manage and advertise my hotels",
   };
   return (
     <Box
@@ -42,9 +42,9 @@ function SignupRoleSelection(props) {
             label={options["customer"]}
           ></FormControlLabel>
           <FormControlLabel
-            value="company"
+            value="manager"
             control={<Radio />}
-            label={options["company"]}
+            label={options["manager"]}
           ></FormControlLabel>
         </RadioGroup>
       </Box>
