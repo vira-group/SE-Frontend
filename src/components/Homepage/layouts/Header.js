@@ -1,7 +1,4 @@
 import React from "react";
-import SlideOne from "../../../../public/img/slide01.jpg";
-import SlideTwo from "../../../../public/img/slide02.jpg";
-import SlideThree from "../../../../public/img/slide03.jpg";
 import SearchForm from "./SearchForm";
 import Image from "next/image";
 
@@ -10,8 +7,8 @@ function Header(props) {
     <div className="header">
       <div
         id="carousel"
-        className="carousel slide w-100"
-        data-bs-ride="carousel"
+        // className="carousel slide w-100"
+        // data-bs-ride="carousel"
       >
         {/* <div className="carousel-indicators">
           <button
@@ -35,9 +32,14 @@ function Header(props) {
             aria-label="Slide 3"
           ></button>
         </div> */}
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <Image src={SlideOne} className="d-block w-100" alt="Slide 1" />
+        {/* <div className="carousel-inner"> */}
+        <div style={{ width: "100%", height: "100%" }}>
+          <div
+            // className="carousel-item active"
+            style={{ position: "absolute", width: "100%", height: "100%" }}
+          >
+            {/* <Image src={SlideOne} className="d-block w-100" alt="Slide 1" /> */}
+            <Image quality={100} fill src="/img/slide01.jpg" alt="Slide 1" />
             {/* <div className="carousel-caption d-none d-md-block">
               <h5 className="carousel-caption-style">What is Hotel center?</h5>
               <p className="carousel-caption-style">
@@ -47,7 +49,8 @@ function Header(props) {
             </div> */}
           </div>
           <div className="carousel-item">
-            <Image src={SlideTwo} className="d-block w-100" alt="Slide 2" />
+            {/* <Image src={SlideTwo} className="d-block w-100" alt="Slide 2" /> */}
+            <Image quality={100} fill src="/img/slide02.jpg" alt="Slide 2" />
             {/* <div className="carousel-caption d-none d-md-block">
               <h5 className="carousel-caption-style">Second slide label</h5>
               <p className="carousel-caption-style">
@@ -56,7 +59,8 @@ function Header(props) {
             </div> */}
           </div>
           <div className="carousel-item">
-            <Image src={SlideThree} className="d-block w-100" alt="Slide 3" />
+            {/* <Image src={SlideThree} className="d-block w-100" alt="Slide 3" /> */}
+            <Image quality={100} fill src="/img/slide03.jpg" alt="Slide 3" />
             {/* <div className="carousel-caption d-none d-md-block">
               <h5 className="carousel-caption-style">Third slide label</h5>
               <p className="carousel-caption-style">
