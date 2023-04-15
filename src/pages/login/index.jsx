@@ -24,7 +24,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function Login() {
+export default function Login() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
 
@@ -172,5 +172,3 @@ function Login() {
     </ThemeProvider>
   );
 }
-
-export default Login;

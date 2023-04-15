@@ -5,15 +5,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "./style.css";
-import pic from "./s3.png";
-import SignupForm from "./SignupForm";
+// import "./style.css";
+import SignupForm from "../../components/signup/SignupForm";
 import { useState } from "react";
-import SignupRoleSelection from "./SignupRoleSelection";
+import SignupRoleSelection from "../../components/signup/SignupRoleSelection";
 import { useReducer } from "react";
 import { Stack } from "@mui/material";
+import Image from "next/image";
 
-function Signup() {
+export default function Signup() {
   function signupReducer(state, action) {
     if (action.type == "set_role") {
       return {
@@ -55,14 +55,11 @@ function Signup() {
           }}
         >
           <Stack alignItems="center">
-            <Avatar
-              sx={{ m: 0.5, backgroundColor: "black", color: "white" }}
-              className="icon"
-            />
+            <Avatar sx={{ m: 0.5, backgroundColor: "black", color: "white" }} />
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <img className="imgs" src={pic} />
+            <Image src="/img/s3.png" width={300} height={300} />
           </Stack>
           <Box flexGrow={1} sx={{ height: "80%" }}>
             {activeStep === 0 && (
@@ -85,5 +82,3 @@ function Signup() {
     </ThemeProvider>
   );
 }
-
-export default Signup;

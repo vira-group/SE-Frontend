@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import "./style.css";
+import styles from "./style.module.css";
 import { Sign_up_connection } from "../../Utils/connection";
 import { useFormik } from "formik";
 import Stack from "@mui/material/Stack";
@@ -97,7 +97,7 @@ function SignupForm(props) {
           value={formik.values.email}
           onChange={formik.handleChange}
         />
-        <p className="err">
+        <p className={styles.err}>
           {formik.errors.email || " "}
           <br />
         </p>
@@ -116,7 +116,7 @@ function SignupForm(props) {
           value={formik.values.phone_number}
           onChange={formik.handleChange}
         />
-        <p className="err">
+        <p className={styles.err}>
           {formik.errors.phone_number || " "}
           <br />
         </p>
@@ -134,7 +134,7 @@ function SignupForm(props) {
           value={formik.values.password}
           onChange={formik.handleChange}
         />
-        <p className="err">
+        <p className={styles.err}>
           {formik.errors.password || " "}
           <br />
         </p>
@@ -154,7 +154,7 @@ function SignupForm(props) {
           value={formik.values.password_confirm}
           onChange={formik.handleChange}
         />
-        <p className="err">
+        <p className={styles.err}>
           {formik.errors.password_confirm || " "}
           <br />
         </p>
