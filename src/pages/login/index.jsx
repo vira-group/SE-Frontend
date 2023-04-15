@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import "./style.css";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import references from "../../assets/References.json";
@@ -34,6 +33,7 @@ function Login() {
       setPopupMessage("Already logged in");
       setPopupIsOpen(true);
     } else {
+      console.table(values);
       axios
         .post(makeURL(references.url_login), {
           email: values.email,
@@ -43,7 +43,7 @@ function Login() {
           setPopupMessage("login successfully");
           setPopupIsOpen(true);
           set_cookie(response.data.auth_token);
-          // window.location.replace("/");
+          window.location.replace("/");
         })
         .catch((error) => {
           if (error.response.status == 400) {
@@ -74,24 +74,13 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <Image
-            sx={{ m: 1, backgroundColor: "#003049" }}
-            className="icon_Login"
-            src="/img/icon.png"
-            width={48}
-            height={48}
-          />
+          <Image src="/img/icon.png" width={40} height={40} />
 
           <Typography component="h1" variant="h5">
             Login
           </Typography>
 
-          <Image
-            className="imgs_Login"
-            src="/img/s4.png"
-            width={400}
-            height={400}
-          />
+          <Image src="/img/s4.png" width={300} height={300} />
 
           <Box
             component="form"
@@ -127,9 +116,11 @@ function Login() {
                 />
               </Grid>
 
-              <div>
-                <h5 className="err_Login">{formik.errors.email}</h5>
-              </div>
+              {/* <div>
+                <h5 styles={{ color: "red", fontSize: "14.5px" }}>
+                  {formik.errors.email}
+                </h5>
+              </div> */}
             </Grid>
             <Button
               type="submit"
@@ -176,7 +167,6 @@ function Login() {
           >
             {popupMessage}
           </Alert>
-          {popupMessage}
         </Snackbar>{" "}
       </Container>
     </ThemeProvider>
