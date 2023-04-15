@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,9 +9,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "./style.css";
-import pic from "./s4.png";
-import ico from "./icon.png";
+// import "./style.css";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import references from "../../assets/References.json";
@@ -20,6 +18,7 @@ import axios from "axios";
 import { set_cookie } from "../../Utils/common";
 import { useFormik } from "formik";
 import { useState } from "react";
+import Image from "next/image";
 
 const theme = createTheme();
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -44,7 +43,7 @@ function Login() {
           setPopupMessage("login successfully");
           setPopupIsOpen(true);
           set_cookie(response.data.auth_token);
-          window.location.replace("/");
+          // window.location.replace("/");
         })
         .catch((error) => {
           if (error.response.status == 400) {
@@ -75,17 +74,24 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <img
+          <Image
             sx={{ m: 1, backgroundColor: "#003049" }}
             className="icon_Login"
-            src={ico}
+            src="/img/icon.png"
+            width={48}
+            height={48}
           />
 
           <Typography component="h1" variant="h5">
             Login
           </Typography>
 
-          <img className="imgs_Login" src={pic} />
+          <Image
+            className="imgs_Login"
+            src="/img/s4.png"
+            width={400}
+            height={400}
+          />
 
           <Box
             component="form"
@@ -145,12 +151,7 @@ function Login() {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link
-                  to="/sign-up"
-                  variant="body2"
-                  className="lnk_Login"
-                  sx={{ color: "#cd9a2d", marginRight: "10px" }}
-                >
+                <Link href="/sign-up" className="lnk_Login">
                   Don't have an account yet? Sign Up
                 </Link>
               </Grid>
@@ -175,6 +176,7 @@ function Login() {
           >
             {popupMessage}
           </Alert>
+          {popupMessage}
         </Snackbar>{" "}
       </Container>
     </ThemeProvider>
