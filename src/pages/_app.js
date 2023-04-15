@@ -21,6 +21,7 @@ import "../css/NewAndTopHotels.css";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Script from "next/script";
+import Layout from "../components/layout";
 // import { NextScript } from "next/document";
 
 export default function MyApp({ Component, pageProps }) {
@@ -38,7 +39,9 @@ export default function MyApp({ Component, pageProps }) {
           crossorigin="anonymous"
         ></Script>
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   ) : null;
 }
