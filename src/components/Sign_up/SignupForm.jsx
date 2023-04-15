@@ -159,13 +159,23 @@ function SignupForm(props) {
           <br />
         </p>
       </Stack>
+      <Link
+        href="/login"
+        variant="body2"
+        sx={{
+          color: "black",
+          mt: "auto",
+        }}
+      >
+        Already have an account? Sign in
+      </Link>
       <Box
         fullWidth
         sx={{
           display: "flex",
           alignItems: "center",
           gap: 3,
-          mt: "auto",
+          mt: 2,
           mb: 2,
         }}
       >
@@ -191,16 +201,6 @@ function SignupForm(props) {
           Signup
         </Button>
       </Box>
-      <Link
-        to="./login"
-        variant="body2"
-        sx={{
-          color: "black",
-          mt: 2,
-        }}
-      >
-        Already have an account? Sign in
-      </Link>
     </Box>
   );
 }

@@ -48,12 +48,22 @@ function SignupRoleSelection(props) {
           ></FormControlLabel>
         </RadioGroup>
       </Box>
+      <Link
+        href="/login"
+        variant="body2"
+        sx={{
+          color: "black",
+          mt: "auto",
+        }}
+      >
+        Already have an account? Sign in
+      </Link>
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
           gap: 3,
-          mt: "auto",
+          mt: 2,
           mb: 2,
           width: "100%",
         }}
@@ -71,16 +81,6 @@ function SignupRoleSelection(props) {
           Next
         </Button>
       </Box>
-      <Link
-        to="./login"
-        variant="body2"
-        sx={{
-          color: "black",
-          mt: 2,
-        }}
-      >
-        Already have an account? Sign in
-      </Link>
     </Box>
   );
 }
