@@ -113,8 +113,8 @@ class Navbar extends Component {
           this.state.isAdminPanelPage
             ? "d-none"
             : this.state.navbarMoved
-            ? "navbar navbar-expand-lg navbar-light sticky-top nav-scrolled w-100 nav-style"
-            : "navbar navbar-expand-lg navbar-light sticky-top nav-top w-100 nav-style"
+            ? "navbar navbar-expand-md navbar-light sticky-top nav-scrolled w-100 nav-style"
+            : "navbar navbar-expand-md navbar-light sticky-top nav-top w-100 nav-style"
         }
       >
         <div className="container-fluid">
@@ -137,35 +137,6 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="ms-auto pt-3 pt-sm-0">
               <ul className="navbar-nav">
-                {/* <li className="nav-item">
-                  <a
-                    className="nav-link nav-menu-style"
-                    aria-current="page"
-                    href="#"
-                  >
-                    Hotels
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Rooms
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Domain
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Pricing
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Favorites
-                  </a>
-                </li> */}
                 {!this.state.is_loggedin ? (
                   <Fragment>
                     {/*  {this.state.navbarExpand ? <Fragment /> : <hr />} */}
