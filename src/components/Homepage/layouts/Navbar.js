@@ -56,7 +56,7 @@ class Navbar extends Component {
   }
 
   updatePredicate() {
-    this.setState({ navbarExpand: window.innerWidth < 992 });
+    this.setState({ navbarExpand: window.innerWidth < 768 });
   }
 
   handleOpenMenu = () => {
