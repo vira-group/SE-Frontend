@@ -56,7 +56,7 @@ class Navbar extends Component {
   }
 
   updatePredicate() {
-    this.setState({ navbarExpand: window.innerWidth < 768 });
+    this.setState({ navbarExpand: window.innerWidth < 992 });
   }
 
   handleOpenMenu = () => {
@@ -113,8 +113,8 @@ class Navbar extends Component {
           this.state.isAdminPanelPage
             ? "d-none"
             : this.state.navbarMoved
-            ? "navbar navbar-expand-md navbar-light sticky-top nav-scrolled w-100 nav-style"
-            : "navbar navbar-expand-md navbar-light sticky-top nav-top w-100 nav-style"
+            ? "navbar navbar-expand-lg navbar-light sticky-top nav-scrolled w-100 nav-style"
+            : "navbar navbar-expand-lg navbar-light sticky-top nav-top w-100 nav-style"
         }
       >
         <div className="container-fluid">
