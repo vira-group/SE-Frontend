@@ -31,13 +31,19 @@ function PreviewMultipleImages() {
     setFile([...file, URL.createObjectURL(e.target.files[0])]);
     setImages([...images, e.target.files[0]]);
     // console.log("images", images);
+    let hotelid = window.location.pathname.split("/")[4];
+    console.log(
+      window.location.pathname,
+      "\n",
+      "/createHotel/steps/3/" + hotelid
+    );
   }
 
   function upload(e) {
     // console.log(url);
-    let hotelid = window.location.pathname.split("/")[2];
+    let hotelid = window.location.pathname.split("/")[4];
     e.preventDefault();
-    console.log(images);
+    console.log("gggi,", images);
     let filled = images.length != 0;
 
     if (!filled) {
@@ -64,6 +70,9 @@ function PreviewMultipleImages() {
             setOpen(true);
             setLoading(false);
             setMessage("Your picture was uploaded successfully!");
+            if (window.location.pathname == "/createHotel/steps/3/" + hotelid) {
+              window.location.replace("/createHotel");
+            }
             // document.location.reload(true);
           })
           .catch((error) => {
