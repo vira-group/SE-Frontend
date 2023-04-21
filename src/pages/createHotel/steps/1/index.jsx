@@ -66,6 +66,7 @@ function CreateHotel() {
 
   const [region, setRegion] = useState(null);
   const [city, setCity] = useState(null);
+  const [phone, setPhone] = useState(null);
 
   let tempcheckin = checkin; // value from your state
   let tempcheckout = checkout; // value from your state
@@ -95,9 +96,7 @@ function CreateHotel() {
     }
 
     setOpen(false);
-  }; // const handletypeChange = (event, newValue) => {
-  //   setType(newValue);
-  // };
+  };
 
   const handleClick = () => {
     let filled =
@@ -142,7 +141,7 @@ function CreateHotel() {
             name: formik.values.name,
             address: formik.values.address,
             description: formik.values.description,
-            phone_number: formik.values.phone,
+            phone_number: String(phone),
             country: region,
             city: city,
             check_in_range: formattedcheckinDate,
@@ -169,7 +168,7 @@ function CreateHotel() {
             formik.values.description,
             "\n",
             "phone_number:",
-            formik.values.phone,
+            String(phone),
             "\n",
             "country:",
             region,
@@ -184,8 +183,8 @@ function CreateHotel() {
             formattedcheckoutDate
           );
           setMessage("Your hotel was submitted successfully!");
-          console.log("hotelId:", res.data.hotelId);
-          window.location.replace("/createHotel/steps/2/" + res.data.id);
+          console.log("hotelId:", res.data.id);
+          // window.location.replace("/createHotel/steps/2/" + res.data.id);
         })
         .catch((err) => {
           console.log(err);
@@ -483,7 +482,7 @@ function CreateHotel() {
                                 style={{ width: "100" }}
                               >
                                 <PhoneInput
-                                  country={"us"}
+                                  country={"ir"}
                                   required
                                   fullWidth
                                   style={{ width: "100" }}
@@ -493,7 +492,10 @@ function CreateHotel() {
                                   label="Phone number"
                                   InputLabelProps={{ shrink: true }}
                                   value={formik.values.phone}
-                                  onChange={formik.handleChange}
+                                  onChange={(val) => {
+                                    setPhone(val);
+                                    console.log(val, "region");
+                                  }}
                                   onBlur={formik.handleBlur}
                                   error={
                                     formik.touched.phone &&
