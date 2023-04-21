@@ -7,11 +7,7 @@ import references from "../../../../assets/References.json";
 import { CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import moment from "moment";
 import PhoneInput from "react-phone-input-2";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
@@ -61,17 +57,17 @@ function CreateHotel() {
   // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [toggled, setToggled] = useState(false);
   const CHARACTER_LIMIT = 1000;
-  const [checkin, setCheckin] = useState(null);
-  const [checkout, setCheckout] = useState(null);
+  // const [checkin, setCheckin] = useState(null);
+  // const [checkout, setCheckout] = useState(null);
 
   const [region, setRegion] = useState(null);
   const [city, setCity] = useState(null);
   const [phone, setPhone] = useState(null);
 
-  let tempcheckin = checkin; // value from your state
-  let tempcheckout = checkout; // value from your state
-  let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
-  let formattedcheckoutDate = moment(tempcheckout).format("hh:mm");
+  // let tempcheckin = checkin; // value from your state
+  // let tempcheckout = checkout; // value from your state
+  // let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
+  // let formattedcheckoutDate = moment(tempcheckout).format("hh:mm");
 
   const formik = useFormik({
     initialValues: {
@@ -99,13 +95,14 @@ function CreateHotel() {
   };
 
   const handleClick = () => {
+    console.log("phone:", phone);
     let filled =
       !formik.errors.name &&
       !formik.errors.address &&
-      !formik.errors.description &&
-      // facilities.length != 0 &&
-      formattedcheckinDate != "Invalid time" &&
-      formattedcheckoutDate != "Invalid time";
+      !formik.errors.description;
+    // facilities.length != 0 &&
+    // formattedcheckinDate != "Invalid time" &&
+    // formattedcheckoutDate != "Invalid time";
     console.log("filled: ", filled);
     console.log(
       "informations validation: ",
@@ -115,37 +112,39 @@ function CreateHotel() {
       "\n",
       !formik.errors.description,
       "\n",
-      formattedcheckinDate,
+      // formattedcheckinDate,
       "\n",
-      formattedcheckoutDate,
+      // formattedcheckoutDate,
       "\n",
       !formik.errors.name &&
         !formik.errors.address &&
-        !formik.errors.description &&
-        // facilities.length != 0 &&
-        formattedcheckinDate != " Invalid date" &&
-        formattedcheckoutDate != " Invalid date"
+        !formik.errors.description
+      // facilities.length != 0 &&
+      // formattedcheckinDate != " Invalid date" &&
+      // formattedcheckoutDate != " Invalid date"
     );
-    console.log("checkin time: ", formattedcheckinDate);
-    console.log("checkout time: ", formattedcheckoutDate);
+    // console.log("checkin time: ", formattedcheckinDate);
+    // console.log("checkout time: ", formattedcheckoutDate);
     if (!filled) {
       setOpen(true);
       setMessage("Please fill in the blanks.");
     }
 
     if (filled) {
+      console.log("start: phone:", String(phone));
       axios
         .post(
           makeURL(references.url_addhotel),
           {
+            manager: 1,
             name: formik.values.name,
             address: formik.values.address,
             description: formik.values.description,
             phone_number: String(phone),
             country: region,
             city: city,
-            check_in_range: formattedcheckinDate,
-            check_out_range: formattedcheckoutDate,
+            // check_in_range: formattedcheckinDate,
+            // check_out_range: formattedcheckoutDate,
           },
           {
             headers: {
@@ -154,7 +153,6 @@ function CreateHotel() {
           }
         )
         .then((res) => {
-          console.log("responseeeeeeeee", res.data.id);
           setOpen(true);
           setLoading(false);
           console.log(
@@ -175,20 +173,18 @@ function CreateHotel() {
             "\n",
             "city:",
             city,
-            "\n",
-            "check_in_range:",
-            formattedcheckinDate,
-            "\n",
-            "check_out_range:",
-            formattedcheckoutDate
+            "\n"
           );
+          console.log("end: phone:", String(phone));
           setMessage("Your hotel was submitted successfully!");
           console.log("hotelId:", res.data.id);
           // window.location.replace("/createHotel/steps/2/" + res.data.id);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("ERROR:", "\n", err);
           console.log(
+            "eroooor",
+            "\n",
             "name:",
             formik.values.name,
             "\n",
@@ -199,19 +195,14 @@ function CreateHotel() {
             formik.values.description,
             "\n",
             "phone_number:",
-            formik.values.phone,
+            String(phone),
             "\n",
             "country:",
             region,
             "\n",
             "city:",
             city,
-            "\n",
-            "check_in_range:",
-            formattedcheckinDate,
-            "\n",
-            "check_out_range:",
-            formattedcheckoutDate
+            "\n"
           );
           setLoading(false);
           setOpen(true);
@@ -392,7 +383,7 @@ function CreateHotel() {
                             </div>
                           </div>
                         </div>
-                        <hr class="dashed" />
+                        {/* <hr class="dashed" />
                         <div className="mb-3 col-12">
                           <div className="row">
                             <div className="col-lg-3" title="a17">
@@ -463,7 +454,7 @@ function CreateHotel() {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         <hr class="dashed" />
                         <div className="mb-3 col-12">
                           <div className="row">
@@ -494,7 +485,7 @@ function CreateHotel() {
                                   value={formik.values.phone}
                                   onChange={(val) => {
                                     setPhone(val);
-                                    console.log(val, "region");
+                                    console.log(phone, "phone");
                                   }}
                                   onBlur={formik.handleBlur}
                                   error={
