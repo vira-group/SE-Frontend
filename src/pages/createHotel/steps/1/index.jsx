@@ -1,13 +1,10 @@
-/* eslint-disable unused-imports/no-unused-imports */
-/* eslint-disable no-unused-vars */
-/* eslint-disable unused-imports/no-unused-vars */
 import * as React from "react";
-import { TextField, Typography } from "@mui/material";
-import { useState, useEffect } from "react";
+import { TextField } from "@mui/material";
+import { useState } from "react";
 import axios from "axios";
 import { cookies, makeURL } from "../../../../Utils/common";
 import references from "../../../../assets/References.json";
-import { Box, CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -60,18 +57,12 @@ const validationSchema = yup.object({
 function CreateHotel() {
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
-  const [message1, setMessage1] = useState("");
-  const [open1, setOpen1] = useState(false);
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   const [toggled, setToggled] = useState(false);
-  const [hotelId, setHotelId] = useState(null);
   const CHARACTER_LIMIT = 1000;
-  // const [type, setType] = useState(null);
   const [checkin, setCheckin] = useState(null);
   const [checkout, setCheckout] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
 
   const [region, setRegion] = useState(null);
   const [city, setCity] = useState(null);
@@ -80,10 +71,6 @@ function CreateHotel() {
   let tempcheckout = checkout; // value from your state
   let formattedcheckinDate = moment(tempcheckin).format("hh:mm");
   let formattedcheckoutDate = moment(tempcheckout).format("hh:mm");
-
-  // useEffect(() => {
-  //   setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
-  // }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -108,7 +95,6 @@ function CreateHotel() {
     }
 
     setOpen(false);
-    setOpen1(false);
   }; // const handletypeChange = (event, newValue) => {
   //   setType(newValue);
   // };
@@ -198,7 +184,6 @@ function CreateHotel() {
             formattedcheckoutDate
           );
           setMessage("Your hotel was submitted successfully!");
-          setHotelId(res.data.id);
           console.log("hotelId:", res.data.hotelId);
           window.location.replace("/createHotel/steps/2/" + res.data.id);
         })

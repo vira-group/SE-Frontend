@@ -1,7 +1,6 @@
 import axios from "axios";
 import * as React from "react";
 import { useState, useEffect } from "react";
-// import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
@@ -73,7 +72,6 @@ function PreviewMultipleImages() {
             if (window.location.pathname == "/createHotel/steps/3/" + hotelid) {
               window.location.replace("/createHotel");
             }
-            // document.location.reload(true);
           })
           .catch((error) => {
             console.log("error: ", error);

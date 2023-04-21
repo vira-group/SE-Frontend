@@ -1,11 +1,9 @@
-/* eslint-disable unused-imports/no-unused-imports */
-/* eslint-disable no-unused-vars */
-/* eslint-disable unused-imports/no-unused-vars */
 import * as React from "react";
+// eslint-disable-next-line unused-imports/no-unused-imports, no-unused-vars
 import { TextField, Typography } from "@mui/material";
 import Logo from "../../../../public/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { cookies, makeURL } from "../../../Utils/common";
 import references from "../../../assets/References.json";
@@ -20,8 +18,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// eslint-disable-next-line unused-imports/no-unused-imports, no-unused-vars
 import PreviewMultipleImages from "../../../components/AdminPanel/Pages/PreviewMultipleImages";
-// import MySidebar from "../layout/Sidebar";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -107,7 +105,6 @@ function Createroom() {
   const [open2, setOpen2] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggled, setToggled] = useState(false);
-  const [hotelId, setHotelId] = useState(null);
   const [type, setType] = useState("");
   const [includebreakfast, setIncludebreakfast] = useState(null);
   const [facilities, setFacilities] = useState([]);
@@ -116,10 +113,6 @@ function Createroom() {
   const t2 = "doubleRoom";
   const t3 = "tripleRoom";
   const t4 = "suiteRoom";
-
-  useEffect(() => {
-    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
-  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -286,14 +279,8 @@ function Createroom() {
         <div className="col-12 col-md-8">
           <div className="card-body">
             <div className="shadow p-3 mb-5 bg-body rounded">
-              {/* <div className="stepper-container-horizontal  "> */}
               <div className="col"></div>
               <div className={`admin-panel ${toggled ? "toggled" : ""} d-flex`}>
-                {/* <MySidebar
-        toggled={toggled}
-        handleToggleSidebar={handleToggleSidebar}
-        id={hotelId}
-      /> */}
                 <div className="w-100">
                   <div className="adminpanel-header-mobile">
                     <div
@@ -346,27 +333,7 @@ function Createroom() {
                                   <MenuItem value={t1}>Single Room</MenuItem>
                                   <MenuItem value={t2}>Double Room</MenuItem>
                                   <MenuItem value={t3}>Triple Room</MenuItem>
-                                  <MenuItem value={t4}>
-                                    Suite Room - 4 people
-                                  </MenuItem>
-                                  <MenuItem value={t4}>
-                                    Suite Room - 5 people
-                                  </MenuItem>
-                                  <MenuItem value={t4}>
-                                    Suite Room - 6 people
-                                  </MenuItem>
-                                  <MenuItem value={t4}>
-                                    Suite Room - 7 people
-                                  </MenuItem>
-                                  <MenuItem value={t4}>
-                                    Suite Room - 8 people
-                                  </MenuItem>
-                                  <MenuItem value={t4}>
-                                    Suite Room - 9 people
-                                  </MenuItem>
-                                  <MenuItem value={t4}>
-                                    Suite Room - 10 people
-                                  </MenuItem>
+                                  <MenuItem value={t4}>Suite Room</MenuItem>
                                 </Select>
                               </FormControl>
                             </ThemeProvider>
@@ -771,7 +738,6 @@ function Createroom() {
         </div>
       </div>
     </div>
-    // </div>
   );
 }
 

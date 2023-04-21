@@ -1,6 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
-/* eslint-disable no-unused-vars */
-/* eslint-disable unused-imports/no-unused-imports */
 import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,12 +7,9 @@ import { Box, CircularProgress } from "@mui/material";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-// import { useRouter } from "next/router";
 
 function CreateHotelHeader() {
   const [message1, setMessage1] = useState("");
-  // const router = useRouter();
-  // const { hid_s2 } = router.query;
   const [open1, setOpen1] = useState(false);
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars

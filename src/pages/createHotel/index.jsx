@@ -14,15 +14,8 @@ class CreateHotel extends Component {
       <div class=" bg-white">
         <div className="container ">
           <div className="row align-items-center ">
-            {/* <div class="p-3  rounded ms-3" > */}
             <div className="col-md-5 mb-md-0 mb-5 pb-md-0 pb-3 d-md-none">
               <Image src="/img/Hotel_Booking.png" width={400} height={300} />
-              {/* <img
-                className="w-100 mx-md-0 mx-auto w3-animate-zoom"
-                src={pic}
-                style={{ borderRadius: "10%" }}
-                alt="Illustration"
-              /> */}
             </div>
             <div className="col-lg-6 offset-lg-1 col-md-7 text-md-start text-center">
               <div className="mx-md-0 mx-auto">
@@ -80,12 +73,6 @@ class CreateHotel extends Component {
             </div>
             <div className="d-none d-md-block col-md-5 mb-md-0 mb-5 pb-md-0 pb-3">
               <Image src="/img/Hotel_booking.png" width={400} height={300} />
-              {/* <img
-                className="w-100 mx-md-0 mx-auto w3-animate-zoom"
-                src={pic}
-                style={{ borderRadius: "10%" }}
-                alt="Illustration"
-              /> */}
             </div>
           </div>
           <div className="row">
