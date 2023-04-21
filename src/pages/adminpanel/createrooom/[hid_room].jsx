@@ -179,10 +179,32 @@ function Createroom() {
       let temp = { name: allfacilities[i] };
       listForBack.push(temp);
     }
-    console.log(filled);
+    console.log("filled:", filled);
+    console.log(
+      "type:",
+      type,
+      "\n",
+      "size:",
+      formik.values.size,
+      "\n",
+      "view:",
+      formik.values.view,
+      "\n",
+      "sleeps:",
+      formik.values.sleeps,
+      "\n",
+      "price:",
+      formik.values.price,
+      "\n",
+      "option:",
+      option,
+      "room_facilities:",
+      listForBack
+    );
 
     if (!filled) {
       setOpen(true);
+      console.log("!filled");
       setMessage("Please fill in the blanks.");
     }
 
@@ -695,8 +717,6 @@ function Createroom() {
                           {message}
                         </Alert>
                       </Snackbar>
-
-                      {/* <hr class="dashed"></hr> */}
                     </div>
                   </div>
                 </div>
