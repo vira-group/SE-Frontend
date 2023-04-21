@@ -70,6 +70,7 @@ function PreviewMultipleImages(props) {
                 setOpen(true);
                 setLoading(false);
                 setMessage("Your picture was uploaded successfully!");
+                window.location.replace("/");
                 // document.location.reload(true);
               })
               .catch((error) => {

@@ -206,6 +206,7 @@ function Createroom() {
       setOpen(true);
       console.log("!filled");
       setMessage("Please fill in the blanks.");
+      // window.location.replace("/adminpanel/createrooom/images/" + hotelid);
     }
 
     if (filled) {
@@ -233,6 +234,7 @@ function Createroom() {
           setOpen1(true);
           setLoading(false);
           setMsg1("Your room was created successfully!");
+          window.location.replace("/");
         })
         .catch((err) => {
           console.log("error for createroom page: ", err);
@@ -507,7 +509,13 @@ function Createroom() {
                               </div>
                             </div>
                           </div>
+                        </div>
+                      </div>
 
+                      <hr class="dashed"></hr>
+
+                      <div className="mb-3 col-12">
+                        <div className="row">
                           <div className="mb-3 col-6">
                             <div className="row mt-3">
                               <div className="col-lg-3">
@@ -519,7 +527,7 @@ function Createroom() {
                                   Room Price
                                 </label>
                               </div>
-                              <div className="col-lg-9">
+                              <div className="col-lg-8">
                                 <ThemeProvider theme={textfieldTheme}>
                                   <TextField
                                     required
@@ -539,6 +547,43 @@ function Createroom() {
                                     helperText={
                                       formik.touched.price &&
                                       formik.errors.price
+                                    }
+                                  />
+                                </ThemeProvider>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="mb-3 col-6">
+                            <div className="row mt-3">
+                              <div className="col-lg-3">
+                                <label
+                                  for="exampleFormControlInput2"
+                                  className="ms-2 mt-1 form-label"
+                                  title="element6"
+                                >
+                                  Room Sleeps
+                                </label>
+                              </div>
+                              <div className="col-lg-8">
+                                <ThemeProvider theme={textfieldTheme}>
+                                  <TextField
+                                    required
+                                    fullWidth
+                                    placeholder="3"
+                                    id="sleeps"
+                                    size="small"
+                                    label="Room sleeps"
+                                    InputLabelProps={{ shrink: true }}
+                                    value={formik.values.sleeps}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={
+                                      formik.touched.sleeps &&
+                                      Boolean(formik.errors.sleeps)
+                                    }
+                                    helperText={
+                                      formik.touched.sleeps &&
+                                      formik.errors.sleeps
                                     }
                                   />
                                 </ThemeProvider>
@@ -585,7 +630,7 @@ function Createroom() {
                           </div>
                         </div>
                       </div>
-                      <hr class="dashed"></hr>
+                      {/* <hr class="dashed"></hr>
 
                       <div className="mb-3 col-md-12">
                         <div className="row mt-3">
@@ -622,7 +667,7 @@ function Createroom() {
                             </ThemeProvider>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="row">
                         <div className="col-lg-4 col-md-2"></div>
                         <div className="col-lg-4 col-md-2"></div>
@@ -642,12 +687,12 @@ function Createroom() {
                           </button>
                         </div>
 
-                        <div className="mb-3 col-12">
+                        {/* <div className="mb-3 col-12">
                           <Typography sx={{ mb: 3 }}>
                             Please upload room photos here.
                           </Typography>
                           <PreviewMultipleImages roomid={roomid} />
-                        </div>
+                        </div> */}
                       </div>
                     </div>
 
