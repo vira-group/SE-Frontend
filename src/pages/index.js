@@ -63,7 +63,7 @@ function App() {
           /> */}
           {/* <Route
             exact
-            path="/adminpanel/:id/createrooom"
+            path="/adminpanel/createrooom/:id"
             element={<Createroom />}
           /> */}
           {/* <Route
