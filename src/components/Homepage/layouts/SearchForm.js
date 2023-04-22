@@ -8,15 +8,13 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import references from "../../../assets/References.json";
-import axios from "axios";
-import { cookies, makeURL } from "../../../Utils/common";
 import moment from "moment";
 
 import { PlainTextField } from "../../../theme/PlainTextField";
 import cities from "../../../assets/WorldCities.json";
 import SearchFormCSS from "./SearchForm.module.scss";
 import { MobileDatePicker } from "@mui/x-date-pickers";
+import { useRouter } from "next/navigation";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -69,32 +67,20 @@ function SearchForm(props) {
   const handleClose = () => {
     setAnchor(null);
   };
+  const router = useRouter();
 
   const handleSearch = () => {
-    var url =
-      makeURL(references.url_allhotels) +
-      destination.city +
-      "&check_in=" +
-      formattedcheckinDate +
-      "&check_out=" +
-      formattedcheckoutDate +
-      "&size=" +
-      numberOfPeople;
-    axios
-      .get(url, {
-        headers: {
-          Authorization: cookies.get("Authorization"),
+    if (destination && checkinDate && checkoutDate) {
+      router.push({
+        pathname: "/search",
+        query: {
+          city: destination.city,
+          check_in: formattedcheckinDate,
+          check_out: formattedcheckoutDate,
+          size: numberOfPeople,
         },
-      })
-      .then((response) => {
-        props.setHotels(response.data);
-        console.log("checkin date: ", formattedcheckinDate);
-        console.log("checkout date: ", formattedcheckoutDate);
-        console.log("number of people: ", numberOfPeople);
-      })
-      .catch((error) => {
-        console.log(error);
       });
+    }
   };
 
   const handleChangeNumber = (actionType, guestType) => {

@@ -8,6 +8,8 @@ import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Image from "next/image";
+import SingleTopHotelCardCSS from "./SingleTopHotelCard.module.scss";
 
 export default function SingleTopHotelCard(props) {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
@@ -64,7 +66,11 @@ export default function SingleTopHotelCard(props) {
   return (
     <div class="col">
       <div class="card h-100 shadow">
-        <img src={props.image} class="card-img-top" alt="..." />
+        <Image
+          src={props.image}
+          class={[SingleTopHotelCardCSS.image]}
+          alt="..."
+        />
         <div class="card-body">
           <div className="mb-2 d-flex">
             <StarIcon className="rate-icon-style me-1" />
