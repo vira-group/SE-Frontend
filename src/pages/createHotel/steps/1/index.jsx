@@ -95,6 +95,20 @@ function CreateHotel() {
   };
 
   const handleClick = () => {
+    let manager;
+    axios
+      .get(makeURL(references.url_me), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((res) => {
+        manager = res.data.id;
+        console.log("manager:", res.data.id, res);
+      })
+      .catch((error) => {
+        console.log("get ERROR:", error);
+      });
     console.log("phone:", phone);
     let filled =
       !formik.errors.name &&
@@ -136,7 +150,7 @@ function CreateHotel() {
         .post(
           makeURL(references.url_addhotel),
           {
-            manager: 1,
+            manager: manager,
             name: formik.values.name,
             address: formik.values.address,
             description: formik.values.description,
