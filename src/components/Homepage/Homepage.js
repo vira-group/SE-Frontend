@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Header from "./layouts/Header";
-import Homepagecontent from "./Homepagecontent";
 import NewHotels from "./NewHotels";
 import TopHotels from "./TopHotels";
 import axios from "axios";
@@ -106,7 +105,7 @@ export default function Homepage() {
       <Header setHotels={setHotels} />
       <NewHotels hotels={NewHotelsMock} />
       <TopHotels hotels={TopHotelsMock} />
-      <Homepagecontent hotels={hotels} />
+      {/* <Homepagecontent hotels={hotels} /> */}
     </div>
   );
 }
