@@ -72,7 +72,7 @@ function SearchForm(props) {
 
   const handleSearch = () => {
     var url =
-      makeURL(references.url_allhotels) +
+      makeURL(references.url_basic_hotel_search) +
       destination.city +
       "&check_in=" +
       formattedcheckinDate +
@@ -87,7 +87,7 @@ function SearchForm(props) {
         },
       })
       .then((response) => {
-        props.setHotels(response.data);
+        console.log(response.data);
         console.log("checkin date: ", formattedcheckinDate);
         console.log("checkout date: ", formattedcheckoutDate);
         console.log("number of people: ", numberOfPeople);
