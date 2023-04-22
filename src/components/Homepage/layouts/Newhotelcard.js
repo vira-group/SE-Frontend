@@ -10,6 +10,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
+import Image from "next/image";
+
 export default function Newhotelcard(props) {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
   const [message, setMessage] = useState("");
@@ -64,7 +66,13 @@ export default function Newhotelcard(props) {
   return (
     <div class="col mt-5">
       <div class="card h-100">
-        <img src={props.image} class="card-img-top" alt="..." />
+        {/* <img src={props.image} class="card-img-top" alt="..." /> */}
+        <Image
+          src={props.image}
+          style={{ width: "100%" }}
+          height={200}
+          alt="..."
+        />
         <div class="card-body">
           <h5 class="card-title">
             <a className="link hotel-links" href={"/hotelpage/" + props.id}>
