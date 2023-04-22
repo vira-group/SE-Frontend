@@ -13,6 +13,7 @@ import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { useRouter } from "next/router";
 const textfieldTheme = createTheme({
   palette: {
     primary: {
@@ -51,6 +52,7 @@ const validationSchema = yup.object({
 });
 
 function CreateHotel() {
+  const router = useRouter();
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -95,7 +97,6 @@ function CreateHotel() {
   };
 
   const handleClick = () => {
-    let manager;
     axios
       .get(makeURL(references.url_me), {
         headers: {
@@ -103,8 +104,68 @@ function CreateHotel() {
         },
       })
       .then((res) => {
-        manager = res.data.id;
+        let manager = res.data.id;
         console.log("manager:", res.data.id, res);
+        return manager;
+      })
+      .then((manager) => {
+        axios
+          .post(
+            makeURL(references.url_addhotel),
+            {
+              manager: manager,
+              name: formik.values.name,
+              address: formik.values.address,
+              description: formik.values.description,
+              phone_number: String(phone),
+              country: region,
+              city: city,
+              // check_in_range: formattedcheckinDate,
+              // check_out_range: formattedcheckoutDate,
+            },
+            {
+              headers: {
+                Authorization: cookies.get("Authorization"),
+              },
+            }
+          )
+          .then((res) => {
+            setOpen(true);
+            setLoading(false);
+            console.table(formik.values);
+            console.log("end: phone:", String(phone));
+            setMessage("Your hotel was submitted successfully!");
+            console.log("hotelId:", res.data.id);
+            router.push("/createHotel/steps/2/" + res.data.id);
+          })
+          .catch((err) => {
+            console.log("ERROR:", "\n", err);
+            console.log(
+              "eroooor",
+              "\n",
+              "name:",
+              formik.values.name,
+              "\n",
+              "address:",
+              formik.values.address,
+              "\n",
+              "description:",
+              formik.values.description,
+              "\n",
+              "phone_number:",
+              String(phone),
+              "\n",
+              "country:",
+              region,
+              "\n",
+              "city:",
+              city,
+              "\n"
+            );
+            setLoading(false);
+            setOpen(true);
+            setMessage("We have a problem, try again later.");
+          });
       })
       .catch((error) => {
         console.log("get ERROR:", error);
@@ -114,9 +175,6 @@ function CreateHotel() {
       !formik.errors.name &&
       !formik.errors.address &&
       !formik.errors.description;
-    // facilities.length != 0 &&
-    // formattedcheckinDate != "Invalid time" &&
-    // formattedcheckoutDate != "Invalid time";
     console.log("filled: ", filled);
     console.log(
       "informations validation: ",
@@ -126,19 +184,10 @@ function CreateHotel() {
       "\n",
       !formik.errors.description,
       "\n",
-      // formattedcheckinDate,
-      "\n",
-      // formattedcheckoutDate,
-      "\n",
       !formik.errors.name &&
         !formik.errors.address &&
         !formik.errors.description
-      // facilities.length != 0 &&
-      // formattedcheckinDate != " Invalid date" &&
-      // formattedcheckoutDate != " Invalid date"
     );
-    // console.log("checkin time: ", formattedcheckinDate);
-    // console.log("checkout time: ", formattedcheckoutDate);
     if (!filled) {
       setOpen(true);
       setMessage("Please fill in the blanks.");
@@ -146,82 +195,6 @@ function CreateHotel() {
 
     if (filled) {
       console.log("start: phone:", String(phone));
-      axios
-        .post(
-          makeURL(references.url_addhotel),
-          {
-            manager: manager,
-            name: formik.values.name,
-            address: formik.values.address,
-            description: formik.values.description,
-            phone_number: String(phone),
-            country: region,
-            city: city,
-            // check_in_range: formattedcheckinDate,
-            // check_out_range: formattedcheckoutDate,
-          },
-          {
-            headers: {
-              Authorization: cookies.get("Authorization"),
-            },
-          }
-        )
-        .then((res) => {
-          setOpen(true);
-          setLoading(false);
-          console.log(
-            "name:",
-            formik.values.name,
-            "\n",
-            "address:",
-            formik.values.address,
-            "\n",
-            "description:",
-            formik.values.description,
-            "\n",
-            "phone_number:",
-            String(phone),
-            "\n",
-            "country:",
-            region,
-            "\n",
-            "city:",
-            city,
-            "\n"
-          );
-          console.log("end: phone:", String(phone));
-          setMessage("Your hotel was submitted successfully!");
-          console.log("hotelId:", res.data.id);
-          window.location.replace("/createHotel/steps/2/" + res.data.id);
-        })
-        .catch((err) => {
-          console.log("ERROR:", "\n", err);
-          console.log(
-            "eroooor",
-            "\n",
-            "name:",
-            formik.values.name,
-            "\n",
-            "address:",
-            formik.values.address,
-            "\n",
-            "description:",
-            formik.values.description,
-            "\n",
-            "phone_number:",
-            String(phone),
-            "\n",
-            "country:",
-            region,
-            "\n",
-            "city:",
-            city,
-            "\n"
-          );
-          setLoading(false);
-          setOpen(true);
-          setMessage("We have a problem, try again later.");
-        });
     }
   };
 
