@@ -17,6 +17,7 @@ import moment from "moment";
 
 import { PlainTextField } from "../../../theme/PlainTextField";
 import cities from "../../../assets/WorldCities.json";
+import SearchFormCSS from "./SearchForm.module.scss";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -105,11 +106,13 @@ function SearchForm(props) {
 
   return (
     <div
-      className="row mx-2 mx-sm-4 mx-lg-0 p-2 search-form"
+      className={[SearchFormCSS.searchForm, "p-2", "col-8", "row", "m-1"].join(
+        " "
+      )}
       style={{ position: "relative" }}
     >
       <Autocomplete
-        className="col-12 col-lg-3 p-0 mt-2 mb-0"
+        className="p-0 p-b-2"
         id="destination"
         // sx={{ width: 300 }}
         filterOptions={filterOptions}
@@ -153,7 +156,7 @@ function SearchForm(props) {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             disablePast
-            className="bg-white col-12 col-lg-auto mt-2 mb-0 mb-lg-2"
+            className="bg-white"
             maxDate={
               checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
             }
@@ -175,7 +178,7 @@ function SearchForm(props) {
         <LocalizationProvider dateAdapter={AdapterDateFns} className="ms-2">
           <DatePicker
             disablePast
-            className="bg-white col-12 col-lg-auto mb-0 mb-lg-2 mt-2"
+            className="bg-white"
             minDate={
               checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
             }
@@ -195,7 +198,7 @@ function SearchForm(props) {
         </LocalizationProvider>
       </ThemeProvider>
       <GoldenTextField
-        className="col-12 col-lg-auto bg-white mb-0 mb-lg-2 mt-2"
+        className="bg-white"
         aria-describedby={id}
         // style={{ width: "200px" }}
         variant="outlined"
@@ -207,7 +210,7 @@ function SearchForm(props) {
       />
       <button
         type="button"
-        className="col-grow col-lg-1 py-0 mt-2"
+        className=""
         style={{
           border: "none",
           height: "56px",
