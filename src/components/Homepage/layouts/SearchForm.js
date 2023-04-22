@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import Popover from "@mui/material/Popover";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { GoldenTextField } from "../../../theme/GoldenTextField";
@@ -16,6 +15,9 @@ import axios from "axios";
 import { cookies, makeURL } from "../../../Utils/common";
 import moment from "moment";
 
+import { PlainTextField } from "../../../theme/PlainTextField";
+import cities from "../../../assets/WorldCities.json";
+
 const datePickerTheme = createTheme({
   palette: {
     primary: {
@@ -27,16 +29,6 @@ const datePickerTheme = createTheme({
   },
 });
 
-const Cities = [
-  { id: "0", city: "London", country: "United Kingdom" },
-  { id: "1", city: "Paris", country: "France" },
-  { id: "2", city: "Toronto", country: "Canada" },
-  { id: "3", city: "Alberta", country: "Canada" },
-  { id: "4", city: "Yport", country: "France" },
-  { id: "5", city: "Tehran", country: "Iran" },
-  { id: "6", city: "Amsterdam", country: "Netherlands" },
-];
-
 const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
 
 function SearchForm(props) {
@@ -44,7 +36,7 @@ function SearchForm(props) {
   const [checkoutDate, setCheckoutDate] = useState(null);
   const [destination, setDestination] = useState(null);
   const [anchor, setAnchor] = useState(null);
-  const [numberOfAdults, setNumberOfAdults] = useState(1);
+  const [numberOfAdults, setNumberOfAdults] = useState(2);
   const [numberOfChildren, setNumberOfChildren] = useState(0);
 
   // useEffect(() => {
@@ -57,6 +49,11 @@ function SearchForm(props) {
   let formattedcheckinDate = moment(checkin).format("YYYY-MM-DD");
   let formattedcheckoutDate = moment(checkout).format("YYYY-MM-DD");
   let numberOfPeople = numberOfAdults + numberOfChildren;
+
+  const filterOptions = createFilterOptions({
+    matchFrom: "any",
+    limit: 20,
+  });
 
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
@@ -107,113 +104,121 @@ function SearchForm(props) {
   const id = open ? "popover" : undefined;
 
   return (
-    <div className="card search-form-card">
-      <div className="card-body row">
-        <Autocomplete
-          className="col-12 col-lg-4 px-1"
-          id="destination"
-          // sx={{ width: 300 }}
-          options={Cities}
-          autoHighlight
-          getOptionLabel={(option) => option.city}
-          renderOption={(props, option) => (
-            <Box
-              component="li"
-              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-              {...props}
-            >
-              <LocationOnIcon className="mr-2 location-icon" />
-              <div className="ps-2">
-                <b className="text-dark">{option.city}</b>
-                <br />
-                <div className="text-secondary">{option.country}</div>
-              </div>
-            </Box>
-          )}
-          renderInput={(params) => (
-            <GoldenTextField
-              {...params}
-              label="Destination"
-              inputProps={{
-                ...params.inputProps,
-              }}
-              variant="outlined"
-            />
-          )}
-          value={destination}
-          onChange={(event, newValue) => {
-            setDestination(newValue);
-          }}
-          // onInputChange={(event, newInputValue) => {
-          //   this.handleInputChange(event, newInputValue);
-          // }}
-        />
-        <ThemeProvider theme={datePickerTheme}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              disablePast
-              maxDate={
-                checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
-              }
-              label="Check in"
-              value={checkinDate}
-              onChange={(newValue) => {
-                setCheckinDate(newValue);
-              }}
-              renderInput={(params) => (
-                <GoldenTextField
-                  {...params}
-                  variant="outlined"
-                  className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
-                />
-              )}
-            />
-          </LocalizationProvider>
-
-          <LocalizationProvider dateAdapter={AdapterDateFns} className="ms-2">
-            <DatePicker
-              disablePast
-              minDate={
-                checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
-              }
-              label="Check out"
-              value={checkoutDate}
-              onChange={(newValue) => {
-                setCheckoutDate(newValue);
-              }}
-              renderInput={(params) => (
-                <GoldenTextField
-                  {...params}
-                  variant="outlined"
-                  className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
-                />
-              )}
-            />
-          </LocalizationProvider>
-        </ThemeProvider>
-        <GoldenTextField
-          className="col-12 col-lg-3 px-1 my-3 my-lg-0"
-          aria-describedby={id}
-          variant="outlined"
-          onClick={handleClick}
-          label="Number of guests"
-          value={
-            numberOfAdults + " adults" + " - " + numberOfChildren + " children"
-          }
-          placeholder="0 adults - 0 children"
-        />
-        <div className="col-12 col-lg-1 px-1">
-          <button
-            type="button"
-            className="btn btn-primary search-button"
-            onClick={handleSearch}
+    <div
+      className="row mx-2 mx-sm-4 mx-lg-0 p-2 search-form"
+      style={{ position: "relative" }}
+    >
+      <Autocomplete
+        className="col-12 col-lg-3 p-0 mt-2 mb-0"
+        id="destination"
+        // sx={{ width: 300 }}
+        filterOptions={filterOptions}
+        options={cities}
+        autoHighlight
+        getOptionLabel={(option) => option.city}
+        renderOption={(props, option) => (
+          <Box
+            component="li"
+            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+            {...props}
           >
-            <span>
-              <SearchIcon />
-            </span>
-          </button>
-        </div>
-      </div>
+            <LocationOnIcon className="mr-2 location-icon" />
+            <div className="ps-2">
+              <b className="text-dark">{option.city}</b>
+              <br />
+              <div className="text-secondary">{option.country}</div>
+            </div>
+          </Box>
+        )}
+        renderInput={(params) => (
+          <PlainTextField
+            {...params}
+            // label="Destination"
+            placeholder="Destination"
+            inputProps={{
+              ...params.inputProps,
+            }}
+            variant="outlined"
+          />
+        )}
+        value={destination}
+        onChange={(event, newValue) => {
+          setDestination(newValue);
+        }}
+        // onInputChange={(event, newInputValue) => {
+        //   this.handleInputChange(event, newInputValue);
+        // }}
+      />
+      <ThemeProvider theme={datePickerTheme}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            disablePast
+            className="bg-white col-12 col-lg-auto mt-2 mb-0 mb-lg-2"
+            maxDate={
+              checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
+            }
+            value={checkinDate}
+            onChange={(newValue) => {
+              setCheckinDate(newValue);
+            }}
+            renderInput={(params) => (
+              <PlainTextField
+                {...params}
+                variant="outlined"
+                placeholder="Check In"
+                className=""
+              />
+            )}
+          />
+        </LocalizationProvider>
+
+        <LocalizationProvider dateAdapter={AdapterDateFns} className="ms-2">
+          <DatePicker
+            disablePast
+            className="bg-white col-12 col-lg-auto mb-0 mb-lg-2 mt-2"
+            minDate={
+              checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
+            }
+            // label="Check out"
+            value={checkoutDate}
+            onChange={(newValue) => {
+              setCheckoutDate(newValue);
+            }}
+            renderInput={(params) => (
+              <GoldenTextField
+                {...params}
+                variant="outlined"
+                className="col-6 col-lg-2 mt-3 mt-lg-0"
+              />
+            )}
+          />
+        </LocalizationProvider>
+      </ThemeProvider>
+      <GoldenTextField
+        className="col-12 col-lg-auto bg-white mb-0 mb-lg-2 mt-2"
+        aria-describedby={id}
+        // style={{ width: "200px" }}
+        variant="outlined"
+        onClick={handleClick}
+        value={
+          numberOfAdults + " Adults" + " - " + numberOfChildren + " Children"
+        }
+        placeholder="0 adults - 0 children"
+      />
+      <button
+        type="button"
+        className="col-grow col-lg-1 py-0 mt-2"
+        style={{
+          border: "none",
+          height: "56px",
+          borderWidth: "1px",
+          borderRadius: "5px",
+          backgroundColor: "#ffe2a4",
+        }}
+        onClick={handleSearch}
+      >
+        <span>Search</span>
+      </button>
       <Popover
         id={id}
         open={open}

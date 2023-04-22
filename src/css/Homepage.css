@@ -28,19 +28,6 @@
   color: black;
 }
 
-.search-form .row > * {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.search-form {
-  display: flex;
-  justify-content: center;
-  padding-top: 30vh;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
 .location-icon {
   color: #cd9a2d;
 }
@@ -97,6 +84,11 @@
   background-color: #c99015;
 }
 
+.search-form {
+  background-color: #ebbd5a;
+  border-radius: 10px;
+}
+
 /*****************************************footer******************************************/
 .footer-bg-color {
   background-color: #cd9a2d;
@@ -109,41 +101,44 @@
   }
 
   .search-form {
-    margin-left: 5%;
-    margin-right: 5%;
-    padding-top: 5vh;
+    margin-top: 2vw;
   }
 }
 
 /* Small devices */
 @media only screen and (min-width: 576px) and (max-width: 767.98px) {
   .search-form {
-    margin-left: 10%;
-    margin-right: 10%;
-    padding-top: 15vh;
+    margin-top: 18vw;
   }
 }
 
 /* Medium devices */
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
   .search-form {
-    margin-left: 15%;
-    margin-right: 15%;
-    padding-top: 18vh;
+    margin-top: 22vw;
   }
 }
 
 /* Large devices */
 @media only screen and (min-width: 992px) and (max-width: 1199.98px) {
   .search-form {
-    padding-top: 18vh;
+    margin-top: 24vw;
+    min-width: 960px;
   }
 }
 
 /* Extra Large devices */
 @media only screen and (min-width: 1200px) and (max-width: 1399.98px) {
+  .search-form {
+    margin-top: 24vw;
+    min-width: 960px;
+  }
 }
 
 /* Extra Extra Large devices */
 @media only screen and (min-width: 1400px) {
+  .search-form {
+    margin-top: 24vw;
+    min-width: 960px;
+  }
 }
