@@ -1,3 +1,6 @@
+/* eslint-disable unused-imports/no-unused-vars */
+/* eslint-disable no-unused-vars */
+
 import * as React from "react";
 import { TextField, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -5,7 +8,6 @@ import axios from "axios";
 import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 import { CircularProgress } from "@mui/material";
-import "../../css/Profile.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Radio from "@mui/material/Radio";
@@ -16,11 +18,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
-import Sidebar from "./Sidebar";
-import image1 from "../../statics/img/pics/avatar.jpg";
+import Sidebar from "../../components/Profile/Sidebar";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import PhoneInput from "react-phone-input-2";
+import Image from "next/image";
 
 const textFieldTheme = createTheme({
   palette: {
@@ -70,7 +72,7 @@ function Profile() {
   const [loading, setLoading] = useState(false);
   const [genValue, setGenValue] = useState("Male");
   const [birthdate, setBirthdate] = useState(null);
-  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
+
   const [state, setState] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   let date = birthdate; // value from your state
@@ -109,29 +111,29 @@ function Profile() {
   };
 
   useEffect(() => {
-    axios
-      .get(makeURL(references.url_edit_profile), {
-        headers: {
-          Authorization: cookies.get("Authorization"),
-        },
-      })
-      .then((res) => {
-        console.log("response of profile: ", res.data);
-        setState(res.data);
-        formik.setValues({
-          firstname: res.data.firstName || "",
-          lastname: res.data.lastName || "",
-          nationalcode: res.data.national_code || "",
-          email: res.data.email || "",
-          phone: res.data.phone_number || "",
-          aboutme: res.data.description || "",
-          telephone: "",
-          balance: res.data.balance || 0,
-        });
-        setSelectedImage(res.data.avatar);
-        setBirthdate(res.data.birthday || "");
-        setGenValue(res.data.gender || "");
-      });
+    // axios
+    //   .get(makeURL(references.url_edit_profile), {
+    //     headers: {
+    //       Authorization: cookies.get("Authorization"),
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log("response of profile: ", res.data);
+    //     setState(res.data);
+    //     formik.setValues({
+    //       firstname: res.data.firstName || "",
+    //       lastname: res.data.lastName || "",
+    //       nationalcode: res.data.national_code || "",
+    //       email: res.data.email || "",
+    //       phone: res.data.phone_number || "",
+    //       aboutme: res.data.description || "",
+    //       telephone: "",
+    //       balance: res.data.balance || 0,
+    //     });
+    //     setSelectedImage(res.data.avatar);
+    //     setBirthdate(res.data.birthday || "");
+    //     setGenValue(res.data.gender || "");
+    //   });
   }, []);
 
   const handleClick = () => {
@@ -250,9 +252,10 @@ function Profile() {
                       alt="Avatar"
                     />
                   ) : (
-                    <img
-                      src={image1}
-                      className="rounded-circle default"
+                    <Image
+                      src="/img/pics/avatar.jpg"
+                      width={130}
+                      height={130}
                       alt="Avatar"
                     />
                   )}
@@ -359,7 +362,7 @@ function Profile() {
                     </Grid>
                   </Grid>
 
-                  {/* <input
+                  <input
                     type="name"
                     className="form-control"
                     id="exampleFormControlInput1"
@@ -368,7 +371,7 @@ function Profile() {
                     // onBlur={formik.handleBlur}
                     // error={formik.touched.fullname && Boolean(formik.errors.fullname)}
                     // helperText={formik.touched.fullname && formik.errors.fullname}
-                  ></input> */}
+                  ></input>
                 </div>
               </div>
             </div>
@@ -531,7 +534,7 @@ function Profile() {
                     //     formik.touched.phone && Boolean(formik.errors.phone)
                     //   }
                     //   helperText={formik.touched.phone && formik.errors.phone}
-                    // /> */}
+                    // />  */}
                   </ThemeProvider>
                 </div>
               </div>
