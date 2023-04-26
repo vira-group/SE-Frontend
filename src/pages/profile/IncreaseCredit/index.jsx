@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "./Sidebar";
-import { GoldenTextField } from "../../theme/GoldenTextField";
+import Sidebar from "../../../components/Profile/Sidebar";
+import { GoldenTextField } from "../../../theme/GoldenTextField";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
-import WhiteLogo from "../../statics/logo/white_logo_3.png";
 import axios from "axios";
-import { cookies, makeURL } from "../../Utils/common";
-import references from "../../assets/References.json";
+import { cookies, makeURL } from "../../../Utils/common";
+import references from "../../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { CircularProgress } from "@mui/material";
+import Image from "next/image";
 
 export default function Credit() {
   const [amountOfMoney, setAmountOfMoney] = useState(0);
@@ -187,7 +187,11 @@ export default function Credit() {
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <h6>Your wallet balance</h6>
                 <div className="money-card mt-4 mt-lg-5">
-                  <img src={WhiteLogo} />
+                  <Image
+                    src="/logo/white_logo_3.png"
+                    width={262}
+                    height={252}
+                  />
                   <div className="h-100">
                     <p className="site-name">Hotel Center</p>
                     <div className="fw-bold d-flex card-content">
