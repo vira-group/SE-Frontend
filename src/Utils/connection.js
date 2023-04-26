@@ -44,10 +44,9 @@ export const Sign_up_connection = async (
     .then(() => {
       // console.log(response);
       message = true;
-      window.location.replace("/verify-email");
     })
-    .catch(() => {
-      // console.log(error);
+    .catch((error) => {
+      console.error(error);
       message = false;
     });
   return message;

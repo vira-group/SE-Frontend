@@ -57,12 +57,12 @@ function SignupForm(props) {
 
       return errors;
     },
-    onSubmit: function (values) {
+    onSubmit: async function (values) {
       props.dispatch({
         type: "set_login_info",
         value: values,
       });
-      const is_registered = Sign_up_connection(
+      const is_registered = await Sign_up_connection(
         values.email,
         values.phone_number,
         props.role,
