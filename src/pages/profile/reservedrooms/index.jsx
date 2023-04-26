@@ -1,10 +1,9 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL } from "../../Utils/common";
-import "../../css/Profile.css";
-import Sidebar from "./Sidebar";
-import CancelReserve from "./CancelReserve";
+import { cookies, makeURL } from "../../../Utils/common";
+import Sidebar from "../../../components/Profile/Sidebar";
+import CancelReserve from "../../../components/Profile/CancelReserve";
 export default function ReservedRooms() {
   const [hotel, setHotel] = useState(null);
 
