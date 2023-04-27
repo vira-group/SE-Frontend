@@ -1,5 +1,4 @@
 import * as React from "react";
-import "../../css/Profile.css";
 
 export default function Myhotelscard(props) {
   const handleClick = () => {

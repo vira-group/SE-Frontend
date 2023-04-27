@@ -4,10 +4,9 @@ import axios from "axios";
 import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 import { Box } from "@mui/material";
-import "../../css/Profile.css";
-import MyhotelsCard from "./Myhotelscard";
-import Sidebar from "./Sidebar";
-import image1 from "../../statics/img/pics/add_files.svg";
+import MyhotelsCard from "../../components/Profile/Myhotelscard";
+import Sidebar from "../../components/Profile/Sidebar";
+import Image from "next/image";
 
 export default function Myhotels() {
   const [hotel, setHotel] = useState(null);
@@ -20,8 +19,8 @@ export default function Myhotels() {
         },
       })
       .then((response) => {
-        console.log("my hotels response: ", response.data.owners);
-        setHotel(response.data.owners);
+        console.log("my hotels response: ", response.data.managers);
+        setHotel(response.data.managers);
       })
       .catch((error) => {
         console.log("error: ", error);
@@ -79,10 +78,11 @@ export default function Myhotels() {
               }}
             >
               <div className="container" style={{ textAlign: "center" }}>
-                <img
-                  className="add-hotel-img"
-                  style={{ height: "100px", cursor: "pointer" }}
-                  src={image1}
+                <Image
+                  width={100}
+                  height={100}
+                  style={{ cursor: "pointer" }}
+                  src="/img/pics/add_files.svg"
                   onClick={handleClick}
                 />
               </div>

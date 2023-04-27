@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL } from "../../Utils/common";
-import references from "../../assets/References.json";
-import Sidebar from "./Sidebar";
-import SingleFavoriteCard from "./SingleFavoriteCard";
+import { cookies, makeURL } from "../../../Utils/common";
+import references from "../../../assets/References.json";
+import Sidebar from "../../../components/Profile/Sidebar";
+import SingleFavoriteCard from "../../../components/Profile/SingleFavoriteCard";
 
 export default function Favorites2() {
   const [favoritehotels, setFavoritehotels] = useState(null);

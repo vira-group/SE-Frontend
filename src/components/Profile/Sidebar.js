@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Link from "next/link";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import BedIcon from "@mui/icons-material/Bed";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -11,7 +12,7 @@ export default function Sidebar() {
     <div className="d-flex flex-column flex-shrink-0 p-3 profile-sidebar border mb-4 mb-lg-0">
       <div className="row">
         <Link
-          to="/profile"
+          href="/profile"
           class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2"
         >
           <ModeEditOutlinedIcon className="icon-style" />
@@ -20,7 +21,7 @@ export default function Sidebar() {
 
         <hr className="mb-2" />
         <Link
-          to="/myhotels"
+          href="/myhotels"
           class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2"
         >
           <BedIcon className="icon-style" />
@@ -34,7 +35,7 @@ export default function Sidebar() {
         </Link>
         <hr className="mb-2" /> */}
         <Link
-          to="/profile/favorites"
+          href="/profile/favorites"
           class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2"
         >
           <FavoriteBorderIcon className="icon-style" />
@@ -43,7 +44,7 @@ export default function Sidebar() {
         <hr className="mb-2" />
 
         <Link
-          to="/profile/IncreaseCredit"
+          href="/profile/IncreaseCredit"
           class="nav-link link-dark sidebar-items d-lg-flex"
         >
           <AddCardIcon className="icon-style" />
@@ -53,7 +54,7 @@ export default function Sidebar() {
         <hr className="mb-2" />
 
         <Link
-          to="/profile/reservedrooms"
+          href="/profile/reservedrooms"
           class="nav-link link-dark sidebar-items d-lg-flex"
         >
           <BookmarkBorderIcon className="icon-style" />
