@@ -57,11 +57,6 @@
   background-color: #c99015;
 }
 
-/*****************************************footer******************************************/
-.footer-bg-color {
-  background-color: #cd9a2d;
-}
-
 /* X-small devices */
 @media only screen and (max-width: 575.98px) {
   #carousel {
