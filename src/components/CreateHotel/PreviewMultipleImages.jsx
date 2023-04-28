@@ -1,7 +1,6 @@
 import axios from "axios";
 import * as React from "react";
 import { useState, useEffect } from "react";
-// import { cookies, makeURL, set_cookie } from '../../../Utils/common';
 import { cookies, makeURL } from "../../Utils/common";
 import references from "../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
@@ -31,13 +30,19 @@ function PreviewMultipleImages() {
     setFile([...file, URL.createObjectURL(e.target.files[0])]);
     setImages([...images, e.target.files[0]]);
     // console.log("images", images);
+    let hotelid = window.location.pathname.split("/")[4];
+    console.log(
+      window.location.pathname,
+      "\n",
+      "/createHotel/steps/3/" + hotelid
+    );
   }
 
   function upload(e) {
     // console.log(url);
-    let hotelid = window.location.pathname.split("/")[2];
+    let hotelid = window.location.pathname.split("/")[4];
     e.preventDefault();
-    console.log(images);
+    console.log("gggi,", images);
     let filled = images.length != 0;
 
     if (!filled) {
@@ -64,7 +69,9 @@ function PreviewMultipleImages() {
             setOpen(true);
             setLoading(false);
             setMessage("Your picture was uploaded successfully!");
-            // document.location.reload(true);
+            if (window.location.pathname == "/createHotel/steps/3/" + hotelid) {
+              window.location.replace("/createHotel");
+            }
           })
           .catch((error) => {
             console.log("error: ", error);
@@ -129,6 +136,10 @@ function PreviewMultipleImages() {
       <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
           severity={
             message === "Your picture was uploaded successfully!"
               ? "success"

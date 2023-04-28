@@ -1,7 +1,6 @@
 import * as React from "react";
 import axios from "axios";
 import { cookies, makeURL } from "../../Utils/common";
-import "../../css/Profile.css";
 
 export default function CancelReserve(props) {
   const handleClick = () => {

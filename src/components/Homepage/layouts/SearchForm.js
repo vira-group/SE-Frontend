@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import Popover from "@mui/material/Popover";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { GoldenTextField } from "../../../theme/GoldenTextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import references from "../../../assets/References.json";
-import axios from "axios";
-import { cookies, makeURL } from "../../../Utils/common";
 import moment from "moment";
+
+import { PlainTextField } from "../../../theme/PlainTextField";
+import cities from "../../../assets/WorldCities.json";
+import SearchFormCSS from "./SearchForm.module.scss";
+import { MobileDatePicker } from "@mui/x-date-pickers";
+import { useRouter } from "next/navigation";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -27,16 +27,6 @@ const datePickerTheme = createTheme({
   },
 });
 
-const Cities = [
-  { id: "0", city: "London", country: "United Kingdom" },
-  { id: "1", city: "Paris", country: "France" },
-  { id: "2", city: "Toronto", country: "Canada" },
-  { id: "3", city: "Alberta", country: "Canada" },
-  { id: "4", city: "Yport", country: "France" },
-  { id: "5", city: "Tehran", country: "Iran" },
-  { id: "6", city: "Amsterdam", country: "Netherlands" },
-];
-
 const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
 
 function SearchForm(props) {
@@ -44,7 +34,7 @@ function SearchForm(props) {
   const [checkoutDate, setCheckoutDate] = useState(null);
   const [destination, setDestination] = useState(null);
   const [anchor, setAnchor] = useState(null);
-  const [numberOfAdults, setNumberOfAdults] = useState(1);
+  const [numberOfAdults, setNumberOfAdults] = useState(2);
   const [numberOfChildren, setNumberOfChildren] = useState(0);
 
   // useEffect(() => {
@@ -58,6 +48,18 @@ function SearchForm(props) {
   let formattedcheckoutDate = moment(checkout).format("YYYY-MM-DD");
   let numberOfPeople = numberOfAdults + numberOfChildren;
 
+  const filterOptions = createFilterOptions({
+    matchFrom: "any",
+    limit: 20,
+  });
+
+  let numberWidth;
+  if (numberOfAdults >= 10 || numberOfAdults >= 10) {
+    numberWidth = 50;
+  } else {
+    numberWidth = 41;
+  }
+
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };
@@ -65,32 +67,20 @@ function SearchForm(props) {
   const handleClose = () => {
     setAnchor(null);
   };
+  const router = useRouter();
 
   const handleSearch = () => {
-    var url =
-      makeURL(references.url_allhotels) +
-      destination.city +
-      "&check_in=" +
-      formattedcheckinDate +
-      "&check_out=" +
-      formattedcheckoutDate +
-      "&size=" +
-      numberOfPeople;
-    axios
-      .get(url, {
-        headers: {
-          Authorization: cookies.get("Authorization"),
+    if (destination && checkinDate && checkoutDate) {
+      router.push({
+        pathname: "/search",
+        query: {
+          city: destination.city,
+          check_in: formattedcheckinDate,
+          check_out: formattedcheckoutDate,
+          size: numberOfPeople,
         },
-      })
-      .then((response) => {
-        props.setHotels(response.data);
-        console.log("checkin date: ", formattedcheckinDate);
-        console.log("checkout date: ", formattedcheckoutDate);
-        console.log("number of people: ", numberOfPeople);
-      })
-      .catch((error) => {
-        console.log(error);
       });
+    }
   };
 
   const handleChangeNumber = (actionType, guestType) => {
@@ -107,113 +97,145 @@ function SearchForm(props) {
   const id = open ? "popover" : undefined;
 
   return (
-    <div className="card search-form-card">
-      <div className="card-body row">
-        <Autocomplete
-          className="col-12 col-lg-4 px-1"
-          id="destination"
-          // sx={{ width: 300 }}
-          options={Cities}
-          autoHighlight
-          getOptionLabel={(option) => option.city}
-          renderOption={(props, option) => (
-            <Box
-              component="li"
-              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-              {...props}
-            >
-              <LocationOnIcon className="mr-2 location-icon" />
-              <div className="ps-2">
-                <b className="text-dark">{option.city}</b>
-                <br />
-                <div className="text-secondary">{option.country}</div>
-              </div>
-            </Box>
-          )}
-          renderInput={(params) => (
-            <GoldenTextField
-              {...params}
-              label="Destination"
-              inputProps={{
-                ...params.inputProps,
-              }}
-              variant="outlined"
-            />
-          )}
-          value={destination}
-          onChange={(event, newValue) => {
-            setDestination(newValue);
-          }}
-          // onInputChange={(event, newInputValue) => {
-          //   this.handleInputChange(event, newInputValue);
-          // }}
-        />
-        <ThemeProvider theme={datePickerTheme}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              disablePast
-              maxDate={
-                checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
-              }
-              label="Check in"
-              value={checkinDate}
-              onChange={(newValue) => {
-                setCheckinDate(newValue);
-              }}
-              renderInput={(params) => (
-                <GoldenTextField
-                  {...params}
-                  variant="outlined"
-                  className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
-                />
+    <div
+      className={[
+        SearchFormCSS.searchForm,
+        "p-1",
+        "col-12",
+        "col-sm-11",
+        "row",
+      ].join(" ")}
+      style={{ position: "relative" }}
+    >
+      <Autocomplete
+        className={[
+          SearchFormCSS.cityPicker,
+          "mb-1",
+          "mb-lg-0",
+          "me-lg-1",
+        ].join(" ")}
+        id="destination"
+        filterOptions={filterOptions}
+        options={cities}
+        autoHighlight
+        getOptionLabel={(option) => option.city}
+        renderOption={(props, option) => (
+          <Box component="li" role="listbox" {...props}>
+            <LocationOnIcon
+              className={[SearchFormCSS.locationIcon, "my-auto", "me-3"].join(
+                " "
               )}
             />
-          </LocalizationProvider>
+            <div>
+              <b className="text-dark">{option.city}</b>
+              <br />
+              <div className="text-secondary">{option.country}</div>
+            </div>
+          </Box>
+        )}
+        renderInput={(params) => (
+          <PlainTextField
+            {...params}
+            placeholder="Destination"
+            inputProps={{
+              ...params.inputProps,
+            }}
+            variant="outlined"
+          />
+        )}
+        value={destination}
+        onChange={(event, newValue) => {
+          setDestination(newValue);
+        }}
+        // onInputChange={(event, newInputValue) => {
+        //   this.handleInputChange(event, newInputValue);
+        // }}
+      />
+      <ThemeProvider theme={datePickerTheme}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <MobileDatePicker
+            disablePast
+            slotProps={{ textField: { placeholder: "Check In" } }}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                backgroundColor: "white",
+              },
+              "& .MuiInputBase-input::placeholder": {
+                color: "gray",
+                opacity: 1,
+              },
+            }}
+            className={[
+              SearchFormCSS.datePicker,
+              "mb-1",
+              "mb-lg-0",
+              "me-lg-1",
+            ].join(" ")}
+            maxDate={
+              checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
+            }
+            value={checkinDate}
+            onChange={(newValue) => {
+              setCheckinDate(newValue);
+            }}
+          />
+        </LocalizationProvider>
 
-          <LocalizationProvider dateAdapter={AdapterDateFns} className="ms-2">
-            <DatePicker
-              disablePast
-              minDate={
-                checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
-              }
-              label="Check out"
-              value={checkoutDate}
-              onChange={(newValue) => {
-                setCheckoutDate(newValue);
-              }}
-              renderInput={(params) => (
-                <GoldenTextField
-                  {...params}
-                  variant="outlined"
-                  className="col-6 col-lg-2 px-1 mt-3 mt-lg-0"
-                />
-              )}
-            />
-          </LocalizationProvider>
-        </ThemeProvider>
-        <GoldenTextField
-          className="col-12 col-lg-3 px-1 my-3 my-lg-0"
-          aria-describedby={id}
-          variant="outlined"
-          onClick={handleClick}
-          label="Number of guests"
-          value={
-            numberOfAdults + " adults" + " - " + numberOfChildren + " children"
-          }
-          placeholder="0 adults - 0 children"
-        />
-        <div className="col-12 col-lg-1 px-1">
-          <button
-            type="button"
-            className="btn btn-primary search-button"
-            onClick={handleSearch}
-          >
-            <span>
-              <SearchIcon />
-            </span>
-          </button>
-        </div>
-      </div>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <MobileDatePicker
+            disablePast
+            slotProps={{ textField: { placeholder: "Check Out" } }}
+            sx={{
+              "& .MuiInputBase-root": {
+                backgroundColor: "white",
+              },
+              "& .MuiInputBase-input::placeholder": {
+                color: "gray",
+                opacity: 1,
+              },
+            }}
+            className={[
+              SearchFormCSS.datePicker,
+              "mb-1",
+              "mb-lg-0",
+              "me-lg-1",
+            ].join(" ")}
+            minDate={
+              checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
+            }
+            // label="Check out"
+            value={checkoutDate}
+            onChange={(newValue) => {
+              setCheckoutDate(newValue);
+            }}
+            renderInput={(params) => (
+              <input {...params} placeholder="asd"></input>
+            )}
+          />
+        </LocalizationProvider>
+      </ThemeProvider>
+      <PlainTextField
+        className={[
+          SearchFormCSS.personCountBox,
+          "mb-1",
+          "mb-lg-0",
+          "me-lg-1",
+        ].join(" ")}
+        aria-describedby={id}
+        variant="outlined"
+        onClick={handleClick}
+        value={
+          numberOfAdults + " Adults" + " - " + numberOfChildren + " Children"
+        }
+      />
+      <button
+        type="button"
+        className={[SearchFormCSS.searchButton].join(" ")}
+        style={{}}
+        onClick={handleSearch}
+      >
+        <span>Search</span>
+      </button>
       <Popover
         id={id}
         open={open}
@@ -228,12 +250,16 @@ function SearchForm(props) {
           horizontal: "right",
         }}
       >
-        <div className="p-3 number-of-guests-form">
+        <div className={[SearchFormCSS.personCountPopover, "p-3"].join(" ")}>
           <div className="mb-3 d-flex align-items-center">
-            <p className="mb-0 me-auto">Adults</p>
+            <span className="me-auto">Adults</span>
             <button
               type="button"
-              className="btn btn-primary decrease-button"
+              className={[
+                SearchFormCSS.changePersonCountButton,
+                "ms-5",
+                "btn",
+              ].join(" ")}
               onClick={() => handleChangeNumber("dec", "adults")}
               disabled={numberOfAdults <= 1}
             >
@@ -241,10 +267,14 @@ function SearchForm(props) {
                 <RemoveIcon />
               </span>
             </button>
-            <p className="mb-0 px-3">{numberOfAdults}</p>
+            <span className="px-3 text-center" style={{ width: numberWidth }}>
+              {numberOfAdults}
+            </span>
             <button
               type="button"
-              className="btn btn-primary increase-button"
+              className={[SearchFormCSS.changePersonCountButton, "btn"].join(
+                " "
+              )}
               onClick={() => handleChangeNumber("inc", "adults")}
             >
               <span>
@@ -253,10 +283,14 @@ function SearchForm(props) {
             </button>
           </div>
           <div className="d-flex  align-items-center">
-            <p className="mb-0 me-auto">Children</p>
+            <span className="me-auto">Children</span>
             <button
               type="button"
-              className="btn btn-primary decrease-button"
+              className={[
+                SearchFormCSS.changePersonCountButton,
+                "ms-5",
+                "btn",
+              ].join(" ")}
               onClick={() => handleChangeNumber("dec", "children")}
               disabled={numberOfChildren <= 0}
             >
@@ -264,10 +298,14 @@ function SearchForm(props) {
                 <RemoveIcon />
               </span>
             </button>
-            <p className="mb-0 px-3">{numberOfChildren}</p>
+            <span className="px-3 text-center" style={{ width: numberWidth }}>
+              {numberOfChildren}
+            </span>
             <button
               type="button"
-              className="btn btn-primary increase-button"
+              className={[SearchFormCSS.changePersonCountButton, "btn"].join(
+                " "
+              )}
               onClick={() => handleChangeNumber("inc", "children")}
             >
               <span>

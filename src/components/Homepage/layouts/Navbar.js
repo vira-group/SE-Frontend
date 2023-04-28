@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import Logo from "../../../statics/logo/logo2.png";
+import Logo from "../../../../public/logo/logo2.png";
 // import UseAnimations from "react-useanimations";
 // import menu3 from "react-useanimations/lib/menu3";
 import { me, logout } from "../../../Utils/connection";
@@ -10,6 +10,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
+import Image from "next/image";
+
+import { Divide as Hamburger } from "hamburger-react";
+import NavbarCSS from "./Navbar.module.scss";
 
 class Navbar extends Component {
   constructor() {
@@ -20,22 +24,24 @@ class Navbar extends Component {
       is_loggedin: false,
       anchorEl: null,
       open: Boolean(null),
-      navbarExpand: true,
+      navbarExpand: false,
       isAdminPanelPage: false,
     };
+    this.updatePredicate = this.updatePredicate.bind(this);
   }
 
   componentDidMount() {
     document.scrollingElement.scrollTop = 0;
+    this.updatePredicate();
+    window.addEventListener("resize", this.updatePredicate);
     document.addEventListener("scroll", this.handleScroll);
-    window.innerWidth < 992
-      ? this.setState({
-          navbarExpand: false,
-        })
-      : this.setState({
-          navbarExpand: true,
-        });
-
+    // window.innerWidth < 992
+    //   ? this.setState({
+    //       navbarExpand: false,
+    //     })
+    //   : this.setState({
+    //       navbarExpand: true,
+    //     });
     this.setState({
       isAdminPanelPage: window.location.pathname.includes("adminpanel"),
     });
@@ -47,6 +53,11 @@ class Navbar extends Component {
 
   componentWillUnmount() {
     document.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("resisze", this.updatePredicate);
+  }
+
+  updatePredicate() {
+    this.setState({ navbarExpand: window.innerWidth < 992 });
   }
 
   handleOpenMenu = () => {
@@ -96,6 +107,7 @@ class Navbar extends Component {
   };
 
   render() {
+    const navbarExpand = this.state.navbarExpand;
     return (
       <nav
         className={
@@ -108,61 +120,28 @@ class Navbar extends Component {
       >
         <div className="container-fluid">
           <a href="/" className="navbar-brand logo">
-            <img src={Logo} alt="Hotel Center" />
+            <Image src={Logo} alt="Hotel Center" height={48} />
             <span className="fw-bold logo-text-font">Hotel Center</span>
           </a>
 
-          <button
-            className="navbar-toggler nav-hamburger-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navMenu"
-          >
-            {/* <UseAnimations
-              reverse={this.state.openMenu}
-              onClick={this.handleOpenMenu}
-              size={40}
-              animation={menu3}
-              speed={3}
-              strokeColor="#cd9a2d"
-            /> */}
-          </button>
+          {navbarExpand && (
+            <button
+              className={NavbarCSS.hamburgerButton}
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navMenu"
+            >
+              <Hamburger size={20} distsnce="sm" />
+            </button>
+          )}
+
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="ms-auto pt-3 pt-sm-0">
               <ul className="navbar-nav">
-                {/* <li className="nav-item">
-                  <a
-                    className="nav-link nav-menu-style"
-                    aria-current="page"
-                    href="#"
-                  >
-                    Hotels
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Rooms
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Domain
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Pricing
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link nav-menu-style" href="#">
-                    Favorites
-                  </a>
-                </li> */}
                 {!this.state.is_loggedin ? (
                   <Fragment>
                     {/*  {this.state.navbarExpand ? <Fragment /> : <hr />} */}
-                    <hr />
+                    <hr style={{ margin: "1rem 0rem 0.5rem 0rem" }} />
                     <li className="nav-item">
                       <a href="http://localhost:3000/login">
                         <button
