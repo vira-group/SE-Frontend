@@ -2,53 +2,38 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import { useState } from "react";
-import axios from "axios";
-import references from "../../../assets/References.json";
-import { cookies, makeURL } from "../../../Utils/common";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import useHotelInfo from "./useHotelInfo";
 
 import Image from "next/image";
 
 export default function HotelCard(props) {
-  const [isFavorite, setIsFavorite] = useState(props.isFavorite);
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
+  const { hotel, isHotelFavorite, toggleIsHotelFavorite } = useHotelInfo(props);
 
   const handleClick = () => {
-    setIsFavorite(!isFavorite);
-    // request to backend
-    axios
-      .post(
-        makeURL(references.url_addfavoritehotel),
-        { hotel_id: props.id },
-        {
-          headers: {
-            Authorization: cookies.get("Authorization"),
-          },
-        }
-      )
-      .then((response) => {
-        console.log("adding favorite hotel: ", response.data);
+    toggleIsHotelFavorite()
+      .then(() => {
         setOpen(true);
         setMessage(
-          isFavorite === false
+          isHotelFavorite === false
             ? "Hotel was added to your favorites successfully!"
             : "Hotel was removed from your favorites successfully!"
         );
         setTimeout(() => window.location.reload(true), 1000);
       })
-      .catch((error) => {
-        console.log("failed to add favorite hotel: ", error);
+      .catch(() => {
         setOpen(true);
-        setMessage("An error occured.Please try again.");
+        setMessage("An error occured. Please try again.");
       });
   };
 
   const handleRedirect = () => {
-    window.location = "http://localhost:3000/" + "hotelpage/" + props.id;
+    window.location = "http://localhost:3000/" + "hotelpage/" + hotel.id;
   };
 
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -59,24 +44,22 @@ export default function HotelCard(props) {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
   return (
     <div class="col mt-5">
       <div class="card h-100">
-        {/* <img src={props.image} class="card-img-top" alt="..." /> */}
         <Image
-          src={props.image}
+          src={hotel.image}
           style={{ width: "100%" }}
           height={200}
           alt="..."
         />
         <div class="card-body">
           <h5 class="card-title">
-            <a className="link hotel-links" href={"/hotelpage/" + props.id}>
-              {props.name}
+            <a className="link hotel-links" href={"/hotelpage/" + hotel.id}>
+              {hotel.name}
             </a>
           </h5>
           <Box
@@ -88,9 +71,9 @@ export default function HotelCard(props) {
               marginLeft: "2px",
             }}
           >
-            <Rating name="read-only" value={props.rate} readOnly />
+            <Rating name="read-only" value={hotel.rate} readOnly />
           </Box>
-          <a href="">{props.address}</a>
+          <a href="">{hotel.address}</a>
           <p class="card-text">{props.description.slice(0, 250) + " ..."}</p>
         </div>
         <div className="card-footer">
@@ -103,7 +86,7 @@ export default function HotelCard(props) {
           </button>
 
           <button className="btn favorite-btn-style" onClick={handleClick}>
-            {isFavorite ? (
+            {isHotelFavorite ? (
               <FavoriteIcon className="favorite-icon-style" />
             ) : (
               <FavoriteBorderIcon />
