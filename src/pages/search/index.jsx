@@ -12,7 +12,7 @@ import { Box, CircularProgress } from "@mui/material";
 
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import Newhotelcard from "../../components/Homepage/layouts/Newhotelcard";
+import HotelCard from "src/components/Hotel/HotelCard";
 import pic from "../../../public/img/room7.jpg";
 
 import { result } from "lodash";
@@ -414,16 +414,7 @@ export default function search() {
           ) : result ? (
             <div className="row row-cols-1 row-cols-md-3 g-4">
               {searchResult.map((h) => (
-                <Newhotelcard
-                  address={h.hotel.address}
-                  description={h.hotel.description}
-                  image={pic}
-                  name={h.hotel.name}
-                  rate={h.hotel.rate || 4}
-                  reviews={h.hotel.reply_count || 2}
-                  id={h.hotel.id}
-                  isFavorite={true}
-                />
+                <HotelCard hotel={h.hotel} image={pic} />
               ))}
             </div>
           ) : (

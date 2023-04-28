@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { cookies, makeURL } from "../../../Utils/common";
+import { cookies, makeURL } from "src/Utils/common";
 import references from "../../assets/References.json";
 import axios from "axios";
 
-export default useHotelInfo = (initialData) => {
+export default function useHotelInfo(initialData) {
   const [hotel] = useState(initialData);
   const [isFavorite, setIsFavorite] = useState(false);
 
   async function toggleIsFavorite() {
-    axios
+    return axios
       .post(
         makeURL(references.url_addfavoritehotel),
         { hotel_id: hotel.id },
@@ -23,7 +23,7 @@ export default useHotelInfo = (initialData) => {
         return response;
       })
       .catch((error) => {
-        throw error.response;
+        throw error;
       });
   }
 
@@ -32,4 +32,4 @@ export default useHotelInfo = (initialData) => {
     isHotelFavorite: isFavorite,
     toggleIsHotelFavorite: toggleIsFavorite,
   };
-};
+}

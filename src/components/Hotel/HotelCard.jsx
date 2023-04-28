@@ -13,7 +13,9 @@ import Image from "next/image";
 export default function HotelCard(props) {
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
-  const { hotel, isHotelFavorite, toggleIsHotelFavorite } = useHotelInfo(props);
+  const { hotel, isHotelFavorite, toggleIsHotelFavorite } = useHotelInfo(
+    props.hotel
+  );
 
   const handleClick = () => {
     toggleIsHotelFavorite()
@@ -51,7 +53,7 @@ export default function HotelCard(props) {
     <div class="col mt-5">
       <div class="card h-100">
         <Image
-          src={hotel.image}
+          src={props.image}
           style={{ width: "100%" }}
           height={200}
           alt="..."
@@ -74,7 +76,7 @@ export default function HotelCard(props) {
             <Rating name="read-only" value={hotel.rate} readOnly />
           </Box>
           <a href="">{hotel.address}</a>
-          <p class="card-text">{props.description.slice(0, 250) + " ..."}</p>
+          <p class="card-text">{hotel.description.slice(0, 250) + " ..."}</p>
         </div>
         <div className="card-footer">
           <button
