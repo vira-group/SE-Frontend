@@ -73,7 +73,12 @@ export default function HotelCard(props) {
               marginLeft: "2px",
             }}
           >
-            <Rating name="read-only" value={hotel.rate} readOnly />
+            <Rating
+              name="read-only"
+              value={hotel.rate}
+              readOnly
+              precision={0.5}
+            />
           </Box>
           <a href="">{hotel.address}</a>
           <p class="card-text">{hotel.description.slice(0, 250) + " ..."}</p>
