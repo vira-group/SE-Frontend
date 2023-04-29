@@ -7,7 +7,15 @@ export default function Footer() {
       <Box
         fullWidth
         p={4}
-        sx={{ bottom: "0", gap: 16, display: "flex", justifyContent: "center" }}
+        sx={{
+          bottom: "0",
+          position: "absolute",
+          left: "0",
+          right: "0",
+          gap: 16,
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
         <Typography variant="body2">FAQ</Typography>
         <Typography variant="body2">Terms of Service</Typography>
