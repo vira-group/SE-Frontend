@@ -3,24 +3,26 @@ import Logo from "../../../../public/logo/logo2.png";
 // import UseAnimations from "react-useanimations";
 // import menu3 from "react-useanimations/lib/menu3";
 import { me, logout } from "../../../Utils/connection";
-import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
-import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import Image from "next/image";
 
-import { Divide as Hamburger } from "hamburger-react";
-import NavbarCSS from "./Navbar.module.scss";
+import Hamburger from "hamburger-react";
+import Link from "next/link";
+import { Box, useTheme } from "@mui/material";
+import { useRouter } from "next/router";
 
 function Navbar() {
+  const theme = useTheme();
+  const router = useRouter();
   const initialState = {
     openMenu: false,
     navbarMoved: false,
     is_loggedin: false,
-    anchorEl: null,
     open: Boolean(null),
     navbarExpand: false,
     isAdminPanelPage: false,
@@ -43,7 +45,7 @@ function Navbar() {
           ...state,
           navbarExpand: window.innerWidth < 992,
         };
-      case "menu/open":
+      case "menu/toggle":
         return {
           ...state,
           openMenu: !state.openMenu,
@@ -51,14 +53,12 @@ function Navbar() {
       case "navbar/open":
         return {
           ...state,
-          actionEl: action.target,
           open: true,
         };
       case "navbar/close":
         return {
           ...state,
-          actionEl: null,
-          open: false,
+          openMenu: false,
         };
       case "navbar/update_movement":
         return {
@@ -71,6 +71,15 @@ function Navbar() {
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const hamburgerButton = (
+    <Hamburger
+      onToggle={() => {
+        dispatch({ type: "menu/toggle" });
+      }}
+      color={theme.palette.primary.main}
+      size={24}
+    />
+  );
 
   function handleScroll() {
     var scrolled = document.scrollingElement.scrollTop;
@@ -97,12 +106,11 @@ function Navbar() {
   }, []);
 
   function handleLogout() {
-    logout();
-  }
-
-  function handleClick(event) {
-    let target = event.currentTarget;
-    dispatch({ type: "navbar/open", target: target });
+    logout().then((message) => {
+      if (message === true) {
+        router.push("/").then(handleClose);
+      }
+    });
   }
 
   function handleClose() {
@@ -110,8 +118,7 @@ function Navbar() {
   }
 
   function handleGotoProfile() {
-    console.log("profile profile profile profile");
-    window.location.href = "http://localhost:3000/profile";
+    router.push("/profile").then(handleClose);
   }
   return (
     <nav
@@ -119,95 +126,51 @@ function Navbar() {
         state.isAdminPanelPage
           ? "d-none"
           : state.navbarMoved
-          ? "navbar navbar-expand-lg navbar-light sticky-top nav-scrolled w-100 nav-style"
-          : "navbar navbar-expand-lg navbar-light sticky-top nav-top w-100 nav-style"
+          ? "navbar navbar-expand-md navbar-light sticky-top nav-scrolled w-100 nav-style"
+          : "navbar navbar-expand-md navbar-light sticky-top nav-top w-100 nav-style"
       }
     >
       <div className="container-fluid">
-        <a href="/" className="navbar-brand logo">
+        <Link href="/" className="navbar-brand logo">
           <Image src={Logo} alt="Hotel Center" height={48} />
           <span className="fw-bold logo-text-font">Hotel Center</span>
-        </a>
-
-        {state.navbarExpand && (
-          <button
-            className={NavbarCSS.hamburgerButton}
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navMenu"
-          >
-            <Hamburger size={20} distsnce="sm" />
-          </button>
-        )}
+        </Link>
 
         <div className="collapse navbar-collapse" id="navMenu">
           <div className="ms-auto pt-3 pt-sm-0">
             <ul className="navbar-nav">
               {!state.is_loggedin ? (
-                <Fragment>
-                  {/*  {this.state.navbarExpand ? <Fragment /> : <hr />} */}
-                  <hr style={{ margin: "1rem 0rem 0.5rem 0rem" }} />
-                  <li className="nav-item">
-                    <a href="http://localhost:3000/login">
-                      <button
-                        type="button"
-                        className="btn btn-outline-dark me-2 nav-button nav-menu-style"
-                      >
-                        Login
-                      </button>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="http://localhost:3000/sign-up">
-                      <button
-                        type="button"
-                        className="btn btn-outline-dark nav-button nav-menu-style"
-                      >
-                        Sign up
-                      </button>
-                    </a>
-                  </li>
-                </Fragment>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: "2",
+                  }}
+                >
+                  <Link href="/login">
+                    <Button variant="contained">Login</Button>
+                  </Link>
+                  <Link href="/sign-up">
+                    <Button variant="contained">Sign up</Button>
+                  </Link>
+                </Box>
               ) : (
                 <Fragment>
                   {state.navbarExpand ? (
-                    <li className="nav-item">
-                      <IconButton
-                        onClick={handleClick}
-                        size="small"
-                        aria-controls={state.open ? "account-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={state.open ? "true" : undefined}
-                      >
-                        <Avatar sx={{ width: 32, height: 32 }}>
-                          <PersonIcon />
-                        </Avatar>
-                      </IconButton>
-                    </li>
+                    hamburgerButton
                   ) : (
-                    <Fragment>
-                      <hr />
-                      <li className="nav-item">
-                        <button
-                          type="button"
-                          className="btn btn-outline-dark nav-button nav-menu-style"
-                          onClick={handleGotoProfile}
-                        >
-                          Profile
-                        </button>
-                      </li>
-                      <li className="nav-item">
-                        <button
-                          type="button"
-                          className="btn btn-outline-dark nav-button nav-menu-style"
-                          onClick={() => {
-                            handleLogout();
-                          }}
-                        >
-                          Logout
-                        </button>
-                      </li>
-                    </Fragment>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: "8",
+                      }}
+                    >
+                      <Link href="/profile">
+                        <Button variant="contained">Profile</Button>
+                      </Link>
+                      <Button variant="contained" onClick={handleLogout}>
+                        Logout
+                      </Button>
+                    </Box>
                   )}
                 </Fragment>
               )}
@@ -215,9 +178,9 @@ function Navbar() {
           </div>
         </div>
         <Menu
-          anchorEl={state.anchorEl}
+          anchorEl={hamburgerButton}
           id="account-menu"
-          open={state.open}
+          open={state.openMenu}
           onClose={handleClose}
           onClick={handleClose}
           PaperProps={{
@@ -247,8 +210,10 @@ function Navbar() {
             },
           }}
           transformOrigin={{ horizontal: "left", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+          disableEnforceFocus
         >
+          {/* <Link href="/profile"> */}
           <MenuItem
             style={{ width: "150px" }}
             onClick={() => {
@@ -260,6 +225,7 @@ function Navbar() {
             </ListItemIcon>
             Profile
           </MenuItem>
+          {/* </Link> */}
           <MenuItem
             onClick={() => {
               handleLogout();
