@@ -10,12 +10,12 @@ export const AccountActivation = async (uid1, token1) => {
       uid: uid1,
       token: token1,
     })
-    .then(() => {
-      // console.log(response);
+    .then((response) => {
+      console.log(response);
       message = true;
     })
-    .catch(() => {
-      // console.log(error);
+    .catch((error) => {
+      console.log(error);
       message = false;
     });
   return message;
