@@ -3,9 +3,23 @@ import Navbar from "./Homepage/layouts/Navbar";
 
 export default function Layout({ children }) {
   return (
-    <div className="App h-100">
+    <div
+      className="App"
+      style={{
+        display: "flex",
+        // height: "100%",
+        minHeight: "100vh",
+        flexDirection: "column",
+      }}
+    >
       <Navbar />
-      {children}
+      <div
+        style={{
+          flexGrow: "1",
+        }}
+      >
+        {children}
+      </div>
       <Footer />
     </div>
   );
