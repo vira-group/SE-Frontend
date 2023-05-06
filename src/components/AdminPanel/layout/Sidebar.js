@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Sidebar, Menu, MenuItem, ProSidebarProvider } from "react-pro-sidebar";
 import { logout } from "../../../Utils/connection";
-import Logo from "../../../statics/logo/logo2.png";
 import BubbleChartIcon from "@mui/icons-material/BubbleChart";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -10,11 +9,18 @@ import EditIcon from "@mui/icons-material/Edit";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import ChatIcon from "@mui/icons-material/Chat";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function MySidebar(props) {
-  const handleLogout = () => {
-    logout();
-  };
+  const router = useRouter();
+  function handleLogout() {
+    logout().then((response) => {
+      if (response == true) {
+        router.push("/");
+      }
+    });
+  }
 
   return (
     <ProSidebarProvider>
@@ -22,38 +28,43 @@ export default function MySidebar(props) {
         toggled={props.toggled}
         breakPoint="md"
         onToggle={props.handleToggleSidebar}
-        style={{ backgroundColor: "white !important" }}
+        style={{ padding: 16 }}
       >
         {/* <SidebarHeader> */}
-        <a href="/" className="navbar-brand logo">
-          <img src={Logo} alt="Hotel Center" />
+        <Link href="/" className="navbar-brand logo">
+          <Image
+            src={"/logo/logo2.png"}
+            width={48}
+            height={48}
+            alt="Hotel Center"
+          />
           <span className="fw-bold logo-text-font">Hotel Center</span>
-        </a>
+        </Link>
         {/* </SidebarHeader> */}
         {/* <SidebarContent> */}
         <Menu iconShape="circle">
           <MenuItem icon={<BubbleChartIcon />}>
-            <Link to={`/adminpanel/${props.id}/statistics`}>
+            <Link href={`/adminpanel/${props.id}/statistics`}>
               <p className="mb-0">Statistics</p>
             </Link>
           </MenuItem>
           <MenuItem icon={<KingBedIcon />}>
-            <Link to={`/adminpanel/${props.id}/roomsstatus`}>
+            <Link href={`/adminpanel/${props.id}/roomsstatus`}>
               <p className="mb-0">Rooms status</p>
             </Link>
           </MenuItem>
           <MenuItem icon={<DomainAddIcon />}>
-            <Link to={`/adminpanel/${props.id}/createrooom`}>
+            <Link href={`/adminpanel/${props.id}/createrooom`}>
               <p className="mb-0">Create room</p>
             </Link>
           </MenuItem>
           <MenuItem icon={<EditIcon />}>
-            <Link to={`/adminpanel/${props.id}/edithotel`}>
+            <Link href={`/adminpanel/${props.id}/edithotel`}>
               <p className="mb-0">Edit hotel</p>
             </Link>
           </MenuItem>
           <MenuItem icon={<ChatIcon />}>
-            <Link to={`/adminpanel/${props.id}/messages`}>
+            <Link href={`/adminpanel/${props.id}/messages`}>
               <p className="mb-0">Messages</p>
             </Link>
           </MenuItem>
@@ -76,7 +87,7 @@ export default function MySidebar(props) {
           }}
         >
           <CopyrightIcon />
-          Vira Team
+          Withoutname Team
         </div>
         {/* </SidebarFooter> */}
       </Sidebar>

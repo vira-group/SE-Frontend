@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import "./Styles/Comment.scss";
 import DeleteModal from "./DeleteModal";
 import CommentHeader from "./CommentHeader";
 import CommentFooter from "./CommentFooter";

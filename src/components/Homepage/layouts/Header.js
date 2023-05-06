@@ -84,7 +84,9 @@ function Header(props) {
           </div>
         </div>
       </div>
-      <div className="px-2 px-sm-0 d-flex justify-content-center"></div>
+      <div className="px-2 px-sm-0 d-flex justify-content-center">
+        <SearchForm />
+      </div>
     </div>
   );
 }

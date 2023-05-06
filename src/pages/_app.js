@@ -17,12 +17,13 @@ import "../css/Edithotel.css";
 import "../css/Edithotel.css";
 import "../css/Chat.css";
 import "../css/NewAndTopHotels.css";
+import { lightTheme } from "src/theme/theme";
 
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Script from "next/script";
 import Layout from "../components/layout";
-// import { NextScript } from "next/document";
+import { ThemeProvider } from "@mui/material";
 
 export default function MyApp({ Component, pageProps }) {
   const [render, setRender] = useState(false);
@@ -39,9 +40,11 @@ export default function MyApp({ Component, pageProps }) {
           crossorigin="anonymous"
         ></Script>
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider theme={lightTheme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </>
   ) : null;
 }

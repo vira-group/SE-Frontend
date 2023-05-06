@@ -12,8 +12,6 @@ import FitnessCenterRoundedIcon from "@mui/icons-material/FitnessCenterRounded";
 import RestaurantMenuRoundedIcon from "@mui/icons-material/RestaurantMenuRounded";
 import AlarmIcon from "@mui/icons-material/Alarm";
 import { useState, useEffect } from "react";
-import "../../../css/Hotelpage2.css";
-import "../../../css/Chat.css";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
@@ -28,7 +26,7 @@ import { GoldenTextField } from "../../../theme/GoldenTextField";
 import Popover from "@mui/material/Popover";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import Chatboxuser from "./Chatboxuser";
+// import Chatboxuser from "./Chatboxuser";
 
 const labels = {
   0.5: "Useless",
@@ -625,12 +623,13 @@ export default function Hotelpage() {
             >
               <div className="modal-body p-0">
                 {user ? (
-                  <Chatboxuser
-                    user={user}
-                    roomNumber={roomNumber}
-                    hotel={hotel}
-                  />
-                ) : null}
+                  <div>Placeholder Chatbox</div>
+                ) : // <Chatboxuser
+                //   user={user}
+                //   roomNumber={roomNumber}
+                //   hotel={hotel}
+                // />
+                null}
               </div>
             </div>
           </div>

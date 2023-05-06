@@ -775,9 +775,9 @@ class Reservation extends React.Component {
                     </label>
                     <br />
                     <lable
-                      className="col-12"
+                      className="col-12 form-check-label"
                       // eslint-disable-next-line react/jsx-no-duplicate-props
-                      className="form-check-label"
+                      // className=""
                       htmlFor="flexCheckDefault"
                     >
                       {" "}

@@ -1,5 +1,6 @@
 import React from "react";
-import SingleTopHotelCard from "./SingleTopHotelCard";
+// import SingleTopHotelCard from "./SingleTopHotelCard";
+import HotelCard from "src/components/Hotel/HotelCard";
 // import { useState, useEffect } from "react";
 // import axios from "axios";
 // import { cookies, makeURL } from "../../Utils/common";
@@ -47,17 +48,23 @@ export default function TopHotels(props) {
       <h3 className="mb-4 fw-bold">Offers</h3>
       <div className="row row-cols-1 row-cols-md-4 g-4">
         {props.hotels
-          ? props.hotels.map((hotel) => (
-              <SingleTopHotelCard
-                image={hotel.image}
-                name={hotel.name}
-                city={hotel.city}
-                country={hotel.country}
-                score={hotel.rate}
-                isFavorite={hotel.is_favorite}
-                id={hotel.id}
-              />
-            ))
+          ? props.hotels.map(
+              (hotel) => {
+                const { image, ...other } = hotel;
+                return <HotelCard hotel={other} image={image} />;
+              }
+              // (
+              //     // <SingleTopHotelCard
+              //     //   image={hotel.image}
+              //     //   name={hotel.name}
+              //     //   city={hotel.city}
+              //     //   country={hotel.country}
+              //     //   score={hotel.rate}
+              //     //   isFavorite={hotel.is_favorite}
+              //     //   id={hotel.id}
+              //     // />
+              //   )
+            )
           : null}
       </div>
     </div>

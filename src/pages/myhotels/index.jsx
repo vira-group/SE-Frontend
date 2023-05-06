@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import MyhotelsCard from "../../components/Profile/Myhotelscard";
 import Sidebar from "../../components/Profile/Sidebar";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Myhotels() {
   const [hotel, setHotel] = useState(null);
@@ -27,9 +28,6 @@ export default function Myhotels() {
       });
   }, []);
 
-  const handleClick = () => {
-    window.location.href = "http://localhost:3000/createHotel";
-  };
   // useEffect(() => {
   //   // console.log(cookies.get("Authorization"));
   //   axios
@@ -78,13 +76,14 @@ export default function Myhotels() {
               }}
             >
               <div className="container" style={{ textAlign: "center" }}>
-                <Image
-                  width={100}
-                  height={100}
-                  style={{ cursor: "pointer" }}
-                  src="/img/pics/add_files.svg"
-                  onClick={handleClick}
-                />
+                <Link href="/createHotel">
+                  <Image
+                    width={100}
+                    height={100}
+                    style={{ cursor: "pointer" }}
+                    src="/img/pics/add_files.svg"
+                  />
+                </Link>
               </div>
             </Box>
 
