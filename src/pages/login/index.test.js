@@ -3,6 +3,7 @@ import { Alert } from ".";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
 import { render, waitFor } from "@testing-library/react";
+import { act } from "react-test-renderer";
 
 describe("Login Page", () => {
   it("renders Login button", () => {
@@ -53,7 +54,9 @@ describe("Login Validation", () => {
       name: "Email Address",
     });
 
-    emailInput.focus();
+    act(() => {
+      emailInput.focus();
+    });
     await waitFor(() => {
       expect(emailInput).toHaveFocus();
     });
@@ -68,7 +71,9 @@ describe("Login Validation", () => {
       name: "Password",
     });
 
-    passwordInput.focus();
+    act(() => {
+      passwordInput.focus();
+    });
     await waitFor(() => {
       expect(passwordInput).toHaveFocus();
     });
@@ -82,13 +87,17 @@ describe("Login Validation", () => {
       name: "Email Address",
     });
 
-    emailInput.focus();
+    act(() => {
+      emailInput.focus();
+    });
     await waitFor(() => {
       expect(emailInput).toHaveFocus();
     });
-    emailInput.blur();
-    await waitFor(() => {
-      expect(emailInput).not.toHaveFocus();
+    await act(async () => {
+      emailInput.blur();
+      await waitFor(() => {
+        expect(emailInput).not.toHaveFocus();
+      });
     });
 
     expect(
@@ -103,12 +112,16 @@ describe("Login Validation", () => {
       name: "Email Address",
     });
 
-    emailInput.focus();
+    act(() => {
+      emailInput.focus();
+    });
     await waitFor(() => {
       expect(emailInput).toHaveFocus();
     });
     await user.type(emailInput, "invalid@email");
-    emailInput.blur();
+    act(() => {
+      emailInput.blur();
+    });
     await waitFor(() => {
       expect(emailInput).not.toHaveFocus();
     });
@@ -124,13 +137,17 @@ describe("Login Validation", () => {
       name: "Password",
     });
 
-    passwordInput.focus();
+    act(() => {
+      passwordInput.focus();
+    });
     await waitFor(() => {
       expect(passwordInput).toHaveFocus();
     });
-    passwordInput.blur();
-    await waitFor(() => {
-      expect(passwordInput).not.toHaveFocus();
+    await act(async () => {
+      passwordInput.blur();
+      await waitFor(() => {
+        expect(passwordInput).not.toHaveFocus();
+      });
     });
 
     expect(loginPage.queryByText("Please enter your password")).toBeTruthy();
@@ -142,11 +159,15 @@ describe("Login Validation", () => {
       name: "Email Address",
     });
 
-    emailInput.focus();
+    act(() => {
+      emailInput.focus();
+    });
     await waitFor(() => {
       expect(emailInput).toHaveFocus();
     });
-    emailInput.blur();
+    act(() => {
+      emailInput.blur();
+    });
     await waitFor(() => {
       expect(emailInput).not.toHaveFocus();
     });
@@ -166,11 +187,12 @@ describe("Login Validation", () => {
 
     await user.type(emailInput, "valid@email.address");
     await user.type(passwordInput, "password");
-    passwordInput.blur();
+    act(() => {
+      passwordInput.blur();
+    });
     await waitFor(() => {
       expect(passwordInput).not.toHaveFocus();
     });
-    loginPage.debug();
 
     expect(loginPage.queryByText("Please enter your email address")).toBeNull();
     expect(
