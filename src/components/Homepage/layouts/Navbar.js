@@ -146,7 +146,7 @@ function Navbar() {
                     gap: "2",
                   }}
                 >
-                  <Link href="/login">
+                  <Link href="/login" style={{ marginRight: 16 }}>
                     <Button variant="contained">Login</Button>
                   </Link>
                   <Link href="/sign-up">
@@ -164,7 +164,7 @@ function Navbar() {
                         gap: "8",
                       }}
                     >
-                      <Link href="/profile">
+                      <Link href="/profile" style={{ marginRight: 16 }}>
                         <Button variant="contained">Profile</Button>
                       </Link>
                       <Button variant="contained" onClick={handleLogout}>
