@@ -1,11 +1,10 @@
 import * as React from "react";
 import { TextField, Typography } from "@mui/material";
-import Logo from "../../../statics/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL } from "../../../Utils/common";
-import references from "../../../assets/References.json";
+import { cookies, makeURL } from "../../../../Utils/common";
+import references from "src/assets/References.json";
 import { Box, CircularProgress, Autocomplete } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -14,12 +13,13 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
-import PreviewMultipleImages from "./PreviewMultipleImages";
-import MySidebar from "../layout/Sidebar";
+import PreviewMultipleImages from "../../../../components/AdminPanel/Pages/PreviewMultipleImages";
+import MySidebar from "../../../../components/AdminPanel/layout/Sidebar";
 import EditIcon from "@mui/icons-material/Edit";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import PhoneInput from "react-phone-input-2";
+import Image from "next/image";
 
 const textfieldTheme = createTheme({
   palette: {
@@ -329,7 +329,12 @@ function Edithotel() {
           </div>
           <a href="/" className="navbar-brand logo d-md-none">
             <span className="fw-bold logo-text-font">Hotel Center</span>
-            <img src={Logo} alt="Hotel Center" />
+            <Image
+              src={"/logo/logo2.png"}
+              width={48}
+              height={48}
+              alt="Hotel Center"
+            />
           </a>
         </div>
         <div className="container py-5 px-lg-5">
