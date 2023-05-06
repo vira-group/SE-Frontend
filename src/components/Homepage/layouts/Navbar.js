@@ -15,6 +15,7 @@ import Hamburger from "hamburger-react";
 import Link from "next/link";
 import { Box, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
+import { cookies } from "src/Utils/common";
 
 function Navbar() {
   const theme = useTheme();
@@ -105,9 +106,17 @@ function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    dispatch({
+      type: "user/check_auth",
+      response: cookies.get("Authorization"),
+    });
+    dispatch({ type: "user/check_admin" });
+  }, [router]);
+
   function handleLogout() {
     logout().then((message) => {
-      dispatch({ type: "user/check_auth", response: !message });
+      // dispatch({ type: "user/check_auth", response: !message });
       if (message === true) {
         router.push("/").then(handleClose);
       }

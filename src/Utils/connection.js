@@ -138,9 +138,6 @@ export const logout = async () => {
       cookies.remove("Authorization");
       message = true;
     })
-    .then(() => {
-      message = true;
-    })
     .catch(() => {
       // console.log(error);
       message = false;

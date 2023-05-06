@@ -19,27 +19,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route exact path="/hotelcard" element={<Hotelcard />} /> */}
-          {/* <Route exact path="/profile" element={<Profile />} /> */}
-          {/* <Route
-            exact
-            path="/profile/IncreaseCredit"
-            component={IncreaseCredit}
-          /> */}
-          {/* <Route exact path="/profile/favorites" element={<Favorites />} /> */}
-          {/* <Route exact path="/myhotels" element={<Myhotels />} /> */}
-          {/* <Route
-            exact
-            path="/profile/reservedrooms"
-            component={ReservedRooms}
-          /> */}
           {/* <Route exact path="/hotelpage/:handle" element={<hotelPage />} /> */}
           <Route exact path="/" element={<Homepage />} />
           {/* <Route exact path="/feedback" element={<Feedback />} /> */}
-          {/* <Route
-            exact
-            path="/auth/activate/:handle/:handle1"
-            element={<account_activation />}
-          /> */}
           {/* <Route
             exact
             path="/reserve/:getin/:getout/:person/:price_per_day/:name/:city/:id"
