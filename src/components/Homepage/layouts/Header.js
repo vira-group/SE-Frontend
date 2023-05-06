@@ -106,7 +106,7 @@ function Header(props) {
         </div>
       </div>
       <div className="px-2 px-sm-0 d-flex justify-content-center">
-        <SearchForm setHotels={props.setHotels} />
+        <SearchForm />
       </div>
     </div>
   );
