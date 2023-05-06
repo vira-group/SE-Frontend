@@ -1,7 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Homepage from "../components/Homepage/Homepage";
-// import Hotelcard from "../components/Homepage/layouts/Newhotelcard";
-// import Edithotel from "../components/AdminPanel/Pages/Edithotel";
 // import ReservedRooms from "../components/Profile/ReservedRooms";
 // import Feedback from "../components/Comment/Feedback";
 // import Messages from "../components/AdminPanel/Pages/Messages";
@@ -13,18 +11,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route exact path="/hotelcard" element={<Hotelcard />} /> */}
-          {/* <Route exact path="/hotelpage/:handle" element={<hotelPage />} /> */}
           <Route exact path="/" element={<Homepage />} />
           {/* <Route exact path="/feedback" element={<Feedback />} /> */}
           {/* <Route
             exact
             path="/reserve/:getin/:getout/:person/:price_per_day/:name/:city/:id"
             element={<reservation />}
-          /> */}
-          {/* <Route
-            exact
-            path="/adminpanel/:id/edithotel"
-            element={<Edithotel />}
           /> */}
           {/* <Route exact path="/adminpanel/:id/messages" element={<Messages />} /> */}
         </Routes>
