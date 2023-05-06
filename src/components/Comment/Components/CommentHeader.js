@@ -1,6 +1,6 @@
 import CommentBtn from "./CommentBtn";
-import "../../../css/Hotelpage2.css";
-import im from "../../../statics/img/pics/avatar.jpg";
+// import "../../../css/Hotelpage2.css";
+import Image from "next/image";
 // import image1 from "../../statics/img/pics/avatar.jpg";
 
 const CommentHeader = ({
@@ -22,7 +22,12 @@ const CommentHeader = ({
       {avatar !== null ? (
         <img className={`profile-pic`} src={avatar}></img>
       ) : (
-        <img className={`profile-pic`} src={im}></img>
+        <Image
+          className={`profile-pic`}
+          src={"/img/pics/avatar.jpg"}
+          width={30}
+          height={30}
+        ></Image>
       )}
       <div className="username">{first} </div>
 

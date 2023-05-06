@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import "./Styles/DeleteModal.scss";
+// import "./Styles/DeleteModal.scss";
 import axios from "axios";
 import { cookies, makeURL } from "../../../Utils/common";
 import React from "react";

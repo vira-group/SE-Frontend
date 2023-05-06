@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import MySidebar from "../layout/Sidebar";
-import Logo from "../../../statics/logo/logo2.png";
+import MySidebar from "../../../../components/AdminPanel/layout/Sidebar";
 import MenuIcon from "@mui/icons-material/Menu";
-import Widget from "../layout/Widget";
-import Chart from "../layout/Chart";
+import Widget from "../../../../components/AdminPanel/layout/Widget";
+import Chart from "../../../../components/AdminPanel/layout/Chart";
 import BubbleChartIcon from "@mui/icons-material/BubbleChart";
 import BoyIcon from "@mui/icons-material/Boy";
 import EscalatorWarningIcon from "@mui/icons-material/EscalatorWarning";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import HomeIcon from "@mui/icons-material/Home";
 import axios from "axios";
-import { makeURL, cookies } from "../../../Utils/common";
-import references from "../../../assets/References.json";
+import { makeURL, cookies } from "../../../../Utils/common";
+import references from "src/assets/References.json";
+import Image from "next/image";
 
 //name: month name   //Total: total income for that month
 const incomeData = [
@@ -85,7 +85,12 @@ export default function Statistics() {
           </div>
           <a href="/" className="navbar-brand logo d-md-none">
             <span className="fw-bold logo-text-font">Hotel Center</span>
-            <img src={Logo} alt="Hotel Center" />
+            <Image
+              src={"/logo/logo2.png"}
+              width={48}
+              height={48}
+              alt="Hotel Center"
+            />
           </a>
         </div>
         <div className="container py-5 px-lg-5">

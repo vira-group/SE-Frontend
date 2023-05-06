@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MySidebar from "../layout/Sidebar";
-import Logo from "../../../statics/logo/logo2.png";
+import MySidebar from "../../../../components/AdminPanel/layout/Sidebar";
 import MenuIcon from "@mui/icons-material/Menu";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import Table from "@mui/material/Table";
@@ -15,12 +14,13 @@ import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { GoldenTextField } from "../../../theme/GoldenTextField";
+import { GoldenTextField } from "../../../../theme/GoldenTextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import { makeURL, cookies } from "../../../Utils/common";
-import references from "../../../assets/References.json";
+import { makeURL, cookies } from "../../../../Utils/common";
+import references from "src/assets/References.json";
+import Image from "next/image";
 
 function createData(roomNumber, roomType, roomStatus, roomDescription) {
   return {
@@ -195,7 +195,12 @@ export default function RoomsStatus() {
           </div>
           <a href="/" className="navbar-brand logo d-md-none">
             <span className="fw-bold logo-text-font">Hotel Center</span>
-            <img src={Logo} alt="Hotel Center" />
+            <Image
+              src={"/logo/logo2.png"}
+              width={48}
+              height={48}
+              alt="Hotel Center"
+            />
           </a>
         </div>
         <div className="container py-5 px-lg-5">

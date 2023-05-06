@@ -2,6 +2,7 @@ import Image from "next/image";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import RoomServiceIcon from "@mui/icons-material/RoomService";
 import PaidIcon from "@mui/icons-material/Paid";
+import Link from "next/link";
 
 export default function CreateHotel() {
   return (
@@ -81,11 +82,11 @@ export default function CreateHotel() {
       <div className="row align-items-center">
         <div className="col" />
         <div className="col-12 col-sm-10 col-lg-5">
-          <a href="/CreateHotel/steps">
+          <Link href="/createHotel/steps/1">
             <button type="button" class="w-100 btn btn-lg btn-dark">
               Create your hotel now!{" "}
             </button>
-          </a>
+          </Link>
         </div>
         <div className="col" />
         <br />

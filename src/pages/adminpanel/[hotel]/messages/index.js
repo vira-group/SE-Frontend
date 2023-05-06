@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
-import MySidebar from "../layout/Sidebar";
-import Logo from "../../../statics/logo/logo2.png";
+import MySidebar from "../../../../components/AdminPanel/layout/Sidebar";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChatIcon from "@mui/icons-material/Chat";
-import ChatBox from "../layout/ChatBox";
+// import ChatBox from "../../../../components/AdminPanel/layout/ChatBox";
 import axios from "axios";
-import { cookies, makeURL } from "../../../Utils/common";
-import references from "../../../assets/References.json";
+import { cookies, makeURL } from "../../../../Utils/common";
+import references from "src/assets/References.json";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Messages() {
   const [toggled, setToggled] = useState(false);
   const [hotelId, setHotelId] = useState(null);
   const [chatroomlist, setChatroomlist] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    setHotelId(parseInt(window.location.pathname.split("/")[2], 10));
-    let hotelid = window.location.pathname.split("/")[2];
+    let hotelid = router.query.hotel;
+    setHotelId(parseInt(hotelid, 10));
     let tmpCookie = cookies.get("Authorization");
 
     axios
@@ -31,7 +33,7 @@ export default function Messages() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [router]);
 
   const handleToggleSidebar = (value) => {
     setToggled(value);
@@ -47,7 +49,12 @@ export default function Messages() {
       <div className="w-100 admin-content">
         <div className="adminpanel-header-mobile">
           <a href="/" className="navbar-brand logo d-md-none">
-            <img src={Logo} alt="Hotel Center" />
+            <Image
+              src={"/logo/logo2.png"}
+              width={48}
+              height={48}
+              alt="Hotel Center"
+            />
             <span className="fw-bold logo-text-font">Hotel Center</span>
           </a>
           <div
@@ -64,7 +71,8 @@ export default function Messages() {
           </h2>
           <div className="chatbox">
             {chatroomlist ? (
-              <ChatBox chatRoomsList={chatroomlist} />
+              // <ChatBox chatRoomsList={chatroomlist} />
+              <div>Chatbox Placeholder</div>
             ) : (
               "loading..."
             )}
