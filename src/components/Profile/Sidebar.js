@@ -15,7 +15,7 @@ export default function Sidebar() {
           href="/profile"
           class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2"
         >
-          <ModeEditOutlinedIcon className="icon-style" />
+          <ModeEditOutlinedIcon color="primary" />
           <p className="mb-0">Edit Profile</p>
         </Link>
 
@@ -24,7 +24,7 @@ export default function Sidebar() {
           href="/myhotels"
           class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2"
         >
-          <BedIcon className="icon-style" />
+          <BedIcon color="primary" />
           <p className="mb-0">My Hotels</p>
         </Link>
 
@@ -38,7 +38,7 @@ export default function Sidebar() {
           href="/profile/favorites"
           class="nav-link link-dark sidebar-items d-lg-flex mb-lg-2"
         >
-          <FavoriteBorderIcon className="icon-style" />
+          <FavoriteBorderIcon color="primary" />
           <p className="mb-0">Favorites</p>
         </Link>
         <hr className="mb-2" />
@@ -47,7 +47,7 @@ export default function Sidebar() {
           href="/profile/IncreaseCredit"
           class="nav-link link-dark sidebar-items d-lg-flex"
         >
-          <AddCardIcon className="icon-style" />
+          <AddCardIcon color="primary" />
           <p className="mb-0">Wallet</p>
         </Link>
 
@@ -57,7 +57,7 @@ export default function Sidebar() {
           href="/profile/reservedrooms"
           class="nav-link link-dark sidebar-items d-lg-flex"
         >
-          <BookmarkBorderIcon className="icon-style" />
+          <BookmarkBorderIcon color="primary" />
           <p className="mb-0">Reservations</p>
         </Link>
       </div>
