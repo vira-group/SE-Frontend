@@ -18,7 +18,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import Image from "next/image";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
+export const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -105,9 +105,9 @@ export default function Login() {
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                role="password"
                 id="password"
-                autoComplete="new-password"
+                autoComplete="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
               />
