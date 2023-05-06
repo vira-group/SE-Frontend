@@ -111,29 +111,29 @@ function Profile() {
   };
 
   useEffect(() => {
-    // axios
-    //   .get(makeURL(references.url_edit_profile), {
-    //     headers: {
-    //       Authorization: cookies.get("Authorization"),
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log("response of profile: ", res.data);
-    //     setState(res.data);
-    //     formik.setValues({
-    //       firstname: res.data.firstName || "",
-    //       lastname: res.data.lastName || "",
-    //       nationalcode: res.data.national_code || "",
-    //       email: res.data.email || "",
-    //       phone: res.data.phone_number || "",
-    //       aboutme: res.data.description || "",
-    //       telephone: "",
-    //       balance: res.data.balance || 0,
-    //     });
-    //     setSelectedImage(res.data.avatar);
-    //     setBirthdate(res.data.birthday || "");
-    //     setGenValue(res.data.gender || "");
-    //   });
+    axios
+      .get(makeURL(references.url_edit_profile), {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+      })
+      .then((res) => {
+        console.log("response of profile: ", res.data);
+        setState(res.data);
+        formik.setValues({
+          firstname: res.data.firstName || "",
+          lastname: res.data.lastName || "",
+          nationalcode: res.data.national_code || "",
+          email: res.data.email || "",
+          phone: res.data.phone_number || "",
+          aboutme: res.data.description || "",
+          // telephone: res.data.phone_number || "",
+          // balance: res.data.balance || 0,
+        });
+        // setSelectedImage(res.data.avatar);
+        // setBirthdate(res.data.birthday || "");
+        // setGenValue(res.data.gender || "");
+      });
   }, []);
 
   const handleClick = () => {
@@ -580,7 +580,7 @@ function Profile() {
                     htmlFor="exampleFormControlInput5"
                     className="ms-2 mt-1 form-label"
                   >
-                    Balance
+                    Phone Number
                   </label>
                 </div>
                 <div className="col-lg-8">
@@ -588,12 +588,12 @@ function Profile() {
                     <TextField
                       fullWidth
                       placeholder="02632552012"
-                      id="balance"
+                      id="phone"
                       size="small"
-                      label="Balance"
+                      label="Phone Number"
                       InputLabelProps={{ shrink: true }}
                       InputProps={{ readOnly: true }}
-                      value={formik.values.balance}
+                      value={formik.values.phone}
                     />
                   </ThemeProvider>
                 </div>
