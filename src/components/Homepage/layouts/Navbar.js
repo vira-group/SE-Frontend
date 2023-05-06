@@ -107,6 +107,7 @@ function Navbar() {
 
   function handleLogout() {
     logout().then((message) => {
+      dispatch({ type: "user/check_auth", response: !message });
       if (message === true) {
         router.push("/").then(handleClose);
       }
