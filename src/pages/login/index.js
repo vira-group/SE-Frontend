@@ -17,6 +17,7 @@ import { set_cookie } from "../../Utils/common";
 import { useFormik } from "formik";
 import { useState } from "react";
 import Image from "next/image";
+import * as yup from "yup";
 
 export const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -27,6 +28,7 @@ export default function Login() {
   const [popupMessage, setPopupMessage] = useState("");
 
   function handleSubmit(values) {
+    console.table(values);
     if (cookies.get("Authorization") != undefined) {
       setPopupMessage("Already logged in");
       setPopupIsOpen(true);
@@ -58,6 +60,13 @@ export default function Login() {
       password: "",
     },
     onSubmit: handleSubmit,
+    validationSchema: yup.object({
+      email: yup
+        .string()
+        .required("Please enter your email address")
+        .email("Please enter a valid email address"),
+      password: yup.string().required("Please enter your password"),
+    }),
   });
 
   return (
@@ -96,6 +105,11 @@ export default function Login() {
                 autoComplete="email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.email && formik.errors.email}
+                helperText={
+                  (formik.touched.email && formik.errors.email) || " "
+                }
               />
             </Grid>
 
@@ -109,7 +123,12 @@ export default function Login() {
                 id="password"
                 autoComplete="password"
                 value={formik.values.password}
+                onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
+                error={formik.touched.password && formik.errors.password}
+                helperText={
+                  (formik.touched.password && formik.errors.password) || " "
+                }
               />
             </Grid>
 
@@ -123,7 +142,7 @@ export default function Login() {
             type="submit"
             fullWidth
             variant="contained"
-            onClick={formik.handleSubmit}
+            // onClick={formik.handleSubmit}
             style={{
               mt: 2,
               mb: 2,
