@@ -4,8 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
 import ReconnectingWebSocket from "../../Homepage/layouts/reconnecting-websocket";
-import DefaultImage from "../../../statics/img/pics/avatar.jpg";
-import references from "../../../assets/References.json";
+// import references from "../../../assets/References.json";
+import Image from "next/image";
 
 export default function ChatBox(props) {
   const [selectedChat, setSelectedChat] = useState(null);
@@ -26,6 +26,9 @@ export default function ChatBox(props) {
     setTimeout(() => {
       var roomName = chatRoom.roomname;
       var id = chatRoom.user.id;
+      if (window === undefined) {
+        return;
+      }
       // var chatSocket = null;
       var chatSocket = new ReconnectingWebSocket(
         "ws://" + "localhost:8000" + "/ws/chat/" + roomName + "/"
@@ -236,13 +239,11 @@ export default function ChatBox(props) {
                       onClick={() => handleOpenChat(chatroom.roomname)}
                     >
                       <div className="d-flex align-items-center">
-                        <img
+                        <Image
                           alt="avatar"
-                          src={
-                            chatroom.user.avatar
-                              ? references.base_address + chatroom.user.avatar
-                              : DefaultImage
-                          }
+                          src={"img/pics/avatar.jpg"}
+                          width={50}
+                          height={50}
                           className="avatar"
                         />
                         <span className="name">
@@ -269,13 +270,11 @@ export default function ChatBox(props) {
             <Fragment>
               <div className="chat-header">
                 <div>
-                  <img
+                  <Image
                     alt="avatar"
-                    src={
-                      selectedChat.user.avatar
-                        ? references.base_address + selectedChat.user.avatar
-                        : DefaultImage
-                    }
+                    src={"img/pics/avatar.jpg"}
+                    width={50}
+                    height={50}
                     className="avatar"
                   />
                   <span className="name">
@@ -326,13 +325,11 @@ export default function ChatBox(props) {
                       onClick={() => handleOpenChat(chatroom.roomname)}
                     >
                       <div className="d-flex align-items-center">
-                        <img
+                        <Image
                           alt="avatar"
-                          src={
-                            chatroom.user.avatar
-                              ? references.base_address + chatroom.user.avatar
-                              : DefaultImage
-                          }
+                          src={"img/pics/avatar.jpg"}
+                          width={50}
+                          height={50}
                           className="avatar"
                         />
                         <span className="name">
@@ -359,13 +356,11 @@ export default function ChatBox(props) {
               <Fragment>
                 <div className="chat-header">
                   <div>
-                    <img
+                    <Image
                       alt="avatar"
-                      src={
-                        selectedChat.user.avatar
-                          ? references.base_address + selectedChat.user.avatar
-                          : DefaultImage
-                      }
+                      src={"img/pics/avatar.jpg"}
+                      width={50}
+                      height={50}
                       className="avatar"
                     />
                     <span className="name">
