@@ -15,7 +15,7 @@ import IncreaseCredit from "../src/components/Profile/IncreaseCredit";
 import Favorites from "../src/components/Profile/Favorites";
 import RoomStatus from "./pages/adminpanel/[hotel]/roomsstatus";
 import Createroom from "../src/components/AdminPanel/Pages/Createroom";
-import Edithotel from "./pages/adminpanel/[hotel]/edithotel/Edithotel";
+import Edithotel from "./pages/adminpanel/[hotel]/edithotel";
 import CreateHotel from "./components/CreateHotel/HotelInfo4";
 // import Reservation from '../src/components/Reservation/reservation';
 

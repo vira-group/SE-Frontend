@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./Styles/AddComment.scss";
 import Rating from "@mui/material/Rating";
 
 const AddComment = ({ buttonValue, addComments }) => {
