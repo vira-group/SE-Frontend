@@ -15,6 +15,7 @@ import cities from "../../../assets/WorldCities.json";
 import SearchFormCSS from "./SearchForm.module.scss";
 import { MobileDatePicker } from "@mui/x-date-pickers";
 import { useRouter } from "next/navigation";
+import Button from "@mui/material/Button";
 
 const datePickerTheme = createTheme({
   palette: {
@@ -95,6 +96,13 @@ function SearchForm(props) {
 
   const open = Boolean(anchor);
   const id = open ? "popover" : undefined;
+
+  let buttonState;
+  if (!destination || !checkinDate || !checkoutDate) {
+    buttonState = "outlined";
+  } else {
+    buttonState = "contained";
+  }
 
   return (
     <div
@@ -228,14 +236,17 @@ function SearchForm(props) {
           numberOfAdults + " Adults" + " - " + numberOfChildren + " Children"
         }
       />
-      <button
-        type="button"
+      <Button
+        id="searchButton"
+        variant={buttonState}
+        disabled={buttonState == "contained" ? false : true}
+        // type="button"
         className={[SearchFormCSS.searchButton].join(" ")}
         style={{}}
         onClick={handleSearch}
       >
         <span>Search</span>
-      </button>
+      </Button>
       <Popover
         id={id}
         open={open}
