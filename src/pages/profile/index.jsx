@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 
 import * as React from "react";
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { cookies, makeURL } from "../../Utils/common";
@@ -272,13 +272,13 @@ function Profile() {
                     setSelectedImage(event.target.files[0]);
                   }}
                 />
-                <button className="btn edit-hotel" onClick={handleUploadClick}>
+                <Button variant="contained" onClick={handleUploadClick}>
                   {loading ? (
                     <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
                   ) : (
                     "Upload"
                   )}
-                </button>
+                </Button>
                 <Snackbar
                   open={open1}
                   autoHideDuration={4000}
@@ -428,31 +428,29 @@ function Profile() {
                   </label>
                 </div>
                 <div className="col-lg-9">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <RadioGroup
-                      row
-                      aria-label="level"
-                      name="row-radio-buttons-group"
-                      value={genValue}
-                      onChange={genhandleChange}
-                    >
-                      <FormControlLabel
-                        value="Male"
-                        control={<Radio />}
-                        label="Male"
-                      />
-                      <FormControlLabel
-                        value="Female"
-                        control={<Radio />}
-                        label="Female"
-                      />
-                      <FormControlLabel
-                        value="Other"
-                        control={<Radio />}
-                        label="Other"
-                      />
-                    </RadioGroup>
-                  </ThemeProvider>
+                  <RadioGroup
+                    row
+                    aria-label="level"
+                    name="row-radio-buttons-group"
+                    value={genValue}
+                    onChange={genhandleChange}
+                  >
+                    <FormControlLabel
+                      value="Male"
+                      control={<Radio />}
+                      label="Male"
+                    />
+                    <FormControlLabel
+                      value="Female"
+                      control={<Radio />}
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="Other"
+                      control={<Radio />}
+                      label="Other"
+                    />
+                  </RadioGroup>
                 </div>
               </div>
             </div>
@@ -504,22 +502,21 @@ function Profile() {
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <PhoneInput
-                      country={"us"}
-                      size="large"
-                      id="phone"
-                      label="Phone number"
-                      name="phone"
-                      fullWidth
-                      required
-                      value={phone2}
-                      onChange={(val) => {
-                        setphone2(val);
-                        console.log("pho", val);
-                      }}
-                    />
-                    {/* // <TextField
+                  <PhoneInput
+                    country={"us"}
+                    size="large"
+                    id="phone"
+                    label="Phone number"
+                    name="phone"
+                    fullWidth
+                    required
+                    value={phone2}
+                    onChange={(val) => {
+                      setphone2(val);
+                      console.log("pho", val);
+                    }}
+                  />
+                  {/* // <TextField
                     //   required
                     //   fullWidth
                     //   placeholder="09912141869"
@@ -535,7 +532,6 @@ function Profile() {
                     //   }
                     //   helperText={formik.touched.phone && formik.errors.phone}
                     // />  */}
-                  </ThemeProvider>
                 </div>
               </div>
             </div>
@@ -643,13 +639,13 @@ function Profile() {
               <div className="col-4"></div>
               <div className="col-4"></div>
               <div className="col-4 edit-profile">
-                <button className="btn edit-hotel" onClick={handleClick}>
+                <Button variant="contained" onClick={handleClick}>
                   {loading ? (
                     <CircularProgress style={{ color: "#fff" }} size="1.5rem" />
                   ) : (
                     "Edit Profile"
                   )}
-                </button>
+                </Button>
               </div>
             </div>
             <Snackbar
