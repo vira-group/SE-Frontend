@@ -1,12 +1,11 @@
 import * as React from "react";
 // eslint-disable-next-line unused-imports/no-unused-imports, no-unused-vars
 import { TextField, Typography } from "@mui/material";
-import Logo from "../../../../public/logo/logo2.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import axios from "axios";
-import { cookies, makeURL } from "../../../Utils/common";
-import references from "../../../assets/References.json";
+import { cookies, makeURL } from "../../../../Utils/common";
+import references from "src/assets/References.json";
 import { CircularProgress, Autocomplete } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -19,10 +18,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // eslint-disable-next-line unused-imports/no-unused-imports, no-unused-vars
-import PreviewMultipleImages from "../../../components/AdminPanel/Pages/PreviewMultipleImages";
+import PreviewMultipleImages from "../../../../components/AdminPanel/Pages/PreviewMultipleImages";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { useRouter } from "next/router";
 
 const textfieldTheme = createTheme({
   palette: {
@@ -113,6 +113,7 @@ function Createroom() {
   const t2 = "doubleRoom";
   const t3 = "tripleRoom";
   const t4 = "suiteRoom";
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -154,7 +155,7 @@ function Createroom() {
   };
 
   const handleClick = () => {
-    let hotelid = window.location.pathname.split("/")[3];
+    let hotelid = router.query.hotel;
     let option = "";
     includebreakfast === "Yes" ? (option = "Breakfast") : (option = "");
     let filled =
@@ -293,7 +294,12 @@ function Createroom() {
                       <span className="fw-bold logo-text-font">
                         Hotel Center
                       </span>
-                      <img src={Logo} alt="Hotel Center" />
+                      <img
+                        src={"/logo/logo2.png"}
+                        width={48}
+                        height={48}
+                        alt="Hotel Center"
+                      />
                     </a>
                   </div>
                   <div className="container py-5 px-lg-5">
