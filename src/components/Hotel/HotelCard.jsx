@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import { useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -83,14 +83,10 @@ export default function HotelCard(props) {
           <a href="">{hotel.address}</a>
           <p class="card-text">{hotel.description.slice(0, 250) + " ..."}</p>
         </div>
-        <div className="card-footer">
-          <button
-            type="button"
-            className="btn btn-primary view-hotel-button"
-            onClick={handleRedirect}
-          >
+        <div className="card-footer p-3">
+          <Button variant="contained" onClick={handleRedirect}>
             View details
-          </button>
+          </Button>
 
           <button className="btn favorite-btn-style" onClick={handleClick}>
             {isHotelFavorite ? (
