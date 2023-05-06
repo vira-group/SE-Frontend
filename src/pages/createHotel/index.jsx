@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import pic from "../../statics/img/Hotel_Booking.gif";
+import Image from "next/image";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import RoomServiceIcon from "@mui/icons-material/RoomService";
 import PaidIcon from "@mui/icons-material/Paid";
@@ -14,14 +14,8 @@ class CreateHotel extends Component {
       <div class=" bg-white">
         <div className="container ">
           <div className="row align-items-center ">
-            {/* <div class="p-3  rounded ms-3" > */}
             <div className="col-md-5 mb-md-0 mb-5 pb-md-0 pb-3 d-md-none">
-              <img
-                className="w-100 mx-md-0 mx-auto w3-animate-zoom"
-                src={pic}
-                style={{ borderRadius: "10%" }}
-                alt="Illustration"
-              />
+              <Image src="/img/Hotel_Booking.png" width={400} height={300} />
             </div>
             <div className="col-lg-6 offset-lg-1 col-md-7 text-md-start text-center">
               <div className="mx-md-0 mx-auto">
@@ -78,12 +72,7 @@ class CreateHotel extends Component {
               </div>
             </div>
             <div className="d-none d-md-block col-md-5 mb-md-0 mb-5 pb-md-0 pb-3">
-              <img
-                className="w-100 mx-md-0 mx-auto w3-animate-zoom"
-                src={pic}
-                style={{ borderRadius: "10%" }}
-                alt="Illustration"
-              />
+              <Image src="/img/Hotel_booking.png" width={400} height={300} />
             </div>
           </div>
           <div className="row">
@@ -93,7 +82,7 @@ class CreateHotel extends Component {
           <div className="row align-items-center">
             <div className="col" />
             <div className="col-12 col-sm-10 col-lg-5">
-              <a href="/CreateHotel/steps">
+              <a href="/createHotel/steps/1">
                 <button type="button" class="w-100 btn btn-lg btn-dark">
                   Create your hotel now!{" "}
                 </button>
