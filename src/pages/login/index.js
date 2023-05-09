@@ -1,27 +1,16 @@
-/* eslint-disable react/no-unescaped-entities */
-import * as React from "react";
-import Link from "next/link";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
+import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-import references from "../../assets/References.json";
-import { cookies, makeURL } from "../../Utils/common";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { set_cookie } from "../../Utils/common";
-import { useFormik } from "formik";
-import { useState } from "react";
 import Image from "next/image";
-import * as yup from "yup";
-
-export const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import * as React from "react";
+import { useState } from "react";
+import { cookies, makeURL, set_cookie } from "src/Utils/common";
+import references from "src/assets/References.json";
+import LoginForm from "src/components/authentication/LoginForm";
 
 export default function Login() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
@@ -54,21 +43,6 @@ export default function Login() {
     }
   }
 
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: handleSubmit,
-    validationSchema: yup.object({
-      email: yup
-        .string()
-        .required("Please enter your email address")
-        .email("Please enter a valid email address"),
-      password: yup.string().required("Please enter your password"),
-    }),
-  });
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -80,88 +54,14 @@ export default function Login() {
           alignItems: "center",
         }}
       >
-        <Image src="/img/icon.png" width={40} height={40} />
+        <Image src="/img/icon.png" width={40} height={40} alt="Login Icon" />
 
         <Typography component="h1" variant="h5">
           Login
         </Typography>
 
-        <Image src="/img/s4.png" width={300} height={300} />
-
-        <Box
-          component="form"
-          noValidate
-          onSubmit={formik.handleSubmit}
-          sx={{ mt: 1 }}
-        >
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.email && formik.errors.email}
-                helperText={
-                  (formik.touched.email && formik.errors.email) || " "
-                }
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                role="password"
-                id="password"
-                autoComplete="password"
-                value={formik.values.password}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                error={formik.touched.password && formik.errors.password}
-                helperText={
-                  (formik.touched.password && formik.errors.password) || " "
-                }
-              />
-            </Grid>
-
-            {/* <div>
-                <h5 styles={{ color: "red", fontSize: "14.5px" }}>
-                  {formik.errors.email}
-                </h5>
-              </div> */}
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            // onClick={formik.handleSubmit}
-            style={{
-              mt: 2,
-              mb: 2,
-              marginTop: "20px",
-              height: "43px",
-              marginBottom: "10px",
-            }}
-          >
-            Login
-          </Button>
-
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link href="/sign-up" className="lnk_Login">
-                Don't have an account yet? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
+        <Image src="/img/s4.png" width={300} height={300} alt="Login Image" />
+        <LoginForm handleSubmit={handleSubmit} />
       </Box>
       <Snackbar
         open={popupIsOpen}
@@ -170,17 +70,16 @@ export default function Login() {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert
-          onClose={() => setPopupIsOpen(false)}
+          variant="filled"
           severity={
             popupMessage === ("wrong email or password" || "Already logged in")
               ? "error"
               : "success"
           }
-          sx={{ width: "100%" }}
         >
-          {popupMessage}
+          <Typography variant="body1">{popupMessage}</Typography>
         </Alert>
-      </Snackbar>{" "}
+      </Snackbar>
     </Container>
   );
 }
