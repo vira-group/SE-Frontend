@@ -4,17 +4,17 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
 import Image from "next/image";
-import * as React from "react";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { cookies, makeURL, set_cookie } from "src/Utils/common";
-import references from "src/assets/References.json";
+import { cookies, set_cookie } from "src/Utils/common";
 import LoginForm from "src/components/authentication/LoginForm";
+import login from "src/services/auth/login";
 
 export default function Login() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const router = useRouter();
 
   function handleSubmit(values) {
     console.table(values);
@@ -23,22 +23,16 @@ export default function Login() {
       setPopupIsOpen(true);
     } else {
       console.table(values);
-      axios
-        .post(makeURL(references.url_login), {
-          email: values.email,
-          password: values.password,
-        })
+      login(values.email, values.password)
         .then((response) => {
           setPopupMessage("login successfully");
           setPopupIsOpen(true);
           set_cookie(response.data.auth_token);
-          window.location.replace("/");
+          router.push("/");
         })
-        .catch((error) => {
-          if (error.response.status == 400) {
-            setPopupMessage("wrong email or password");
-            setPopupIsOpen(true);
-          }
+        .catch((errorMessage) => {
+          setPopupMessage(errorMessage);
+          setPopupIsOpen(true);
         });
     }
   }
@@ -71,11 +65,7 @@ export default function Login() {
       >
         <Alert
           variant="filled"
-          severity={
-            popupMessage === ("wrong email or password" || "Already logged in")
-              ? "error"
-              : "success"
-          }
+          severity={popupMessage === "login successfully" ? "success" : "error"}
         >
           <Typography variant="body1">{popupMessage}</Typography>
         </Alert>

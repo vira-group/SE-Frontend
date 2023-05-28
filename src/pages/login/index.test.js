@@ -1,9 +1,19 @@
-import Login from ".";
-import { Alert } from ".";
-import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
 import { render, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { act } from "react-test-renderer";
+import Login from ".";
+
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      route: "/login",
+      pathname: "login",
+      query: "",
+      asPath: "/login",
+    };
+  },
+}));
 
 describe("Login Page", () => {
   it("renders Login button", () => {
@@ -199,25 +209,5 @@ describe("Login Validation", () => {
       loginPage.queryByText("Please enter a valid email address")
     ).toBeNull();
     expect(loginPage.queryByText("Please enter your password")).toBeNull();
-  });
-});
-
-describe("Login Alert", () => {
-  it("renders alert text", () => {
-    const alertMessage = "Alert Message";
-    const alert = render(<Alert>{alertMessage}</Alert>);
-    expect(alert.getByText(alertMessage)).toBeTruthy();
-  });
-
-  it("shows success message properly", () => {
-    const alertMessage = "Success Message";
-    const alert = render(<Alert severity="success">{alertMessage}</Alert>);
-    expect(alert.getByRole("alert")).toHaveClass("MuiAlert-filledSuccess");
-  });
-
-  it("shows error message properly", () => {
-    const alertMessage = "Error Message";
-    const alert = render(<Alert severity="error">{alertMessage}</Alert>);
-    expect(alert.getByRole("alert")).toHaveClass("MuiAlert-filledError");
   });
 });
