@@ -1,13 +1,17 @@
 import axios from "axios";
-import { makeURL } from "src/Utils/common";
+import { cookies, makeURL, set_cookie } from "src/Utils/common";
 import URLS from "src/assets/References.json";
 
-export default async function login(email, password) {
+export default async function login(values, router) {
+  if (cookies.get("Authorization") != undefined) {
+    throw "Already logged in";
+  }
   const url = makeURL(URLS.url_login);
   return axios
-    .post(url, {
-      email: email,
-      password: password,
+    .post(url, values)
+    .then((response) => {
+      set_cookie(response.data.auth_token);
+      router.push("/");
     })
     .catch((error) => {
       let message = "";

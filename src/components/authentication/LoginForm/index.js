@@ -22,6 +22,7 @@ export default function LoginForm(props) {
 
   return (
     <Box
+      role="form"
       component="form"
       noValidate
       onSubmit={formik.handleSubmit}
