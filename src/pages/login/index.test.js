@@ -36,9 +36,10 @@ describe("Login Page", () => {
     let emailInput = loginPage.getByRole("textbox", {
       name: "Email Address",
     });
-    let passwordInput = loginPage.getByRole("textbox", {
+    let passwordField = loginPage.getByRole("password", {
       name: "Password",
     });
+    let passwordInput = passwordField.children[1].firstElementChild;
     let submitButton = loginPage.getByRole("button", {
       name: "Login",
     });

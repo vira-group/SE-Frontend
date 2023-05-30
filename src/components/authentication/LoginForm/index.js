@@ -1,7 +1,6 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import Link from "next/link";
-import React from "react";
 import * as yup from "yup";
 
 export default function LoginForm(props) {
@@ -53,8 +52,10 @@ export default function LoginForm(props) {
             fullWidth
             name="password"
             label="Password"
-            role="password"
             id="password"
+            type="password"
+            role="password"
+            aria-label="Password"
             autoComplete="password"
             value={formik.values.password}
             onBlur={formik.handleBlur}

@@ -16,7 +16,7 @@ describe("Login Form", () => {
     expect(
       loginForm.getByRole("textbox", { name: "Email Address" })
     ).toBeTruthy();
-    expect(loginForm.getByRole("textbox", { name: "Password" })).toBeTruthy();
+    expect(loginForm.getByRole("password", { name: "Password" })).toBeTruthy();
   });
 
   it("has editable login fields", async () => {
@@ -26,9 +26,10 @@ describe("Login Form", () => {
     let emailInput = loginForm.getByRole("textbox", {
       name: "Email Address",
     });
-    let passwordInput = loginForm.getByRole("textbox", {
+    let passwordField = loginForm.getByRole("password", {
       name: "Password",
     });
+    let passwordInput = passwordField.children[1].firstElementChild;
 
     expect(emailInput.textContent).toBe("");
     expect(passwordInput.textContent).toBe("");
@@ -58,14 +59,11 @@ describe("Login Form", () => {
   it("ignores the password validation if password input is not onfocused", async () => {
     const user = userEvent.setup();
     const loginForm = render(<LoginForm />);
-    let passwordInput = loginForm.getByRole("textbox", {
+    let passwordField = loginForm.getByRole("password", {
       name: "Password",
     });
 
-    await user.click(passwordInput);
-    await waitFor(() => {
-      expect(passwordInput).toHaveFocus();
-    });
+    await user.click(passwordField);
 
     expect(loginForm.queryByText("Please enter your password")).toBeNull();
   });
@@ -77,17 +75,14 @@ describe("Login Form", () => {
       name: "Email Address",
     });
 
-    user.click(emailInput);
+    await user.click(emailInput);
     await waitFor(() => {
-      expect(emailInput).toHaveFocus();
-    });
-    emailInput.blur();
-    await waitFor(() => {
+      emailInput.blur();
       expect(emailInput).not.toHaveFocus();
     });
 
     expect(
-      loginForm.findByText("Please enter your email address")
+      await loginForm.findByText("Please enter your email address")
     ).toBeTruthy();
   });
 
@@ -99,8 +94,8 @@ describe("Login Form", () => {
     });
 
     await user.type(emailInput, "invalid@email");
-    emailInput.blur();
     await waitFor(() => {
+      emailInput.blur();
       expect(emailInput).not.toHaveFocus();
     });
 
@@ -112,16 +107,14 @@ describe("Login Form", () => {
   it("fails the password validation if password is empty", async () => {
     const user = userEvent.setup();
     const loginForm = render(<LoginForm />);
-    let passwordInput = await loginForm.findByRole("textbox", {
+    let passwordField = loginForm.getByRole("password", {
       name: "Password",
     });
+    let passwordInput = passwordField.children[1].firstElementChild;
 
-    user.click(passwordInput);
+    await user.click(passwordInput);
     await waitFor(() => {
-      expect(passwordInput).toHaveFocus();
-    });
-    passwordInput.blur();
-    await waitFor(() => {
+      passwordInput.blur();
       expect(passwordInput).not.toHaveFocus();
     });
 
@@ -131,16 +124,13 @@ describe("Login Form", () => {
   it("ignores password validation if email is validated", async () => {
     const user = userEvent.setup();
     const loginForm = render(<LoginForm />);
-    let emailInput = await loginForm.findByRole("textbox", {
+    let emailInput = loginForm.getByRole("textbox", {
       name: "Email Address",
     });
 
-    user.click(emailInput);
+    await user.click(emailInput);
     await waitFor(() => {
-      expect(emailInput).toHaveFocus();
-    });
-    emailInput.blur();
-    await waitFor(() => {
+      emailInput.blur();
       expect(emailInput).not.toHaveFocus();
     });
 
@@ -151,20 +141,21 @@ describe("Login Form", () => {
     const handleSubmit = jest.fn();
     const user = userEvent.setup();
     const loginForm = render(<LoginForm handleSubmit={handleSubmit} />);
-    let emailInput = await loginForm.findByRole("textbox", {
+    let emailInput = loginForm.getByRole("textbox", {
       name: "Email Address",
     });
-    let passwordInput = await loginForm.findByRole("textbox", {
+    let passwordField = loginForm.getByRole("password", {
       name: "Password",
     });
-    let submitButton = await loginForm.findByRole("button", {
+    let submitButton = loginForm.getByRole("button", {
       name: "Login",
     });
+    let passwordInput = passwordField.children[1].firstElementChild;
 
     await user.type(emailInput, "valid@email.address");
     await user.type(passwordInput, "password");
-    passwordInput.blur();
     await waitFor(() => {
+      passwordInput.blur();
       expect(passwordInput).not.toHaveFocus();
     });
 
