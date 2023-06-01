@@ -10,9 +10,9 @@ export default function Footer() {
     >
       <Divider />
       <Box
-        fullWidth
         p={4}
         sx={{
+          width: "100%",
           gap: 16,
           display: "flex",
           justifyContent: "center",
