@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import PhoneInput from "react-phone-input-2";
 import * as yup from "yup";
@@ -57,6 +57,18 @@ export default function HotelCreationForm(props) {
     validationSchema: validationSchema,
     onSubmit: props.handleSubmit,
   });
+  useEffect(() => {
+    formik.setValues({ ...formik.values, city: "" });
+  }, [formik.values.country]);
+  const enableLocation =
+    formik.values.country !== "" && formik.values.city !== "";
+  const changeCenter = (longitude, latitude) => {
+    formik.setValues({
+      ...formik.values,
+      longitude: longitude,
+      latitude: latitude,
+    });
+  };
   return (
     <>
       <form
@@ -153,7 +165,11 @@ export default function HotelCreationForm(props) {
                     }}
                   >
                     <Typography variant="h6">No location selected</Typography>
-                    <Button onClick={startDialog} variant="contained">
+                    <Button
+                      disabled={!enableLocation}
+                      onClick={startDialog}
+                      variant="contained"
+                    >
                       Add Location
                     </Button>
                   </Box>
@@ -271,7 +287,7 @@ export default function HotelCreationForm(props) {
       <NewHotelLocationSelectionDialog
         open={openDialog}
         setOpen={setOpenDialog}
-        onChange={formik.handleChange}
+        changeCenter={changeCenter}
         center={{
           latitude: formik.values.latitude,
           longitude: formik.values.longitude,
