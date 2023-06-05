@@ -22,12 +22,41 @@ export default function search() {
 
   const [searchResult, setSearchResult] = useState([]);
 
+  const locationSearchCallAPI = () => {
+    const longitude = router.query.longitude;
+    const latitude = router.query.latitude;
+    var url = makeURL("/hotel/nearhotel/");
+
+    axios
+      .get(url, {
+        headers: {
+          Authorization: cookies.get("Authorization"),
+        },
+        params: {
+          y: longitude,
+          x: latitude,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setSearchResult(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
-    if (!router.query.city) {
+    if (router.query.longitude) {
+      locationSearchCallAPI();
+      return;
+    } else if (!router.query.city) {
       return;
     }
     var url =
       makeURL(references.url_basic_hotel_search) +
+      "0" +
+      "?city=" +
       router.query.city +
       "&check_in=" +
       router.query.check_in +
@@ -414,7 +443,7 @@ export default function search() {
           ) : result ? (
             <div className="row row-cols-1 row-cols-md-3 g-4">
               {searchResult.map((h) => (
-                <HotelCard hotel={h.hotel} image={pic} />
+                <HotelCard hotel={h.hotel ? h.hotel : h} image={pic} />
               ))}
             </div>
           ) : (

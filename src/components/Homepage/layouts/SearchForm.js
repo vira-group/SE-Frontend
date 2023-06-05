@@ -90,8 +90,8 @@ function SearchForm(props) {
         ? setNumberOfAdults(numberOfAdults > 1 ? numberOfAdults - 1 : 1)
         : setNumberOfChildren(numberOfChildren > 0 ? numberOfChildren - 1 : 0)
       : guestType === "adults"
-      ? setNumberOfAdults(numberOfAdults + 1)
-      : setNumberOfChildren(numberOfChildren + 1);
+        ? setNumberOfAdults(numberOfAdults + 1)
+        : setNumberOfChildren(numberOfChildren + 1);
   };
 
   const open = Boolean(anchor);
@@ -155,9 +155,9 @@ function SearchForm(props) {
         onChange={(event, newValue) => {
           setDestination(newValue);
         }}
-        // onInputChange={(event, newInputValue) => {
-        //   this.handleInputChange(event, newInputValue);
-        // }}
+      // onInputChange={(event, newInputValue) => {
+      //   this.handleInputChange(event, newInputValue);
+      // }}
       />
       <ThemeProvider theme={datePickerTheme}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
