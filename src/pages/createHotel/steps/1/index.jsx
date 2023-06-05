@@ -53,6 +53,8 @@ function CreateHotel() {
               phone_number: String(values.phone),
               country: values.country,
               city: values.city,
+              longitude: values.longitude,
+              latitude: values.latitude,
             },
             {
               headers: {
