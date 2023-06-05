@@ -271,6 +271,11 @@ export default function HotelCreationForm(props) {
       <NewHotelLocationSelectionDialog
         open={openDialog}
         setOpen={setOpenDialog}
+        onChange={formik.handleChange}
+        center={{
+          latitude: formik.values.latitude,
+          longitude: formik.values.longitude,
+        }}
       />
     </>
   );
