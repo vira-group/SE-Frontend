@@ -55,6 +55,8 @@ export default function search() {
     }
     var url =
       makeURL(references.url_basic_hotel_search) +
+      "0" +
+      "?city=" +
       router.query.city +
       "&check_in=" +
       router.query.check_in +
