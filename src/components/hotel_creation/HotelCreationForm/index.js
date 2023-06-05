@@ -58,17 +58,21 @@ export default function HotelCreationForm(props) {
     onSubmit: props.handleSubmit,
   });
   useEffect(() => {
-    formik.setValues({ ...formik.values, city: "" });
+    if (formik.touched.country) {
+      formik.setValues({ ...formik.values, city: "" });
+    }
   }, [formik.values.country]);
   const enableLocation =
     formik.values.country !== "" && formik.values.city !== "";
-  const changeCenter = (longitude, latitude) => {
+  const changeCenter = ({ longitude, latitude }) => {
     formik.setValues({
       ...formik.values,
       longitude: longitude,
       latitude: latitude,
     });
   };
+  const hasLocation =
+    formik.values.longitude !== null && formik.values.latitude !== null;
   return (
     <>
       <form
@@ -164,14 +168,16 @@ export default function HotelCreationForm(props) {
                       alignItems: "center",
                     }}
                   >
-                    <Typography variant="h6">No location selected</Typography>
                     <Button
                       disabled={!enableLocation}
                       onClick={startDialog}
                       variant="contained"
                     >
-                      Add Location
+                      {hasLocation ? "Change Location" : "Add Location"}
                     </Button>
+                    {!hasLocation && (
+                      <Typography variant="h6">No location selected</Typography>
+                    )}
                   </Box>
                 </div>
               </div>
@@ -287,8 +293,8 @@ export default function HotelCreationForm(props) {
       <NewHotelLocationSelectionDialog
         open={openDialog}
         setOpen={setOpenDialog}
-        changeCenter={changeCenter}
-        center={{
+        onChange={changeCenter}
+        value={{
           latitude: formik.values.latitude,
           longitude: formik.values.longitude,
         }}
