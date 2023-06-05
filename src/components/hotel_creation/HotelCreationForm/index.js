@@ -1,4 +1,4 @@
-import NewHotelLocationSelectionDialog from "@/components/hotel_location/NewHotelLocationSelectionDialog";
+import HotelLocationSelectionDialog from "@/components/hotel_location/HotelLocationSelectionDialog";
 import {
   Box,
   Button,
@@ -290,7 +290,7 @@ export default function HotelCreationForm(props) {
         </div>
       </form>
 
-      <NewHotelLocationSelectionDialog
+      <HotelLocationSelectionDialog
         open={openDialog}
         setOpen={setOpenDialog}
         onChange={changeCenter}

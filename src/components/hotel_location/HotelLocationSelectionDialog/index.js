@@ -12,7 +12,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export default function NewHotelLocationSelectionDialog(props) {
+export default function HotelLocationSelectionDialog(props) {
   const [center, setCenter] = useState({
     latitude: null,
     longitude: null,
