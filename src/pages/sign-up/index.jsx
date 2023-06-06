@@ -40,7 +40,6 @@ export default function Signup() {
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Box
-        spacing={8}
         sx={{
           mt: 4,
           gap: 8,
