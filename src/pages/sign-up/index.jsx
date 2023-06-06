@@ -4,9 +4,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import SignupForm from "../../components/signup/SignupForm";
+import SignupForm from "src/components/signup/SignupForm";
 import { useState } from "react";
-import SignupRoleSelection from "../../components/signup/SignupRoleSelection";
+import SignupRoleSelection from "src/components/signup/SignupRoleSelection";
 import { useReducer } from "react";
 import { Stack } from "@mui/material";
 import Image from "next/image";
@@ -40,7 +40,6 @@ export default function Signup() {
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Box
-        spacing={8}
         sx={{
           mt: 4,
           gap: 8,
