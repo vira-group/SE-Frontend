@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import Credit from ".";
+import Credit from "src/pages/profile/IncreaseCredit";
 
 describe("Wallet Page", () => {
   it("renders correctly", () => {

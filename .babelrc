@@ -1,0 +1,13 @@
+{
+  "env": {
+    "production": {
+      "ignore": [
+        "**/*.test.js"
+      ]
+    }
+  },
+  "presets": [
+    "next/babel",
+    "@babel/preset-react"
+  ]
+}

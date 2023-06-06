@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import Createroom from ".";
+import Createroom from "src/pages/adminpanel/[hotel]/createrooom";
 
 jest.mock("next/router", () => ({
   useRouter() {
