@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import Myhotels from ".";
+import Myhotels from "src/pages/myhotels";
 
 describe("Manager Hotels Tab", () => {
   it("renders correctly", () => {

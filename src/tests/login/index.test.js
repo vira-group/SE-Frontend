@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import login from "src/services/auth/login";
 import renderer from "react-test-renderer";
-import LoginPage from ".";
+import LoginPage from "src/pages/login";
 
 jest.mock("src/services/auth/login");
 
