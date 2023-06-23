@@ -24,17 +24,6 @@ import MuiAlert from "@mui/material/Alert";
 import PhoneInput from "react-phone-input-2";
 import Image from "next/image";
 
-const textFieldTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#cd9a2b",
-      dark: "#cd9a2b",
-      light: "#d7ae55",
-      contrastText: "#fff",
-    },
-  },
-});
-
 const validationSchema = yup.object({
   firstname: yup
     .string()
@@ -315,50 +304,46 @@ function Profile() {
                 <div className="col-lg-8">
                   <Grid container spacing={3}>
                     <Grid item xs={6}>
-                      <ThemeProvider theme={textFieldTheme}>
-                        <TextField
-                          required
-                          fullWidth
-                          placeholder="Eric"
-                          id="firstname"
-                          size="small"
-                          label="First name"
-                          InputLabelProps={{ shrink: true }}
-                          value={formik.values.firstname}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          error={
-                            formik.touched.firstname &&
-                            Boolean(formik.errors.firstname)
-                          }
-                          helperText={
-                            formik.touched.firstname && formik.errors.firstname
-                          }
-                        />
-                      </ThemeProvider>
+                      <TextField
+                        required
+                        fullWidth
+                        placeholder="Eric"
+                        id="firstname"
+                        size="small"
+                        label="First name"
+                        InputLabelProps={{ shrink: true }}
+                        value={formik.values.firstname}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={
+                          formik.touched.firstname &&
+                          Boolean(formik.errors.firstname)
+                        }
+                        helperText={
+                          formik.touched.firstname && formik.errors.firstname
+                        }
+                      />
                     </Grid>
                     <Grid item xs={6}>
-                      <ThemeProvider theme={textFieldTheme}>
-                        <TextField
-                          required
-                          fullWidth
-                          placeholder="Hodson"
-                          id="lastname"
-                          size="small"
-                          label="Last name"
-                          InputLabelProps={{ shrink: true }}
-                          value={formik.values.lastname}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          error={
-                            formik.touched.lastname &&
-                            Boolean(formik.errors.lastname)
-                          }
-                          helperText={
-                            formik.touched.lastname && formik.errors.lastname
-                          }
-                        />
-                      </ThemeProvider>
+                      <TextField
+                        required
+                        fullWidth
+                        placeholder="Hodson"
+                        id="lastname"
+                        size="small"
+                        label="Last name"
+                        InputLabelProps={{ shrink: true }}
+                        value={formik.values.lastname}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={
+                          formik.touched.lastname &&
+                          Boolean(formik.errors.lastname)
+                        }
+                        helperText={
+                          formik.touched.lastname && formik.errors.lastname
+                        }
+                      />
                     </Grid>
                   </Grid>
 
@@ -366,11 +351,11 @@ function Profile() {
                     type="name"
                     className="form-control"
                     id="exampleFormControlInput1"
-                    // value={formik.values.fullname}
-                    // onChange={formik.handleChange}
-                    // onBlur={formik.handleBlur}
-                    // error={formik.touched.fullname && Boolean(formik.errors.fullname)}
-                    // helperText={formik.touched.fullname && formik.errors.fullname}
+                  // value={formik.values.fullname}
+                  // onChange={formik.handleChange}
+                  // onBlur={formik.handleBlur}
+                  // error={formik.touched.fullname && Boolean(formik.errors.fullname)}
+                  // helperText={formik.touched.fullname && formik.errors.fullname}
                   ></input>
                 </div>
               </div>
@@ -389,28 +374,26 @@ function Profile() {
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      required
-                      fullWidth
-                      placeholder="0023839813"
-                      id="nationalcode"
-                      size="small"
-                      label="National code"
-                      InputLabelProps={{ shrink: true }}
-                      value={formik.values.nationalcode}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.nationalcode &&
-                        Boolean(formik.errors.nationalcode)
-                      }
-                      helperText={
-                        formik.touched.nationalcode &&
-                        formik.errors.nationalcode
-                      }
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="0023839813"
+                    id="nationalcode"
+                    size="small"
+                    label="National code"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.nationalcode}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.nationalcode &&
+                      Boolean(formik.errors.nationalcode)
+                    }
+                    helperText={
+                      formik.touched.nationalcode &&
+                      formik.errors.nationalcode
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -465,26 +448,24 @@ function Profile() {
                   </label>
                 </div>
                 <div className="col-lg-8 birthday-inp">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        label="Birthdate"
-                        value={birthdate}
-                        onChange={(newValue) => {
-                          setBirthdate(newValue);
-                        }}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            required
-                            fullWidth
-                            size="small"
-                            variant="outlined"
-                          />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </ThemeProvider>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      label="Birthdate"
+                      value={birthdate}
+                      onChange={(newValue) => {
+                        setBirthdate(newValue);
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          required
+                          fullWidth
+                          size="small"
+                          variant="outlined"
+                        />
+                      )}
+                    />
+                  </LocalizationProvider>
                 </div>
               </div>
             </div>
@@ -549,24 +530,22 @@ function Profile() {
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      required
-                      fullWidth
-                      placeholder="yf7901@gamil.com"
-                      id="email"
-                      size="small"
-                      label="Email"
-                      InputLabelProps={{ shrink: true }}
-                      value={formik.values.email}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.email && Boolean(formik.errors.email)
-                      }
-                      helperText={formik.touched.email && formik.errors.email}
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    required
+                    fullWidth
+                    placeholder="yf7901@gamil.com"
+                    id="email"
+                    size="small"
+                    label="Email"
+                    InputLabelProps={{ shrink: true }}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.email && Boolean(formik.errors.email)
+                    }
+                    helperText={formik.touched.email && formik.errors.email}
+                  />
                 </div>
               </div>
             </div>
@@ -584,18 +563,16 @@ function Profile() {
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      fullWidth
-                      placeholder="02632552012"
-                      id="phone"
-                      size="small"
-                      label="Phone Number"
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{ readOnly: true }}
-                      value={formik.values.phone}
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    fullWidth
+                    placeholder="02632552012"
+                    id="phone"
+                    size="small"
+                    label="Phone Number"
+                    InputLabelProps={{ shrink: true }}
+                    InputProps={{ readOnly: true }}
+                    value={formik.values.phone}
+                  />
                 </div>
               </div>
             </div>
@@ -613,25 +590,23 @@ function Profile() {
                   </label>
                 </div>
                 <div className="col-lg-8">
-                  <ThemeProvider theme={textFieldTheme}>
-                    <TextField
-                      fullWidth
-                      id="aboutme"
-                      placeholder=""
-                      multiline
-                      autoComplete="aboutme"
-                      label="About me"
-                      InputLabelProps={{ shrink: true }}
-                      inputProps={{ maxLength: CHARACTER_LIMIT }}
-                      value={formik.values.aboutme}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.aboutme && Boolean(formik.errors.aboutme)
-                      }
-                      helperText={`${formik.values.aboutme.length}/${CHARACTER_LIMIT}`}
-                    />
-                  </ThemeProvider>
+                  <TextField
+                    fullWidth
+                    id="aboutme"
+                    placeholder=""
+                    multiline
+                    autoComplete="aboutme"
+                    label="About me"
+                    InputLabelProps={{ shrink: true }}
+                    inputProps={{ maxLength: CHARACTER_LIMIT }}
+                    value={formik.values.aboutme}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.aboutme && Boolean(formik.errors.aboutme)
+                    }
+                    helperText={`${formik.values.aboutme.length}/${CHARACTER_LIMIT}`}
+                  />
                 </div>
               </div>
             </div>
