@@ -178,9 +178,23 @@ exports[`Wallet Page renders correctly 1`] = `
                 className="col-sm-4"
               >
                 <button
-                  className="btn w-100 money-option-button"
+                  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium w-100 css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
                   data-testid="no1"
+                  disabled={false}
+                  onBlur={[Function]}
                   onClick={[Function]}
+                  onContextMenu={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
                   type="button"
                 >
                   $100
@@ -190,9 +204,23 @@ exports[`Wallet Page renders correctly 1`] = `
                 className="col-sm-4 my-2 my-sm-0"
               >
                 <button
-                  className="btn w-100 money-option-button"
+                  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium w-100 css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
                   data-testid="no2"
+                  disabled={false}
+                  onBlur={[Function]}
                   onClick={[Function]}
+                  onContextMenu={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
                   type="button"
                 >
                   $200
@@ -202,9 +230,23 @@ exports[`Wallet Page renders correctly 1`] = `
                 className="col-sm-4"
               >
                 <button
-                  className="btn w-100 money-option-button"
+                  className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium w-100 css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
                   data-testid="no3"
+                  disabled={false}
+                  onBlur={[Function]}
                   onClick={[Function]}
+                  onContextMenu={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={0}
                   type="button"
                 >
                   $500
@@ -217,7 +259,7 @@ exports[`Wallet Page renders correctly 1`] = `
               or enter your desired amount of money here:
             </p>
             <div
-              className="MuiFormControl-root MuiTextField-root w-100 mb-4 css-1li6zgt-MuiFormControl-root-MuiTextField-root"
+              className="MuiFormControl-root MuiTextField-root w-100 mb-4 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
             >
               <label
                 className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
@@ -281,9 +323,22 @@ exports[`Wallet Page renders correctly 1`] = `
               </div>
             </div>
             <button
-              className="btn btn-primary pay-button w-100"
+              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium w-100 css-sghohy-MuiButtonBase-root-MuiButton-root"
               disabled={true}
+              onBlur={[Function]}
               onClick={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={-1}
               type="button"
             >
               Pay
