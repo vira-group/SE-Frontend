@@ -1,11 +1,9 @@
 import HotelLocationSelectionDialog from "@/components/hotel_location/HotelLocationSelectionDialog";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  TextField,
-  Typography,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";

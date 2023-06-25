@@ -13,11 +13,11 @@ import moment from "moment";
 import { PlainTextField } from "../../../theme/PlainTextField";
 import cities from "../../../assets/WorldCities.json";
 import SearchFormCSS from "./SearchForm.module.scss";
-import { MobileDatePicker } from "@mui/x-date-pickers";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 
 const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
 

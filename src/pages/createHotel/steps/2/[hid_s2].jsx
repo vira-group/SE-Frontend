@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { cookies, makeURL } from "../../../../Utils/common";
 import references from "../../../../assets/References.json";
-import { Box, CircularProgress } from "@mui/material";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -53,9 +54,9 @@ function CreateHotelHeader() {
         .post(
           makeURL(
             references.url_onehotelImage +
-              "/" +
-              hotelid +
-              "/images/?is_header=true"
+            "/" +
+            hotelid +
+            "/images/?is_header=true"
           ),
           form_data,
           {
@@ -154,7 +155,7 @@ function CreateHotelHeader() {
                                   onClose={handleClose}
                                   severity={
                                     message1 ===
-                                    "Your image uploaded successfully!"
+                                      "Your image uploaded successfully!"
                                       ? "success"
                                       : "error"
                                   }

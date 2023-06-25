@@ -7,7 +7,9 @@ import { cookies, makeURL } from "../../../Utils/common";
 import references from "../../../assets/References.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { CircularProgress, Button, TextField } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import Image from "next/image";
 
 export default function Credit() {

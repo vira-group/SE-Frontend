@@ -13,7 +13,8 @@ import Image from "next/image";
 
 import Hamburger from "hamburger-react";
 import Link from "next/link";
-import { Box, useTheme } from "@mui/material";
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { cookies } from "src/Utils/common";
 

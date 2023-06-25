@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Typography } from "@mui/material";
-import PreviewMultipleImages from "../../../../components/CreateHotel/PreviewMultipleImages";
+import Typography from "@mui/material/Typography";
+import PreviewMultipleImages from "src/components/CreateHotel/PreviewMultipleImages";
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 
 function CreateHotelImages() {
