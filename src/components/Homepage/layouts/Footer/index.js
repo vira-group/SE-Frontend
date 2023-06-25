@@ -13,9 +13,11 @@ export default function Footer() {
         p={4}
         sx={{
           width: "100%",
-          gap: 16,
+          gap: 4,
+          px: 12,
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
         }}
       >
         <Typography variant="body2">FAQ</Typography>

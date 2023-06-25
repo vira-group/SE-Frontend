@@ -8,7 +8,7 @@ exports[`Footer renders correctly 1`] = `
     className="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
   />
   <div
-    className="MuiBox-root css-6h5udx"
+    className="MuiBox-root css-12t46fw"
   >
     <p
       className="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"

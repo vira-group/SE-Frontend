@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import moment from "moment";
 
 import { PlainTextField } from "../../../theme/PlainTextField";
@@ -16,17 +16,8 @@ import SearchFormCSS from "./SearchForm.module.scss";
 import { MobileDatePicker } from "@mui/x-date-pickers";
 import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
-
-const datePickerTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#cd9a2b",
-      dark: "#cd9a2b",
-      light: "#d7ae55",
-      contrastText: "#fff",
-    },
-  },
-});
+import TextField from "@mui/material/TextField";
+import { IconButton } from "@mui/material";
 
 const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
 
@@ -37,6 +28,7 @@ function SearchForm(props) {
   const [anchor, setAnchor] = useState(null);
   const [numberOfAdults, setNumberOfAdults] = useState(2);
   const [numberOfChildren, setNumberOfChildren] = useState(0);
+  const theme = useTheme();
 
   // useEffect(() => {
   //   console.log(checkinDate);
@@ -130,9 +122,8 @@ function SearchForm(props) {
         renderOption={(props, option) => (
           <Box component="li" role="listbox" {...props}>
             <LocationOnIcon
-              className={[SearchFormCSS.locationIcon, "my-auto", "me-3"].join(
-                " "
-              )}
+              color="primary"
+              className="my-auto me-3"
             />
             <div>
               <b className="text-dark">{option.city}</b>
@@ -142,8 +133,11 @@ function SearchForm(props) {
           </Box>
         )}
         renderInput={(params) => (
-          <PlainTextField
+          <TextField
             {...params}
+            sx={{
+              backgroundColor: "white",
+            }}
             placeholder="Destination"
             inputProps={{
               ...params.inputProps,
@@ -155,74 +149,74 @@ function SearchForm(props) {
         onChange={(event, newValue) => {
           setDestination(newValue);
         }}
-      // onInputChange={(event, newInputValue) => {
-      //   this.handleInputChange(event, newInputValue);
-      // }}
       />
-      <ThemeProvider theme={datePickerTheme}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <MobileDatePicker
-            disablePast
-            slotProps={{ textField: { placeholder: "Check In" } }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: "white",
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: "gray",
-                opacity: 1,
-              },
-            }}
-            className={[
-              SearchFormCSS.datePicker,
-              "mb-1",
-              "mb-lg-0",
-              "me-lg-1",
-            ].join(" ")}
-            maxDate={
-              checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
-            }
-            value={checkinDate}
-            onChange={(newValue) => {
-              setCheckinDate(newValue);
-            }}
-          />
-        </LocalizationProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <MobileDatePicker
+          disablePast
+          slotProps={{
+            textField: { placeholder: "Check In" }
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              backgroundColor: "white",
+            },
+            "& .MuiInputBase-input::placeholder": {
+              color: "gray",
+              opacity: 1,
+            },
+          }}
+          className={[
+            SearchFormCSS.datePicker,
+            "mb-1",
+            "mb-lg-0",
+            "me-lg-1",
+          ].join(" ")}
+          maxDate={
+            checkoutDate ? new Date(checkoutDate.getTime() - oneDay) : null
+          }
+          value={checkinDate}
+          onChange={(newValue) => {
+            setCheckinDate(newValue);
+          }}
+        />
+      </LocalizationProvider>
 
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <MobileDatePicker
-            disablePast
-            slotProps={{ textField: { placeholder: "Check Out" } }}
-            sx={{
-              "& .MuiInputBase-root": {
-                backgroundColor: "white",
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: "gray",
-                opacity: 1,
-              },
-            }}
-            className={[
-              SearchFormCSS.datePicker,
-              "mb-1",
-              "mb-lg-0",
-              "me-lg-1",
-            ].join(" ")}
-            minDate={
-              checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
-            }
-            // label="Check out"
-            value={checkoutDate}
-            onChange={(newValue) => {
-              setCheckoutDate(newValue);
-            }}
-            renderInput={(params) => (
-              <input {...params} placeholder="asd"></input>
-            )}
-          />
-        </LocalizationProvider>
-      </ThemeProvider>
-      <PlainTextField
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <MobileDatePicker
+          disablePast
+          slotProps={{ textField: { placeholder: "Check Out" } }}
+          sx={{
+            "& .MuiInputBase-root": {
+              backgroundColor: "white",
+            },
+            "& .MuiInputBase-input::placeholder": {
+              color: "gray",
+              opacity: 1,
+            },
+          }}
+          className={[
+            SearchFormCSS.datePicker,
+            "mb-1",
+            "mb-lg-0",
+            "me-lg-1",
+          ].join(" ")}
+          minDate={
+            checkinDate ? new Date(checkinDate.getTime() + oneDay) : null
+          }
+          // label="Check out"
+          value={checkoutDate}
+          onChange={(newValue) => {
+            setCheckoutDate(newValue);
+          }}
+          renderInput={(params) => (
+            <input {...params} placeholder="asd"></input>
+          )}
+        />
+      </LocalizationProvider>
+      <TextField
+        sx={{
+          backgroundColor: "white",
+        }}
         className={[
           SearchFormCSS.personCountBox,
           "mb-1",
@@ -261,72 +255,84 @@ function SearchForm(props) {
           horizontal: "right",
         }}
       >
-        <div className={[SearchFormCSS.personCountPopover, "p-3"].join(" ")}>
+        <div className={[SearchFormCSS.personCountPopover, "px-4 py-2"].join(" ")}>
           <div className="mb-3 d-flex align-items-center">
-            <span className="me-auto">Adults</span>
-            <button
-              type="button"
-              className={[
-                SearchFormCSS.changePersonCountButton,
-                "ms-5",
-                "btn",
-              ].join(" ")}
+            <span className="me-4">Adults</span>
+            <IconButton
+              sx={{
+                width: "40px",
+                height: "40px",
+                bgcolor: theme.palette.primary.main,
+                '&:hover': {
+                  bgcolor: theme.palette.primary.dark,
+                },
+                '&:disabled': {
+                  bgcolor: theme.palette.primary.light,
+                },
+              }}
               onClick={() => handleChangeNumber("dec", "adults")}
               disabled={numberOfAdults <= 1}
             >
-              <span>
-                <RemoveIcon />
-              </span>
-            </button>
+              <RemoveIcon />
+            </IconButton>
             <span className="px-3 text-center" style={{ width: numberWidth }}>
               {numberOfAdults}
             </span>
-            <button
-              type="button"
-              className={[SearchFormCSS.changePersonCountButton, "btn"].join(
-                " "
-              )}
+            <IconButton
+              sx={{
+                width: "40px",
+                height: "40px",
+                bgcolor: theme.palette.primary.main,
+                '&:hover': {
+                  bgcolor: theme.palette.primary.dark,
+                },
+              }}
               onClick={() => handleChangeNumber("inc", "adults")}
             >
-              <span>
-                <AddIcon />
-              </span>
-            </button>
+              <AddIcon />
+            </IconButton>
           </div>
           <div className="d-flex  align-items-center">
             <span className="me-auto">Children</span>
-            <button
-              type="button"
-              className={[
-                SearchFormCSS.changePersonCountButton,
-                "ms-5",
-                "btn",
-              ].join(" ")}
+            <IconButton
+              sx={{
+                width: "40px",
+                height: "40px",
+                bgcolor: theme.palette.primary.main,
+                '&:hover': {
+                  bgcolor: theme.palette.primary.dark,
+                },
+                '&:disabled': {
+                  bgcolor: theme.palette.primary.light,
+                }
+              }}
               onClick={() => handleChangeNumber("dec", "children")}
               disabled={numberOfChildren <= 0}
             >
               <span>
                 <RemoveIcon />
               </span>
-            </button>
+            </IconButton>
             <span className="px-3 text-center" style={{ width: numberWidth }}>
               {numberOfChildren}
             </span>
-            <button
-              type="button"
-              className={[SearchFormCSS.changePersonCountButton, "btn"].join(
-                " "
-              )}
+            <IconButton
+              sx={{
+                width: "40px",
+                height: "40px",
+                bgcolor: theme.palette.primary.main,
+                '&:hover': {
+                  bgcolor: theme.palette.primary.dark,
+                },
+              }}
               onClick={() => handleChangeNumber("inc", "children")}
             >
-              <span>
-                <AddIcon />
-              </span>
-            </button>
+              <AddIcon />
+            </IconButton>
           </div>
         </div>
-      </Popover>
-    </div>
+      </Popover >
+    </div >
   );
 }
 
