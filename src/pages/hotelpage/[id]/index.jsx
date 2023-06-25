@@ -7,6 +7,12 @@ import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import { useState } from "react";
 import { useEffect } from "react";
 import SimpleAccordion from "src/components/HotelPage/accordion";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
 
 export default function HotelPage() {
   const initialState = {
@@ -201,6 +207,35 @@ export default function HotelPage() {
             <SimpleAccordion description={hotel.description} />
           </div>
         </div>
+
+        <Card
+          sx={{
+            mt: 4,
+            mx: 'auto',
+            maxWidth: 500,
+            p: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+          }}
+        >
+          <Typography variant="body2">
+            Add a review for this hotel:
+          </Typography>
+          <TextField
+            multiline
+            rows={5}
+            variant="outlined"
+            placeholder="Your comment"
+            fullWidth
+          />
+          <Box sx={{ display: 'flex', width: "100%", alignItems: 'center', justifyContent: "flex-end", gap: 2 }}>
+            <Rating name="rating" defaultValue={0} max={5} />
+            <Button variant="contained">
+              Add review
+            </Button>
+          </Box>
+        </Card>
 
         {/* <Hotelpage2 id={id} /> */}
       </div>
