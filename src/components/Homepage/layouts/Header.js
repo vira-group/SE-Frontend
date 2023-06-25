@@ -36,7 +36,7 @@
 import React from "react";
 import SearchForm from "./SearchForm";
 import Image from "next/image";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import LocationSearchForm from "@/components/HotelSearch/LocationSearchForm";
 
 function Header(props) {

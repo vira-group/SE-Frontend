@@ -1,5 +1,4 @@
-import { Button } from "@mui/material";
-import * as React from "react";
+import Button from "@mui/material/Button";
 
 export default function Myhotelscard(props) {
   const handleClick = () => {

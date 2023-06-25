@@ -8,7 +8,7 @@ import SignupForm from "src/components/signup/SignupForm";
 import { useState } from "react";
 import SignupRoleSelection from "src/components/signup/SignupRoleSelection";
 import { useReducer } from "react";
-import { Stack } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import Image from "next/image";
 
 export default function Signup() {

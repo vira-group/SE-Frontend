@@ -1,5 +1,5 @@
 import HotelLocationSelectionDialog from "@/components/hotel_location/HotelLocationSelectionDialog";
-import { Card } from "@mui/material";
+import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 import { useState } from "react";

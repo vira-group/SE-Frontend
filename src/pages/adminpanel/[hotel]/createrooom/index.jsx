@@ -1,12 +1,15 @@
 import * as React from "react";
 // eslint-disable-next-line unused-imports/no-unused-imports, no-unused-vars
-import { Button, TextField, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import Autocomplete from "@mui/material/Autocomplete";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import axios from "axios";
 import { cookies, makeURL } from "../../../../Utils/common";
 import references from "src/assets/References.json";
-import { CircularProgress, Autocomplete } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Radio from "@mui/material/Radio";

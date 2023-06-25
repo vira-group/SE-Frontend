@@ -2,23 +2,24 @@
 /* eslint-disable no-unused-vars */
 
 import * as React from "react";
-import { TextField, Grid, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies, makeURL } from "../../Utils/common";
-import references from "../../assets/References.json";
-import { CircularProgress } from "@mui/material";
+import { cookies, makeURL } from "src/Utils/common";
+import references from "src/assets/References.json";
+import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment from "moment";
-import Sidebar from "../../components/Profile/Sidebar";
+import Sidebar from "src/components/Profile/Sidebar";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import PhoneInput from "react-phone-input-2";

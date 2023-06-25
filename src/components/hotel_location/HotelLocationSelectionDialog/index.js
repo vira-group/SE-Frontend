@@ -1,11 +1,9 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
 import NeshanMap from "@neshan-maps-platform/react-openlayers";
 import "@neshan-maps-platform/react-openlayers/dist/style.css";
 import { useRef } from "react";

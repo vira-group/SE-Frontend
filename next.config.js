@@ -1,4 +1,8 @@
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+  openAnalyzer: false,
+});
+module.exports = withBundleAnalyzer({
   webpack: (config, { isServer }) => {
     // Exclude test files from the Next.js build
     if (!isServer) {
@@ -10,4 +14,4 @@ module.exports = {
 
     return config;
   },
-};
+});
