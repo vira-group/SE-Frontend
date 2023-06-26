@@ -10,10 +10,20 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
+import { useState, useEffect } from "react";
+import getTags from "src/services/reveiws/tags";
 import * as yup from "yup";
 
 export default function AddReviewForm(props) {
-  const tags = ["Cheap", "Expensive", "Luxurious"];
+  const [tags, setTags] = useState([]);
+  async function loadTags() {
+    const newTags = await getTags();
+    setTags(newTags);
+  }
+  useEffect(() => {
+    loadTags();
+  }, []);
+  // const tags = ["Cheap", "Expensive", "Luxurious"];
   const { handleSubmit } = props;
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
