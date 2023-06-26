@@ -7,15 +7,13 @@ import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import { useState } from "react";
 import { useEffect } from "react";
 import SimpleAccordion from "src/components/HotelPage/accordion";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import ReviewsList from "@/components/hotel_reviews/ReviewsList";
 import CardContent from "@mui/material/CardContent";
 import { CardHeader } from "@mui/material";
+import AddReviewForm from "@/components/hotel_reviews/AddReviewForm";
 
 export default function HotelPage() {
   const initialState = {
@@ -237,38 +235,7 @@ export default function HotelPage() {
               }}
             >
               <ReviewsList reviews={[]} />
-              <Box
-                sx={{
-                  width: 500,
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 2,
-                }}
-              >
-                <Typography variant="body2">
-                  Add a review for this hotel:
-                </Typography>
-                <TextField
-                  multiline
-                  rows={5}
-                  variant="outlined"
-                  placeholder="Your comment"
-                  fullWidth
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    gap: 2,
-                  }}
-                >
-                  <Rating name="rating" defaultValue={0} max={5} />
-                  <Button variant="contained">Add review</Button>
-                </Box>
-              </Box>
+              <AddReviewForm />
             </Box>
           </CardContent>
         </Card>
