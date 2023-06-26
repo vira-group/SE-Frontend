@@ -13,6 +13,9 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
+import ReviewsList from "@/components/hotel_reviews/ReviewsList";
+import CardContent from "@mui/material/CardContent";
+import { CardHeader } from "@mui/material";
 
 export default function HotelPage() {
   const initialState = {
@@ -50,6 +53,8 @@ export default function HotelPage() {
       }
     });
   }, [id]);
+
+  const nReviews = 0;
 
   return (
     <div className="div">
@@ -210,31 +215,62 @@ export default function HotelPage() {
 
         <Card
           sx={{
+            width: "fit-content",
+            mx: "auto",
             mt: 4,
-            mx: 'auto',
-            maxWidth: 500,
-            p: 3,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
           }}
         >
-          <Typography variant="body2">
-            Add a review for this hotel:
-          </Typography>
-          <TextField
-            multiline
-            rows={5}
-            variant="outlined"
-            placeholder="Your comment"
-            fullWidth
+          <CardHeader
+            title={
+              <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                <Rating readOnly value={5.0} />
+                {nReviews} Reviews
+              </Box>
+            }
           />
-          <Box sx={{ display: 'flex', width: "100%", alignItems: 'center', justifyContent: "flex-end", gap: 2 }}>
-            <Rating name="rating" defaultValue={0} max={5} />
-            <Button variant="contained">
-              Add review
-            </Button>
-          </Box>
+          <CardContent>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                gap: 2,
+              }}
+            >
+              <ReviewsList reviews={[]} />
+              <Box
+                sx={{
+                  width: 500,
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
+                }}
+              >
+                <Typography variant="body2">
+                  Add a review for this hotel:
+                </Typography>
+                <TextField
+                  multiline
+                  rows={5}
+                  variant="outlined"
+                  placeholder="Your comment"
+                  fullWidth
+                />
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    gap: 2,
+                  }}
+                >
+                  <Rating name="rating" defaultValue={0} max={5} />
+                  <Button variant="contained">Add review</Button>
+                </Box>
+              </Box>
+            </Box>
+          </CardContent>
         </Card>
 
         {/* <Hotelpage2 id={id} /> */}
