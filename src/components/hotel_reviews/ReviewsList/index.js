@@ -10,7 +10,7 @@ export default function ReviewsList({ sx = {}, reviews }) {
       sx={{
         ...sx,
         width: "500px",
-        height: "300px",
+        height: "350px",
         borderStyle: "solid",
         borderWidth: "1px",
         borderColor: "divider",
