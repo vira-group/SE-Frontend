@@ -14,6 +14,7 @@ import ReviewsList from "@/components/hotel_reviews/ReviewsList";
 import CardContent from "@mui/material/CardContent";
 import { CardHeader } from "@mui/material";
 import AddReviewForm from "@/components/hotel_reviews/AddReviewForm";
+import addComment from "src/services/reveiws/add";
 
 export default function HotelPage() {
   const initialState = {
@@ -30,6 +31,12 @@ export default function HotelPage() {
   const [hotel, setHotel] = useState(initialState);
   const [images, setImages] = useState([]);
   const router = useRouter();
+
+  function handleAddComment(values) {
+    values.hotel = id;
+    values.tag = values.tag.map((tag) => tag.id);
+    addComment(values);
+  }
 
   useEffect(() => {
     setId(router.query.id);
@@ -235,7 +242,7 @@ export default function HotelPage() {
               }}
             >
               <ReviewsList reviews={[]} />
-              <AddReviewForm />
+              <AddReviewForm handleSubmit={handleAddComment} />
             </Box>
           </CardContent>
         </Card>

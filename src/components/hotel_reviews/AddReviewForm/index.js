@@ -36,14 +36,14 @@ export default function AddReviewForm(props) {
     },
   };
   const validationSchema = yup.object({
-    rating: yup.number().positive("Please give a rating"),
-    comment: yup.string().required("Please write the review"),
+    rate: yup.number().positive("Please give a rating"),
+    text: yup.string().required("Please write the review"),
     tag: yup.array(),
   });
   const formik = useFormik({
     initialValues: {
-      rating: 0,
-      comment: "",
+      rate: 0,
+      text: "",
       tag: [],
     },
     onSubmit: handleSubmit,
@@ -63,17 +63,17 @@ export default function AddReviewForm(props) {
     >
       <Typography variant="body2">Add a review for this hotel:</Typography>
       <TextField
-        name="comment"
+        name="text"
         multiline
         rows={5}
         variant="outlined"
         placeholder="Your comment"
         fullWidth
-        value={formik.values.comment}
+        value={formik.values.text}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        helperText={formik.touched.comment && formik.errors.comment}
-        error={formik.touched.comment && Boolean(formik.errors.comment)}
+        helperText={formik.touched.text && formik.errors.text}
+        error={formik.touched.text && Boolean(formik.errors.text)}
       />
       <FormControl fullWidth sx={{ m: 1 }}>
         <InputLabel id="tag-label">Tags</InputLabel>
@@ -88,15 +88,15 @@ export default function AddReviewForm(props) {
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
               {selected.map((tag) => (
-                <Chip key={tag} label={tag} />
+                <Chip key={tag.id} label={tag.name} />
               ))}
             </Box>
           )}
           MenuProps={MenuProps}
         >
           {tags.map((tag) => (
-            <MenuItem key={tag} value={tag}>
-              {tag}
+            <MenuItem key={tag.id} value={tag}>
+              {tag.name}
             </MenuItem>
           ))}
         </Select>
@@ -111,9 +111,9 @@ export default function AddReviewForm(props) {
         }}
       >
         <Rating
-          name="rating"
+          name="rate"
           max={5}
-          value={formik.values.rating}
+          value={formik.values.rate}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
