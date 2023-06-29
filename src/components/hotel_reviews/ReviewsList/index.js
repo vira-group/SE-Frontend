@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
+import { Chip } from "@mui/material";
 
 export default function ReviewsList({ sx = {}, reviews }) {
   return (
@@ -18,16 +19,24 @@ export default function ReviewsList({ sx = {}, reviews }) {
       }}
     >
       {reviews.map((review, index) => (
-        <Card key={index} sx={{ my: 2 }}>
+        <Card key={index}>
           <CardContent>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-              <Rating name={`rating-${index}`} value={review.rating} readOnly />
+            <Box sx={{ display: "flex", alignItems: "center", mb: 1, gap: 1 }}>
+              <Rating
+                size="small"
+                name={`rating-${index}`}
+                value={review.rate}
+                readOnly
+              />
               <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
                 {review.date}
               </Typography>
+              {review.tag.map((tag) => (
+                <Chip size="small" key={tag.id} label={tag.name} />
+              ))}
             </Box>
             <Typography variant="body2" sx={{ mb: 1 }}>
-              {review.comment}
+              {review.text}
             </Typography>
             <Typography variant="caption" color="text.secondary">
               Reviewed by: {review.author}

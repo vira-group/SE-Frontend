@@ -23,7 +23,6 @@ export default function AddReviewForm(props) {
   useEffect(() => {
     loadTags();
   }, []);
-  // const tags = ["Cheap", "Expensive", "Luxurious"];
   const { handleSubmit } = props;
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;

@@ -15,6 +15,7 @@ import CardContent from "@mui/material/CardContent";
 import { CardHeader } from "@mui/material";
 import AddReviewForm from "@/components/hotel_reviews/AddReviewForm";
 import addComment from "src/services/reveiws/add";
+import getComments from "src/services/reveiws/get";
 
 export default function HotelPage() {
   const initialState = {
@@ -30,7 +31,14 @@ export default function HotelPage() {
   const [id, setId] = useState(null);
   const [hotel, setHotel] = useState(initialState);
   const [images, setImages] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const router = useRouter();
+
+  function loadComments() {
+    getComments(id).then((data) => {
+      setReviews(data);
+    });
+  }
 
   function handleAddComment(values) {
     values.hotel = id;
@@ -39,8 +47,10 @@ export default function HotelPage() {
   }
 
   useEffect(() => {
-    setId(router.query.id);
-  }, []);
+    if (router.query.id !== undefined) {
+      setId(router.query.id);
+    }
+  }, [router.query]);
 
   useEffect(() => {
     if (id === null) {
@@ -57,9 +67,8 @@ export default function HotelPage() {
         setImages(res.forEach((data) => data.image));
       }
     });
+    loadComments();
   }, [id]);
-
-  const nReviews = 0;
 
   return (
     <div className="div">
@@ -229,7 +238,7 @@ export default function HotelPage() {
             title={
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 <Rating readOnly value={5.0} />
-                {nReviews} Reviews
+                {reviews.length} Reviews
               </Box>
             }
           />
@@ -241,7 +250,7 @@ export default function HotelPage() {
                 gap: 2,
               }}
             >
-              <ReviewsList reviews={[]} />
+              <ReviewsList reviews={reviews} />
               <AddReviewForm handleSubmit={handleAddComment} />
             </Box>
           </CardContent>
