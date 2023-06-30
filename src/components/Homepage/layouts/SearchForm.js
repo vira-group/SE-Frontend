@@ -7,17 +7,16 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import moment from "moment";
 
-import { PlainTextField } from "../../../theme/PlainTextField";
-import cities from "../../../assets/WorldCities.json";
 import SearchFormCSS from "./SearchForm.module.scss";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
+import { Country, State, City } from "country-state-city";
 
 const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
 
@@ -67,7 +66,7 @@ function SearchForm(props) {
       router.push({
         pathname: "/search",
         query: {
-          city: destination.city,
+          city: destination.name,
           check_in: formattedcheckinDate,
           check_out: formattedcheckoutDate,
           size: numberOfPeople,
@@ -82,8 +81,8 @@ function SearchForm(props) {
         ? setNumberOfAdults(numberOfAdults > 1 ? numberOfAdults - 1 : 1)
         : setNumberOfChildren(numberOfChildren > 0 ? numberOfChildren - 1 : 0)
       : guestType === "adults"
-        ? setNumberOfAdults(numberOfAdults + 1)
-        : setNumberOfChildren(numberOfChildren + 1);
+      ? setNumberOfAdults(numberOfAdults + 1)
+      : setNumberOfChildren(numberOfChildren + 1);
   };
 
   const open = Boolean(anchor);
@@ -116,19 +115,25 @@ function SearchForm(props) {
         ].join(" ")}
         id="destination"
         filterOptions={filterOptions}
-        options={cities}
+        options={City.getAllCities()}
         autoHighlight
-        getOptionLabel={(option) => option.city}
+        getOptionLabel={(option) => option.name}
         renderOption={(props, option) => (
           <Box component="li" role="listbox" {...props}>
-            <LocationOnIcon
-              color="primary"
-              className="my-auto me-3"
-            />
+            <LocationOnIcon color="primary" className="my-auto me-3" />
             <div>
-              <b className="text-dark">{option.city}</b>
+              <b className="text-dark">{option.name}</b>
               <br />
-              <div className="text-secondary">{option.country}</div>
+              <div className="text-secondary">
+                {Country.getCountryByCode(option.countryCode).name}
+                {", "}
+                {
+                  State.getStateByCodeAndCountry(
+                    option.stateCode,
+                    option.countryCode
+                  ).name
+                }
+              </div>
             </div>
           </Box>
         )}
@@ -154,7 +159,7 @@ function SearchForm(props) {
         <MobileDatePicker
           disablePast
           slotProps={{
-            textField: { placeholder: "Check In" }
+            textField: { placeholder: "Check In" },
           }}
           sx={{
             "& .MuiOutlinedInput-root": {
@@ -255,7 +260,9 @@ function SearchForm(props) {
           horizontal: "right",
         }}
       >
-        <div className={[SearchFormCSS.personCountPopover, "px-4 py-2"].join(" ")}>
+        <div
+          className={[SearchFormCSS.personCountPopover, "px-4 py-2"].join(" ")}
+        >
           <div className="mb-3 d-flex align-items-center">
             <span className="me-4">Adults</span>
             <IconButton
@@ -263,10 +270,10 @@ function SearchForm(props) {
                 width: "40px",
                 height: "40px",
                 bgcolor: theme.palette.primary.main,
-                '&:hover': {
+                "&:hover": {
                   bgcolor: theme.palette.primary.dark,
                 },
-                '&:disabled': {
+                "&:disabled": {
                   bgcolor: theme.palette.primary.light,
                 },
               }}
@@ -283,7 +290,7 @@ function SearchForm(props) {
                 width: "40px",
                 height: "40px",
                 bgcolor: theme.palette.primary.main,
-                '&:hover': {
+                "&:hover": {
                   bgcolor: theme.palette.primary.dark,
                 },
               }}
@@ -299,12 +306,12 @@ function SearchForm(props) {
                 width: "40px",
                 height: "40px",
                 bgcolor: theme.palette.primary.main,
-                '&:hover': {
+                "&:hover": {
                   bgcolor: theme.palette.primary.dark,
                 },
-                '&:disabled': {
+                "&:disabled": {
                   bgcolor: theme.palette.primary.light,
-                }
+                },
               }}
               onClick={() => handleChangeNumber("dec", "children")}
               disabled={numberOfChildren <= 0}
@@ -321,7 +328,7 @@ function SearchForm(props) {
                 width: "40px",
                 height: "40px",
                 bgcolor: theme.palette.primary.main,
-                '&:hover': {
+                "&:hover": {
                   bgcolor: theme.palette.primary.dark,
                 },
               }}
@@ -331,8 +338,8 @@ function SearchForm(props) {
             </IconButton>
           </div>
         </div>
-      </Popover >
-    </div >
+      </Popover>
+    </div>
   );
 }
 

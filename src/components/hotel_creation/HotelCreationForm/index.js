@@ -1,4 +1,5 @@
 import HotelLocationSelectionDialog from "@/components/hotel_location/HotelLocationSelectionDialog";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -6,8 +7,8 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import PhoneInput from "react-phone-input-2";
+import { Country, State, City } from "country-state-city";
 import * as yup from "yup";
 
 export default function HotelCreationForm(props) {
@@ -29,16 +30,9 @@ export default function HotelCreationForm(props) {
       .required("Required!"),
     phone: yup.number().required("Required!"),
     description: yup.string().max(1000, "Can't be more than 1000 characters."),
-    country: yup
-      .string()
-      .max(40, "Must be 40 characters or less")
-      .min(2, "Must be at least 2 characters")
-      .required("Required!"),
-    city: yup
-      .string()
-      .max(40, "Must be 40 characters or less")
-      .min(2, "Must be at least 2 characters")
-      .required("Required!"),
+    country: yup.string().required("Required!"),
+    state: yup.string().required("Required!"),
+    city: yup.string().required("Required!"),
   });
   const formik = useFormik({
     initialValues: {
@@ -48,6 +42,7 @@ export default function HotelCreationForm(props) {
       phone: "",
       description: "",
       country: "",
+      state: "",
       city: "",
       longitude: null,
       latitude: null,
@@ -57,11 +52,24 @@ export default function HotelCreationForm(props) {
   });
   useEffect(() => {
     if (formik.touched.country) {
-      formik.setValues({ ...formik.values, city: "" });
+      formik.setValues({ ...formik.values, state: "", city: "" });
     }
   }, [formik.values.country]);
-  const enableLocation =
-    formik.values.country !== "" && formik.values.city !== "";
+  useEffect(() => {
+    if (formik.touched.state) {
+      formik.setValues({ ...formik.values, city: "" });
+    }
+  }, [formik.values.state]);
+
+  const countries = Country.getAllCountries();
+  const states = formik.values.country
+    ? State.getStatesOfCountry(formik.values.country)
+    : [];
+  const cities = formik.values.state
+    ? City.getCitiesOfState(formik.values.country, formik.values.state)
+    : [];
+
+  const enableLocation = formik.values.city !== "";
   const changeCenter = ({ longitude, latitude }) => {
     formik.setValues({
       ...formik.values,
@@ -116,7 +124,7 @@ export default function HotelCreationForm(props) {
                 className="ms-2 mt-1 form-label"
                 title="f4"
               >
-                Country & City
+                Location
               </label>
             </div>
 
@@ -125,31 +133,87 @@ export default function HotelCreationForm(props) {
                 <div className="col-lg-12" title="a19">
                   <div className="div">
                     <div className="col-lg-12">
-                      <CountryDropdown
-                        className={"form-control"}
-                        required
-                        placeholder="USA"
-                        id="country"
-                        size="small"
-                        label="County"
-                        value={formik.values.country}
-                        onChange={formik.handleChange("country")}
-                      />
+                      <FormControl fullWidth>
+                        <InputLabel size="small" id="country-label">
+                          Country
+                        </InputLabel>
+                        <Select
+                          size="small"
+                          labelId="country-label"
+                          name="country"
+                          label="Country"
+                          value={formik.values.country}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          error={
+                            formik.touched.country &&
+                            Boolean(formik.errors.country)
+                          }
+                        >
+                          {countries.map((country) => (
+                            <MenuItem
+                              key={country.isoCode}
+                              value={country.isoCode}
+                            >
+                              {country.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </div>
                     <br />
                     <div className="col-lg-12">
-                      {" "}
-                      <RegionDropdown
-                        className={"form-control"}
-                        country={formik.values.country}
-                        required
-                        placeholder="New York"
-                        id="city"
-                        size="small"
-                        label="City"
-                        value={formik.values.city}
-                        onChange={formik.handleChange("city")}
-                      />
+                      <FormControl fullWidth>
+                        <InputLabel size="small" id="state-label">
+                          State
+                        </InputLabel>
+                        <Select
+                          disabled={!formik.values.country}
+                          size="small"
+                          labelId="state-label"
+                          name="state"
+                          label="State"
+                          value={formik.values.state}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          error={
+                            formik.touched.state && Boolean(formik.errors.state)
+                          }
+                        >
+                          {states.map((state) => (
+                            <MenuItem key={state.isoCode} value={state.isoCode}>
+                              {state.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    <br />
+                    <div className="col-lg-12">
+                      <FormControl fullWidth>
+                        <InputLabel size="small" id="city-label">
+                          City
+                        </InputLabel>
+                        <Select
+                          disabled={!formik.values.state}
+                          size="small"
+                          labelId="city-label"
+                          name="city"
+                          label="City"
+                          value={formik.values.city}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          error={
+                            formik.touched.city && Boolean(formik.errors.city)
+                          }
+                        >
+                          {cities.map((city) => (
+                            <MenuItem key={city.name} value={city.name}>
+                              {city.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </div>
                   </div>
                 </div>

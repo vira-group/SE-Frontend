@@ -12,6 +12,7 @@
     "@neshan-maps-platform/react-openlayers": "^2.0.16",
     "axios": "^0.26.1",
     "bootstrap-icons": "^1.8.1",
+    "country-state-city": "^3.1.4",
     "coverage": "^0.4.1",
     "date-fns": "^2.28.0",
     "formik": "^2.2.9",
