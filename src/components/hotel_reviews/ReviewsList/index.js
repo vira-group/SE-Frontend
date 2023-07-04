@@ -28,8 +28,12 @@ export default function ReviewsList({ sx = {}, reviews }) {
                 value={review.rate}
                 readOnly
               />
-              <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
-                {review.date}
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ ml: 1 }}
+              >
+                {new Date(review.created_comment).toDateString()}
               </Typography>
               {review.tag.map((tag) => (
                 <Chip size="small" key={tag.id} label={tag.name} />
@@ -39,7 +43,7 @@ export default function ReviewsList({ sx = {}, reviews }) {
               {review.text}
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              Reviewed by: {review.author}
+              Reviewed by {review.writer.customer.full_name}
             </Typography>
           </CardContent>
         </Card>
