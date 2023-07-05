@@ -15,6 +15,7 @@ export default function ReviewsList({ sx = {}, reviews }) {
         borderStyle: "solid",
         borderWidth: "1px",
         borderColor: "divider",
+        overflowY: "auto",
         borderRadius: 1,
       }}
     >

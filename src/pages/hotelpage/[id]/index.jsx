@@ -43,7 +43,9 @@ export default function HotelPage() {
   function handleAddComment(values) {
     values.hotel = id;
     values.tag = values.tag.map((tag) => tag.id);
-    addComment(values);
+    addComment(values).then(() => {
+      loadComments();
+    });
   }
 
   useEffect(() => {

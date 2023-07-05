@@ -7,10 +7,9 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import moment from "moment";
 
-import { PlainTextField } from "../../../theme/PlainTextField";
 import cities from "../../../assets/WorldCities.json";
 import SearchFormCSS from "./SearchForm.module.scss";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
@@ -82,8 +81,8 @@ function SearchForm(props) {
         ? setNumberOfAdults(numberOfAdults > 1 ? numberOfAdults - 1 : 1)
         : setNumberOfChildren(numberOfChildren > 0 ? numberOfChildren - 1 : 0)
       : guestType === "adults"
-        ? setNumberOfAdults(numberOfAdults + 1)
-        : setNumberOfChildren(numberOfChildren + 1);
+      ? setNumberOfAdults(numberOfAdults + 1)
+      : setNumberOfChildren(numberOfChildren + 1);
   };
 
   const open = Boolean(anchor);
@@ -121,10 +120,7 @@ function SearchForm(props) {
         getOptionLabel={(option) => option.city}
         renderOption={(props, option) => (
           <Box component="li" role="listbox" {...props}>
-            <LocationOnIcon
-              color="primary"
-              className="my-auto me-3"
-            />
+            <LocationOnIcon color="primary" className="my-auto me-3" />
             <div>
               <b className="text-dark">{option.city}</b>
               <br />
@@ -154,7 +150,7 @@ function SearchForm(props) {
         <MobileDatePicker
           disablePast
           slotProps={{
-            textField: { placeholder: "Check In" }
+            textField: { placeholder: "Check In" },
           }}
           sx={{
             "& .MuiOutlinedInput-root": {
@@ -255,7 +251,9 @@ function SearchForm(props) {
           horizontal: "right",
         }}
       >
-        <div className={[SearchFormCSS.personCountPopover, "px-4 py-2"].join(" ")}>
+        <div
+          className={[SearchFormCSS.personCountPopover, "px-4 py-2"].join(" ")}
+        >
           <div className="mb-3 d-flex align-items-center">
             <span className="me-4">Adults</span>
             <IconButton
@@ -263,10 +261,10 @@ function SearchForm(props) {
                 width: "40px",
                 height: "40px",
                 bgcolor: theme.palette.primary.main,
-                '&:hover': {
+                "&:hover": {
                   bgcolor: theme.palette.primary.dark,
                 },
-                '&:disabled': {
+                "&:disabled": {
                   bgcolor: theme.palette.primary.light,
                 },
               }}
@@ -283,7 +281,7 @@ function SearchForm(props) {
                 width: "40px",
                 height: "40px",
                 bgcolor: theme.palette.primary.main,
-                '&:hover': {
+                "&:hover": {
                   bgcolor: theme.palette.primary.dark,
                 },
               }}
@@ -299,12 +297,12 @@ function SearchForm(props) {
                 width: "40px",
                 height: "40px",
                 bgcolor: theme.palette.primary.main,
-                '&:hover': {
+                "&:hover": {
                   bgcolor: theme.palette.primary.dark,
                 },
-                '&:disabled': {
+                "&:disabled": {
                   bgcolor: theme.palette.primary.light,
-                }
+                },
               }}
               onClick={() => handleChangeNumber("dec", "children")}
               disabled={numberOfChildren <= 0}
@@ -321,7 +319,7 @@ function SearchForm(props) {
                 width: "40px",
                 height: "40px",
                 bgcolor: theme.palette.primary.main,
-                '&:hover': {
+                "&:hover": {
                   bgcolor: theme.palette.primary.dark,
                 },
               }}
@@ -331,8 +329,8 @@ function SearchForm(props) {
             </IconButton>
           </div>
         </div>
-      </Popover >
-    </div >
+      </Popover>
+    </div>
   );
 }
 
