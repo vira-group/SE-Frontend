@@ -16,7 +16,7 @@
   "url_hotelrooms": "/hotel/room/",
   "url_reserveroom": "/hotel/reserve/",
   "url_edit_profile": "/accounts/profile/",
-  "url_add_credit": "/accounts/credit/",
+  "url_add_credit": "/accounts/balance/",
   "url_hotel_search": "/hotel/1/search/",
   "url_addhotel": "/hotel/create/",
   "url_addfavoritehotel": "/hotel/favorites/",

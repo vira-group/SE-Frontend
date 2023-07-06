@@ -61,9 +61,9 @@ export default function Credit() {
     setLoading(true);
     if (amountOfMoney) {
       axios
-        .post(
+        .patch(
           makeURL(references.url_add_credit),
-          { credit: amountOfMoney },
+          { amount: amountOfMoney },
           {
             headers: {
               Authorization: cookies.get("Authorization"),
@@ -74,7 +74,7 @@ export default function Credit() {
           setOpen(true);
           setLoading(false);
           console.log("response for credits: ", response.data);
-          setBalance(response.data.new_credit);
+          setBalance(response.data.balance);
           setMessage("Account balance increased successfully.");
         })
         .catch((error) => {
