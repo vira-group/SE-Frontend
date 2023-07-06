@@ -84,7 +84,7 @@ function CreateHotel() {
     <>
       <div className="containter m-5">
         <div className="row justify-content-center">
-          <div className="col-12 col-md-8">
+          <div className="col-12 col-md-10">
             <div className="card-body">
               <div className="shadow p-3 mb-5 bg-body rounded">
                 <div className="stepper-container-horizontal  ">

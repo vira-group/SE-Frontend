@@ -10,13 +10,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useTheme } from "@mui/material/styles";
 import moment from "moment";
 
-import cities from "../../../assets/WorldCities.json";
 import SearchFormCSS from "./SearchForm.module.scss";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
+import { Country, State, City } from "country-state-city";
 
 const oneDay = 24 * 60 * 60 * 1000; // represents one day in miliseconds
 
@@ -66,7 +66,7 @@ function SearchForm(props) {
       router.push({
         pathname: "/search",
         query: {
-          city: destination.city,
+          city: destination.name,
           check_in: formattedcheckinDate,
           check_out: formattedcheckoutDate,
           size: numberOfPeople,
@@ -115,16 +115,25 @@ function SearchForm(props) {
         ].join(" ")}
         id="destination"
         filterOptions={filterOptions}
-        options={cities}
+        options={City.getAllCities()}
         autoHighlight
-        getOptionLabel={(option) => option.city}
+        getOptionLabel={(option) => option.name}
         renderOption={(props, option) => (
           <Box component="li" role="listbox" {...props}>
             <LocationOnIcon color="primary" className="my-auto me-3" />
             <div>
-              <b className="text-dark">{option.city}</b>
+              <b className="text-dark">{option.name}</b>
               <br />
-              <div className="text-secondary">{option.country}</div>
+              <div className="text-secondary">
+                {Country.getCountryByCode(option.countryCode).name}
+                {", "}
+                {
+                  State.getStateByCodeAndCountry(
+                    option.stateCode,
+                    option.countryCode
+                  ).name
+                }
+              </div>
             </div>
           </Box>
         )}
