@@ -24,5 +24,8 @@
   "url_myhotels": "/hotel/myhotels/",
   "url_admimpanel_mainpage": "/hotel/admin/panel/",
   "url_chatwithhotel": "/chat/hotelcaht/",
-  "url_hotelchatlist": "/chat/hotelcahtlist/"
+  "url_hotelchatlist": "/chat/hotelcahtlist/",
+  "url_comment_get_tags": "/comment/tag/",
+  "url_comment_get": "/comment/getallhotelcomments/",
+  "url_comment_add": "/comment/addcomment/"
 }
